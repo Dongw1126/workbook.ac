@@ -1,0 +1,12 @@
+{
+  "name": "workbook.ac",
+  "version": "1.0.0",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "cd server && yarn start",
+    "dev": "concurrently --kill-others-on-fail \"yarn run server\" \"yarn run client\""
+  },
+  "dependencies": {
+    "concurrently": "^6.3.0"
+  }
+}
