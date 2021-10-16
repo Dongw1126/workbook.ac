@@ -1,6 +1,6 @@
 import React from "react";
 import ProblemTree from "../components/tree/ProblemTree";
-function Main() {
+function CreateWorkbook() {
     return (
         <div>
             <ProblemTree/>
@@ -8,4 +8,4 @@ function Main() {
     );
 }
 
-export default Main;
+export default CreateWorkbook;

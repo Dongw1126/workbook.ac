@@ -2,7 +2,6 @@ import React, { useState, useRef, useEffect } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
 import { ProblemNode } from "./ProblemNode";
-import { Button } from "@mui/material";
 import styles from "./ProblemTree.module.css";
 import SampleData from "./sample.json";
 
@@ -33,7 +32,6 @@ function ProblemTree() {
 
   return (
     <div className={styles.treeapp}>
-      <Button variant="outlined" onClick={handleOpen}>open</Button>
       <Tree
         ref={ref}
         tree={treeData}
