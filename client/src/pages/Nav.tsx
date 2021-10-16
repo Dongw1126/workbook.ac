@@ -6,10 +6,10 @@ function Nav() {
   return (
     <div>
       <Link to="/">
-        내 문제집
+        Main
       </Link>
       <Link to="/info">
-        소개
+        Info
       </Link>
     </div>
   );

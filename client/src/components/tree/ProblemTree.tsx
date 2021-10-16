@@ -1,27 +1,41 @@
-import React, { useState } from "react";
-import { Tree, NodeModel } from "@minoru/react-dnd-treeview";
+import React, { useState, useRef, useEffect } from "react";
+import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
 import { ProblemNode } from "./ProblemNode";
+import { Button } from "@mui/material";
 import styles from "./ProblemTree.module.css";
 import SampleData from "./sample.json";
 
 function ProblemTree() {
   const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
-  // const [idsText, setIdsText] = useState("");
-  const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>([]);
 
-  // const targetIds = idsText.trim() === "" ? [] : idsText.split(",").map((id) => Number(id.trim()));
+  const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
+    () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
+  );
+
+  const ref = useRef<TreeMethods>(null);
+  const handleOpen = () => {
+    if (ref.current?.open) {
+      ref.current.open(newOpenIds);
+    }
+  }
+
+  useEffect(() => {
+    handleOpen();
+  }, []);
 
   const handleDrop = (newTree: NodeModel<ProblemData>[]) => setTreeData(newTree);
 
   const handleChangeOpen = (newOpenIds: NodeModel["id"][]) => {
     setNewOpenIds(newOpenIds);
-    console.log(newOpenIds);
+    window.localStorage.setItem("openIds", JSON.stringify(newOpenIds));
   };
 
   return (
     <div className={styles.treeapp}>
+      <Button variant="outlined" onClick={handleOpen}>open</Button>
       <Tree
+        ref={ref}
         tree={treeData}
         rootId={0}
         render={(
