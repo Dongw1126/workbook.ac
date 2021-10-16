@@ -24,8 +24,10 @@ export const ProblemNode: React.FC<Props> = (props) => {
 
   return (
     <div
-      className={`tree-node ${styles.root}`}
-      style={{ paddingInlineStart: indent }}
+      className={`tree-node ${styles.root} ${
+        props.node.droppable ? styles.isDroppable : ""
+      }`}
+      style={{ paddingInlineStart: indent*3 }}
     >
       <div
         className={`${styles.expandIconWrapper} ${
