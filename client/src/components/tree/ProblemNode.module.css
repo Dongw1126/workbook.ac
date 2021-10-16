@@ -4,14 +4,15 @@
   border-radius: 2px;
   grid-template-columns: auto auto 1fr auto;
   height: 60px;
+  margin: 4px;
   padding-inline-end: 8px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  /* box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .root:hover {
   box-shadow: 0px 5px 10px rgba(0,0,0,0.25), -0px -5px 10px rgba(0,0,0,0.22);
-  /*box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);*/
+  /* box-shadow: 0 7px 14px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22); */
 }
 
 .isDroppable {
