@@ -4,12 +4,13 @@ import ImageIcon from "@mui/icons-material/Image";
 import ListAltIcon from "@mui/icons-material/ListAlt";
 import DescriptionIcon from "@mui/icons-material/Description";
 
+//TODO : tier icon
 type Props = {
   droppable?: boolean;
   fileType?: string;
 };
 
-export const TypeIcon: React.FC<Props> = (props) => {
+export const TypedIcon: React.FC<Props> = (props) => {
   if (props.droppable) {
     return <FolderIcon />;
   }

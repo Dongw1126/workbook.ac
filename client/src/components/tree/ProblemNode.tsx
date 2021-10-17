@@ -3,7 +3,8 @@ import Typography from '@mui/material/Typography';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
-import { TypeIcon } from "./TypeIcon";
+import { TypedIcon } from "./TypedIcon";
+import { TypedText } from "./TypedText";
 import styles from "./ProblemNode.module.css";
 
 type Props = {
@@ -19,6 +20,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
+    console.log(props.node);
     props.onToggle(props.node.id);
   };
 
@@ -28,6 +30,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
         props.node.droppable ? styles.isDroppable : ""
       }`}
       style={{ paddingInlineStart: indent*3 }}
+      onClick={handleToggle}
     >
       <div
         className={`${styles.expandIconWrapper} ${
@@ -35,16 +38,16 @@ export const ProblemNode: React.FC<Props> = (props) => {
         }`}
       >
         {props.node.droppable && (
-          <div onClick={handleToggle}>
+          <div>
             <ArrowRightIcon />
           </div>
         )}
       </div>
       <div>
-        <TypeIcon droppable={droppable} fileType={data?.fileType} />
+        <TypedIcon droppable={droppable} fileType={data?.fileType} />
       </div>
       <div className={styles.labelGridItem}>
-        <Typography variant="body2">{props.node.text}</Typography>
+        <TypedText droppable={droppable} data={data} />
       </div>
     </div>
   );

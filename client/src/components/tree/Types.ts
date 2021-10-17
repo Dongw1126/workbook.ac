@@ -1,6 +1,8 @@
 export type ProblemData = {
   fileType: string;
-  fileSize: string;
+  tier: number;
+  id: number;
+  name: string;
   // tierShown, etc
 };
   
