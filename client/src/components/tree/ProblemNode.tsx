@@ -27,7 +27,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
   return (
     <div
       className={`tree-node ${styles.root} ${
-        props.node.droppable ? styles.isDroppable : ""
+        props.node.droppable ? styles.isDroppable : styles.nonDroppable
       }`}
       style={{ paddingInlineStart: indent*3 }}
       onClick={handleToggle}
