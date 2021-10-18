@@ -1,5 +1,4 @@
 import React from "react";
-import Typography from '@mui/material/Typography';
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";

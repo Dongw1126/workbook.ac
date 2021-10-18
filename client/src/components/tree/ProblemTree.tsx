@@ -3,7 +3,6 @@ import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
 import { ProblemNode } from "./ProblemNode";
 import styles from "./ProblemTree.module.css";
-import SampleData from "./sample.json";
 
 type Props = {
   json: NodeModel<ProblemData>[];
