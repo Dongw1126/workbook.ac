@@ -5,8 +5,13 @@ import { ProblemNode } from "./ProblemNode";
 import styles from "./ProblemTree.module.css";
 import SampleData from "./sample.json";
 
-function ProblemTree() {
-  const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
+type Props = {
+  json: NodeModel<ProblemData>[];
+};
+
+function ProblemTree(props: Props) {
+  // const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
+  const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.json);
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")

@@ -1,8 +1,7 @@
 export type ProblemData = {
-  fileType: string;
-  tier: number;
-  id: number;
-  name: string;
+  problemId: number;
+  titleKo: string;
+  level: number;
   // tierShown, etc
 };
   

@@ -31,8 +31,8 @@ export const TypedText: React.FC<Props> = (props) => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline />
-            <Typography sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.data?.id}</Typography>
-            <Typography sx={{ display: 'inline' }}>{props.data?.name}</Typography>
+            <Typography sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.data?.problemId}</Typography>
+            <Typography sx={{ display: 'inline' }}>{props.data?.titleKo}</Typography>
         </ThemeProvider>
     );
 };

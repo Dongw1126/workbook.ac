@@ -44,7 +44,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
         )}
       </div>
       <div>
-        <TypedIcon droppable={droppable} fileType={data?.fileType} />
+        <TypedIcon droppable={droppable} level={data?.level} />
       </div>
       <div className={styles.labelGridItem}>
         <TypedText droppable={droppable} data={data} />

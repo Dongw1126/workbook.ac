@@ -7,18 +7,19 @@ import DescriptionIcon from "@mui/icons-material/Description";
 //TODO : tier icon
 type Props = {
   droppable?: boolean;
-  fileType?: string;
+  level?: number;
 };
 
 export const TypedIcon: React.FC<Props> = (props) => {
   if (props.droppable) {
     return <FolderIcon />;
   }
-
-  switch (props.fileType) {
-    case "image": return <ImageIcon />;
-    case "csv": return <ListAltIcon />;
-    case "text": return <DescriptionIcon />;
-    default: return null;
+  else {
+    switch (props.level) {
+      // case "image": return <ImageIcon />;
+      // case "csv": return <ListAltIcon />;
+      // case "text": return <DescriptionIcon />;
+      default: return null;
+    }
   }
 };

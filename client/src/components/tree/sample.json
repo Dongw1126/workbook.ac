@@ -5,10 +5,9 @@
       "droppable": true,
       "text": "Folder 1",
       "data": {
-        "fileType": "",
-        "tier": -1,
-        "id": -1,
-        "name": "Folder 1"
+        "level": -1,
+        "problemId": -1,
+        "titleKo": "Folder 1"
       }
     },
     {
@@ -17,10 +16,9 @@
       "droppable": false,
       "text": "File 1-1",
       "data": {
-        "fileType": "",
-        "tier": 10,
-        "id": 1000,
-        "name": "A+B"
+        "level": 10,
+        "problemId": 1000,
+        "titleKo": "A+B"
       }
     },
     {
@@ -29,10 +27,9 @@
       "droppable": false,
       "text": "File 1-2",
       "data": {
-        "fileType": "",
-        "tier": 10,
-        "id": 1234,
-        "name": "엄청난 부자🥺"
+        "level": 10,
+        "problemId": 1234,
+        "titleKo": "엄청난 부자🥺"
       }
     },
     {
@@ -41,10 +38,9 @@
       "droppable": true,
       "text": "Folder 2",
       "data": {
-        "fileType": "",
-        "tier": -1,
-        "id": -1,
-        "name": "Folder 2"
+        "level": -1,
+        "problemId": -1,
+        "titleKo": "Folder 2"
       }
     },
     {
@@ -53,10 +49,9 @@
       "droppable": true,
       "text": "Folder 2-1",
       "data": {
-        "fileType": "",
-        "tier": -1,
-        "id": -1,
-        "name": "Folder 2-1"
+        "level": -1,
+        "problemId": -1,
+        "titleKo": "Folder 2-1"
       }
     },
     {
@@ -65,10 +60,9 @@
       "droppable": false,
       "text": "File 2-1-1",
       "data": {
-        "fileType": "",
-        "tier": 10,
-        "id": 1234,
-        "name": "asdf"
+        "level": 10,
+        "problemId": 1234,
+        "titleKo": "asdf"
       }
     },
     {
@@ -77,10 +71,9 @@
       "droppable": false,
       "text": "File 3",
       "data": {
-        "fileType": "",
-        "tier": 10,
-        "id": 1234,
-        "name": "asdf"
+        "level": 10,
+        "problemId": 1234,
+        "titleKo": "asdf"
       }
     }
   ]
