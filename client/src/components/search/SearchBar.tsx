@@ -22,11 +22,12 @@ function SearchBar() {
                                 <ArrowForwardIcon />
                             </IconButton>
                         </InputAdornment>
-                    )
+                    ),
+                    style: {fontFamily: 'Pretendard'}
                 }}
                 id="outlined-search"
                 label=""
-                type="search"
+                variant="outlined"
             />
         </Box>
     );
