@@ -8,7 +8,7 @@ type Props = {
 }
 
 export const Placeholder: React.FC<Props> = (props) => {
-    const left = props.depth * 24;
+    const left = props.depth * 36;
     return (
         <div className={styles.root} style={{ left }}></div>
     )

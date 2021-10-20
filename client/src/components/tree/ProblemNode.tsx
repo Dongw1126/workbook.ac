@@ -15,7 +15,7 @@ type Props = {
 
 export const ProblemNode: React.FC<Props> = (props) => {
   const { droppable, data } = props.node;
-  const indent = props.depth * 24;
+  const indent = props.depth * 36;
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();

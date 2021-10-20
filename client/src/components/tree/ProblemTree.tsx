@@ -67,7 +67,7 @@ function ProblemTree(props: Props) {
         }}
         sort={false}
         insertDroppableFirst={false}
-        dropTargetOffset={5}
+        dropTargetOffset={10}
         placeholderRender={(node, { depth }) => (
           <Placeholder node={node} depth={depth} />
         )}
