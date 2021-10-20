@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
 import { ProblemNode } from "./ProblemNode";
+import { Placeholder } from "./Placeholder";
 import styles from "./ProblemTree.module.css";
 
 type Props = {
@@ -56,8 +57,20 @@ function ProblemTree(props: Props) {
         classes={{
           root: styles.treeRoot,
           draggingSource: styles.draggingSource,
-          dropTarget: styles.dropTarget
+          dropTarget: styles.dropTarget,
+          placeholder: styles.placeholder
         }}
+        canDrop={(tree, { dragSource, dropTargetId, dropTarget }) => {
+          if (dragSource?.parent === dropTargetId) {
+            return true;
+          }
+        }}
+        sort={false}
+        insertDroppableFirst={false}
+        dropTargetOffset={5}
+        placeholderRender={(node, { depth }) => (
+          <Placeholder node={node} depth={depth} />
+        )}
       />
     </div>
   );

@@ -16,7 +16,6 @@ type Props = {
 export const ProblemNode: React.FC<Props> = (props) => {
   const { droppable, data } = props.node;
   const indent = props.depth * 24;
-  const indentWeight = 3;
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -29,9 +28,10 @@ export const ProblemNode: React.FC<Props> = (props) => {
       className={`tree-node ${styles.root} ${
         props.node.droppable ? styles.isDroppable : styles.nonDroppable
       }`}
-      style={props.node.droppable ? 
-        {paddingInlineStart: props.depth*indentWeight*24 }
-      :{paddingInlineStart: (props.depth - 1)*indentWeight*24}}
+      style={{ paddingInlineStart: indent }}
+      /*style={props.node.droppable ? 
+        {paddingInlineStart: props.depth*indentWeight }
+      :{paddingInlineStart: (props.depth - 1)*indentWeight}}*/
       onClick={handleToggle}
     >
       <div
