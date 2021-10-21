@@ -49,7 +49,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
         <TypedIcon droppable={droppable} level={data?.level} />
       </div>
       <div className={styles.labelGridItem}>
-        <TypedText droppable={droppable} data={data} />
+        <TypedText droppable={droppable} node={props.node} />
       </div>
     </div>
   );
