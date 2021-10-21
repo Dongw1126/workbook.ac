@@ -3,7 +3,7 @@ import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "./Types";
 import { TypedIcon } from "./TypedIcon";
-import { TypedText } from "./TypedText";
+import { ProblemDisplay } from "./TypedText";
 import styles from "./ProblemNode.module.css";
 
 type Props = {
@@ -49,7 +49,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
         <TypedIcon droppable={droppable} level={data?.level} />
       </div>
       <div className={styles.labelGridItem}>
-        <TypedText droppable={droppable} node={props.node} />
+        <ProblemDisplay droppable={droppable} node={props.node} />
       </div>
     </div>
   );
