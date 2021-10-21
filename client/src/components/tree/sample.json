@@ -75,6 +75,28 @@
         "problemId": 1234,
         "titleKo": "asdf"
       }
+    },
+    {
+      "id": 10,
+      "parent": 0,
+      "droppable": true,
+      "text": "Folder 3",
+      "data": {
+        "level": -1,
+        "problemId": -1,
+        "titleKo": "Folder 3"
+      }
+    },
+    {
+      "id": 11,
+      "parent": 0,
+      "droppable": true,
+      "text": "Folder 4",
+      "data": {
+        "level": -1,
+        "problemId": -1,
+        "titleKo": "Folder 4"
+      }
     }
   ]
   
