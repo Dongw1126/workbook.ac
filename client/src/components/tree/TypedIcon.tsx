@@ -3,7 +3,6 @@ import { Box } from "@mui/system";
 import FolderIcon from "@mui/icons-material/Folder";
 import * as Constants from "../../constants"
 
-//TODO : tier icon
 type Props = {
   droppable?: boolean;
   level?: number;
