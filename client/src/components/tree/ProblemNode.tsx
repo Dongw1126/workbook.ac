@@ -5,6 +5,7 @@ import { ProblemData } from "./Types";
 import { TypedIcon } from "./TypedIcon";
 import { ProblemDisplay } from "./TypedText";
 import styles from "./ProblemNode.module.css";
+import * as Constants from "../../constants"
 
 type Props = {
   node: NodeModel<ProblemData>;
@@ -15,7 +16,7 @@ type Props = {
 
 export const ProblemNode: React.FC<Props> = (props) => {
   const { droppable, data } = props.node;
-  const indent = props.depth * 36;
+  const indent = props.depth * Constants.TREE_ITEM_SPACE;
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
