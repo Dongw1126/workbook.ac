@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
@@ -6,15 +6,21 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
 
+
 function SearchComponent() {
+    const [text, setText] = useState('');
+
     return(
         <div>
             <Box>
                 <TextField fullWidth
                     InputProps={{
                         onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-                            if(event.key == 'Enter') {
-                                console.log('fire');
+                            if(event.key == 'Enter') {  
+                                let ev = event.target as HTMLInputElement;
+                                if(ev){
+                                    setText(ev.value);
+                                }
                             }
                         },
                         startAdornment: (
@@ -37,7 +43,7 @@ function SearchComponent() {
                 />
             </Box>
             <Box>
-                Hello
+                {text}
             </Box>
         </div>
     );
