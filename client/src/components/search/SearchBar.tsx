@@ -6,11 +6,23 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
 
-function SearchBar() {
+interface Props {
+    setQuery: (parm: string) => void;
+}
+
+function SearchBar(props: Props) {
     return (
         <Box>
             <TextField fullWidth
                 InputProps={{
+                    onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (event.key == 'Enter') {
+                            let ev = event.target as HTMLInputElement;
+                            if (ev) {
+                                props.setQuery(ev.value);
+                            }
+                        }
+                    },
                     startAdornment: (
                         <InputAdornment position="start">
                             <SearchIcon />
@@ -18,12 +30,12 @@ function SearchBar() {
                     ),
                     endAdornment: (
                         <InputAdornment position="start">
-                            <IconButton sx={{p:0}}>
+                            <IconButton sx={{ p: 0 }}>
                                 <ArrowForwardIcon />
                             </IconButton>
                         </InputAdornment>
                     ),
-                    style: {fontFamily: 'Pretendard'}
+                    style: { fontFamily: 'Pretendard' }
                 }}
                 id="outlined-search"
                 label=""

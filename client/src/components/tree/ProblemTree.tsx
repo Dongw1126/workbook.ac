@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
-import { ProblemData } from "./Types";
+import { ProblemData } from "../Types";
 import { ProblemNode } from "./ProblemNode";
 import { Placeholder } from "./Placeholder";
 import styles from "./ProblemTree.module.css";

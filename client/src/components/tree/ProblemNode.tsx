@@ -1,7 +1,7 @@
 import React from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
-import { ProblemData } from "./Types";
+import { ProblemData } from "../Types";
 import { TypedIcon } from "./TypedIcon";
 import { ProblemDisplay } from "./TypedText";
 import styles from "./ProblemNode.module.css";

@@ -8,7 +8,7 @@ import SearchComponent from '../components/SearchComponent';
 function CreateWorkbook() {
     return (
         <div>
-            <MuiGrid container xs>
+            <MuiGrid container>
                 <MuiGrid item xs>
                     <Box sx={{ m:3, height: '100vh' }}>
                         <TreeComponent/>
