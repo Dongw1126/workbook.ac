@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./search/SearchBar";
+import SearchResult from "./search/SearchResult";
 import Box from '@mui/material/Box';
 
 function SearchComponent() {
@@ -12,7 +13,7 @@ function SearchComponent() {
         <div>
             <SearchBar setQuery={parentQuery}/>
             <Box>
-                {query}
+                <SearchResult query={query} />
             </Box>
         </div>
     );
