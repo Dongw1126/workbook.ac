@@ -20,7 +20,6 @@ export const ProblemNode: React.FC<Props> = (props) => {
 
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
-    console.log(props.node);
     props.onToggle(props.node.id);
   };
 
