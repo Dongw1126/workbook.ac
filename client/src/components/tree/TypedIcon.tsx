@@ -10,7 +10,6 @@ type Props = {
 
 
 export const TypedIcon: React.FC<Props> = (props) => {
-  // const tier = props.level ? props.level : -1;
   if (props.droppable) {
     return <FolderIcon />;
   }
@@ -20,6 +19,7 @@ export const TypedIcon: React.FC<Props> = (props) => {
       return (
         <Box>
           <img src={tierUrl} 
+          alt="tier image"
           style={{
             width:"1,2em", 
             height:"1.2em", 
