@@ -64,7 +64,7 @@ function SearchResult(props: Props) {
         <div>
             {
                 complete ?
-                <ProblemTree key={props.query} json={resultTree} /> :
+                <ProblemTree key={props.query} json={resultTree} canSort={false} /> :
                 <CircularProgress />
             } 
         </div>

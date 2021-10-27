@@ -7,7 +7,16 @@ import styles from "./ProblemTree.module.css";
 
 type Props = {
   json: NodeModel<ProblemData>[];
+  canSort: boolean;
 };
+
+type PlaceholderRenderParam = {
+  depth: number
+};
+
+const placeholderRender = (node:NodeModel<ProblemData>, param: PlaceholderRenderParam) => (
+  <Placeholder node={node} depth={param.depth} />
+)
 
 function ProblemTree(props: Props) {
   // const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
@@ -60,17 +69,17 @@ function ProblemTree(props: Props) {
           dropTarget: styles.dropTarget,
           placeholder: styles.placeholder
         }}
-        canDrop={(tree, { dragSource, dropTargetId, dropTarget }) => {
-          if (dragSource?.parent === dropTargetId) {
-            return true;
-          }
-        }}
+        canDrop={props.canSort ?
+          (tree, { dragSource, dropTargetId, dropTarget }) => {
+            if (dragSource?.parent === dropTargetId) {
+              return true;
+            }} : undefined}
         sort={false}
-        insertDroppableFirst={false}
-        dropTargetOffset={10}
-        placeholderRender={(node, { depth }) => (
+        insertDroppableFirst={!props.canSort}
+        dropTargetOffset={props.canSort ? 10 : undefined }
+        placeholderRender={props.canSort ? (node, { depth }) => (
           <Placeholder node={node} depth={depth} />
-        )}
+        ) : undefined }
       />
     </div>
   );

@@ -6,7 +6,7 @@ import SampleData2 from "./tree/sample2.json";
 
 function WorkbookComponent() {
     return(
-        <ProblemTree json={SampleData2}/>
+        <ProblemTree json={SampleData2} canSort={true} />
     );
 }
 
