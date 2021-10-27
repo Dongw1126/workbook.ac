@@ -9,7 +9,7 @@ type Props = {
 
 function processProblems(items: any) {
     let ret: NodeModel<ProblemData>[] = [];
-    console.log(items.values())
+
     Object.values(items).forEach((item:any) => {
         const tmp: NodeModel<ProblemData> = {
             id: item.problemId,
@@ -43,10 +43,12 @@ function SearchResult(props: Props) {
 
     useEffect(() => {
         getResult(props.query)
-        //.then(res => setResult(res))
-        .then(res => setResultTree(processProblems(res)))
+        .then(res => {
+            setResultTree(processProblems(res))
+            console.log("call");
+        })
         .catch(err => console.log(err))
-    });
+    }, [props.query]);
 
     return(
         <div>
