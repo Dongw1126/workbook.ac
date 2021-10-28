@@ -18,7 +18,7 @@ export const TypedIcon: React.FC<Props> = (props) => {
     return (
       <Box>
         <img src={tierUrl} 
-        alt="tier image"
+        alt=""
         style={{
           width:"1,2em", 
           height:"1.2em", 
@@ -28,5 +28,4 @@ export const TypedIcon: React.FC<Props> = (props) => {
       </Box>
     );
   }
-  return null;
 };

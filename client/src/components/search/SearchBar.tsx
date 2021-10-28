@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
 import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
@@ -11,17 +11,19 @@ interface Props {
 }
 
 function SearchBar(props: Props) {
+    const [inputText, setInputText] = useState("");
     return (
         <Box>
             <TextField fullWidth
                 InputProps={{
                     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (event.key == 'Enter') {
-                            let ev = event.target as HTMLInputElement;
-                            if (ev) {
-                                props.setQuery(ev.value);
-                            }
+                        if (event.key === 'Enter') {                   
+                            props.setQuery(inputText);
                         }
+                    },
+                    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                        let ev = event.target as HTMLInputElement;
+                        setInputText(ev.value);
                     },
                     startAdornment: (
                         <InputAdornment position="start">
@@ -30,7 +32,9 @@ function SearchBar(props: Props) {
                     ),
                     endAdornment: (
                         <InputAdornment position="start">
-                            <IconButton sx={{ p: 0 }}>
+                            <IconButton sx={{ p: 0 }} onClick={(event) => {
+                                props.setQuery(inputText);
+                            }}>
                                 <ArrowForwardIcon />
                             </IconButton>
                         </InputAdornment>

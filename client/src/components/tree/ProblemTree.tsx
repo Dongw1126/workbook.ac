@@ -10,14 +10,6 @@ type Props = {
   canSort: boolean;
 };
 
-type PlaceholderRenderParam = {
-  depth: number
-};
-
-const placeholderRender = (node:NodeModel<ProblemData>, param: PlaceholderRenderParam) => (
-  <Placeholder node={node} depth={param.depth} />
-)
-
 function ProblemTree(props: Props) {
   // const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
   const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.json);
