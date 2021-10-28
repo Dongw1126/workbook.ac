@@ -12,9 +12,9 @@ function SearchComponent() {
     return(
         <div>
             <SearchBar setQuery={parentQuery}/>
-            <Box>
+            <div style={{overflowY:"scroll", height:"500px"}}>
                 <SearchResult query={query} />
-            </Box>
+            </div>
         </div>
     );
 }
