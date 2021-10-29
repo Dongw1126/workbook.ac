@@ -6,13 +6,13 @@ import { Placeholder } from "./Placeholder";
 import styles from "./ProblemTree.module.css";
 
 type Props = {
-  json: NodeModel<ProblemData>[];
+  data: NodeModel<ProblemData>[];
   canSort: boolean;
 };
 
 function ProblemTree(props: Props) {
   // const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
-  const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.json);
+  const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.data);
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")

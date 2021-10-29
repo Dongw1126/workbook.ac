@@ -79,7 +79,7 @@ function SearchResult(props: Props) {
     }
     else if (complete === 1) {
         return (
-            <ProblemTree key={props.query} json={resultTree} canSort={false} />
+            <ProblemTree key={props.query} data={resultTree} canSort={false} />
         );
     }
     else {
