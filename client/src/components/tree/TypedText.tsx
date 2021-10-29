@@ -4,15 +4,17 @@ import { Box } from "@mui/system";
 import { ProblemData } from "../Types";
 
 type Props = {
-    node: NodeModel<ProblemData>;
+    // node: NodeModel<ProblemData>;
+    id?: number;
+    title?: string;
     droppable?: boolean;
 };
 
 export const ProblemDisplay: React.FC<Props> = (props) => {
     return (
         <div style={{lineHeight: '1.6'}}>
-            <Box sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.node.data?.problemId}</Box>
-            <Box sx={{ display: 'inline' }}>{props.node.text}</Box>
+            <Box sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.id}</Box>
+            <Box sx={{ display: 'inline' }}>{props.title}</Box>
         </div>
     );
 };

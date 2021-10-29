@@ -49,7 +49,7 @@ export const ProblemNode: React.FC<Props> = (props) => {
         <TypedIcon droppable={droppable} level={data?.level} />
       </div>
       <div className={styles.labelGridItem}>
-        <ProblemDisplay droppable={droppable} node={props.node} />
+        <ProblemDisplay droppable={droppable} id={props.node.data?.problemId} title={props.node.text} />
       </div>
     </div>
   );
