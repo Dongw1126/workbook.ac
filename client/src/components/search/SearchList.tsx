@@ -11,7 +11,12 @@ function SearchList(props: Props) {
             {props.data.map(
                 item => {
                     return(
-                        <SearchItem id={item.problemId} level={item.level} title={item.titleKo}/>
+                        <SearchItem 
+                            id={item.problemId} 
+                            level={item.level} 
+                            title={item.titleKo}
+                            voteCnt={item.votedUserCount}
+                        />
                     );
                 }
             )}

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
+import TextField from '@mui/material/TextField';;
 
 interface Props {
     setQuery: (parm: string) => void;

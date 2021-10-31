@@ -14,7 +14,7 @@ const getResult = async(_query: string, _page=1) => {
     const response = await fetch(url);
     if(response.status === 200) {
         const body = await response.json();
-        console.log(body.item)
+        console.log(body)
         return body.items;
     }
 
