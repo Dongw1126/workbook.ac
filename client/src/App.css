@@ -2,3 +2,17 @@
     background-color: rgb(247, 248, 249);
     font-family: 'Pretendard';
 }
+
+::-webkit-scrollbar{
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb{
+    height: 17%;
+    background-color: rgb(136, 136, 136);
+    border-radius: 10px;  
+}
+
+::-webkit-scrollbar-track{
+    background-color: rgba(33,133,133,0.33);
+}
