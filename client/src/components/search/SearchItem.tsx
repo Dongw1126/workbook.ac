@@ -6,7 +6,6 @@ import AddIcon from '@mui/icons-material/Add';
 import LaunchIcon from '@mui/icons-material/Launch';
 import IconButton from '@mui/material/IconButton';
 
-
 type Props = {
     level: number;
     id: number;
@@ -15,6 +14,8 @@ type Props = {
 };
 
 function SearchItem(props: Props) {
+    const url = "https://www.acmicpc.net/problem/" + props.id;
+
     return (
         <div className={`${styles.root}`}>
             <IconButton onClick={(event) => {
@@ -28,9 +29,7 @@ function SearchItem(props: Props) {
             <div className={styles.itemSpacing}>
                 <ProblemDisplay droppable={false} id={props.id} title={props.title} />
             </div>
-            <IconButton onClick={(event) => {
-
-            }}>
+            <IconButton onClick={() => window.open(url, "_blank")}>
                 <LaunchIcon />
             </IconButton>
 
