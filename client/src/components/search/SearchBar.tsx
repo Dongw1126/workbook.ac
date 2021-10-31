@@ -13,39 +13,37 @@ interface Props {
 function SearchBar(props: Props) {
     const [inputText, setInputText] = useState("");
     return (
-        <Box sx={{ mb: 2 }}>
-            <TextField fullWidth
-                InputProps={{
-                    onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
-                        if (event.key === 'Enter') {                   
+        <TextField fullWidth
+            InputProps={{
+                onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
+                    if (event.key === 'Enter') {                   
+                        props.setQuery(inputText);
+                    }
+                },
+                onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+                    let ev = event.target as HTMLInputElement;
+                    setInputText(ev.value);
+                },
+                startAdornment: (
+                    <InputAdornment position="start">
+                        <SearchIcon />
+                    </InputAdornment>
+                ),
+                endAdornment: (
+                    <InputAdornment position="start">
+                        <IconButton sx={{ p: 0 }} onClick={(event) => {
                             props.setQuery(inputText);
-                        }
-                    },
-                    onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
-                        let ev = event.target as HTMLInputElement;
-                        setInputText(ev.value);
-                    },
-                    startAdornment: (
-                        <InputAdornment position="start">
-                            <SearchIcon />
-                        </InputAdornment>
-                    ),
-                    endAdornment: (
-                        <InputAdornment position="start">
-                            <IconButton sx={{ p: 0 }} onClick={(event) => {
-                                props.setQuery(inputText);
-                            }}>
-                                <ArrowForwardIcon />
-                            </IconButton>
-                        </InputAdornment>
-                    ),
-                    style: { fontFamily: 'Pretendard' }
-                }}
-                id="outlined-search"
-                label=""
-                variant="outlined"
+                        }}>
+                            <ArrowForwardIcon />
+                        </IconButton>
+                    </InputAdornment>
+                ),
+                style: { fontFamily: 'Pretendard' }
+            }}
+            id="outlined-search"
+            label=""
+            variant="outlined"
             />
-        </Box>
     );
 }
 
