@@ -6,13 +6,17 @@ type Props = {
     query: string;
 };
 
-const getResult = async(_query: string, _page=1) => {
-    // if(_query.length === 0) _query="tier:b5..r1";
+const SEARCH_LOADING = 0;
+const SEARCH_COMPLETE = 1;
+const SEARCH_EMPTY = 2;
+const SEARCH_ERROR = 3;
+
+const getResult = async (_query: string, _page = 1) => {
     const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
     // console.log(url);
 
     const response = await fetch(url);
-    if(response.status === 200) {
+    if (response.status === 200) {
         const body = await response.json();
         console.log(body)
         return body.items;
@@ -28,43 +32,69 @@ function SearchResult(props: Props) {
 
 
     useEffect(() => {
-        getResult(props.query)
-        .then(res => {
-            setComplete(0);
-            // console.log(res)
-            if(typeof res === "object") {
-                setResultData(res)
-                setComplete(1);
-            }
-            else {
-                setStatus(res);
-                setComplete(2);
-            }
-        })
-        .catch(err => console.log(err))
+        if (props.query !== "") {
+            getResult(props.query)
+                .then(res => {
+                    setComplete(SEARCH_LOADING);
+                    // console.log(res)
+                    if (typeof res === "object") {
+                        setResultData(res)
+                        setComplete(SEARCH_COMPLETE);
+                    }
+                    else {
+                        setStatus(res);
+                        setComplete(SEARCH_ERROR);
+                    }
+                })
+                .catch(err => console.log(err))
+        } else {
+            setComplete(SEARCH_EMPTY);
+        }
     }, [props.query]);
 
     /*useEffect(() => {
         console.log(complete);
     });*/
-    
-    if (complete === 0) {
+
+    if (complete === SEARCH_LOADING) {
         return (
-            <div style={{ textAlign: "center"}}>
-                <CircularProgress sx={{ m: 20 }}/>
+            <div style={{ textAlign: "center" }}>
+                <CircularProgress sx={{ m: 20 }} />
             </div>
         );
     }
-    else if (complete === 1) {
+    else if (complete === SEARCH_COMPLETE) {
         return (
             <SearchList key={props.query} data={resultData} />
         );
     }
+    else if (complete === SEARCH_EMPTY) {
+        return(
+            <div style={{ fontSize: 18, lineHeight: 2, margin: 10, marginTop: 15 }}>
+                <div style={{ width: "40%" }}>
+                    <div style={{ float: "left"}}>
+                        tier:<br/>
+                        solved:<br/>
+                        average_try:<br/>
+                        tag:<br/>
+                        from:<br/> 
+                    </div>
+                    <div style={{ float: "right", color: "#595959"}}>
+                        난이도 필터<br/>
+                        푼 사람 수 필터<br/>
+                        평균 시도 횟수 필터<br/>
+                        태그 필터<br/>
+                        출처 필터<br/>
+                    </div>
+                </div>
+            </div>
+        );
+    }
     else {
         return (
-            <div style={{fontSize: 38}}>
+            <div style={{ fontSize: 38 }}>
                 <p>
-                    😵 {status} 오류! <br/>
+                    😵 {status} 오류! <br />
                     잠시 후에 다시 시도해 주세요
                 </p>
             </div>
