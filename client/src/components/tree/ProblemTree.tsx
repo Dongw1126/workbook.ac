@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../Types";
-import { ProblemNode } from "./ProblemNode";
-import { Placeholder } from "./Placeholder";
+import ProblemNode from "./ProblemNode";
+import Placeholder from "./Placeholder";
 import styles from "./ProblemTree.module.css";
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
 };
 
 function ProblemTree(props: Props) {
-  // const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(SampleData);
   const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.data);
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(

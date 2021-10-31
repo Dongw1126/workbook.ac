@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./SearchItem.module.css";
-import { TypedIcon } from "../tree/TypedIcon";
-import { ProblemDisplay } from "../tree/TypedText";
+import TypedIcon from "../tree/TypedIcon";
+import ProblemDisplay from "../tree/TypedText";
 
 type Props = {
     level: number;

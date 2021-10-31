@@ -2,8 +2,8 @@ import React from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../Types";
-import { TypedIcon } from "./TypedIcon";
-import { ProblemDisplay } from "./TypedText";
+import TypedIcon from "./TypedIcon";
+import ProblemDisplay from "./TypedText";
 import styles from "./ProblemNode.module.css";
 import * as Constants from "../../constants"
 
@@ -14,7 +14,7 @@ type Props = {
   onToggle: (id: NodeModel["id"]) => void;
 };
 
-export const ProblemNode: React.FC<Props> = (props) => {
+function ProblemNode(props: Props) {
   const { droppable, data } = props.node;
   const indent = props.depth * Constants.TREE_ITEM_SPACE;
 
@@ -53,4 +53,6 @@ export const ProblemNode: React.FC<Props> = (props) => {
       </div>
     </div>
   );
-};
+}
+
+export default ProblemNode;

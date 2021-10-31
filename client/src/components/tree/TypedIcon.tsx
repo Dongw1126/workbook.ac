@@ -9,7 +9,7 @@ type Props = {
 };
 
 
-export const TypedIcon: React.FC<Props> = (props) => {
+function TypedIcon(props: Props) {
   if (props.droppable) {
     return <FolderIcon />;
   }
@@ -28,4 +28,6 @@ export const TypedIcon: React.FC<Props> = (props) => {
       </Box>
     );
   }
-};
+}
+
+export default TypedIcon;

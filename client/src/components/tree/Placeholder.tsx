@@ -8,9 +8,11 @@ type Props = {
     depth: number;
 }
 
-export const Placeholder: React.FC<Props> = (props) => {
+function Placeholder(props: Props) {
     const left = props.depth * Constants.TREE_ITEM_SPACE;
     return (
         <div className={styles.root} style={{ left }}></div>
-    )
-};
+    );
+}
+
+export default Placeholder;

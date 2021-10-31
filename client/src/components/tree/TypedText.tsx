@@ -7,11 +7,13 @@ type Props = {
     droppable?: boolean;
 };
 
-export const ProblemDisplay: React.FC<Props> = (props) => {
+function ProblemDisplay(props: Props) {
     return (
         <div style={{lineHeight: '1.6'}}>
             <Box sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.id}</Box>
             <Box sx={{ display: 'inline' }}>{props.title}</Box>
         </div>
     );
-};
+}
+
+export default ProblemDisplay;
