@@ -1,33 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { CircularProgress } from "@mui/material";
-import ProblemTree from "../tree/ProblemTree";
-import { NodeModel } from "@minoru/react-dnd-treeview";
-import { ProblemData } from "../Types";
-import SampleData2 from "../tree/sample2.json";
+import SearchList from "./SearchList";
 
 type Props = {
     query: string;
 };
-
-function processProblems(items: any) {
-    let ret: NodeModel<ProblemData>[] = [];
-
-    Object.values(items).forEach((item:any) => {
-        const tmp: NodeModel<ProblemData> = {
-            id: item.problemId,
-            parent: 0,
-            droppable: false,
-            text: item.titleKo,
-            data: {
-                level: item.level,
-                problemId: item.problemId  
-            } 
-        }
-        ret.push(tmp)
-    });
-    console.log(ret);
-    return ret;
-}
 
 const getResult = async(_query: string, _page=1) => {
     // if(_query.length === 0) _query="tier:b5..r1";
@@ -37,6 +14,7 @@ const getResult = async(_query: string, _page=1) => {
     const response = await fetch(url);
     if(response.status === 200) {
         const body = await response.json();
+        console.log(body.item)
         return body.items;
     }
 
@@ -44,7 +22,7 @@ const getResult = async(_query: string, _page=1) => {
 }
 
 function SearchResult(props: Props) {
-    const [resultTree, setResultTree] = useState<NodeModel<ProblemData>[]>([]);
+    const [resultData, setResultData] = useState<any>([]);
     const [status, setStatus] = useState(0);
     const [complete, setComplete] = useState(0);
 
@@ -55,7 +33,7 @@ function SearchResult(props: Props) {
             setComplete(0);
             // console.log(res)
             if(typeof res === "object") {
-                setResultTree(processProblems(res))
+                setResultData(res)
                 setComplete(1);
             }
             else {
@@ -79,7 +57,7 @@ function SearchResult(props: Props) {
     }
     else if (complete === 1) {
         return (
-            <ProblemTree key={props.query} data={resultTree} canSort={false} />
+            <SearchList key={props.query} data={resultData} />
         );
     }
     else {

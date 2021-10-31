@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./search/SearchBar";
 import SearchResult from "./search/SearchResult";
-import Box from '@mui/material/Box';
 
 function SearchComponent() {
     const [query, setQuery] = useState('');
@@ -11,7 +10,7 @@ function SearchComponent() {
     
     return(
         <div>
-            <SearchBar setQuery={parentQuery}/>
+            <SearchBar setQuery={parentQuery} />
             <div style={{overflowY:"scroll", height:"500px"}}>
                 <SearchResult query={query} />
             </div>

@@ -13,7 +13,7 @@ interface Props {
 function SearchBar(props: Props) {
     const [inputText, setInputText] = useState("");
     return (
-        <Box>
+        <Box sx={{ mb: 2 }}>
             <TextField fullWidth
                 InputProps={{
                     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
