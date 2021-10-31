@@ -1,27 +1,20 @@
 import React from "react";
-import Box from '@mui/material/Box';
-import MuiGrid from '@mui/material/Grid';
-import Divider from '@mui/material/Divider';
 import WorkbookComponent from '../components/WorkbookComponent';
 import SearchComponent from '../components/SearchComponent';
 
 function CreateWorkbook() {
     return (
-        <div>
-            <MuiGrid container>
-                <MuiGrid item xs>
-                    <Box sx={{ m:3, height: '100vh' }}>
-                        <WorkbookComponent/>
-                    </Box>
-                </MuiGrid>
-                <Divider orientation="vertical" flexItem/>
-                <MuiGrid item xs>
-                    <Box sx={{ m:3 }}>
-                        <SearchComponent/>
-                    </Box>
-                </MuiGrid>
-            </MuiGrid>
-            
+        <div style={{ width: "100%" }}>
+            <div style={{ width: "40%", float: "left", boxSizing: "border-box" }}>
+                <div style={{ margin: "5%" }}>
+                    <WorkbookComponent/>
+                </div>
+            </div>
+            <div style={{ width: "60%", float: "right", boxSizing: "border-box" }}>
+                <div style={{ margin: "5%" }}>
+                    <SearchComponent/>
+                </div>
+            </div>
         </div>
     );
 }
