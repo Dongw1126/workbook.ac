@@ -24,6 +24,7 @@
 .isSelected {
   border-width: 3px;
   border-style: dotted;
+  box-sizing: border-box
 }
 
 .expandIconWrapper {
