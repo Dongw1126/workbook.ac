@@ -6,7 +6,9 @@ type Props = {
     title?: string;
     droppable?: boolean;
 };
-
+/**
+ * 문제 출력 컴포넌트
+ */
 function ProblemDisplay(props: Props) {
     return (
         <div style={{lineHeight: '1.6'}}>

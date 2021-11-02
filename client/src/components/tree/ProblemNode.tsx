@@ -16,6 +16,10 @@ type Props = {
   onSelect: (node: NodeModel) => void;
 };
 
+/**
+ * 문제집 트리 노드 컴포넌트
+ * props.node.droppable 이 참이면 폴더, 거짓이면 문제
+ */
 function ProblemNode(props: Props) {
   const { droppable, data } = props.node;
   const indent = props.depth * Constants.TREE_ITEM_SPACE;

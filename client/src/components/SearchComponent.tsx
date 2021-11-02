@@ -2,6 +2,10 @@ import React, { useState } from "react";
 import SearchBar from "./search/SearchBar";
 import SearchResult from "./search/SearchResult";
 
+/**
+ * parentQuery를 SearchBar에 넘겨주어 검색 시 query를 업데이트하고
+ * query를 SearchResult 에 넘겨주어 검색 결과 출력
+ */
 function SearchComponent() {
     const [query, setQuery] = useState('');
     function parentQuery(str: string) {

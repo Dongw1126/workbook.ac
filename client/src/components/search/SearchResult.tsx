@@ -25,6 +25,10 @@ const getResult = async (_query: string, _page = 1) => {
     return response.status;
 }
 
+/**
+ * 검색 결과 출력 컴포넌트
+ * props.query 는 SearchBar 에서 입력한 데이터
+ */
 function SearchResult(props: Props) {
     const [resultData, setResultData] = useState<any>([]);
     const [status, setStatus] = useState(0);

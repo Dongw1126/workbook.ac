@@ -9,7 +9,11 @@ type Props = {
   voteCnt?: number;
 };
 
-
+/**
+ * 트리 노드 아이콘 컴포넌트
+ * droppable 이 true면, 폴더이므로 폴더 아이콘 출력
+ * droppable 이 false면, 문제이므로 level에 맞게 티어 아이콘 출력
+ */
 function TypedIcon(props: Props) {
   if (props.droppable) {
     return <FolderIcon />;

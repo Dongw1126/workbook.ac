@@ -10,6 +10,10 @@ type Props = {
   canSort: boolean;
 };
 
+/**
+ * 문제집 트리 컴포넌트
+ * ProblemData의 배열로 트리 데이터 구성
+ */
 function ProblemTree(props: Props) {
   const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.data);
 

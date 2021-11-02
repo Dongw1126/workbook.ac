@@ -4,6 +4,9 @@ import SampleData from "./tree/sample.json";
 import SampleData2 from "./tree/sample2.json";
 
 
+/**
+ * 문제집 컴포넌트
+ */
 function WorkbookComponent() {
     return(
         <ProblemTree data={SampleData2} canSort={true} />

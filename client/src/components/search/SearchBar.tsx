@@ -9,6 +9,10 @@ interface Props {
     setQuery: (parm: string) => void;
 }
 
+/**
+ * 검색 창 컴포넌트
+ * props.setQuery 는 SearchComponent 에서 넘어옴
+ */
 function SearchBar(props: Props) {
     const [inputText, setInputText] = useState("");
     return (

@@ -13,6 +13,9 @@ type Props = {
     voteCnt: number;
 };
 
+/**
+ * 결과 아이템 컴포넌트
+ */
 function SearchItem(props: Props) {
     const url = "https://www.acmicpc.net/problem/" + props.id;
 
