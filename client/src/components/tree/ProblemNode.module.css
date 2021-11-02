@@ -21,6 +21,11 @@
   background-color: rgb(216, 216, 216);
 }
 
+.isSelected {
+  border-width: 3px;
+  border-style: dotted;
+}
+
 .expandIconWrapper {
   align-items: center;
   font-size: 0;

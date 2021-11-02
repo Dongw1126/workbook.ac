@@ -10,8 +10,10 @@ import * as Constants from "../../constants"
 type Props = {
   node: NodeModel<ProblemData>;
   depth: number;
+  isSelected: boolean;
   isOpen: boolean;
   onToggle: (id: NodeModel["id"]) => void;
+  onSelect: (node: NodeModel) => void;
 };
 
 function ProblemNode(props: Props) {
@@ -21,17 +23,16 @@ function ProblemNode(props: Props) {
   const handleToggle = (e: React.MouseEvent) => {
     e.stopPropagation();
     props.onToggle(props.node.id);
+    props.onSelect(props.node);
   };
 
   return (
     <div
-      className={`tree-node ${styles.root} ${
-        props.node.droppable ? styles.isDroppable : styles.nonDroppable
-      }`}
+      className={`tree-node ${styles.root} 
+      ${props.node.droppable ? styles.isDroppable : styles.nonDroppable}
+      ${props.isSelected ? styles.isSelected : ""}
+      `}
       style={{ paddingInlineStart: indent }}
-      /*style={props.node.droppable ? 
-        {paddingInlineStart: props.depth*indentWeight }
-      :{paddingInlineStart: (props.depth - 1)*indentWeight}}*/
       onClick={handleToggle}
     >
       <div

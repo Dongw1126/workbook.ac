@@ -9,7 +9,7 @@ function SearchList(props: Props) {
     return(
         <div>
             {props.data.map(
-                item => {
+                (item, index) => {
                     return(
                         <SearchItem 
                             id={item.problemId} 

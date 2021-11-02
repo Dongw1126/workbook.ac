@@ -17,6 +17,8 @@ function ProblemTree(props: Props) {
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );
 
+  const [selectedNode, setSelectedNode] = useState<NodeModel>(); 
+
   const ref = useRef<TreeMethods>(null);
   const handleOpen = () => {
     if (ref.current?.open) {
@@ -28,6 +30,8 @@ function ProblemTree(props: Props) {
     handleOpen();
   }, []);
 
+  const handleSelect = (node: NodeModel) => setSelectedNode(node);
+  const resetSelect = () => setSelectedNode(undefined);
   const handleDrop = (newTree: NodeModel<ProblemData>[]) => setTreeData(newTree);
 
   const handleChangeOpen = (newOpenIds: NodeModel["id"][]) => {
@@ -36,7 +40,7 @@ function ProblemTree(props: Props) {
   };
 
   return (
-    <div className={styles.treeapp}>
+    <div className={styles.treeapp} onClick={resetSelect}>
       <Tree
         ref={ref}
         tree={treeData}
@@ -49,7 +53,9 @@ function ProblemTree(props: Props) {
             node={node}
             depth={depth}
             isOpen={isOpen}
+            isSelected={node.id === selectedNode?.id}
             onToggle={onToggle}
+            onSelect={handleSelect}
           />
         )}
         onDrop={handleDrop}
