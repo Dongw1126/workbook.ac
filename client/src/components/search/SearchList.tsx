@@ -16,6 +16,7 @@ function SearchList(props: Props) {
                 (item, index) => {
                     return(
                         <SearchItem 
+                            key={item.problemId}
                             id={item.problemId} 
                             level={item.level} 
                             title={item.titleKo}

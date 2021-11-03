@@ -12,6 +12,8 @@ const SEARCH_EMPTY = 2;
 const SEARCH_ERROR = 3;
 
 const getResult = async (_query: string, _page = 1) => {
+    console.log("getResult call");
+
     const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
     // console.log(url);
 

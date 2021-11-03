@@ -29,45 +29,69 @@ function ProblemTree(props: Props) {
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
+
   const handleOpen = useCallback(() => {
+    console.log("handleOpen call");
+    
     if (ref.current?.open) {
       ref.current.open(newOpenIds);
     }
   }, [newOpenIds])
 
   useEffect(() => {
-    handleOpen();
+    console.log("useEffect call");
 
+    handleOpen();
     let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM + 1}, () => false);
     treeData.forEach((element) => {
       let curr_id = 0;
       if (typeof element.id === 'number' && element.droppable) {
         curr_id = element.id;
-        console.log(curr_id)
+        //console.log(curr_id)
       }
       newFolderArray[curr_id] = true;
     })
     setFolderIdArray(newFolderArray);
   }, []);
 
+
   const handleSelect = useCallback((node: NodeModel) => {
+    console.log("handleSelect call");
+
     setSelectedNode(node);
     window.localStorage.setItem("selectedId", node.id.toString());
   }, [setSelectedNode]);
 
-  const resetSelect = useCallback(() => setSelectedNode(undefined), [setSelectedNode]);
-  const handleDrop = useCallback((newTree: NodeModel<ProblemData>[]) => setTreeData(newTree), [setTreeData]);
+  const resetSelect = useCallback(() => {
+    console.log("resetSelect call");
+
+    setSelectedNode(undefined);
+  }, [setSelectedNode]);
+
+
+  const handleDrop = useCallback((newTree: NodeModel<ProblemData>[]) => {
+    console.log("handleDrop call");
+
+    setTreeData(newTree);
+  }, [setTreeData]);
 
   const handleChangeOpen = useCallback((_newOpenIds: NodeModel["id"][]) => {
+    console.log("handleChangeOpen call");
+
     setNewOpenIds(_newOpenIds);
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
+  
   const addNode = useCallback((newNode: NodeModel<ProblemData>) => {
+    console.log("addNode call");
+
     setTreeData(prevData => [...prevData, newNode]);
   }, [setTreeData]);
 
   const addFolder = useCallback(() => {
+    console.log("addFolder call");
+
     let newId = -1;
     for(let i = 1; i <= Constants.MAX_FOLDER_NUM; i++) {
       if(!folderIdArray[i]) {
@@ -78,10 +102,12 @@ function ProblemTree(props: Props) {
         break;
       }
     }
+
     if(newId === -1) {
       console.log("폴더 꽉 참");
       return;
     }
+
     console.log(newId);
 
     let parentId;

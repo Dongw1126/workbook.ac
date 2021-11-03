@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../Types";
@@ -24,11 +24,13 @@ function ProblemNode(props: Props) {
   const { droppable, data } = props.node;
   const indent = props.depth * Constants.TREE_ITEM_SPACE;
 
-  const handleToggle = (e: React.MouseEvent) => {
+  const handleToggle = useCallback((e: React.MouseEvent) => {
+    console.log("handleToggle call");
+
     e.stopPropagation();
     props.onToggle(props.node.id);
     props.onSelect(props.node);
-  };
+  },[props.onToggle, props.onSelect]);
 
   return (
     <div
