@@ -10,7 +10,7 @@
     }
   },
   {
-    "id": 2,
+    "id": 1000,
     "parent": 1,
     "droppable": false,
     "text": "A+B",
@@ -20,7 +20,7 @@
     }
   },
   {
-    "id": 3,
+    "id": 1238,
     "parent": 1,
     "droppable": false,
     "text": "엄청난 부자🥺",
@@ -50,7 +50,7 @@
     }
   },
   {
-    "id": 6,
+    "id": 1235,
     "parent": 5,
     "droppable": false,
     "text": "asdf",
@@ -60,7 +60,7 @@
     }
   },
   {
-    "id": 7,
+    "id": 1234,
     "parent": 0,
     "droppable": false,
     "text": "asdf",
