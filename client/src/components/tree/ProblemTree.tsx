@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
@@ -29,16 +29,16 @@ function ProblemTree(props: Props) {
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
-  const handleOpen = () => {
+  const handleOpen = useCallback(() => {
     if (ref.current?.open) {
       ref.current.open(newOpenIds);
     }
-  }
+  }, [newOpenIds])
 
   useEffect(() => {
     handleOpen();
-    let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM + 1}, () => false);
 
+    let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM + 1}, () => false);
     treeData.forEach((element) => {
       let curr_id = 0;
       if (typeof element.id === 'number' && element.droppable) {
@@ -47,24 +47,27 @@ function ProblemTree(props: Props) {
       }
       newFolderArray[curr_id] = true;
     })
-
     setFolderIdArray(newFolderArray);
   }, []);
 
-  const handleSelect = (node: NodeModel) => setSelectedNode(node);
-  const resetSelect = () => setSelectedNode(undefined);
-  const handleDrop = (newTree: NodeModel<ProblemData>[]) => setTreeData(newTree);
+  const handleSelect = useCallback((node: NodeModel) => {
+    setSelectedNode(node);
+    window.localStorage.setItem("selectedId", node.id.toString());
+  }, [setSelectedNode]);
 
-  const handleChangeOpen = (newOpenIds: NodeModel["id"][]) => {
-    setNewOpenIds(newOpenIds);
-    window.localStorage.setItem("openIds", JSON.stringify(newOpenIds));
-  };
+  const resetSelect = useCallback(() => setSelectedNode(undefined), [setSelectedNode]);
+  const handleDrop = useCallback((newTree: NodeModel<ProblemData>[]) => setTreeData(newTree), [setTreeData]);
 
-  const addNode = (newNode: NodeModel<ProblemData>) => {
+  const handleChangeOpen = useCallback((_newOpenIds: NodeModel["id"][]) => {
+    setNewOpenIds(_newOpenIds);
+    window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
+  }, [setNewOpenIds]);
+
+  const addNode = useCallback((newNode: NodeModel<ProblemData>) => {
     setTreeData(prevData => [...prevData, newNode]);
-  };
+  }, [setTreeData]);
 
-  const addFolder = () => {
+  const addFolder = useCallback(() => {
     let newId = -1;
     for(let i = 1; i <= Constants.MAX_FOLDER_NUM; i++) {
       if(!folderIdArray[i]) {
@@ -104,7 +107,7 @@ function ProblemTree(props: Props) {
         }
       }
     )
-  };
+  }, [folderIdArray, setFolderIdArray, selectedNode, addNode]);
 
   return (
     <div className={styles.treeapp} onClick={resetSelect}>
