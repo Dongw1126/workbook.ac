@@ -59,7 +59,6 @@ function ProblemTree(props: Props) {
     console.log("handleSelect call");
 
     setSelectedNode(node);
-    window.localStorage.setItem("selectedId", node.id.toString());
   }, [setSelectedNode]);
 
   const resetSelect = useCallback(() => {
@@ -136,45 +135,49 @@ function ProblemTree(props: Props) {
   }, [folderIdArray, setFolderIdArray, selectedNode, addNode]);
 
   return (
-    <div className={styles.treeapp} onClick={resetSelect}>
-      <button onClick={addFolder}>add folder</button>
-      <Tree
-        ref={ref}
-        tree={treeData}
-        rootId={0}
-        render={(
-          node: NodeModel<ProblemData>,
-          { depth, isOpen, onToggle }
-        ) => (
-          <ProblemNode
-            node={node}
-            depth={depth}
-            isOpen={isOpen}
-            isSelected={node.id === selectedNode?.id}
-            onToggle={onToggle}
-            onSelect={handleSelect}
-          />
-        )}
-        onDrop={handleDrop}
-        onChangeOpen={handleChangeOpen}
-        classes={{
-          root: styles.treeRoot,
-          draggingSource: styles.draggingSource,
-          dropTarget: styles.dropTarget,
-          placeholder: styles.placeholder
-        }}
-        canDrop={props.canSort ?
-          (tree, { dragSource, dropTargetId, dropTarget }) => {
-            if (dragSource?.parent === dropTargetId) {
-              return true;
-            }} : undefined}
-        sort={false}
-        insertDroppableFirst={!props.canSort}
-        dropTargetOffset={props.canSort ? 10 : undefined }
-        placeholderRender={props.canSort ? (node, { depth }) => (
-          <Placeholder node={node} depth={depth} />
-        ) : undefined }
-      />
+    <div>
+      <div>
+        <button onClick={addFolder}>add Folder</button>
+      </div>
+      <div className={styles.treeapp} onClick={resetSelect}>
+        <Tree
+          ref={ref}
+          tree={treeData}
+          rootId={0}
+          render={(
+            node: NodeModel<ProblemData>,
+            { depth, isOpen, onToggle }
+          ) => (
+            <ProblemNode
+              node={node}
+              depth={depth}
+              isOpen={isOpen}
+              isSelected={node.id === selectedNode?.id}
+              onToggle={onToggle}
+              onSelect={handleSelect}
+            />
+          )}
+          onDrop={handleDrop}
+          onChangeOpen={handleChangeOpen}
+          classes={{
+            root: styles.treeRoot,
+            draggingSource: styles.draggingSource,
+            dropTarget: styles.dropTarget,
+            placeholder: styles.placeholder
+          }}
+          canDrop={props.canSort ?
+            (tree, { dragSource, dropTargetId, dropTarget }) => {
+              if (dragSource?.parent === dropTargetId) {
+                return true;
+              }} : undefined}
+          sort={false}
+          insertDroppableFirst={!props.canSort}
+          dropTargetOffset={props.canSort ? 10 : undefined }
+          placeholderRender={props.canSort ? (node, { depth }) => (
+            <Placeholder node={node} depth={depth} />
+          ) : undefined }
+        />
+      </div>
     </div>
   );
 }
