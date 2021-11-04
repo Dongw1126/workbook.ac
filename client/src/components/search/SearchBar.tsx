@@ -3,7 +3,8 @@ import SearchIcon from '@mui/icons-material/Search';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
-import TextField from '@mui/material/TextField';;
+import TextField from '@mui/material/TextField';
+import * as Constants from "../../constants";
 
 interface Props {
     setQuery: (parm: string) => void;
@@ -43,9 +44,13 @@ function SearchBar(props: Props) {
                 ),
                 style: { fontFamily: 'Pretendard' }
             }}
+            inputProps={{
+                maxLength: Constants.MAX_SEARCH_LENGTH,
+            }}
             id="outlined-search"
             label=""
             variant="outlined"
+            autoComplete="off"
             />
     );
 }
