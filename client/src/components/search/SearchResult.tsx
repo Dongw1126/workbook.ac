@@ -75,22 +75,17 @@ function SearchResult(props: Props) {
         );
     }
     else if (complete === SEARCH_EMPTY) {
-        return(
+        return (
             <div style={{ fontSize: 18, lineHeight: 2, margin: 10, marginTop: 15 }}>
                 <div style={{ width: "40%" }}>
-                    <div style={{ float: "left"}}>
-                        tier:<br/>
-                        solved:<br/>
-                        average_try:<br/>
-                        tag:<br/>
-                        from:<br/> 
-                    </div>
-                    <div style={{ float: "right", color: "#595959"}}>
-                        난이도 필터<br/>
-                        푼 사람 수 필터<br/>
-                        평균 시도 횟수 필터<br/>
-                        태그 필터<br/>
-                        출처 필터<br/>
+                    <div style={{ whiteSpace: "nowrap" }}>
+                        <table style={{ width: "25vw", borderSpacing: "2vw 0"}}>
+                            <tr><td>tier:</td><td>난이도 필터</td></tr>
+                            <tr><td>solved:</td><td>푼 사람 수 필터</td></tr>
+                            <tr><td>average_try:</td><td>평균 시도 횟수 필터</td></tr>
+                            <tr><td>tag:</td><td>태그 필터</td></tr>
+                            <tr><td>from:</td><td>출처 필터</td></tr>
+                        </table>
                     </div>
                 </div>
             </div>

@@ -9,7 +9,9 @@ import SampleData2 from "./tree/sample2.json";
  */
 function WorkbookComponent() {
     return(
-        <ProblemTree data={SampleData2} canSort={true} />
+        <div style={{overflow:"auto", height:"70vh", marginTop: 5}}>
+            <ProblemTree data={SampleData2} canSort={true} />
+        </div>
     );
 }
 
