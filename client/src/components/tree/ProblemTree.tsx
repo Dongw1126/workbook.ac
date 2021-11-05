@@ -1,8 +1,12 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
+
 import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
+
+import useFolderIdArray from "../../hooks/useFolderIdArray";
+
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
 
@@ -22,9 +26,9 @@ function ProblemTree(props: Props) {
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
-  );
+  );  
   
-  const [folderIdArray, setFolderIdArray] = useState([false]);
+  const [folderIdArray, updateFolderIdArray] = useFolderIdArray(treeData);
 
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
@@ -39,20 +43,12 @@ function ProblemTree(props: Props) {
   }, [newOpenIds])
 
   useEffect(() => {
-    console.log("useEffect call");
-
     handleOpen();
-    let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM + 1}, () => false);
-    treeData.forEach((element) => {
-      let curr_id = 0;
-      if (typeof element.id === 'number' && element.droppable) {
-        curr_id = element.id;
-        //console.log(curr_id)
-      }
-      newFolderArray[curr_id] = true;
-    })
-    setFolderIdArray(newFolderArray);
-  }, []);
+  });
+
+  useEffect(() => {
+    updateFolderIdArray();
+  }, [treeData]);
 
 
   const handleSelect = useCallback((node: NodeModel) => {
@@ -94,9 +90,6 @@ function ProblemTree(props: Props) {
     let newId = -1;
     for(let i = 1; i <= Constants.MAX_FOLDER_NUM; i++) {
       if(!folderIdArray[i]) {
-        let newFolderArray = [...folderIdArray];
-        newFolderArray[i] = true;
-        setFolderIdArray(newFolderArray);
         newId = i;
         break;
       }
@@ -132,7 +125,7 @@ function ProblemTree(props: Props) {
         }
       }
     )
-  }, [folderIdArray, setFolderIdArray, selectedNode, addNode]);
+  }, [folderIdArray, selectedNode, addNode]);
 
   return (
     <div>
