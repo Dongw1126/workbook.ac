@@ -5,7 +5,7 @@ import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
 
-import useFolderIdArray from "../../hooks/useFolderIdArray";
+import { useIdArray } from "../../hooks/useIdArray";
 
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
@@ -28,7 +28,7 @@ function ProblemTree(props: Props) {
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );  
   
-  const [folderIdArray, updateFolderIdArray] = useFolderIdArray(treeData);
+  const [idArray, updateIdArray] = useIdArray(treeData);
 
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
@@ -44,10 +44,10 @@ function ProblemTree(props: Props) {
 
   useEffect(() => {
     handleOpen();
-  });
+  }, []);
 
   useEffect(() => {
-    updateFolderIdArray();
+    updateIdArray();
   }, [treeData]);
 
 
@@ -88,8 +88,8 @@ function ProblemTree(props: Props) {
     console.log("addFolder call");
 
     let newId = -1;
-    for(let i = 1; i <= Constants.MAX_FOLDER_NUM; i++) {
-      if(!folderIdArray[i]) {
+    for(let i = 1; i < Constants.MAX_FOLDER_NUM; i++) {
+      if(!idArray[i]) {
         newId = i;
         break;
       }
@@ -125,7 +125,7 @@ function ProblemTree(props: Props) {
         }
       }
     )
-  }, [folderIdArray, selectedNode, addNode]);
+  }, [idArray, selectedNode, addNode]);
 
   return (
     <div>

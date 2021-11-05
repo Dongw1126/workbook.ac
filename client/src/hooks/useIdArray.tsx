@@ -3,13 +3,13 @@ import { NodeModel } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../components/Types";
 import * as Constants from "../constants"
 
-function useFolderIdArray(initalData: NodeModel<ProblemData>[]): [boolean[], () => void] {
-    const [folderIdArray, setFolderIdArray] = useState([false]);
+export function useIdArray(initalData: NodeModel<ProblemData>[]): [boolean[], () => void] {
+    const [idArray, setIdArray] = useState([false]);
 
-    const updateFolderIdArray = useCallback(() => {
+    const updateIdArray = useCallback(() => {
         console.log("updateFolderIdArray call");
 
-        let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM + 1}, () => false);
+        let newFolderArray = Array.from({length: Constants.MAX_FOLDER_NUM}, () => false);
         initalData.forEach((element) => {
           let curr_id = 0;
           if (typeof element.id === 'number' && element.droppable) {
@@ -18,10 +18,8 @@ function useFolderIdArray(initalData: NodeModel<ProblemData>[]): [boolean[], () 
           }
           newFolderArray[curr_id] = true;
         })
-        setFolderIdArray(newFolderArray);
+        setIdArray(newFolderArray);
     }, [initalData]);
 
-    return [folderIdArray, updateFolderIdArray];
+    return [idArray, updateIdArray];
 }
-
-export default useFolderIdArray;
