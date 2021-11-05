@@ -5,8 +5,6 @@ import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
 
-import { useIdArray } from "../../hooks/useIdArray";
-
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
 
@@ -14,6 +12,38 @@ type Props = {
   data: NodeModel<ProblemData>[];
   canSort: boolean;
 };
+
+function getNewFolderId(_treeData: NodeModel<ProblemData>[], _selectedNode?: NodeModel) {
+  console.log("getNewFolderId call");
+  
+  let idArray = Array.from({length: Constants.MAX_FOLDER_NUM}, () => false);
+  _treeData.forEach((element) => {
+    if (typeof element.id === 'number' && element.droppable) {
+      idArray[element.id] = true;
+    }
+  });
+
+  let newId = -1;
+  for(let i = 1; i < Constants.MAX_FOLDER_NUM; i++) {
+    if(!idArray[i]) {
+      newId = i;
+      break;
+    }
+  }
+
+  let parentId;
+  if(typeof _selectedNode === "undefined" || !_selectedNode) {
+    parentId = 0;
+  } else {
+    if(_selectedNode.droppable) {
+      parentId = _selectedNode.id;
+    } else {
+      parentId = _selectedNode.parent;
+    }
+  }
+
+  return [newId, parentId];  
+}
 
 /**
  * 문제집 트리 컴포넌트 
@@ -27,13 +57,13 @@ function ProblemTree(props: Props) {
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );  
-  
-  const [idArray, updateIdArray] = useIdArray(treeData);
 
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
 
+
+  // newOpenIds로 부터 열려있던 폴더 상태 불러옴
   const handleOpen = useCallback(() => {
     console.log("handleOpen call");
     
@@ -45,10 +75,6 @@ function ProblemTree(props: Props) {
   useEffect(() => {
     handleOpen();
   }, []);
-
-  useEffect(() => {
-    updateIdArray();
-  }, [treeData]);
 
 
   const handleSelect = useCallback((node: NodeModel) => {
@@ -70,6 +96,7 @@ function ProblemTree(props: Props) {
     setTreeData(newTree);
   }, [setTreeData]);
 
+  // 폴더를 열때 어떤 폴더들을 열었는지 상태 저장
   const handleChangeOpen = useCallback((_newOpenIds: NodeModel["id"][]) => {
     console.log("handleChangeOpen call");
 
@@ -77,23 +104,19 @@ function ProblemTree(props: Props) {
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
-  
+
+  // treeData에 노드 추가
   const addNode = useCallback((newNode: NodeModel<ProblemData>) => {
     console.log("addNode call");
 
     setTreeData(prevData => [...prevData, newNode]);
   }, [setTreeData]);
 
+  //treeData에 폴더 추가
   const addFolder = useCallback(() => {
     console.log("addFolder call");
 
-    let newId = -1;
-    for(let i = 1; i < Constants.MAX_FOLDER_NUM; i++) {
-      if(!idArray[i]) {
-        newId = i;
-        break;
-      }
-    }
+    const [newId, parentId] = getNewFolderId(treeData, selectedNode);
 
     if(newId === -1) {
       console.log("폴더 꽉 참");
@@ -102,19 +125,7 @@ function ProblemTree(props: Props) {
 
     console.log(newId);
 
-    let parentId;
-    if(typeof selectedNode === "undefined" || !selectedNode) {
-      parentId = 0;
-    } else {
-      if(selectedNode.droppable) {
-        parentId = selectedNode.id;
-      } else {
-        parentId = selectedNode.parent;
-      }
-    }
-
-    addNode(
-      {
+    addNode({
         "id": newId,
         "parent": parentId,
         "droppable": true,
@@ -123,9 +134,8 @@ function ProblemTree(props: Props) {
           "level": -1,
           "problemId": -1,
         }
-      }
-    )
-  }, [idArray, selectedNode, addNode]);
+    });
+  }, [selectedNode, treeData, addNode]);
 
   return (
     <div>
