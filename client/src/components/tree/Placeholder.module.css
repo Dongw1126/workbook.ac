@@ -1,9 +1,17 @@
-.root {
-    height: 4px;
-    width: 100%;
-    position: relative;
-    background-color: #1967d2;
-    right: 0;
-    transform: translateY(-50%);
-  }
+.container {
+  height: 4px;
+  width: 100%;
+}
+
+.main {
+  height: 4px;
+  background-color: #1967d2;
+  float: right;
+}
+
+.space {
+  height: 4px;
+  background-color: rgb(247, 248, 249);
+  float: left;
+}
   
