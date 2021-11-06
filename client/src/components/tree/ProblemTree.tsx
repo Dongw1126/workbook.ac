@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
+import { useContextMenu } from "react-contexify";
 
 import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
@@ -8,6 +9,7 @@ import * as Utils from "./ProblemTreeUtils";
 
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
+import TreeContextMenu from "../contextMenu/TreeContextMenu";
 
 type Props = {
   data: NodeModel<ProblemData>[];
@@ -30,6 +32,16 @@ function ProblemTree(props: Props) {
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
+
+  const { show } = useContextMenu({
+    id: Constants.TREE_CONTEXT_MENU_ID
+  });
+
+  const displayMenu = (e: any) => {
+    // 노드 선택 추가
+    resetSelect();
+    show(e);
+  }
 
 
   // newOpenIds로 부터 열려있던 폴더 상태 불러옴
@@ -73,33 +85,8 @@ function ProblemTree(props: Props) {
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
-
-  // treeData에 노드 추가
-  const addNode = useCallback((newNode: NodeModel<ProblemData>) => {
-    console.log("addNode call");
-
-    setTreeData(prevData => [...prevData, newNode]);
-  }, [setTreeData]);
-
-  //treeData에 폴더 추가
-  const addFolder = useCallback(() => {
-    console.log("addFolder call");
-
-    const [newFolder] = Utils.getNewFolder(treeData, selectedNode);
-    console.log(newFolder.id);
-    if(newFolder.id === -1) {
-      console.log("폴더 꽉 참");
-      return;
-    }
-    addNode(newFolder);
-
-  }, [selectedNode, treeData, addNode]);
-
   return (
-    <div onClick={resetSelect}>
-      <div>
-        <button onClick={addFolder}>add Folder</button>
-      </div>
+    <div onClick={resetSelect} onContextMenu={displayMenu}>
       <div className={styles.treeapp}>
         <Tree
           ref={ref}
@@ -138,6 +125,7 @@ function ProblemTree(props: Props) {
             <Placeholder node={node} depth={depth} />
           ) : undefined }
         />
+        <TreeContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
       </div>
     </div>
   );

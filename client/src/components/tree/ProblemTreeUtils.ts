@@ -42,5 +42,5 @@ export function getNewFolder(_treeData: NodeModel<ProblemData>[], _selectedNode?
         }
     };
 
-    return [newFolder];
+    return newFolder;
 }
