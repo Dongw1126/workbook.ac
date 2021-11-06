@@ -4,6 +4,7 @@ import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
+import * as Utils from "./ProblemTreeUtils";
 
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
@@ -12,38 +13,6 @@ type Props = {
   data: NodeModel<ProblemData>[];
   canSort: boolean;
 };
-
-function getNewFolderId(_treeData: NodeModel<ProblemData>[], _selectedNode?: NodeModel) {
-  console.log("getNewFolderId call");
-  
-  let idArray = Array.from({length: Constants.MAX_FOLDER_NUM}, () => false);
-  _treeData.forEach((element) => {
-    if (typeof element.id === 'number' && element.droppable) {
-      idArray[element.id] = true;
-    }
-  });
-
-  let newId = -1;
-  for(let i = 1; i < Constants.MAX_FOLDER_NUM; i++) {
-    if(!idArray[i]) {
-      newId = i;
-      break;
-    }
-  }
-
-  let parentId;
-  if(typeof _selectedNode === "undefined" || !_selectedNode) {
-    parentId = 0;
-  } else {
-    if(_selectedNode.droppable) {
-      parentId = _selectedNode.id;
-    } else {
-      parentId = _selectedNode.parent;
-    }
-  }
-
-  return [newId, parentId];  
-}
 
 /**
  * 문제집 트리 컴포넌트 
@@ -116,25 +85,14 @@ function ProblemTree(props: Props) {
   const addFolder = useCallback(() => {
     console.log("addFolder call");
 
-    const [newId, parentId] = getNewFolderId(treeData, selectedNode);
-
-    if(newId === -1) {
+    const [newFolder] = Utils.getNewFolder(treeData, selectedNode);
+    console.log(newFolder.id);
+    if(newFolder.id === -1) {
       console.log("폴더 꽉 참");
       return;
     }
+    addNode(newFolder);
 
-    console.log(newId);
-
-    addNode({
-        "id": newId,
-        "parent": parentId,
-        "droppable": true,
-        "text": "New Folder",
-        "data": {
-          "level": -1,
-          "problemId": -1,
-        }
-    });
   }, [selectedNode, treeData, addNode]);
 
   return (
