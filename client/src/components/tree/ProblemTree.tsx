@@ -96,11 +96,11 @@ function ProblemTree(props: Props) {
   }, [selectedNode, treeData, addNode]);
 
   return (
-    <div>
+    <div onClick={resetSelect}>
       <div>
         <button onClick={addFolder}>add Folder</button>
       </div>
-      <div className={styles.treeapp} onClick={resetSelect}>
+      <div className={styles.treeapp}>
         <Tree
           ref={ref}
           tree={treeData}
