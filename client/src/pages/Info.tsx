@@ -1,7 +1,5 @@
-import { Menu, Item, Separator, Submenu, useContextMenu } from "react-contexify";
+import { useContextMenu } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
-
-import TreeContextMenu from "../components/contextMenu/TreeContextMenu";
 
 const MENU_ID = "menu-id";
 

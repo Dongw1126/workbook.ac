@@ -5,11 +5,10 @@ import { useContextMenu } from "react-contexify";
 import { ProblemData } from "../Types";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
-import * as Utils from "./ProblemTreeUtils";
 
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
-import TreeContextMenu from "../contextMenu/TreeContextMenu";
+import FolderContextMenu from "../contextMenu/FolderContextMenu";
 
 type Props = {
   data: NodeModel<ProblemData>[];
@@ -34,7 +33,7 @@ function ProblemTree(props: Props) {
   const ref = useRef<TreeMethods>(null);
 
   const { show } = useContextMenu({
-    id: Constants.TREE_CONTEXT_MENU_ID
+    id: Constants.FOLDER_CONTEXT_MENU_ID
   });
 
   const displayMenu = (e: any) => {
@@ -57,7 +56,7 @@ function ProblemTree(props: Props) {
     handleOpen();
   }, []);
 
-
+  // 노드 선택 시 호출
   const handleSelect = useCallback((node: NodeModel) => {
     console.log("handleSelect call");
 
@@ -125,7 +124,7 @@ function ProblemTree(props: Props) {
             <Placeholder node={node} depth={depth} />
           ) : undefined }
         />
-        <TreeContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
+        <FolderContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
       </div>
     </div>
   );
