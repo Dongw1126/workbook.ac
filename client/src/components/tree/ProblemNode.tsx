@@ -40,6 +40,7 @@ function ProblemNode(props: Props) {
       `}
       style={{ paddingInlineStart: indent }}
       onClick={handleToggle}
+      onContextMenu={handleToggle}
     >
       <div
         className={`${styles.expandIconWrapper} ${
