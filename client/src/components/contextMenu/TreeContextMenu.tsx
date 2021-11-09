@@ -1,5 +1,6 @@
 import { Menu, Item } from "react-contexify";
 import AddIcon from '@mui/icons-material/Add';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 
 
@@ -15,7 +16,7 @@ type Props = {
 };
 
 function FolderContextMenu(props: Props) {
-    function addFolder() {
+    const addFolder = () => {
         console.log("addFolder called");
         console.log(props.node);
         
@@ -36,6 +37,10 @@ function FolderContextMenu(props: Props) {
                 <AddIcon style={{ marginRight: 5 }}/>
                 폴더 추가
             </Item>
+            <Item hidden={(typeof props.node === "undefined")} >
+                <DeleteForeverIcon style={{ marginRight: 5 }}/>
+                폴더 삭제
+            </Item>     
         </Menu>
     );
 }

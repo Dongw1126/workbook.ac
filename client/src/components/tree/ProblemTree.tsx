@@ -8,7 +8,7 @@ import Placeholder from "./Placeholder";
 
 import styles from "./ProblemTree.module.css";
 import * as Constants from "../../constants"
-import FolderContextMenu from "../contextMenu/FolderContextMenu";
+import TreeContextMenu from "../contextMenu/TreeContextMenu";
 
 type Props = {
   data: NodeModel<ProblemData>[];
@@ -32,16 +32,13 @@ function ProblemTree(props: Props) {
 
   const ref = useRef<TreeMethods>(null);
 
-  const { show } = useContextMenu({
+  const { show, hideAll } = useContextMenu({
     id: Constants.FOLDER_CONTEXT_MENU_ID
   });
 
   const displayMenu = (e: any) => {
-    // 노드 선택 추가
-    resetSelect();
     show(e);
   }
-
 
   // newOpenIds로 부터 열려있던 폴더 상태 불러옴
   const handleOpen = useCallback(() => {
@@ -103,6 +100,8 @@ function ProblemTree(props: Props) {
               isSelected={node.id === selectedNode?.id}
               onToggle={onToggle}
               onSelect={handleSelect}
+              displayMenu={displayMenu}
+              hideAll={hideAll}
             />
           )}
           onDrop={handleDrop}
@@ -125,7 +124,7 @@ function ProblemTree(props: Props) {
             <Placeholder node={node} depth={depth} />
           ) : undefined }
         />
-        <FolderContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
+        <TreeContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
       </div>
     </div>
   );

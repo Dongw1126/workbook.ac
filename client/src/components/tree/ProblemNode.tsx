@@ -1,9 +1,11 @@
-import React, { useCallback } from "react";
+import React, { useCallback, useState } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
+
 import { ProblemData } from "../Types";
 import TypedIcon from "../TypedIcon";
 import ProblemDisplay from "../TypedText";
+
 import styles from "./ProblemNode.module.css";
 import * as Constants from "../../constants"
 
@@ -12,8 +14,12 @@ type Props = {
   depth: number;
   isSelected: boolean;
   isOpen: boolean;
+
   onToggle: (id: NodeModel["id"]) => void;
   onSelect: (node: NodeModel) => void;
+  // ContextMenu 다루는 함수
+  displayMenu: (e: any) => void;
+  hideAll: () => void;
 };
 
 /**
@@ -28,9 +34,15 @@ function ProblemNode(props: Props) {
     console.log("handleToggle call");
 
     e.stopPropagation();
+    props.hideAll();
     props.onToggle(props.node.id);
     props.onSelect(props.node);
   },[props.onToggle, props.onSelect]);
+
+  const displayMenu = (e: any) => {
+    props.onSelect(props.node);
+    props.displayMenu(e);
+  }
 
   return (
     <div
@@ -40,7 +52,7 @@ function ProblemNode(props: Props) {
       `}
       style={{ paddingInlineStart: indent }}
       onClick={handleToggle}
-      onContextMenu={handleToggle}
+      onContextMenu={displayMenu}
     >
       <div
         className={`${styles.expandIconWrapper} ${
