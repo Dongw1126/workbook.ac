@@ -8,7 +8,7 @@ export type ProblemData = {
 };
 
 
-class Node {
+export class Node {
   data: NodeModel<ProblemData> | undefined;
   child: any[];
   constructor() {
@@ -34,9 +34,6 @@ export class Tree {
         this.root[Number(element.parent)].child.push(element);
       }
     });
-
-    console.log(this.root);
   }
-
 };
 

@@ -32,8 +32,7 @@ function FolderContextMenu(props: Props) {
     }
 
     const deleteFolder = () => {
-        console.log("deleteFolder call");
-        Utils.deleteFolder(props.treeData, props.node);
+        props.setTreeData(Utils.deleteFolder(props.treeData, props.node));
     }
 
     return (
