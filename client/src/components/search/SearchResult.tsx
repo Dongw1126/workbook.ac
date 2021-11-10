@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { CircularProgress } from "@mui/material";
 import SearchList from "./SearchList";
 
@@ -17,13 +18,11 @@ const getResult = async (_query: string, _page = 1) => {
     const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
     // console.log(url);
 
-    const response = await fetch(url);
+    const response = await axios.get(url);
     if (response.status === 200) {
-        const body = await response.json();
-        console.log(body)
-        return body.items;
+        return response.data.items;
     }
-
+    
     return response.status;
 }
 
