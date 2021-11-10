@@ -1,14 +1,14 @@
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import * as Constants from "../../constants"
-import { ProblemData } from "../Types";
+import { ProblemData, Tree } from "../Types";
 
 export function getNewFolder(_treeData: NodeModel<ProblemData>[], _selectedNode?: NodeModel) {
     console.log("getNewFolderId call");
 
     let idArray = Array.from({ length: Constants.MAX_FOLDER_NUM }, () => false);
     _treeData.forEach((element) => {
-        if (typeof element.id === 'number' && element.droppable) {
-            idArray[element.id] = true;
+        if (element.droppable) {
+            idArray[Number(element.id)] = true;
         }
     });
 
@@ -44,3 +44,9 @@ export function getNewFolder(_treeData: NodeModel<ProblemData>[], _selectedNode?
 
     return newFolder;
 }
+
+
+export function deleteFolder(_treeData: NodeModel<ProblemData>[], toBeDeletedNode?: NodeModel) {
+    let newTree = new Tree(_treeData);
+}
+

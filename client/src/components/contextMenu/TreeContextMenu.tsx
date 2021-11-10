@@ -17,7 +17,7 @@ type Props = {
 
 function FolderContextMenu(props: Props) {
     const addFolder = () => {
-        console.log("addFolder called");
+        console.log("addFolder call");
         console.log(props.node);
         
         const newFolder = Utils.getNewFolder(props.treeData, props.node);
@@ -31,13 +31,18 @@ function FolderContextMenu(props: Props) {
         props.setTreeData(prevData => [...prevData, newFolder]);
     }
 
+    const deleteFolder = () => {
+        console.log("deleteFolder call");
+        Utils.deleteFolder(props.treeData, props.node);
+    }
+
     return (
         <Menu id={Constants.FOLDER_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX}}>
             <Item onClick={addFolder}>
                 <AddIcon style={{ marginRight: 5 }}/>
                 폴더 추가
             </Item>
-            <Item hidden={(typeof props.node === "undefined")} >
+            <Item hidden={(typeof props.node === "undefined")} onClick={deleteFolder} >
                 <DeleteForeverIcon style={{ marginRight: 5 }}/>
                 폴더 삭제
             </Item>     
