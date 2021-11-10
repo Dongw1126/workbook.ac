@@ -1,5 +1,4 @@
 import React from "react";
-import { Box } from "@mui/system";
 
 type Props = {
     id?: number;
@@ -11,9 +10,12 @@ type Props = {
  */
 function ProblemDisplay(props: Props) {
     return (
-        <div style={{lineHeight: '1.6'}}>
-            <Box sx={{ display: 'inline', mr: 2 }}>{props.droppable ? "" : props.id}</Box>
-            <Box sx={{ display: 'inline' }}>{props.title}</Box>
+        <div style={{lineHeight: '1.6'}} >
+            <div style={{ display:'inline', marginRight: "16px" }}>{props.droppable ? "" : props.id}</div>
+            <div style={{ 
+                display:'inline', 
+                marginRight: "16px",
+            }} dangerouslySetInnerHTML={{ __html: props.title as string }}></div>
         </div>
     );
 }
