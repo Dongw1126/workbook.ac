@@ -1,34 +1,13 @@
-import { useContextMenu } from "react-contexify";
-import "react-contexify/dist/ReactContexify.css";
-
-const MENU_ID = "menu-id";
-
+import React from 'react';
+import useDialog from "../hooks/useDialog";
+import AddFolderModal from "../components/modal/AddFolderModal";
 
 function Info() {
-
-    /* ContextMenu Test */
-    const { show } = useContextMenu({
-        id: MENU_ID
-    });
-
-    function displayMenu(e: any) {
-        // put whatever custom logic you need
-        // you can even decide to not display the Menu
-        show(e);
-    }
-
+    const [open, handleClickOpen, handleClose] = useDialog(false);
     return (
         <div>
-            <div 
-                style={{ 
-                    backgroundColor: "black", 
-                    width: 100, 
-                    height: 100
-                }}
-                onContextMenu={displayMenu}
-                >       
-            </div>
-            {/*<TreeContextMenu />*/}
+            <button onClick={handleClickOpen}/>
+            <AddFolderModal open={open} onClose={handleClose} />
             소개 페이지
         </div>
     );
