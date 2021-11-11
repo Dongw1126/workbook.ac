@@ -37,7 +37,7 @@ function ProblemNode(props: Props) {
     props.hideAll();
     props.onToggle(props.node.id);
     props.onSelect(props.node);
-  },[props.onToggle, props.onSelect]);
+  }, [props]);
 
   const displayMenu = (e: any) => {
     props.onSelect(props.node);

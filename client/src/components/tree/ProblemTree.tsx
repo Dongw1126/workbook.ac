@@ -1,8 +1,11 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
+import { useObserver } from "mobx-react";
+import { toJS } from "mobx";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { useContextMenu } from "react-contexify";
 
 import { ProblemData } from "../Types";
+import problemListStore from "../../stores/ProblemListStore";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
 
@@ -22,20 +25,21 @@ type Props = {
  * 문제 ID : 1000 ~
  */
 function ProblemTree(props: Props) {
-  const [treeData, setTreeData] = useState<NodeModel<ProblemData>[]>(props.data);
+  // 트리 데이터 Mobx
+  const problemList = problemListStore;
+
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );  
-
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
 
+  // ContextMenu 관련 함수
   const { show, hideAll } = useContextMenu({
     id: Constants.TREE_CONTEXT_MENU_ID
   });
-
   const displayMenu = (e: any) => {
     console.log("displayMenu call");
 
@@ -69,11 +73,11 @@ function ProblemTree(props: Props) {
   }, [setSelectedNode]);
 
 
-  const handleDrop = useCallback((newTree: NodeModel<ProblemData>[]) => {
+  const handleDrop = (newTree: NodeModel<ProblemData>[]) => {
     console.log("handleDrop call");
-
-    setTreeData(newTree);
-  }, [setTreeData]);
+    
+    problemList.setData(newTree);
+  }
 
   // 폴더를 열때 호출
   const handleChangeOpen = useCallback((_newOpenIds: NodeModel["id"][]) => {
@@ -84,12 +88,12 @@ function ProblemTree(props: Props) {
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
-  return (
+  return useObserver(() => (
     <div onClick={resetSelect} onContextMenu={displayMenu}>
       <div className={styles.treeapp}>
         <Tree
           ref={ref}
-          tree={treeData}
+          tree={toJS(problemList.data)}
           rootId={0}
           render={(
             node: NodeModel<ProblemData>,
@@ -126,10 +130,10 @@ function ProblemTree(props: Props) {
             <Placeholder node={node} depth={depth} />
           ) : undefined }
         />
-        <TreeContextMenu treeData={treeData} setTreeData={setTreeData} node={selectedNode}/>
+        <TreeContextMenu node={selectedNode}/>
       </div>
     </div>
-  );
+  ));
 }
 
 export default ProblemTree;
