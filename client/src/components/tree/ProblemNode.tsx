@@ -2,9 +2,9 @@ import React, { useCallback } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 
-import { ProblemData } from "../Types";
-import TypedIcon from "../TypedIcon";
-import ProblemDisplay from "../TypedText";
+import { ProblemData } from "../types/Types";
+import TypedIcon from "../types/TypedIcon";
+import ProblemDisplay from "../types/TypedText";
 
 import styles from "./ProblemNode.module.css";
 import * as Constants from "../../constants"

@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import FolderIcon from "@mui/icons-material/Folder";
-import * as Constants from "../constants"
+import * as Constants from "../../constants"
 
 type Props = {
   droppable?: boolean;
