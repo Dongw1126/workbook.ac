@@ -1,13 +1,23 @@
+import { useEffect } from "react";
+
 import { Menu, Item } from "react-contexify";
-import AddIcon from '@mui/icons-material/Add';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { NodeModel } from "@minoru/react-dnd-treeview";
 import "react-contexify/dist/ReactContexify.css";
 
+import AddIcon from '@mui/icons-material/Add';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
+import { NodeModel } from "@minoru/react-dnd-treeview";
+
+
+import AddFolderModal from "../modal/AddFolderModal";
+import DeleteModal from "../modal/DeleteModal";
+
+import useDialog from "../../hooks/useDialog";
 import * as Utils from "../tree/ProblemTreeUtils";
 import { ProblemData } from "../Types";
+
 import * as Constants from "../../constants";
+
 
 
 type Props = {
@@ -16,38 +26,27 @@ type Props = {
     node?: NodeModel;
 };
 
-function FolderContextMenu(props: Props) {
-    const addFolder = () => {
-        console.log("addFolder call");
-        console.log(props.node);
-        
-        const newFolder = Utils.getNewFolder(props.treeData, props.node);
-        console.log(newFolder.id);
+function TreeContextMenu(props: Props) {
+    const [addFolderDialogOpen, addFolderHandleClickOpen, addFolderHandleClose] = useDialog();
+    const deleteEventTODO = () => {
 
-        if(newFolder.id === -1) {
-          console.log("폴더 꽉 참");
-          return;
-        }
-
-        props.setTreeData(prevData => [...prevData, newFolder]);
-    }
-
-    const deleteFolder = () => {
-        props.setTreeData(Utils.deleteFolder(props.treeData, props.node));
-    }
+    };
 
     return (
-        <Menu id={Constants.TREE_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX}}>
-            <Item onClick={addFolder}>
-                <AddIcon style={{ marginRight: 5 }}/>
-                폴더 추가
-            </Item>
-            <Item hidden={(typeof props.node === "undefined")} onClick={deleteFolder} >
-                <DeleteForeverIcon style={{ marginRight: 5 }}/>
-                폴더 삭제
-            </Item>     
-        </Menu>
+        <div>
+            <Menu id={Constants.TREE_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX }}>
+                <Item onClick={addFolderHandleClickOpen}>
+                    <AddIcon style={{ marginRight: 5 }}/>
+                    폴더 추가
+                </Item>
+                <Item hidden={(typeof props.node === "undefined")} onClick={deleteEventTODO}>
+                    <DeleteForeverIcon style={{ marginRight: 5 }} />
+                    폴더 삭제
+                </Item>
+            </Menu>
+            <AddFolderModal open={addFolderDialogOpen} onClose={addFolderHandleClose} />
+        </div>
     );
 }
 
-export default FolderContextMenu;
+export default TreeContextMenu;

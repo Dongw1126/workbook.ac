@@ -14,7 +14,7 @@ function AddFolderModal(props: Props) {
     };
 
     return (
-        <Dialog onClose={handleClose} open={props.open}>
+        <Dialog onClose={handleClose} open={props.open} >
             <DialogTitle>폴더 추가</DialogTitle>
             <DialogContent>
                 <TextField
@@ -28,8 +28,8 @@ function AddFolderModal(props: Props) {
                 />
             </DialogContent>
             <DialogActions>
-                <Button>추가</Button>
-                <Button onClick={handleClose}>취소</Button>
+                <Button variant="contained" onClick={handleClose}>추가</Button>
+                <Button variant="outlined" onClick={handleClose}>취소</Button>
             </DialogActions>
         </Dialog>
     );
