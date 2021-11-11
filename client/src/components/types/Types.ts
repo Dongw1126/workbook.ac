@@ -48,6 +48,7 @@ export class ProblemList {
   }
 
   updateIdArray() {
+    this.idArray = Array.from({ length: Constants.MAX_FOLDER_NUM }, () => false);
     this.data.forEach((element) => {
       if (element.droppable) {
         this.idArray[Number(element.id)] = true;
@@ -72,7 +73,6 @@ export class ProblemList {
         break;
       }
     }
-    console.log(newId);
 
     let parentId: string | number;
     if (typeof _selectedNode === "undefined" || !_selectedNode) {
@@ -97,9 +97,11 @@ export class ProblemList {
     };
 
     this.data.push(newFolder);
+
+    return newId;
   }
 
-  // 트리 순회를 위한 재귀 서브 함수
+  // 트리 순회를 위한 서브 함수
   deleteNodeSub(n: Node, _del?: NodeModel) {
     if (n.child.length === 0) return;
 
@@ -113,13 +115,14 @@ export class ProblemList {
     });
   }
 
-  // 해당 폴더와 하위 노드를 삭제
+  // 해당 노드와 하위 노드를 삭제
   deleteNode(_del?: NodeModel) {
     console.log("deleteNode call");
 
     this.tree = new Tree(this.data);
     this.data = [];
     this.deleteNodeSub(this.tree.root[0], _del);
+    this.updateIdArray();
   }
 };
 
