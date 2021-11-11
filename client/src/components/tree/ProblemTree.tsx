@@ -33,10 +33,12 @@ function ProblemTree(props: Props) {
   const ref = useRef<TreeMethods>(null);
 
   const { show, hideAll } = useContextMenu({
-    id: Constants.FOLDER_CONTEXT_MENU_ID
+    id: Constants.TREE_CONTEXT_MENU_ID
   });
 
   const displayMenu = (e: any) => {
+    console.log("ProblemTree displayMenu call");
+
     show(e);
   }
 

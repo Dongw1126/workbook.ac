@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useCallback } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
 
@@ -40,6 +40,8 @@ function ProblemNode(props: Props) {
   },[props.onToggle, props.onSelect]);
 
   const displayMenu = (e: any) => {
+    console.log("ProblemNode displayMenu call");
+
     props.onSelect(props.node);
     props.displayMenu(e);
   }

@@ -1,18 +1,18 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 function useDialog(initState: boolean)
 :[boolean, () => void, () => void] {
     const [open, setOpen] = useState(initState);
 
-    const handleClickOpen = useCallback(() => {
+    const handleDialogOpen = useCallback(() => {
         setOpen(true);
     }, [setOpen]);
 
-    const handleClose = useCallback(() => {
+    const handleDialogClose = useCallback(() => {
         setOpen(false);
     }, [setOpen]);
 
-    return [open, handleClickOpen, handleClose];
+    return [open, handleDialogOpen, handleDialogClose];
 }
 
 export default useDialog;

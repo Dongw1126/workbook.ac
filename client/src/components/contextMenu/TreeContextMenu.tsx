@@ -36,7 +36,7 @@ function FolderContextMenu(props: Props) {
     }
 
     return (
-        <Menu id={Constants.FOLDER_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX}}>
+        <Menu id={Constants.TREE_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX}}>
             <Item onClick={addFolder}>
                 <AddIcon style={{ marginRight: 5 }}/>
                 폴더 추가
