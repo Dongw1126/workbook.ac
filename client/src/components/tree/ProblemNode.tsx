@@ -40,8 +40,6 @@ function ProblemNode(props: Props) {
   },[props.onToggle, props.onSelect]);
 
   const displayMenu = (e: any) => {
-    console.log("ProblemNode displayMenu call");
-
     props.onSelect(props.node);
     props.displayMenu(e);
   }

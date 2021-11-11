@@ -1,7 +1,6 @@
 import React from 'react';
 import useDialog from "../hooks/useDialog";
 import AddFolderModal from "../components/modal/AddFolderModal";
-import { useContextMenu } from 'react-contexify';
 
 function Info() {
     const [open, handleClickOpen, handleClose] = useDialog(false);

@@ -2,6 +2,7 @@ import { Menu, Item } from "react-contexify";
 import AddIcon from '@mui/icons-material/Add';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { NodeModel } from "@minoru/react-dnd-treeview";
+import "react-contexify/dist/ReactContexify.css";
 
 
 import * as Utils from "../tree/ProblemTreeUtils";

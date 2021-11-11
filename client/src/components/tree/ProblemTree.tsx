@@ -37,7 +37,7 @@ function ProblemTree(props: Props) {
   });
 
   const displayMenu = (e: any) => {
-    console.log("ProblemTree displayMenu call");
+    console.log("displayMenu call");
 
     show(e);
   }
