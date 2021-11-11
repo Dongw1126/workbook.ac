@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect, useCallback } from "react";
-import { useObserver } from "mobx-react";
+import { Observer } from "mobx-react";
 import { toJS } from "mobx";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { useContextMenu } from "react-contexify";
@@ -31,7 +31,7 @@ function ProblemTree(props: Props) {
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
-  );  
+  );
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
@@ -49,7 +49,7 @@ function ProblemTree(props: Props) {
   // newOpenIds로 부터 열려있던 폴더 상태 불러옴
   const handleOpen = useCallback(() => {
     console.log("handleOpen call");
-    
+
     if (ref.current?.open) {
       ref.current.open(newOpenIds);
     }
@@ -75,7 +75,7 @@ function ProblemTree(props: Props) {
 
   const handleDrop = (newTree: NodeModel<ProblemData>[]) => {
     console.log("handleDrop call");
-    
+
     problemList.setData(newTree);
   }
 
@@ -88,52 +88,57 @@ function ProblemTree(props: Props) {
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
-  return useObserver(() => (
-    <div onClick={resetSelect} onContextMenu={displayMenu}>
-      <div className={styles.treeapp}>
-        <Tree
-          ref={ref}
-          tree={toJS(problemList.data)}
-          rootId={0}
-          render={(
-            node: NodeModel<ProblemData>,
-            { depth, isOpen, onToggle }
-          ) => (
-            <ProblemNode
-              node={node}
-              depth={depth}
-              isOpen={isOpen}
-              isSelected={node.id === selectedNode?.id}
-              onToggle={onToggle}
-              onSelect={handleSelect}
-              displayMenu={displayMenu}
-              hideAll={hideAll}
+
+  return (
+    <Observer>
+      {() => (
+        <div onClick={resetSelect} onContextMenu={displayMenu}>
+          <div className={styles.treeapp}>
+            <Tree
+              ref={ref}
+              tree={toJS(problemList.data)}
+              rootId={0}
+              render={(
+                node: NodeModel<ProblemData>,
+                { depth, isOpen, onToggle }
+              ) => (
+                <ProblemNode
+                  node={node}
+                  depth={depth}
+                  isOpen={isOpen}
+                  isSelected={node.id === selectedNode?.id}
+                  onToggle={onToggle}
+                  onSelect={handleSelect}
+                  displayMenu={displayMenu}
+                  hideAll={hideAll}
+                />
+              )}
+              onDrop={handleDrop}
+              onChangeOpen={handleChangeOpen}
+              classes={{
+                root: styles.treeRoot,
+                draggingSource: styles.draggingSource,
+                dropTarget: styles.dropTarget,
+                placeholder: styles.placeholder
+              }}
+              canDrop={props.canSort ?
+                (tree, { dragSource, dropTargetId, dropTarget }) => {
+                  if (dragSource?.parent === dropTargetId) {
+                    return true;
+                  }
+                } : undefined}
+              sort={false}
+              insertDroppableFirst={!props.canSort}
+              dropTargetOffset={props.canSort ? 10 : undefined}
+              placeholderRender={props.canSort ? (node, { depth }) => (
+                <Placeholder node={node} depth={depth} />
+              ) : undefined}
             />
-          )}
-          onDrop={handleDrop}
-          onChangeOpen={handleChangeOpen}
-          classes={{
-            root: styles.treeRoot,
-            draggingSource: styles.draggingSource,
-            dropTarget: styles.dropTarget,
-            placeholder: styles.placeholder
-          }}
-          canDrop={props.canSort ?
-            (tree, { dragSource, dropTargetId, dropTarget }) => {
-              if (dragSource?.parent === dropTargetId) {
-                return true;
-              }} : undefined}
-          sort={false}
-          insertDroppableFirst={!props.canSort}
-          dropTargetOffset={props.canSort ? 10 : undefined }
-          placeholderRender={props.canSort ? (node, { depth }) => (
-            <Placeholder node={node} depth={depth} />
-          ) : undefined }
-        />
-        <TreeContextMenu node={selectedNode}/>
-      </div>
-    </div>
-  ));
+            <TreeContextMenu node={selectedNode} />
+          </div>
+        </div>)}
+    </Observer>
+  );
 }
 
 export default ProblemTree;
