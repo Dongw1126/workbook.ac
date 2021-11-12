@@ -22,59 +22,62 @@ type Props = {
 
 function TreeContextMenu(props: Props) {
     const problemList = problemListStore;
-    const [dialogOpen, handleClickOpen, handleClose] = useDialog();
+    const [inputModalOpen, handleInputModalOpen, handleInputModalClose] = useDialog();
+    const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
 
-    const [inputTitle, setInputTitle] = useState("");
+    const [modalTitle, setModalTitle] = useState("");
     const [inputLabel, setInputLabel] = useState("");
     const [eventCode, setEventCode] = useState(0);
 
 
-    const handleAddFolderOpen = ({ event }: any) => {
-        handleClickOpen();
+    const handleAddFolderOpen = () => {
+        handleDeleteModalClose();
+        handleInputModalOpen();
 
-        setInputTitle("폴더 추가");
+        setModalTitle("폴더 추가");
         setInputLabel("폴더 이름");
         setEventCode(Constants.ADD_FOLDER);
     };
-
     const handleEditFolderOpen = () => {
-        handleClickOpen();
-        setInputTitle("이름 바꾸기");
+        handleInputModalClose();
+        handleInputModalOpen();
+
+        setModalTitle("이름 바꾸기");
         setInputLabel("폴더 이름");
         setEventCode(Constants.EDIT_FOLDER);
     };
 
-    const deleteNode = () => {
-        problemList.deleteNode(props.node);
-    };
-    /*
-    const addNode = () => {
-        problemList.addFolder(props.node);
-    }
-    */
     return (
         <div>
             <Menu id={Constants.TREE_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX }}>
-                <Item onClick={handleAddFolderOpen}>
+                <Item 
+                    hidden={!((typeof props.node === 'undefined') || props.node?.droppable)} 
+                    onClick={handleAddFolderOpen}>
                     <AddIcon style={{ marginRight: 5 }} />
                     폴더 추가
                 </Item>
-                <Item hidden={(typeof props.node === "undefined")} onClick={handleEditFolderOpen}>
+                <Item hidden={(typeof props.node === "undefined") || !props.node?.droppable} onClick={handleEditFolderOpen}>
                     <EditIcon style={{ marginRight: 5 }} />
                     이름 바꾸기
                 </Item>
-                <Item hidden={(typeof props.node === "undefined")} onClick={deleteNode}>
+                <Item hidden={(typeof props.node === "undefined")} onClick={handleDeleteModalOpen}>
                     <DeleteForeverIcon style={{ marginRight: 5 }} />
-                    폴더 삭제
+                    삭제하기
                 </Item>
             </Menu>
             <TreeInputModal
-                inputTitle={inputTitle}
+                inputTitle={modalTitle}
                 inputLabel={inputLabel}
                 node={props.node}
-                open={dialogOpen}
-                onClose={handleClose}
+                open={inputModalOpen}
+                onClose={handleInputModalClose}
                 eventCode={eventCode}
+            />
+            <TreeDeleteModal
+                deleteTitle="삭제하기"
+                node={props.node}
+                open={deleteModalOpen}
+                onClose={handleDeleteModalClose}
             />
         </div>
     );
