@@ -49,7 +49,7 @@ test("ProblemList deleteNode Test", () => {
     const problemList = new ProblemList();
     problemList.setData(TreeTestData);
     
-    const oldId = problemList.data[0].id;
+    const oldId = Number(problemList.data[0].id);
     let flag = true;
 
     problemList.deleteNode(problemList.data[0]);

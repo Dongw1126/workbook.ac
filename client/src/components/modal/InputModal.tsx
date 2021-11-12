@@ -3,25 +3,27 @@ import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/
 import TextField from '@mui/material/TextField';
 
 interface Props {
+    inputTitle: string;
+    inputLabel: string;
     open: boolean;
     onClose: () => void;
 }
 
 
-function AddFolderModal(props: Props) {
+function InputModal(props: Props) {
     const handleClose = () => {
         props.onClose();
     };
 
     return (
         <Dialog onClose={handleClose} open={props.open} >
-            <DialogTitle>폴더 추가</DialogTitle>
+            <DialogTitle>{props.inputTitle}</DialogTitle>
             <DialogContent>
                 <TextField
                 autoFocus
                 margin="dense"
                 id="name"
-                label="폴더 이름"
+                label={props.inputLabel}
                 type='text'
                 fullWidth
                 variant="standard"
@@ -35,4 +37,4 @@ function AddFolderModal(props: Props) {
     );
 }
 
-export default AddFolderModal;
+export default InputModal;
