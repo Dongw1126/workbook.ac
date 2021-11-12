@@ -32,6 +32,7 @@ function ProblemTree(props: Props) {
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );
+
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
   const ref = useRef<TreeMethods>(null);
@@ -66,6 +67,7 @@ function ProblemTree(props: Props) {
     setSelectedNode(node);
   }, [setSelectedNode]);
 
+
   const resetSelect = useCallback(() => {
     console.log("resetSelect call");
 
@@ -92,7 +94,7 @@ function ProblemTree(props: Props) {
   return (
     <Observer>
       {() => (
-        <div onClick={resetSelect} onContextMenu={displayMenu}>
+        <div onContextMenu={displayMenu}>
           <div className={styles.treeapp}>
             <Tree
               ref={ref}

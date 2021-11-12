@@ -62,7 +62,7 @@ export class ProblemList {
   }
 
   // selectedNode 하위에 새로운 폴더 추가
-  addFolder(_selectedNode?: NodeModel) {
+  addFolder(folderName: string, _selectedNode?: NodeModel) {
     console.log("addFolder call");
 
     let newId = -1;
@@ -89,7 +89,7 @@ export class ProblemList {
       "id": newId,
       "parent": parentId,
       "droppable": true,
-      "text": "New Folder",
+      "text": folderName,
       "data": {
         "level": -1,
         "problemId": -1,
@@ -99,6 +99,17 @@ export class ProblemList {
     this.data.push(newFolder);
 
     return newId;
+  }
+
+  editFolderName(folderName: string, _selectedNode?: NodeModel) {
+    console.log("editFolderName call");
+    if(typeof _selectedNode !== 'undefined') {
+      this.data.forEach((element) => {
+        if (element.id === _selectedNode.id) {
+          element.text = folderName;
+        }
+      });
+    }
   }
 
   // 트리 순회를 위한 서브 함수
