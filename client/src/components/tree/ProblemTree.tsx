@@ -32,8 +32,8 @@ function ProblemTree(props: Props) {
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );
-
   const [selectedNode, setSelectedNode] = useState<NodeModel>();
+
 
   const ref = useRef<TreeMethods>(null);
 
@@ -41,12 +41,19 @@ function ProblemTree(props: Props) {
   const { show, hideAll } = useContextMenu({
     id: Constants.TREE_CONTEXT_MENU_ID
   });
+
   const displayMenu = (e: any) => {
     console.log("displayMenu call");
-
+    e.stopPropagation();
     show(e);
-  }
+  };
 
+  const rootDisplayMenu = (e: any) => {
+    displayMenu(e);
+    resetSelect();
+  };
+
+  
   // newOpenIds로 부터 열려있던 폴더 상태 불러옴
   const handleOpen = useCallback(() => {
     console.log("handleOpen call");
@@ -63,14 +70,14 @@ function ProblemTree(props: Props) {
   // 노드 선택 시 호출
   const handleSelect = useCallback((node: NodeModel) => {
     console.log("handleSelect call");
-
+    
     setSelectedNode(node);
   }, [setSelectedNode]);
 
 
   const resetSelect = useCallback(() => {
     console.log("resetSelect call");
-
+  
     setSelectedNode(undefined);
   }, [setSelectedNode]);
 
@@ -94,7 +101,7 @@ function ProblemTree(props: Props) {
   return (
     <Observer>
       {() => (
-        <div onContextMenu={displayMenu}>
+        <div onContextMenu={rootDisplayMenu}>
           <div className={styles.treeapp}>
             <Tree
               ref={ref}
@@ -112,7 +119,7 @@ function ProblemTree(props: Props) {
                   onToggle={onToggle}
                   onSelect={handleSelect}
                   displayMenu={displayMenu}
-                  hideAll={hideAll}
+                  hideMenu={hideAll}
                 />
               )}
               onDrop={handleDrop}

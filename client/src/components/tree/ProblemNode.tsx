@@ -19,7 +19,7 @@ type Props = {
   onSelect: (node: NodeModel) => void;
   // ContextMenu 다루는 함수
   displayMenu: (e: any) => void;
-  hideAll: () => void;
+  hideMenu: () => void;
 };
 
 /**
@@ -34,9 +34,9 @@ function ProblemNode(props: Props) {
     console.log("handleToggle call");
 
     e.stopPropagation();
-    props.hideAll();
     props.onToggle(props.node.id);
     props.onSelect(props.node);
+    props.hideMenu();
   }, [props]);
 
   const displayMenu = (e: any) => {
