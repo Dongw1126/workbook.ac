@@ -38,12 +38,43 @@ test("ProblemList addFolder Test", () => {
     const element = problemList.data[0];
 
     const childLen = beforeTree.root[Number(element.id)].child.length;
-    const newId = problemList.addFolder(element);
+    const newId = problemList.addFolder("tmp", element);
     const afterTree = new Tree(problemList.data);
 
     expect(afterTree.root[Number(element.id)].child.length).toBe(childLen + 1);
     expect(problemList.idArray[newId]).toBeTruthy();
 });
+
+test("ProblemList addFolder Limit Test", () => {
+    const problemList = new ProblemList();
+    problemList.setData([]);
+    for(let i = 0; i < Constants.MAX_FOLDER_NUM; i++) {
+        problemList.addFolder("tmp");
+    }
+
+    expect(problemList.addFolder("tmp")).toBe(-1);
+});
+
+test("ProblemList addProblem Test", () => {
+    const problemList = new ProblemList();
+    const id = 9876;
+    const level = 1;
+    const text = "tmp";
+
+    let addSuccess = false;
+
+    problemList.setData(TreeTestData);
+    problemList.addProblem(id, level, text);
+    problemList.data.forEach((element) => {
+        if (element.id === 9876 && element.text == text && element.data?.level === level) {
+            addSuccess = true;
+        }
+    });
+
+    expect(addSuccess).toBeTruthy();
+    expect(problemList.addProblem(id, level, text)).toBeFalsy();
+});
+
 
 test("ProblemList deleteNode Test", () => {
     const problemList = new ProblemList();
