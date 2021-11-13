@@ -18,6 +18,10 @@ type Props = {
     node?: NodeModel;
 };
 
+/**
+ * 문제집 트리 ContextMenu
+ * 폴더 추가, 이름 바꾸기, 삭제 하기 기능
+ */
 function TreeContextMenu(props: Props) {
     const [inputModalOpen, handleInputModalOpen, handleInputModalClose] = useDialog();
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();

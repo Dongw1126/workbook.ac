@@ -14,5 +14,6 @@ class SelectedNode {
     }
 }
 
+/** 문제집에서 선택된 노드 저장 */
 const selectedNodeStore = new SelectedNode();
 export default selectedNodeStore;

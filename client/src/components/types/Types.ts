@@ -37,6 +37,10 @@ export class Tree {
   }
 };
 
+
+/**
+ * (Mobx 적용) 트리 문제집 데이터 클래스
+ */
 export class ProblemList {
   data: NodeModel<ProblemData>[] = []
   idArray: boolean[] = []
@@ -61,7 +65,7 @@ export class ProblemList {
     this.updateIdArray();
   }
 
-  // selectedNode 하위에 새로운 폴더 추가
+  /** selectedNode 하위에 새로운 폴더 추가 */
   addFolder(folderName: string, _selectedNode?: NodeModel) {
     console.log("addFolder call");
 
@@ -104,8 +108,7 @@ export class ProblemList {
     return newId;
   }
 
-
-  // selectedNode 하위에 새로운 문제 추가
+  /** selectedNode 하위에 새로운 문제 추가 */
   addProblem(_problemId: number, _level: number, _text: string, _selectedNode?: NodeModel) {
     console.log("addProblem call");
 
@@ -158,7 +161,7 @@ export class ProblemList {
     }
   }
 
-  // 트리 순회를 위한 서브 함수
+  /** 트리 순회를 위한 서브 함수 */
   deleteNodeSub(n: Node, _del?: NodeModel) {
     if (n.child.length === 0) return;
 
@@ -172,7 +175,7 @@ export class ProblemList {
     });
   }
 
-  // 해당 노드와 하위 노드를 삭제
+  /** 해당 노드와 하위 노드를 삭제 */
   deleteNode(_del?: NodeModel) {
     console.log("deleteNode call");
 

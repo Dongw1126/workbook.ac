@@ -5,6 +5,7 @@ type Props = {
     title?: string;
     droppable?: boolean;
 };
+
 /**
  * 문제 출력 컴포넌트
  */

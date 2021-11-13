@@ -9,6 +9,9 @@ interface Props {
     onClose: () => void;
 }
 
+/**
+ * 알림창 Modal 창
+ */
 function AlertModal(props: Props) {
     return(
         <Dialog onClose={props.onClose} open={props.open}>

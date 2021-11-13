@@ -1,5 +1,8 @@
 import React, { useCallback, useState } from 'react';
 
+/**
+ * MUI Dialog 사용을 위한 Custom hook
+ */
 function useDialog()
 :[boolean, () => void, () => void] {
     const [open, setOpen] = useState(false);

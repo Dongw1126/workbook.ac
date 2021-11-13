@@ -11,6 +11,9 @@ interface Props {
     onClose: () => void;
 }
 
+/**
+ * 삭제 확인 Modal 창
+ */
 function DeleteModal(props: Props) {
     const problemList = problemListStore;
 

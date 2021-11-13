@@ -17,6 +17,9 @@ interface Props {
     eventCode: number;
 }
 
+/**
+ * 폴더 이름 입력 Modal 창
+ */
 function TreeInputModal(props: Props) {
     const problemList = problemListStore;
     const [inputText, setInputText] = useState("");
