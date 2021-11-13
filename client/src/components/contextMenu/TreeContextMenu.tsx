@@ -8,12 +8,10 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import { NodeModel } from "@minoru/react-dnd-treeview";
 
-
 import TreeInputModal from "../modal/TreeInputModal";
 import TreeDeleteModal from "../modal/TreeDeleteModal";
 
 import useDialog from "../../hooks/useDialog";
-import problemListStore from "../../stores/ProblemListStore";
 import * as Constants from "../../constants";
 
 type Props = {
@@ -21,7 +19,6 @@ type Props = {
 };
 
 function TreeContextMenu(props: Props) {
-    const problemList = problemListStore;
     const [inputModalOpen, handleInputModalOpen, handleInputModalClose] = useDialog();
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
 

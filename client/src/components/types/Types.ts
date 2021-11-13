@@ -73,6 +73,9 @@ export class ProblemList {
         break;
       }
     }
+    
+    // 최대 폴더 개수 도달
+    if (newId === -1) return newId;
 
     let parentId: string | number;
     if (typeof _selectedNode === "undefined" || !_selectedNode) {

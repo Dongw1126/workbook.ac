@@ -97,7 +97,6 @@ function ProblemTree(props: Props) {
     window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
   }, [setNewOpenIds]);
 
-
   return (
     <Observer>
       {() => (
