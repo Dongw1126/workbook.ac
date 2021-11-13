@@ -1,4 +1,5 @@
 import React from 'react';
+import { Observer } from "mobx-react";
 import problemListStore from '../stores/ProblemListStore'
 import ProblemTree from './tree/ProblemTree';
 import SampleData2 from "./tree/sample2.json";
@@ -12,9 +13,12 @@ function WorkbookComponent() {
     problemList.setData(SampleData2);
 
     return (
-        <div style={{overflow:"auto", height:"auto", marginTop: 5}}>
-            <ProblemTree data={SampleData2} canSort={true} />
-        </div>
+        <Observer>
+            {() => (
+                <div style={{ overflow: "auto", height: "auto", marginTop: 5 }}>
+                    <ProblemTree data={SampleData2} canSort={true} />
+                </div>)}
+        </Observer>
     );
 }
 

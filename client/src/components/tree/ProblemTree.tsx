@@ -6,6 +6,7 @@ import { useContextMenu } from "react-contexify";
 
 import { ProblemData } from "../types/Types";
 import problemListStore from "../../stores/ProblemListStore";
+import selectedNodeStore from "../../stores/SelectedNodeStore"
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
 
@@ -25,14 +26,14 @@ type Props = {
  * 문제 ID : 1000 ~
  */
 function ProblemTree(props: Props) {
-  // 트리 데이터 Mobx
+  // Mobx 로드
   const problemList = problemListStore;
-
+  const selectedNode = selectedNodeStore;
 
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );
-  const [selectedNode, setSelectedNode] = useState<NodeModel>();
+  //const [selectedNode, setSelectedNode] = useState<NodeModel>();
 
 
   const ref = useRef<TreeMethods>(null);
@@ -68,19 +69,18 @@ function ProblemTree(props: Props) {
   }, []);
 
   // 노드 선택 시 호출
-  const handleSelect = useCallback((node: NodeModel) => {
+  const handleSelect = (node: NodeModel) => {
     console.log("handleSelect call");
     
-    setSelectedNode(node);
-  }, [setSelectedNode]);
+    selectedNode.setNode(node);
+  }
 
 
-  const resetSelect = useCallback(() => {
+  const resetSelect = () => {
     console.log("resetSelect call");
   
-    setSelectedNode(undefined);
-  }, [setSelectedNode]);
-
+    selectedNode.setNode(undefined);
+  }
 
   const handleDrop = (newTree: NodeModel<ProblemData>[]) => {
     console.log("handleDrop call");
@@ -114,7 +114,7 @@ function ProblemTree(props: Props) {
                   node={node}
                   depth={depth}
                   isOpen={isOpen}
-                  isSelected={node.id === selectedNode?.id}
+                  isSelected={node.id === selectedNode.node?.id}
                   onToggle={onToggle}
                   onSelect={handleSelect}
                   displayMenu={displayMenu}
@@ -142,7 +142,7 @@ function ProblemTree(props: Props) {
                 <Placeholder node={node} depth={depth} />
               ) : undefined}
             />
-            <TreeContextMenu node={selectedNode} />
+            <TreeContextMenu node={selectedNode.node} />
           </div>
         </div>)}
     </Observer>
