@@ -73,7 +73,7 @@ export class ProblemList {
         break;
       }
     }
-    
+
     // 최대 폴더 개수 도달
     if (newId === -1) return newId;
 
@@ -104,9 +104,52 @@ export class ProblemList {
     return newId;
   }
 
+
+  // selectedNode 하위에 새로운 문제 추가
+  addProblem(_problemId: number, _level: number, _text: string, _selectedNode?: NodeModel) {
+    console.log("addProblem call");
+
+    let isDup = false;
+    this.data.forEach((element) => {
+      if (element.id === _problemId) {
+        // 이미 존재하는 문제
+        isDup = true;
+        return;
+      }
+    });
+
+    if(isDup) return false;
+
+    let parentId: string | number;
+    if (typeof _selectedNode === "undefined" || !_selectedNode) {
+      parentId = 0;
+    } else {
+      if (_selectedNode.droppable) {
+        parentId = _selectedNode.id;
+      } else {
+        parentId = _selectedNode.parent;
+      }
+    }
+
+    const newProblem = {
+      "id": _problemId,
+      "parent": parentId,
+      "droppable": false,
+      "text": _text,
+      "data": {
+        "level": _level,
+        "problemId": _problemId,
+      }
+    };
+
+    this.data.push(newProblem);
+
+    return true;
+  }
+
   editFolderName(folderName: string, _selectedNode?: NodeModel) {
     console.log("editFolderName call");
-    if(typeof _selectedNode !== 'undefined') {
+    if (typeof _selectedNode !== 'undefined') {
       this.data.forEach((element) => {
         if (element.id === _selectedNode.id) {
           element.text = folderName;

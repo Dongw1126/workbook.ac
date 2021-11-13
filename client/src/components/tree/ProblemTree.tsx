@@ -33,8 +33,6 @@ function ProblemTree(props: Props) {
   const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
     () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
   );
-  //const [selectedNode, setSelectedNode] = useState<NodeModel>();
-
 
   const ref = useRef<TreeMethods>(null);
 
