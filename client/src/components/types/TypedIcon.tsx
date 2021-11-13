@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import FolderIcon from "@mui/icons-material/Folder";
+
 import * as Constants from "../../constants"
 
 type Props = {
@@ -26,8 +27,8 @@ function TypedIcon(props: Props) {
         tierLevel = "nr";
       }
     }
-    
-    const tierUrl = Constants.SERVER_URL + "tier/svg/" + tierLevel + ".svg";
+
+    const tierUrl = "tier/svg/" + tierLevel + ".svg";
     return (
       <Box>
         <img src={tierUrl}
