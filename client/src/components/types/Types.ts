@@ -3,8 +3,9 @@ import { NodeModel } from "@minoru/react-dnd-treeview";
 import * as Constants from "../../constants";
 
 export type ProblemData = {
-  level: number;
-  problemId: number;
+  level?: number;
+  problemId?: number;
+  voteCnt?: number;
   // tierShown, etc
 };
 
@@ -97,10 +98,6 @@ export class ProblemList {
       "parent": parentId,
       "droppable": true,
       "text": folderName,
-      "data": {
-        "level": -1,
-        "problemId": -1,
-      }
     };
 
     this.data.push(newFolder);
@@ -109,7 +106,7 @@ export class ProblemList {
   }
 
   /** selectedNode 하위에 새로운 문제 추가 */
-  addProblem(_problemId: number, _level: number, _text: string, _selectedNode?: NodeModel) {
+  addProblem(_problemId: number, _level: number, _text: string, _voteCnt?: number, _selectedNode?: NodeModel) {
     console.log("addProblem call");
 
     let isDup = false;
@@ -142,6 +139,7 @@ export class ProblemList {
       "data": {
         "level": _level,
         "problemId": _problemId,
+        "voteCnt": _voteCnt
       }
     };
 

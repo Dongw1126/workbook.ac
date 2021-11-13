@@ -1,5 +1,6 @@
 import React from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
+import * as Constants from "../../constants";
 
 
 interface Props {
@@ -14,7 +15,7 @@ interface Props {
  */
 function AlertModal(props: Props) {
     return(
-        <Dialog onClose={props.onClose} open={props.open}>
+        <Dialog onClose={props.onClose} open={props.open} style={{ zIndex: Constants.MODAL_Z_INDEX }}>
             <DialogTitle>{props.title}</DialogTitle>
             <DialogContent>
                 {props.content}

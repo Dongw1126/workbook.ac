@@ -28,7 +28,7 @@ function SearchItem(props: Props) {
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
     const handleAddClick = (e: React.MouseEvent) => {
-        const flag = problemList.addProblem(props.id, props.level, props.title, selectedNode.node);
+        const flag = problemList.addProblem(props.id, props.level, props.title, props.voteCnt, selectedNode.node);
         if (!flag) {
             handleAlertOpen();
         }

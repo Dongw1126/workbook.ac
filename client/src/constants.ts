@@ -12,6 +12,7 @@ export const MAX_SEARCH_LENGTH = 50;
 
 export const HOVER_Z_INDEX = 30000;
 export const CONTEXT_MENU_Z_INDEX = 40000;
+export const MODAL_Z_INDEX = 40010;
 
 export const ADD_FOLDER = 1;
 export const EDIT_FOLDER = 2;

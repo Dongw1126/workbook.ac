@@ -66,7 +66,7 @@ function ProblemNode(props: Props) {
         )}
       </div>
       <div>
-        <TypedIcon droppable={droppable} level={data?.level} />
+        <TypedIcon droppable={droppable} level={data?.level} voteCnt={data?.voteCnt}/>
       </div>
       <div className={styles.labelGridItem}>
         <ProblemDisplay droppable={droppable} id={props.node.data?.problemId} title={props.node.text} />
