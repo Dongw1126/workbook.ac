@@ -22,7 +22,7 @@ const getResult = async (_query: string, _page = 1) => {
     if (response.status === 200) {
         return response.data.items;
     }
-    
+
     return response.status;
 }
 
@@ -69,15 +69,25 @@ function SearchResult(props: Props) {
         );
     }
     else if (complete === SEARCH_COMPLETE) {
-        return (
-            <SearchList key={props.query} data={resultData} />
-        );
+        if (resultData.length === 0) {
+            return (
+                <div style={{ fontSize: 20 }}>
+                    <p style={{ textAlign: "center"}}>
+                        😵 해당하는 문제가 없습니다! <br />
+                    </p>
+                </div>
+            );
+        } else {
+            return (
+                <SearchList key={props.query} data={resultData} />
+            );
+        }
     }
     else if (complete === SEARCH_EMPTY) {
         return (
             <div style={{ fontSize: 18, lineHeight: 2, margin: 10, marginTop: 15 }}>
-                <div style={{ width: "40%", whiteSpace: "nowrap"}}>
-                    <table style={{ width: "25vw", borderSpacing: "2vw 0"}}>
+                <div style={{ width: "40%", whiteSpace: "nowrap" }}>
+                    <table style={{ width: "25vw", borderSpacing: "2vw 0" }}>
                         <tbody>
                             <tr><td>tier:</td><td>난이도 필터</td></tr>
                             <tr><td>solved:</td><td>푼 사람 수 필터</td></tr>
