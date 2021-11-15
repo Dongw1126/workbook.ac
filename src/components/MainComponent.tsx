@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import CreateWorkbook from "../pages/CreateWorkbook"
+import WorkbookSearch from "../pages/WorkbookSearch";
+import EditWorkbook from "../pages/EditWorkbook";
+import Home from "../pages/Home";
 import Info from "../pages/Info"
 import Nav from "../pages/Nav"
 
@@ -9,8 +11,10 @@ function MainComponent() {
         <BrowserRouter>
             <Nav />
             <Switch>
-                <Route exact path="/" component={CreateWorkbook} />
+                <Route exact path="/" component={Home} />
                 <Route exact path="/info" component={Info} />
+                <Route exact path="/workbook/search" component={WorkbookSearch} />
+                <Route exact path="/workbook/edit" component={EditWorkbook} />
             </Switch>
         </BrowserRouter>
     );
