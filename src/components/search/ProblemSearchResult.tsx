@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
+
+import MovePage from "./MovePage";
 import SearchList from "./ProblemSearchList";
 
 type Props = {
@@ -12,7 +14,7 @@ const SEARCH_COMPLETE = 1;
 const SEARCH_EMPTY = 2;
 const SEARCH_ERROR = 3;
 
-const getResult = async (_query: string, _page = 1) => {
+const getResult = async (_query: string, _page = 1, _setLastPage:React.Dispatch<any>) => {
     console.log("getResult call");
 
     const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
@@ -20,6 +22,7 @@ const getResult = async (_query: string, _page = 1) => {
 
     const response = await axios.get(url);
     if (response.status === 200) {
+        _setLastPage(Math.ceil(response.data.count / 100));
         return response.data.items;
     }
 
@@ -34,14 +37,14 @@ function ProblemSearchResult(props: Props) {
     const [resultData, setResultData] = useState<any>([]);
     const [status, setStatus] = useState(0);
     const [complete, setComplete] = useState(0);
-
+    const [page, setPage] = useState(1);
+    const [lastPage, setLastPage] = useState(1);
 
     useEffect(() => {
         if (props.query !== "") {
-            getResult(props.query)
+            getResult(props.query, page, setLastPage)
                 .then(res => {
                     setComplete(SEARCH_LOADING);
-                    // console.log(res)
                     if (typeof res === "object") {
                         setResultData(res)
                         setComplete(SEARCH_COMPLETE);
@@ -55,7 +58,7 @@ function ProblemSearchResult(props: Props) {
         } else {
             setComplete(SEARCH_EMPTY);
         }
-    }, [props.query]);
+    }, [props.query, page]);
 
     /*useEffect(() => {
         console.log(complete);
@@ -79,7 +82,12 @@ function ProblemSearchResult(props: Props) {
             );
         } else {
             return (
-                <SearchList key={props.query} data={resultData} />
+                <div>
+                    <div style={{ textAlign:"center" }}>
+                        <MovePage page={page} setPage={setPage} lastPage={lastPage}/>
+                    </div>
+                    <SearchList key={props.query} data={resultData} />
+                </div>
             );
         }
     }
