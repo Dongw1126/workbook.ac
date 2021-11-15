@@ -10,27 +10,52 @@ import { IconButton } from '@mui/material';
 interface Props {
     page: number
     setPage: React.Dispatch<any>
-    lastPage?: number
+    lastPage: number
 }
 
 function MovePage(props: Props) {
+    console.log(props.page)
     return (
-        <div>
-            <IconButton>
+        <div style={{ textAlign: "center" }}>
+            <IconButton disabled={props.page === 1}
+                onClick={() => {
+                    props.setPage(1);
+                }}>
                 <FirstPageIcon />
             </IconButton>
-            <IconButton>
+            <IconButton disabled={props.page === 1}
+                onClick={() => {
+                    props.setPage(props.page - 1);
+                }}>
                 <PrevPageIcon />
             </IconButton>
 
             <TextField variant="standard" type="text" margin="none" size="small" defaultValue={props.page}
-            inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', style: { textAlign: 'center' }}}
-            style={{ width:"10%", height:"10%", marginTop: "1%"}} />
+                inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', style: { textAlign: 'center' } }}
+                style={{ width: "10%", height: "10%", marginTop: "1%" }}
+                InputProps={{
+                    onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
+                        if (event.key === 'Enter') {
+                            const ev = event.target as HTMLInputElement;
+                            let inputPage = Number(ev.value);
+                            if(!isNaN(inputPage)) {
+                                inputPage = props.lastPage || inputPage;
+                                props.setPage(inputPage);
+                            }
+                        }
+                    }
+                }}/>
 
-            <IconButton>
+            <IconButton disabled={props.lastPage === props.page}
+                onClick={() => {
+                    props.setPage(props.page + 1);
+                }}>
                 <NextPageIcon />
             </IconButton>
-            <IconButton>
+            <IconButton disabled={props.lastPage === props.page}
+                onClick={() => {
+                    props.setPage(props.lastPage);
+                }}>
                 <LastPageIcon />
             </IconButton>
         </div>

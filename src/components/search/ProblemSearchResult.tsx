@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
 
-import MovePage from "./MovePage";
 import SearchList from "./ProblemSearchList";
 
 type Props = {
     query: string;
+    page: number;
+    lastPage: number;
+    setLastPage: React.Dispatch<any>;
 };
 
 const SEARCH_LOADING = 0;
@@ -14,7 +16,7 @@ const SEARCH_COMPLETE = 1;
 const SEARCH_EMPTY = 2;
 const SEARCH_ERROR = 3;
 
-const getResult = async (_query: string, _page = 1, _setLastPage:React.Dispatch<any>) => {
+const getResult = async (_query: string, _page: number, _setLastPage: React.Dispatch<any>) => {
     console.log("getResult call");
 
     const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
@@ -37,12 +39,10 @@ function ProblemSearchResult(props: Props) {
     const [resultData, setResultData] = useState<any>([]);
     const [status, setStatus] = useState(0);
     const [complete, setComplete] = useState(0);
-    const [page, setPage] = useState(1);
-    const [lastPage, setLastPage] = useState(1);
 
     useEffect(() => {
         if (props.query !== "") {
-            getResult(props.query, page, setLastPage)
+            getResult(props.query, props.page, props.setLastPage)
                 .then(res => {
                     setComplete(SEARCH_LOADING);
                     if (typeof res === "object") {
@@ -58,7 +58,7 @@ function ProblemSearchResult(props: Props) {
         } else {
             setComplete(SEARCH_EMPTY);
         }
-    }, [props.query, page]);
+    }, [props.query, props.page]);
 
     /*useEffect(() => {
         console.log(complete);
@@ -82,12 +82,7 @@ function ProblemSearchResult(props: Props) {
             );
         } else {
             return (
-                <div>
-                    <div style={{ textAlign:"center" }}>
-                        <MovePage page={page} setPage={setPage} lastPage={lastPage}/>
-                    </div>
-                    <SearchList key={props.query} data={resultData} />
-                </div>
+                <SearchList key={props.query} data={resultData} />
             );
         }
     }
