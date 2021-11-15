@@ -1,6 +1,6 @@
 import React from "react";
 import { Observer } from "mobx-react";
-import styles from "./SearchItem.module.css";
+import styles from "./ProblemSearchItem.module.css";
 import TypedIcon from "../types/TypedIcon";
 import ProblemDisplay from "../types/TypedText";
 import AddIcon from '@mui/icons-material/Add';
@@ -22,7 +22,7 @@ type Props = {
 /**
  * 결과 아이템 컴포넌트
  */
-function SearchItem(props: Props) {
+function ProblemSearchItem(props: Props) {
     const problemList = problemListStore;
     const selectedNode = selectedNodeStore;
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
@@ -62,4 +62,4 @@ function SearchItem(props: Props) {
     );
 }
 
-export default SearchItem;
+export default ProblemSearchItem;

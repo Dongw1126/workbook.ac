@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import SearchBar from "./search/SearchBar";
-import SearchResult from "./search/SearchResult";
+import SearchResult from "./search/ProblemSearchResult";
 
 /**
  * parentQuery를 SearchBar에 넘겨주어 검색 시 query를 업데이트하고

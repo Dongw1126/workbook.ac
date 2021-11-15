@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CircularProgress } from "@mui/material";
-import SearchList from "./SearchList";
+import SearchList from "./ProblemSearchList";
 
 type Props = {
     query: string;
@@ -30,7 +30,7 @@ const getResult = async (_query: string, _page = 1) => {
  * 검색 결과 출력 컴포넌트
  * props.query 는 SearchBar 에서 입력한 데이터
  */
-function SearchResult(props: Props) {
+function ProblemSearchResult(props: Props) {
     const [resultData, setResultData] = useState<any>([]);
     const [status, setStatus] = useState(0);
     const [complete, setComplete] = useState(0);
@@ -112,4 +112,4 @@ function SearchResult(props: Props) {
     }
 }
 
-export default SearchResult;
+export default ProblemSearchResult;

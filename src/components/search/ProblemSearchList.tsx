@@ -1,5 +1,5 @@
 import React from "react";
-import SearchItem from "./SearchItem";
+import SearchItem from "./ProblemSearchItem";
 
 type Props = {
     data: any[];
@@ -9,7 +9,7 @@ type Props = {
  * 문제 검색 결과 리스트 컴포넌트
  * props.data 는 SearchResult 로부터 solved.ac에서 검색 결과
  */
-function SearchList(props: Props) {
+function ProblemSearchList(props: Props) {
     return(
         <div>
             {props.data.map(
@@ -29,4 +29,4 @@ function SearchList(props: Props) {
     );
 }
 
-export default SearchList;
+export default ProblemSearchList;
