@@ -128,6 +128,7 @@ function ProblemTree(props: Props) {
               }}
               canDrop={props.canSort ?
                 (tree, { dragSource, dropTargetId, dropTarget }) => {
+                  console.log(dropTargetId)
                   if (dragSource?.parent === dropTargetId) {
                     return true;
                   }

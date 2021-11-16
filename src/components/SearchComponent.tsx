@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import usePage from "../hooks/usePage";
 import MovePage from "./search/MovePage";
