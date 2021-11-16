@@ -69,14 +69,12 @@ function TreeContextMenu(props: Props) {
             <TreeInputModal
                 inputTitle={modalTitle}
                 inputLabel={inputLabel}
-                node={props.node}
                 open={inputModalOpen}
                 onClose={handleInputModalClose}
                 eventCode={eventCode}
             />
             <TreeDeleteModal
                 deleteTitle="삭제하기"
-                node={props.node}
                 open={deleteModalOpen}
                 onClose={handleDeleteModalClose}
             />

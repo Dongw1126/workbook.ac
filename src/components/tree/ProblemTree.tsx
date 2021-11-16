@@ -6,12 +6,12 @@ import { useContextMenu } from "react-contexify";
 
 import { ProblemData } from "../types/Types";
 import problemListStore from "../../stores/ProblemListStore";
-import selectedNodeStore from "../../stores/SelectedNodeStore"
+import selectedNodeStore from "../../stores/SelectedNodeStore";
 import ProblemNode from "./ProblemNode";
 import Placeholder from "./Placeholder";
 
 import styles from "./ProblemTree.module.css";
-import * as Constants from "../../constants"
+import * as Constants from "../../constants";
 import TreeContextMenu from "../contextMenu/TreeContextMenu";
 
 type Props = {
@@ -69,14 +69,13 @@ function ProblemTree(props: Props) {
   // 노드 선택 시 호출
   const handleSelect = (node: NodeModel) => {
     console.log("handleSelect call");
-    
+
     selectedNode.setNode(node);
   }
 
-
   const resetSelect = () => {
     console.log("resetSelect call");
-  
+
     selectedNode.setNode(undefined);
   }
 
@@ -140,7 +139,7 @@ function ProblemTree(props: Props) {
                 <Placeholder node={node} depth={depth} />
               ) : undefined}
             />
-            <TreeContextMenu node={selectedNode.node} />
+            <TreeContextMenu node={selectedNode.node}/>
           </div>
         </div>)}
     </Observer>

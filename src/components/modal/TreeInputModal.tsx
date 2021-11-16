@@ -5,13 +5,15 @@ import TextField from '@mui/material/TextField';
 
 import AlertModal from "./AlertModal";
 import useDialog from '../../hooks/useDialog';
+
+import selectedNodeStore from "../../stores/SelectedNodeStore";
 import problemListStore from "../../stores/ProblemListStore";
+
 import * as Constants from "../../constants";
 
 interface Props {
     inputTitle: string;
     inputLabel: string;
-    node?: NodeModel;
     open: boolean;
     onClose: () => void;
     eventCode: number;
@@ -22,6 +24,8 @@ interface Props {
  */
 function TreeInputModal(props: Props) {
     const problemList = problemListStore;
+    const selectedNode = selectedNodeStore;
+
     const [inputText, setInputText] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
@@ -39,12 +43,12 @@ function TreeInputModal(props: Props) {
 
     const handleEvent = () => {
         if (props.eventCode === Constants.ADD_FOLDER) {
-            const id = problemList.addFolder(inputText, props.node);
+            const id = problemList.addFolder(inputText, selectedNode.node);
             if(id === -1) {
                 handleFolderLimit();
             }
         } else if (props.eventCode === Constants.EDIT_FOLDER) {
-            problemList.editFolderName(inputText, props.node);
+            problemList.editFolderName(inputText, selectedNode.node);
         }
         handleClose();
     };

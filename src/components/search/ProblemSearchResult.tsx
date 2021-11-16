@@ -40,6 +40,7 @@ function ProblemSearchResult(props: Props) {
         }
     }, [data])
 
+    //빈 쿼리
     if (!props.query) {
         return (
             <div style={{ fontSize: 18, lineHeight: 2, margin: 10, marginTop: 15 }}>
@@ -57,7 +58,7 @@ function ProblemSearchResult(props: Props) {
             </div>
         );
     }
-
+    // 에러 처리
     if (error) {
         return (
             <div style={{ fontSize: 34 }}>
@@ -68,7 +69,7 @@ function ProblemSearchResult(props: Props) {
             </div>
         );
     }
-
+    // 데이터 로딩
     if (!data) {
         return (
             <div style={{ textAlign: "center" }}>
@@ -76,6 +77,7 @@ function ProblemSearchResult(props: Props) {
             </div>
         );
     } else {
+        // 결과 없음
         if (data.items.length === 0) {
             return (
                 <div style={{ fontSize: 20 }}>
@@ -85,6 +87,7 @@ function ProblemSearchResult(props: Props) {
                 </div>
             );
         }
+        // 결과 출력
         return (
             <SearchList key={props.query} data={data.items} />
         );
