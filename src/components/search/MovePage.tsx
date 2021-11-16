@@ -14,7 +14,6 @@ interface Props {
 }
 
 function MovePage(props: Props) {
-    console.log(props.page)
     return (
         <div style={{ textAlign: "center" }}>
             <IconButton disabled={props.page === 1}
@@ -37,9 +36,11 @@ function MovePage(props: Props) {
                     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
                         if (event.key === 'Enter') {
                             const ev = event.target as HTMLInputElement;
+                            console.log(ev.value)
                             let inputPage = Number(ev.value);
                             if(!isNaN(inputPage)) {
-                                inputPage = props.lastPage || inputPage;
+                                inputPage = Math.max(inputPage, 1);
+                                inputPage = Math.min(inputPage, props.lastPage);
                                 props.setPage(inputPage);
                             }
                         }
