@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import usePage from "../hooks/usePage";
+import MovePage from "./search/MovePage";
 import SearchBar from "./search/SearchBar";
-import SearchResult from "./search/SearchResult";
+import SearchResult from "./search/ProblemSearchResult";
 
 /**
  * parentQuery를 SearchBar에 넘겨주어 검색 시 query를 업데이트하고
@@ -8,15 +11,18 @@ import SearchResult from "./search/SearchResult";
  */
 function SearchComponent() {
     const [query, setQuery] = useState('');
-    function parentQuery(str: string) {
+    const [page, lastPage, setPage, setLastPage] = usePage();
+    const handleQuery = (str: string) => {
+        setPage(1);
         setQuery(str);
     }
     
     return(
         <div>
-            <SearchBar setQuery={parentQuery} />
+            <SearchBar setQuery={handleQuery} />
+            {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
             <div style={{overflow:"auto", height:"70vh", marginTop: 5}}>
-                <SearchResult query={query} />
+                <SearchResult key={query} query={query} page={page} lastPage={lastPage} setLastPage={setLastPage} />
             </div>
         </div>
     );

@@ -2,8 +2,6 @@ import React from "react";
 import { Box } from "@mui/system";
 import FolderIcon from "@mui/icons-material/Folder";
 
-import * as Constants from "../../constants"
-
 type Props = {
   droppable?: boolean;
   level?: number;
@@ -28,7 +26,7 @@ function TypedIcon(props: Props) {
       }
     }
 
-    const tierUrl = "tier/svg/" + tierLevel + ".svg";
+    const tierUrl = process.env.PUBLIC_URL + "/tier/svg/" + tierLevel + ".svg";
     return (
       <Box>
         <img src={tierUrl}

@@ -16,9 +16,9 @@ function ProblemDisplay(props: Props) {
             <div style={{ 
                 display:'inline', 
                 marginRight: "16px",
-            }} dangerouslySetInnerHTML={{ __html: props.title as string }}></div>
+            }}>{props.title}</div>
         </div>
     );
 }
-
+// dangerouslySetInnerHTML={{ __html: props.title as string }}
 export default ProblemDisplay;

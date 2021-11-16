@@ -12,7 +12,7 @@ interface Props {
 
 /**
  * 검색 창 컴포넌트
- * props.setQuery 는 SearchComponent 에서 넘어옴
+ * props.setQuery 는 상위 컴포넌트 에서 넘어옴
  */
 function SearchBar(props: Props) {
     const [inputText, setInputText] = useState("");
