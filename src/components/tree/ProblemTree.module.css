@@ -9,7 +9,7 @@ ul {
 }
 
 .treeRoot > :last-child {
-  padding-bottom: 3em;
+  padding-bottom: 10%;
 }
   
 .treeRoot {

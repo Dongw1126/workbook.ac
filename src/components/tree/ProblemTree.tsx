@@ -128,14 +128,13 @@ function ProblemTree(props: Props) {
               }}
               canDrop={props.canSort ?
                 (tree, { dragSource, dropTargetId, dropTarget }) => {
-                  console.log(dropTargetId)
                   if (dragSource?.parent === dropTargetId) {
                     return true;
                   }
                 } : undefined}
               sort={false}
               insertDroppableFirst={!props.canSort}
-              dropTargetOffset={props.canSort ? 10 : undefined}
+              dropTargetOffset={props.canSort ? 7 : undefined}
               placeholderRender={props.canSort ? (node, { depth }) => (
                 <Placeholder node={node} depth={depth} />
               ) : undefined}

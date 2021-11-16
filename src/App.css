@@ -16,6 +16,7 @@
 
 ::-webkit-scrollbar-track{
     background-color: rgba(33,133,133,0.33);
+    border-radius: 10px;
 }
 
 
