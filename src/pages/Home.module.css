@@ -12,31 +12,3 @@
     height: 40px;
     background-color: black;
 }
-
-.circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 37px;
-    width: 37px;
-    text-align: center;
-    border-radius: 50%;
-    background-color: black;
-}
-
-.subTitle {
-    white-space: nowrap;
-    padding: 0 0 0 40px;
-    font-weight: bolder;
-    font-size: 45px;
-}
-
-.usage {
-    margin-right: 30%;
-}
-  
-
-.sticky {
-    margin-left: 2%;
-    width: auto;
-}

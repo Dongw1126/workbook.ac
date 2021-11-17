@@ -11,11 +11,6 @@ function Nav() {
         </Link>
       </div>
       <div>
-        <Link to="/">
-          <div className={styles.navContent}>
-            Main
-          </div>
-        </Link>
         <Link to="/workbook/search">
           <div className={styles.navContent}>
             문제집
@@ -23,7 +18,7 @@ function Nav() {
         </Link>
         <Link to="/info">
           <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
-            Info
+            가이드
           </div>
         </Link>
       </div>
