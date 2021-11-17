@@ -15,7 +15,7 @@ function WorkbookComponent() {
     return (
         <Observer>
             {() => (
-                <div style={{ overflow: "auto", height:"80vh", marginTop: 5 }}>
+                <div style={{ overflow: "auto", height:"490px" }}>
                     <ProblemTree data={SampleData2} canSort={true} />
                 </div>)}
         </Observer>

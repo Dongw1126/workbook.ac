@@ -32,7 +32,7 @@ function TypedIcon(props: Props) {
         <img src={tierUrl}
           alt=""
           style={{
-            width: "1,2em",
+            width: "1.2em",
             height: "1.2em",
             lineHeight: 'inherit',
             verticalAlign: 'middle'

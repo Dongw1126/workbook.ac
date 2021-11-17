@@ -13,7 +13,7 @@ function EditWorkbook() {
 
     return (
         <div>
-            <div style={{ margin: "20px 0 0 10px" }}>
+            <div style={{ margin: "10px 0 10px 10px" }}>
                 <LoadingButton
                     style={{ borderRadius: 50, margin: "0 15px 0 0"}}
                     loading={loading}

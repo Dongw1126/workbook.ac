@@ -36,8 +36,8 @@ function MovePage(props: Props) {
                     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
                         if (event.key === 'Enter') {
                             const ev = event.target as HTMLInputElement;
-                            console.log(ev.value)
                             let inputPage = Number(ev.value);
+                            
                             if(!isNaN(inputPage)) {
                                 inputPage = Math.max(inputPage, 1);
                                 inputPage = Math.min(inputPage, props.lastPage);

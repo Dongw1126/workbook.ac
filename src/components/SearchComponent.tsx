@@ -21,7 +21,7 @@ function SearchComponent() {
         <div>
             <SearchBar setQuery={handleQuery} />
             {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
-            <div style={{overflow:"auto", height:"70vh", marginTop: 5}}>
+            <div style={{ overflow:"auto", height:"490px" }}>
                 <SearchResult key={query} query={query} page={page} lastPage={lastPage} setLastPage={setLastPage} />
             </div>
         </div>

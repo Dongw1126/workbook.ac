@@ -18,14 +18,9 @@ ul {
   
 .treeRoot {
   height: auto;
-  padding: 5%  0px 40% 0px;
+  padding: 10px  0px 100px 0px;
 }
   
 .draggingSource {
   opacity: 0.3;
 }
-
-/*.dropTarget {
-  background-color: #e8f0fe;
-}*/
-  
