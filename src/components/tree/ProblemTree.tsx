@@ -123,7 +123,6 @@ function ProblemTree(props: Props) {
               classes={{
                 root: styles.treeRoot,
                 draggingSource: styles.draggingSource,
-                dropTarget: styles.dropTarget,
                 placeholder: styles.placeholder
               }}
               canDrop={props.canSort ?
