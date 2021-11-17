@@ -1,0 +1,14 @@
+.content {
+    font-size: 26px;
+}
+
+.content a {
+    color: black;
+    line-height: 3;
+}
+
+.blackBar {
+    width: 50%;
+    height: 40px;
+    background-color: black;
+}
