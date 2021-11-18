@@ -14,9 +14,11 @@
 }
 
 .confetti {
+    cursor: pointer;
     width: 100%;
     text-align: center;
     animation: shake 1s infinite alternate;
+    user-select: none;
 }
 
 @keyframes shake {

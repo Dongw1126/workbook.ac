@@ -1,24 +1,26 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
+import ConfettiCannon from "../components/animations/ConfettiCanon";
 import styles from "./Home.module.css";
 
 function Home() {
     const parallax = useRef<IParallax>(null!);
+    const confettirRef = useRef(null);
+    const [popConfetti, setPopConfetti] = useState(false);
+
+    const handleConfetti = () => {
+        if(!popConfetti) {
+            setPopConfetti(true);
+            setTimeout(() => setPopConfetti(false), 800);
+        }
+    };
 
     const logoProps = useSpring({
         to: { opacity: 1, marginRight: 0 },
         from: { opacity: 0, marginRight: 500 },
         config: { mass: 2 }
     });
-
-    const confetti = useSpring({
-        loop: true,
-        from: {rotateZ: 0},
-        to: [{rotateZ: 5}, {rotateZ: 0}, {rotateZ: 5}, {rotateZ: 0}],
-        config: { mass: 1, tension: 280 },
-        delay: 1000
-    })
 
     return (
         <Parallax ref={parallax} pages={4} style={{ height: "90%" }}>
@@ -102,7 +104,13 @@ function Home() {
             >
                 <div>
                     <p>Thank you for visiting!</p>
-                    <div className={styles.confetti}>
+                    {popConfetti && (
+                        <ConfettiCannon
+                            anchorRef={confettirRef}
+                            dotCount={70}
+                        />
+                    )}
+                    <div ref={confettirRef} className={styles.confetti} onClick={handleConfetti}>
                         🎉
                     </div>
                 </div>
