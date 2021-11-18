@@ -12,3 +12,24 @@
     height: 40px;
     background-color: black;
 }
+
+.confetti {
+    width: 100%;
+    text-align: center;
+    animation: shake 1s infinite alternate;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(3deg);
+        transform-origin: bottom left;
+    }
+    20% {
+        transform: rotate(-3deg);
+        transform-origin: bottom left;
+    }
+    40%, 100% {
+        transform: rotate(3deg);
+        transform-origin: bottom left;
+    }
+}

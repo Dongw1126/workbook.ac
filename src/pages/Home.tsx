@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import styles from "./Home.module.css";
@@ -6,29 +6,22 @@ import styles from "./Home.module.css";
 function Home() {
     const parallax = useRef<IParallax>(null!);
 
-    const handleScroll = () => {
-        if (parallax.current) {
-            console.log(window.innerHeight)
-            console.log(parallax)
-        }
-    };
-
-    useEffect(() => {
-        const container = document.querySelector('#home-parallax-root');
-        container?.addEventListener('scroll', handleScroll);
-        return () => {
-            container?.removeEventListener('scroll', handleScroll);
-        }
-    }, []);
-
     const logoProps = useSpring({
         to: { opacity: 1, marginRight: 0 },
         from: { opacity: 0, marginRight: 500 },
         config: { mass: 2 }
     });
 
+    const confetti = useSpring({
+        loop: true,
+        from: {rotateZ: 0},
+        to: [{rotateZ: 5}, {rotateZ: 0}, {rotateZ: 5}, {rotateZ: 0}],
+        config: { mass: 1, tension: 280 },
+        delay: 1000
+    })
+
     return (
-        <Parallax ref={parallax} pages={4} style={{ height: "90%" }} id="home-parallax-root">
+        <Parallax ref={parallax} pages={4} style={{ height: "90%" }}>
             <ParallaxLayer
                 offset={0}
                 speed={0.1}
@@ -109,7 +102,9 @@ function Home() {
             >
                 <div>
                     <p>Thank you for visiting!</p>
-                    <div style={{ width:"100%", textAlign: "center"}}>🎉</div>
+                    <div className={styles.confetti}>
+                        🎉
+                    </div>
                 </div>
             </ParallaxLayer>
         </Parallax>
