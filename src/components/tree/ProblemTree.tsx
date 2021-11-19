@@ -15,7 +15,6 @@ import * as Constants from "../../constants";
 import TreeContextMenu from "../contextMenu/TreeContextMenu";
 
 type Props = {
-  data: NodeModel<ProblemData>[];
   canSort: boolean;
 };
 

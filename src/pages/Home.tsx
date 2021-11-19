@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
-import ConfettiCannon from "../components/animations/ConfettiCanon";
+import ConfettiCannon from "../components/animations/confetti/ConfettiCanon";
 import styles from "./Home.module.css";
 
 function Home() {
