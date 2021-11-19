@@ -1,6 +1,7 @@
 import React from 'react';
 import { Observer } from "mobx-react";
 import problemListStore from '../stores/ProblemListStore'
+import ProblemTreeTitle from './tree/ProblemTreeTitle';
 import ProblemTree from './tree/ProblemTree';
 import SampleData2 from "./tree/sample2.json";
 
@@ -26,13 +27,16 @@ const testData = Array.from({length: 150}, (v, i) => {
 
 function WorkbookComponent() {
     const problemList = problemListStore;
-    problemList.setData(testData);
-    // problemList.setData(SampleData2);
+    // problemList.setData(testData);
+    problemList.setData(SampleData2);
 
     return (
         <Observer>
             {() => (
-                <div style={{ overflow: "auto", height:"490px" }}>
+                <div style={{ overflow: "auto", height:"80vh" }}>
+                    <hr style={{ borderTop: "3px double #bbb" }} />
+                    <ProblemTreeTitle readonly={false}/>
+                    <hr style={{ borderTop: "3px double #bbb" }} />
                     <ProblemTree canSort={true} />
                 </div>)}
         </Observer>
