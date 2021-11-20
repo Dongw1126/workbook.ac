@@ -47,13 +47,13 @@ function MovePage(props: Props) {
                     }
                 }}/>
 
-            <IconButton disabled={props.lastPage === props.page}
+            <IconButton disabled={props.lastPage <= props.page}
                 onClick={() => {
                     props.setPage(props.page + 1);
                 }}>
                 <NextPageIcon />
             </IconButton>
-            <IconButton disabled={props.lastPage === props.page}
+            <IconButton disabled={props.lastPage <= props.page}
                 onClick={() => {
                     props.setPage(props.lastPage);
                 }}>
