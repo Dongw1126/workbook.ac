@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Split from 'react-split'
-import WorkbookComponent from '../components/WorkbookComponent';
-import SearchComponent from '../components/SearchComponent';
+import Workbook from '../components/workbook/Workbook';
+import ProblemSearch from '../components/search/ProblemSearch';
 
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -38,10 +38,10 @@ function EditWorkbook() {
                     cursor="col-resize"
                 >
                     <div>
-                        <WorkbookComponent />
+                        <Workbook />
                     </div>
                     <div style={{ margin: 10 }}>
-                        <SearchComponent />
+                        <ProblemSearch />
                     </div>
                 </Split>
             </div>

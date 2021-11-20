@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 
-import usePage from "../hooks/usePage";
-import MovePage from "./search/MovePage";
-import SearchBar from "./search/SearchBar";
-import SearchResult from "./search/ProblemSearchResult";
+import usePage from "../../hooks/usePage";
+import MovePage from "./MovePage";
+import SearchBar from "./SearchBar";
+import SearchResult from "./ProblemSearchResult";
 
 /**
  * parentQuery를 SearchBar에 넘겨주어 검색 시 query를 업데이트하고

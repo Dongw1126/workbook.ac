@@ -1,9 +1,9 @@
 import React from 'react';
 import { Observer } from "mobx-react";
-import problemListStore from '../stores/ProblemListStore'
-import ProblemTreeTitle from './tree/ProblemTreeTitle';
-import ProblemTree from './tree/ProblemTree';
-import SampleData2 from "./tree/sample2.json";
+import problemListStore from '../../stores/ProblemListStore';
+import ProblemTreeTitle from '../tree/ProblemTreeTitle';
+import ProblemTree from '../tree/ProblemTree';
+import SampleData2 from "../tree/sample2.json";
 
 
 /**
@@ -25,7 +25,7 @@ const testData = Array.from({length: 150}, (v, i) => {
     return o;
 });
 
-function WorkbookComponent() {
+function Workbook() {
     const problemList = problemListStore;
     // problemList.setData(testData);
     problemList.setData(SampleData2);
@@ -43,4 +43,4 @@ function WorkbookComponent() {
     );
 }
 
-export default WorkbookComponent;
+export default Workbook;
