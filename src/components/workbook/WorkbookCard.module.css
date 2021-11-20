@@ -1,0 +1,32 @@
+.card {
+  width: 40vh;
+  display: block;
+  margin: 60px auto;
+}
+
+.cardHeader {
+  height: 40vh;
+  width: 100%;
+}
+
+.cardHeader img {
+  height: 40vh;
+  width: 100%;
+  object-fit: none;
+}
+
+.cardBody {
+  padding: 15px;
+  background-color:#fff;
+}
+
+.cardContent {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.buttonGroup {
+  margin-left: auto;
+}

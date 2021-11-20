@@ -36,19 +36,19 @@ function Guide() {
 
             <ParallaxLayer offset={2} speed={1.5} style={{ ...alignCenter, justifyContent: 'flex-end' }}>
                 <div className={`${styles.usage} ${styles.content}`}>
-                    asdasdasdasd
+                    내용1
                 </div>
             </ParallaxLayer>
 
             <ParallaxLayer offset={3} speed={1.5} style={{ ...alignCenter, justifyContent: 'flex-end' }}>
                 <div className={`${styles.usage} ${styles.content}`}>
-                    asdadasdads
+                    내용2
                 </div>
             </ParallaxLayer>
 
             <ParallaxLayer offset={4} speed={1.5} style={{ ...alignCenter, justifyContent: 'flex-end' }}>
                 <div className={`${styles.usage} ${styles.content}`}>
-                    asdadasdads
+                    내용3
                 </div>
             </ParallaxLayer>
         </Parallax>

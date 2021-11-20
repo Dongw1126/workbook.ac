@@ -8,7 +8,7 @@ import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 
-function EditWorkbook() {
+function WorkbookEdit() {
     const [loading, setLoading] = useState(false);
 
     return (
@@ -49,4 +49,4 @@ function EditWorkbook() {
     );
 }
 
-export default EditWorkbook;
+export default WorkbookEdit;

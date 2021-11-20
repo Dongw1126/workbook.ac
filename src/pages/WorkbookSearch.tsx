@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, BrowserRouter, Route, Switch } from "react-router-dom";
-import EditWorkbook from "./EditWorkbook";
+import WorkbookList from "../components/workbook/WorkbookCard";
 
 function WorkbookSearch() {
 
@@ -10,6 +10,9 @@ function WorkbookSearch() {
             <Link to="/workbook/edit">
                 문제집 편집
             </Link>
+            <div>
+                <WorkbookList />
+            </div>
         </div>
     );
 }
