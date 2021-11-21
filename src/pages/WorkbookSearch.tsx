@@ -6,10 +6,6 @@ function WorkbookSearch() {
 
     return (
         <div>
-            문제집 둘러보기
-            <Link to="/workbook/edit">
-                문제집 편집
-            </Link>
             <div>
                 <WorkbookList />
             </div>
