@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import useSWR from 'swr'
 import { CircularProgress } from "@mui/material";
-import SearchList from "./ProblemSearchList";
+import ProblemSearchList from "./ProblemSearchList";
 
 type Props = {
     query: string;
@@ -89,7 +89,7 @@ function ProblemSearchResult(props: Props) {
         }
         // 결과 출력
         return (
-            <SearchList key={props.query} data={data.items} />
+            <ProblemSearchList key={props.query} data={data.items} />
         );
     }
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import SearchItem from "./ProblemSearchItem";
+import ProblemSearchItem from "./ProblemSearchItem";
 
 type Props = {
     data: any[];
@@ -15,7 +15,7 @@ function ProblemSearchList(props: Props) {
             {props.data.map(
                 (item, index) => {
                     return(
-                        <SearchItem 
+                        <ProblemSearchItem 
                             key={item.problemId}
                             id={item.problemId} 
                             level={item.level} 

@@ -13,8 +13,13 @@ type Props = {
 
 function WorkbookList(props: Props) {
     return(
-        <div>
-            <WorkbookCard data={props.data[0]} />
+        <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap" }}>
+            {props.data.map((item, index) => {
+                return(
+                    <WorkbookCard data={item} />
+                )
+            })}
+            
         </div>
     );
 }

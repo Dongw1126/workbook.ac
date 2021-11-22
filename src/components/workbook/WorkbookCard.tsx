@@ -23,7 +23,7 @@ const handleImgError = (e: any) => {
  */
 function WorkbookCard(props: Props) {
     return (
-        <div className={styles.card}>
+        <span className={styles.card}>
             <div className={styles.cardHeader}>
                 <Link to="/workbook/edit">
                     <img src="" alt="Workbook Image" onError={handleImgError} />
@@ -50,7 +50,7 @@ function WorkbookCard(props: Props) {
                     </div>
                 </div>
             </div>
-        </div>
+        </span>
     );
 }
 
