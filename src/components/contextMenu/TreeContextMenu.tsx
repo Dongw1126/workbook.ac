@@ -43,7 +43,7 @@ function TreeContextMenu(props: Props) {
         handleInputModalClose();
         handleInputModalOpen();
 
-        setModalTitle("이름 바꾸기");
+        setModalTitle("폴더 이름 바꾸기");
         setInputLabel("폴더 이름");
         setEventCode(Constants.EDIT_FOLDER);
     };
@@ -69,14 +69,12 @@ function TreeContextMenu(props: Props) {
             <TreeInputModal
                 inputTitle={modalTitle}
                 inputLabel={inputLabel}
-                node={props.node}
                 open={inputModalOpen}
                 onClose={handleInputModalClose}
                 eventCode={eventCode}
             />
             <TreeDeleteModal
                 deleteTitle="삭제하기"
-                node={props.node}
                 open={deleteModalOpen}
                 onClose={handleDeleteModalClose}
             />

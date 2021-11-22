@@ -1,0 +1,33 @@
+.logo {
+    float: left;
+    padding: 0 20% 0 2%;
+}
+
+.logo img {
+    width: 4em;
+    height: 4em;
+}
+
+.navRoot {
+    display: flex;
+    align-items: center;
+    border-top: solid 1px #b9b9b9;
+    border-bottom: solid 1px #b9b9b9;
+}
+
+.navContent {
+    text-align: center;
+    border-left: solid 1px #b9b9b9;
+    width: 120px;
+    height: 70px;
+    float: left;
+    transition: 0.3s;
+    line-height: 70px;
+    color: black;
+    font-weight: 300;
+    font-size: large;
+}
+
+.navContent:hover {
+    background-color: #dbdbdb;
+}

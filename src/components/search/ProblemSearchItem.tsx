@@ -25,12 +25,17 @@ type Props = {
 function ProblemSearchItem(props: Props) {
     const problemList = problemListStore;
     const selectedNode = selectedNodeStore;
-    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
+    const [dupAlertOpen, handleDupAlertOpen, handleDupAlertClose] = useDialog();
+    const [limitAlertOpen, handleLimitAlertOpen, handleLimitAlertClose] = useDialog();
 
     const handleAddClick = (e: React.MouseEvent) => {
-        const flag = problemList.addProblem(props.id, props.level, props.title, props.voteCnt, selectedNode.node);
-        if (!flag) {
-            handleAlertOpen();
+        if(problemList.problemNum >= 150) {
+            handleLimitAlertOpen();
+        } else {
+            const flag = problemList.addProblem(props.id, props.level, props.title, props.voteCnt, selectedNode.node);
+            if (!flag) {
+                handleDupAlertOpen();
+            }
         }
     }
 
@@ -54,8 +59,14 @@ function ProblemSearchItem(props: Props) {
                 <AlertModal
                     title="알림"
                     content="이미 존재하는 문제입니다!"
-                    open={alertOpen}
-                    onClose={handleAlertClose}
+                    open={dupAlertOpen}
+                    onClose={handleDupAlertClose}
+                />
+                <AlertModal
+                    title="알림"
+                    content="문제는 최대 150개까지 저장 가능합니다!"
+                    open={limitAlertOpen}
+                    onClose={handleLimitAlertClose}
                 />
             </div>)}
         </Observer>

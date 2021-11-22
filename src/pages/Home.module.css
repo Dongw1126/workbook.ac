@@ -1,0 +1,37 @@
+.content {
+    font-size: 1.6rem;
+    line-height: 2;
+}
+
+.content p a {
+    color: black;
+}
+
+.blackBar {
+    width: 50%;
+    height: 40px;
+    background-color: black;
+}
+
+.confetti {
+    cursor: pointer;
+    width: 100%;
+    text-align: center;
+    animation: shake 1s infinite alternate;
+    user-select: none;
+}
+
+@keyframes shake {
+    0% {
+        transform: rotate(3deg);
+        transform-origin: bottom left;
+    }
+    20% {
+        transform: rotate(-3deg);
+        transform-origin: bottom left;
+    }
+    40%, 100% {
+        transform: rotate(3deg);
+        transform-origin: bottom left;
+    }
+}

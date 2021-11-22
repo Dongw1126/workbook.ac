@@ -46,10 +46,20 @@ export class ProblemList {
   data: NodeModel<ProblemData>[] = []
   idArray: boolean[] = []
   tree: Tree = new Tree([]);
+  problemNum: number = 0;
 
   constructor() {
     makeAutoObservable(this);
     this.idArray = Array.from({ length: Constants.MAX_FOLDER_NUM }, () => false);
+  }
+
+  updateProblemNum() {
+    this.problemNum = 0;
+    this.data.forEach((element) => {
+      if (!element.droppable) {
+        this.problemNum++;
+      }
+    });
   }
 
   updateIdArray() {
@@ -62,8 +72,11 @@ export class ProblemList {
   }
 
   setData(_treeData: NodeModel<ProblemData>[]) {
+    console.log("setData");
     this.data = _treeData;
+
     this.updateIdArray();
+    this.updateProblemNum();
   }
 
   /** selectedNode 하위에 새로운 폴더 추가 */
@@ -144,7 +157,9 @@ export class ProblemList {
     };
 
     this.data.push(newProblem);
+    this.problemNum++;
 
+    console.log(this.problemNum);
     return true;
   }
 
@@ -180,7 +195,9 @@ export class ProblemList {
     this.tree = new Tree(this.data);
     this.data = [];
     this.deleteNodeSub(this.tree.root[0], _del);
+
     this.updateIdArray();
+    this.updateProblemNum();
   }
 };
 

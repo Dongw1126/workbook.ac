@@ -5,22 +5,23 @@ ul {
 
 .treeapp {
   height: 70vh;
-  padding: 2em 10px;
+  padding: 0px 10px;
+}
+
+/*.treeRoot > :first-child {
+  margin-top: 10%;
 }
 
 .treeRoot > :last-child {
-  padding-bottom: 3em;
-}
+  padding-bottom: 10%;
+}*/
   
 .treeRoot {
   height: auto;
+  padding: 20px 0px 100px 0px;
+  margin-top: 0;
 }
   
 .draggingSource {
   opacity: 0.3;
 }
-
-/*.dropTarget {
-  background-color: #e8f0fe;
-}*/
-  

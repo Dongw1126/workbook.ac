@@ -2,60 +2,37 @@ import React, { useState } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-import AlertModal from "./AlertModal";
-import useDialog from '../../hooks/useDialog';
-
-import selectedNodeStore from "../../stores/SelectedNodeStore";
-import problemListStore from "../../stores/ProblemListStore";
-
+import TitleStore from "../../stores/TitleStore";
 import * as Constants from "../../constants";
 
 interface Props {
-    inputTitle: string;
-    inputLabel: string;
     open: boolean;
     onClose: () => void;
-    eventCode: number;
 }
 
 /**
- * 폴더 이름 입력 Modal 창
+ * Title 이름 입력 Modal 창
  */
 function TreeInputModal(props: Props) {
-    const problemList = problemListStore;
-    const selectedNode = selectedNodeStore;
-
     const [inputText, setInputText] = useState("");
-    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
+    const problemTreeTitle = TitleStore;
 
     const handleClose = () => {
         props.onClose();
         setInputText("");
     };
 
-    const handleFolderLimit = () => {
-        console.log("handleFolderLimit call");
-
-        handleClose();
-        handleAlertOpen();
-    }
-
     const handleEvent = () => {
-        if (props.eventCode === Constants.ADD_FOLDER) {
-            const id = problemList.addFolder(inputText, selectedNode.node);
-            if(id === -1) {
-                handleFolderLimit();
-            }
-        } else if (props.eventCode === Constants.EDIT_FOLDER) {
-            problemList.editFolderName(inputText, selectedNode.node);
+        if(inputText.length !== 0) {
+            problemTreeTitle.title = inputText;
+            handleClose();
         }
-        handleClose();
     };
 
     return (
         <div>
             <Dialog onClose={handleClose} open={props.open} >
-                <DialogTitle>{props.inputTitle}</DialogTitle>
+                <DialogTitle>문제집 이름 바꾸기</DialogTitle>
                 <DialogContent>
                     <TextField
                         InputProps={{
@@ -70,28 +47,21 @@ function TreeInputModal(props: Props) {
                             }
                         }}
                         inputProps={{
-                            maxLength: Constants.MAX_FOLDER_NAME,
+                            maxLength: Constants.MAX_WORKBOOK_NAME,
                         }}
                         autoFocus
                         margin="dense"
-                        id="name"
-                        label={props.inputLabel}
+                        label="문제집 이름"
                         type='text'
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={handleEvent}>추가</Button>
+                    <Button variant="contained" onClick={handleEvent}>변경</Button>
                     <Button variant="outlined" onClick={handleClose}>취소</Button>
                 </DialogActions>
             </Dialog>
-            <AlertModal
-                title="알림"
-                content="폴더는 최대 50개까지 생성 가능합니다!"
-                open={alertOpen} 
-                onClose={handleAlertClose}
-            />
         </div>
     );
 }

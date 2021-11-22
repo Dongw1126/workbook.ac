@@ -1,7 +1,6 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
+import React, { useEffect } from "react";
+import useSWR from 'swr'
 import { CircularProgress } from "@mui/material";
-
 import SearchList from "./ProblemSearchList";
 
 type Props = {
@@ -11,24 +10,18 @@ type Props = {
     setLastPage: React.Dispatch<any>;
 };
 
-const SEARCH_LOADING = 0;
-const SEARCH_COMPLETE = 1;
-const SEARCH_EMPTY = 2;
-const SEARCH_ERROR = 3;
 
-const getResult = async (_query: string, _page: number, _setLastPage: React.Dispatch<any>) => {
-    console.log("getResult call");
+const fetcher = async (url: string) => {
+    console.log("fetcher call");
 
-    const url = "https://solved.ac/api/v3/search/problem?query=" + _query + "&page=" + _page;
-    // console.log(url);
+    const res = await fetch(url)
 
-    const response = await axios.get(url);
-    if (response.status === 200) {
-        _setLastPage(Math.ceil(response.data.count / 100));
-        return response.data.items;
+    if (!res.ok) {
+        const error = new Error();
+        error.message = res.status + " 오류!";
+        throw error
     }
-
-    return response.status;
+    return res.json();
 }
 
 /**
@@ -36,57 +29,19 @@ const getResult = async (_query: string, _page: number, _setLastPage: React.Disp
  * props.query 는 SearchBar 에서 입력한 데이터
  */
 function ProblemSearchResult(props: Props) {
-    const [resultData, setResultData] = useState<any>([]);
-    const [status, setStatus] = useState(0);
-    const [complete, setComplete] = useState(0);
+    const { data, error } = useSWR(props.query ?
+        "https://solved.ac/api/v3/search/problem?query=" + props.query + "&page=" + props.page : null,
+        fetcher
+    );
 
     useEffect(() => {
-        if (props.query !== "") {
-            getResult(props.query, props.page, props.setLastPage)
-                .then(res => {
-                    setComplete(SEARCH_LOADING);
-                    if (typeof res === "object") {
-                        setResultData(res)
-                        setComplete(SEARCH_COMPLETE);
-                    }
-                    else {
-                        setStatus(res);
-                        setComplete(SEARCH_ERROR);
-                    }
-                })
-                .catch(err => console.log(err))
-        } else {
-            setComplete(SEARCH_EMPTY);
+        if(!error && data) {
+            props.setLastPage(Math.ceil(data.count / 100));
         }
-    }, [props.query, props.page]);
+    }, [data])
 
-    /*useEffect(() => {
-        console.log(complete);
-    });*/
-
-    if (complete === SEARCH_LOADING) {
-        return (
-            <div style={{ textAlign: "center" }}>
-                <CircularProgress sx={{ m: 20 }} />
-            </div>
-        );
-    }
-    else if (complete === SEARCH_COMPLETE) {
-        if (resultData.length === 0) {
-            return (
-                <div style={{ fontSize: 20 }}>
-                    <p style={{ textAlign: "center"}}>
-                        😵 해당하는 문제가 없습니다! <br />
-                    </p>
-                </div>
-            );
-        } else {
-            return (
-                <SearchList key={props.query} data={resultData} />
-            );
-        }
-    }
-    else if (complete === SEARCH_EMPTY) {
+    //빈 쿼리
+    if (!props.query) {
         return (
             <div style={{ fontSize: 18, lineHeight: 2, margin: 10, marginTop: 15 }}>
                 <div style={{ width: "40%", whiteSpace: "nowrap" }}>
@@ -103,14 +58,38 @@ function ProblemSearchResult(props: Props) {
             </div>
         );
     }
-    else {
+    // 에러 처리
+    if (error) {
         return (
-            <div style={{ fontSize: 38 }}>
+            <div style={{ fontSize: 34 }}>
                 <p>
-                    😵 {status} 오류! <br />
+                    😵 {error.message} <br />
                     잠시 후에 다시 시도해 주세요
                 </p>
             </div>
+        );
+    }
+    // 데이터 로딩
+    if (!data) {
+        return (
+            <div style={{ textAlign: "center" }}>
+                <CircularProgress sx={{ m: 20 }} />
+            </div>
+        );
+    } else {
+        // 결과 없음
+        if (data.items.length === 0) {
+            return (
+                <div style={{ fontSize: 20 }}>
+                    <p style={{ textAlign: "center" }}>
+                        😵 해당하는 문제가 없습니다! <br />
+                    </p>
+                </div>
+            );
+        }
+        // 결과 출력
+        return (
+            <SearchList key={props.query} data={data.items} />
         );
     }
 }

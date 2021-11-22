@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="500"
+   height="500"
+   viewBox="0 0 132.29166 132.29167"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     units="px"
+     inkscape:zoom="0.51150168"
+     inkscape:cx="721.40526"
+     inkscape:cy="50.830723"
+     inkscape:window-width="1525"
+     inkscape:window-height="1030"
+     inkscape:window-x="158"
+     inkscape:window-y="28"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     showguides="false" />
+  <defs
+     id="defs2">
+    <rect
+       x="38.707575"
+       y="37.325162"
+       width="425.78333"
+       height="125.79962"
+       id="rect1419" />
+  </defs>
+  <g
+     inkscape:label="레이어 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text1417"
+       style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:'Gmarket Sans TTF';font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect1419);-inkscape-font-specification:'Gmarket Sans TTF';font-stretch:normal;font-variant:normal" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:5.29167px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="0.4047223"
+       y="38.444126"
+       id="text2569"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
+         x="0.4047223"
+         y="38.444126"
+         id="tspan2883">WORK</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:8.33967px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="-0.19701073"
+       y="80.682037"
+       id="text2569-4"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
+         x="-0.19701073"
+         y="80.682037"
+         id="tspan2883-0">BOOK</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:7.9375px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="71.121887"
+       y="122.13721"
+       id="text2569-4-3"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
+         x="71.121887"
+         y="122.13721"
+         id="tspan2883-0-3">AC</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:60.9455px;line-height:1.25;font-family:sans-serif;letter-spacing:3.49218px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.457091"
+       x="1.9241626"
+       y="114.90131"
+       id="text2569-4-2-5"
+       transform="scale(1.0010561,0.99894502)"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60.9455px;font-family:'Gmarket Sans TTF';-inkscape-font-specification:'Gmarket Sans TTF Bold';stroke-width:0.457091"
+         x="1.9241626"
+         y="114.90131"
+         id="tspan2883-0-0-2">.</tspan></text>
+  </g>
+</svg>
