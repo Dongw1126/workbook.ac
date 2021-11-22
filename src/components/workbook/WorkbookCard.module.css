@@ -1,8 +1,15 @@
 .card {
   width: 280px;
-  height: 430px;
+  height: 410px;
   display: block;
   margin: 50px auto;
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  z-index: 5;
+  transform: scale(1.2);
+  box-shadow: 0px 0px 50px 11px rgba(0,0,0,0.25);
 }
 
 .cardHeader {
@@ -17,6 +24,7 @@
 }
 
 .cardBody {
+  height: 130px;
   padding: 5px 15px;
   background-color:#fff;
 }
@@ -37,3 +45,4 @@
   font-weight: 300;
   font-size: small;
 }
+

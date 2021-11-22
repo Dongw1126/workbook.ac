@@ -12,10 +12,9 @@ type Props = {
     data: WorkbookData;
 }
 
-const defaultImg = process.env.PUBLIC_URL + "/images/wb-basic.jpg";
 const handleImgError = (e: any) => {
     e.target.onerror = null;
-    e.target.src = defaultImg;
+    e.target.src = process.env.PUBLIC_URL + "/images/wb-basic.jpg";
 }
 
 /**
