@@ -31,3 +31,9 @@
 .buttonGroup {
   margin-left: auto;
 }
+
+.favNumber {
+  user-select: none;
+  font-weight: 300;
+  font-size: small;
+}

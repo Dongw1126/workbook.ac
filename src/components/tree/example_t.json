@@ -1,0 +1,73 @@
+[
+    {
+      "id": 1,
+      "parent": 0,
+      "droppable": true,
+      "text": "Folder 1",
+      "data": {
+        "level": -1,
+        "problemId": -1
+      }
+    },
+    {
+      "id": 1000,
+      "parent": 1,
+      "droppable": false,
+      "text": "A+B",
+      "data": {
+        "level": 1,
+        "problemId": 1000
+      }
+    },
+    {
+      "id": 1001,
+      "parent": 1,
+      "droppable": false,
+      "text": "A-B",
+      "data": {
+        "level": 1,
+        "problemId": 1001
+      }
+    },
+    {
+      "id": 4,
+      "parent": 0,
+      "droppable": true,
+      "text": "Folder 2",
+      "data": {
+        "level": -1,
+        "problemId": -1
+      }
+    },
+    {
+      "id": 5,
+      "parent": 4,
+      "droppable": true,
+      "text": "Folder 2-1",
+      "data": {
+        "level": -1,
+        "problemId": -1
+      }
+    },
+    {
+      "id": 1152,
+      "parent": 5,
+      "droppable": false,
+      "text": "단어의개수",
+      "data": {
+        "level": 4,
+        "problemId": 1152
+      }
+    },
+    {
+      "id": 1074,
+      "parent": 0,
+      "droppable": false,
+      "text": "Z",
+      "data": {
+        "level": 10,
+        "problemId": 1074
+      }
+    }
+  ]
+  

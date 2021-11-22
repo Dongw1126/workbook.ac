@@ -4,7 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
+
+import { WorkbookData } from "../types/Types";
 import styles from './WorkbookCard.module.css';
+
+type Props = {
+    data: WorkbookData;
+}
 
 const defaultImg = process.env.PUBLIC_URL + "/images/wb-basic.jpg";
 const handleImgError = (e: any) => {
@@ -15,7 +21,7 @@ const handleImgError = (e: any) => {
 /**
  * 문제집 카드 컴포넌트
  */
-function WorkbookCard() {
+function WorkbookCard(props: Props) {
     return (
         <div className={styles.card}>
             <div className={styles.cardHeader}>
@@ -25,19 +31,22 @@ function WorkbookCard() {
             </div>
             <div className={styles.cardBody}>
                 <Link to="/workbook/edit" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    <h2>익명의 문제집</h2>
+                    <h2>{props.data.title}</h2>
                 </Link>
                 <div className={styles.cardContent}>
-                    <p>sss777</p>
+                    <p>{props.data.author}</p>
                     <div className={styles.buttonGroup}>
-                        <IconButton>
-                            <FavoriteBorderIcon />
-                        </IconButton>
                         <Link to="/workbook/edit">
                             <IconButton>
                                 <EditIcon />
                             </IconButton>
                         </Link>
+                        <IconButton>
+                            <FavoriteBorderIcon />
+                        </IconButton>
+                        <span className={styles.favNumber}>
+                            {props.data.favorite}
+                        </span>
                     </div>
                 </div>
             </div>

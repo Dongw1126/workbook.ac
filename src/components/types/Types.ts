@@ -9,6 +9,13 @@ export type ProblemData = {
   // tierShown, etc
 };
 
+export type WorkbookData = {
+  id: number;
+  title: string;
+  author: string;
+  favorite: number;
+}
+
 export class Node {
   data: NodeModel<ProblemData> | undefined;
   child: any[];
