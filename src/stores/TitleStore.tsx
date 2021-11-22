@@ -1,7 +1,7 @@
 import { makeAutoObservable } from 'mobx';
 
 class Title {
-    title: string = "무제 1";
+    title: string = "익명의 문제집";
     constructor() {
         makeAutoObservable(this);
     }

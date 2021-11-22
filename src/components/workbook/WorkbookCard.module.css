@@ -1,22 +1,23 @@
 .card {
-  width: 40vh;
+  width: 280px;
+  height: 430px;
   display: block;
   margin: 60px auto;
 }
 
 .cardHeader {
-  height: 40vh;
+  height: 280px;
   width: 100%;
 }
 
 .cardHeader img {
-  height: 40vh;
+  height: 280px;
   width: 100%;
   object-fit: none;
 }
 
 .cardBody {
-  padding: 15px;
+  padding: 5px 15px;
   background-color:#fff;
 }
 
