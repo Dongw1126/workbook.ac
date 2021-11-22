@@ -26,7 +26,7 @@ function WorkbookCard(props: Props) {
         <span className={styles.card}>
             <div className={styles.cardHeader}>
                 <Link to="/workbook/edit">
-                    <img src="" alt="Workbook Image" onError={handleImgError} />
+                    <img src={props.data.img} alt="Workbook Image" onError={handleImgError} />
                 </Link>
             </div>
             <div className={styles.cardBody}>

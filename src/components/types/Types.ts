@@ -14,6 +14,7 @@ export type WorkbookData = {
   title: string;
   author: string;
   favorite: number;
+  img: string;
 }
 
 export class Node {

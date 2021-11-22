@@ -16,7 +16,7 @@ function WorkbookList(props: Props) {
         <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap" }}>
             {props.data.map((item, index) => {
                 return(
-                    <WorkbookCard data={item} />
+                    <WorkbookCard key={item.id} data={item} />
                 )
             })}
             
