@@ -1,6 +1,7 @@
 import React from "react";
 import { Box } from "@mui/system";
 import FolderIcon from "@mui/icons-material/Folder";
+import CircleIcon from '@mui/icons-material/Circle';
 
 type Props = {
   droppable?: boolean;

@@ -11,14 +11,19 @@ function Nav() {
         </Link>
       </div>
       <div>
-        <Link to="/workbook/search">
+        <Link to="/guide">
           <div className={styles.navContent}>
-            문제집
+            가이드
           </div>
         </Link>
-        <Link to="/guide">
+        <Link to="/workbook/search">
+          <div className={styles.navContent}>
+            둘러보기
+          </div>
+        </Link>
+        <Link to="/workbook/my">
           <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
-            가이드
+            나의 문제집
           </div>
         </Link>
       </div>

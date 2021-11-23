@@ -4,11 +4,13 @@ import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
+import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 
 import { WorkbookData } from "../types/Types";
 import styles from './WorkbookCard.module.css';
 
 type Props = {
+    editable: boolean;
     data: WorkbookData;
 }
 
@@ -29,17 +31,28 @@ function WorkbookCard(props: Props) {
                 </Link>
             </div>
             <div className={styles.cardBody}>
-                <Link to="/workbook/edit" style={{ color: 'inherit', textDecoration: 'inherit'}}>
-                    <h2>{props.data.title}</h2>
+                <Link to="/workbook/edit" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                    <div className={styles.cardTitle}>
+                        {props.data.title}
+                    </div>
                 </Link>
+                <div className={styles.cardAuthor}>
+                        {props.data.author}
+                </div>
                 <div className={styles.cardContent}>
-                    <p>{props.data.author}</p>
                     <div className={styles.buttonGroup}>
-                        <Link to="/workbook/edit">
-                            <IconButton>
-                                <EditIcon />
-                            </IconButton>
-                        </Link>
+                        {props.editable &&
+                            <>
+                                <Link to="/workbook/edit">
+                                    <IconButton>
+                                        <EditIcon />
+                                    </IconButton>
+                                </Link>
+                                <IconButton>
+                                    <InsertPhotoIcon />
+                                </IconButton>
+                            </>
+                        }
                         <IconButton>
                             <FavoriteBorderIcon />
                         </IconButton>

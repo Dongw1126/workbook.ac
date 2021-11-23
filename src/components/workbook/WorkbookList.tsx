@@ -8,6 +8,7 @@ import WorkbookCard from "./WorkbookCard";
  */
 
 type Props = {
+    editable: boolean;
     data: WorkbookData[];
 }
 
@@ -16,7 +17,7 @@ function WorkbookList(props: Props) {
         <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap" }}>
             {props.data.map((item, index) => {
                 return(
-                    <WorkbookCard key={item.id} data={item} />
+                    <WorkbookCard key={item.id} editable={props.editable} data={item} />
                 )
             })}
             

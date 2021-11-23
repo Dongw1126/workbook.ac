@@ -1,14 +1,14 @@
 import { useState } from "react";
 import Split from 'react-split'
-import Workbook from '../components/workbook/Workbook';
-import ProblemSearch from '../components/search/ProblemSearch';
+import Workbook from '../../components/workbook/Workbook';
+import ProblemSearch from '../../components/search/ProblemSearch';
 
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
 
-function WorkbookEdit() {
+function EditWorkbook() {
     const [loading, setLoading] = useState(false);
 
     return (
@@ -49,4 +49,4 @@ function WorkbookEdit() {
     );
 }
 
-export default WorkbookEdit;
+export default EditWorkbook;
