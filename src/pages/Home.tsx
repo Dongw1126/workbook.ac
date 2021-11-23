@@ -32,7 +32,7 @@ function Home() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 onClick={() => parallax.current.scrollTo(1)}>
                 <animated.div style={logoProps}>
-                    <img src={process.env.PUBLIC_URL + '/logo.svg'} alt="" />
+                    <img width="580px" height="580px" src={process.env.PUBLIC_URL + '/logo.svg'} alt="" />
                 </animated.div>
             </ParallaxLayer>
 
