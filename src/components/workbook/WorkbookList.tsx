@@ -14,13 +14,12 @@ type Props = {
 
 function WorkbookList(props: Props) {
     return(
-        <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap" }}>
+        <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {props.data.map((item, index) => {
                 return(
                     <WorkbookCard key={item.id} editable={props.editable} data={item} />
                 )
             })}
-            
         </div>
     );
 }

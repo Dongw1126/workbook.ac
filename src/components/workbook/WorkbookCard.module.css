@@ -1,8 +1,8 @@
 .card {
   width: 240px;
   height: 360px;
-  display: block;
-  margin: 50px auto;
+  justify-content: center;
+  margin: 50px 40px;
   transition: all 0.3s;
 }
 
