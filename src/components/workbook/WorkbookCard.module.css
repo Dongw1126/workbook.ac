@@ -1,6 +1,6 @@
 .card {
   width: 240px;
-  height: 360px;
+  height: auto;
   justify-content: center;
   margin: 50px 40px;
   transition: all 0.3s;
@@ -24,7 +24,7 @@
 }
 
 .cardBody {
-  height: 120px;
+  height: auto;
   padding: 5px 15px;
   background-color:#fff;
 }
@@ -40,6 +40,7 @@
   font-size: 1.7rem;
   font-weight: 700;
   margin-top: 15px;
+  word-break: break-all;
 }
 
 .cardAuthor {
