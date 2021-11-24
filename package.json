@@ -19,6 +19,7 @@
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/react-router-dom": "^5.3.1",
+    "aws-amplify": "^4.3.8",
     "axios": "^0.24.0",
     "mobx": "^6.3.5",
     "mobx-react": "^7.2.1",
