@@ -4,8 +4,8 @@ import { schema } from './schema';
 
 
 
-const { WorkbookData } = initSchema(schema);
+const { WorkbookDB } = initSchema(schema);
 
 export {
-  WorkbookData
+  WorkbookDB
 };

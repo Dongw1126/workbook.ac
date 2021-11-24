@@ -4,11 +4,11 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
-type WorkbookDataMetaData = {
+type WorkbookDBMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
-export declare class WorkbookData {
+export declare class WorkbookDB {
   readonly id: string;
   readonly author: string;
   readonly title: string;
@@ -17,6 +17,6 @@ export declare class WorkbookData {
   readonly treeData?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
-  constructor(init: ModelInit<WorkbookData, WorkbookDataMetaData>);
-  static copyOf(source: WorkbookData, mutator: (draft: MutableModel<WorkbookData, WorkbookDataMetaData>) => MutableModel<WorkbookData, WorkbookDataMetaData> | void): WorkbookData;
+  constructor(init: ModelInit<WorkbookDB, WorkbookDBMetaData>);
+  static copyOf(source: WorkbookDB, mutator: (draft: MutableModel<WorkbookDB, WorkbookDBMetaData>) => MutableModel<WorkbookDB, WorkbookDBMetaData> | void): WorkbookDB;
 }

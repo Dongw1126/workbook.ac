@@ -1,4 +1,4 @@
-type WorkbookData @model @auth(rules: [{allow: public}]) {
+type WorkbookDB @model @auth(rules: [{allow: public}]) {
   id: ID!
   author: String!
   title: String!
@@ -6,3 +6,4 @@ type WorkbookData @model @auth(rules: [{allow: public}]) {
   image: String
   treeData: AWSJSON
 }
+ 

@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "WorkbookData": {
-            "name": "WorkbookData",
+        "WorkbookDB": {
+            "name": "WorkbookDB",
             "fields": {
                 "id": {
                     "name": "id",
@@ -63,7 +63,7 @@ export const schema = {
                 }
             },
             "syncable": true,
-            "pluralName": "WorkbookData",
+            "pluralName": "WorkbookDBS",
             "attributes": [
                 {
                     "type": "model",
@@ -90,5 +90,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "1ad8adcb91232cc6af2cd22641900551"
+    "version": "23c40bba216075f3a780087bb3caa545"
 };
