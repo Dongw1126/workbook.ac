@@ -1,29 +1,21 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB } from '../../../models';
-import WorkbookList from "../../workbook/WorkbookList";
-import example_wb from "../../workbook/example_wb.json"
-
-const fetchDBInit = async () => {
-    const byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
-        sort: s => s.favorite(SortDirection.DESCENDING)
-    });
-    const byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
-        sort: s => s.createdAt(SortDirection.DESCENDING)
-    });
-    console.log(byFavorite);
-    console.log(byCreatedAt);
-};
+import WorkSearchBar from "./WorkbookSearchBar";
+import WorkbookSearchResult from "./WorkbookSearchResult";
 
 function WorkbookSearch() {
-    useEffect(() => {
-        fetchDBInit();
-    })
+    const [query, setQuery] = useState('');
+    const handleQuery = (str: string) => {
+        setQuery(str);
+    }
+
     return (
-        <div>
-            <div>
-                <WorkbookList editable={false} data={example_wb}/>
+        <div style={{ width: "60%", margin: "auto" }}>
+            <div style={{ textAlign: "center" }}>
+                <WorkSearchBar setQuery={handleQuery} />
             </div>
+                <WorkbookSearchResult key={query} query={query}/>
         </div>
     );
 }

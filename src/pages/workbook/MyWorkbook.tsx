@@ -1,5 +1,5 @@
 import React from 'react';
-import WorkbookList from "../../components/workbook/WorkbookList";
+import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import example_wb_my from "../../components/workbook/example_wb_my.json"
 
 function MyWorkbook() {

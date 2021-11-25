@@ -1,5 +1,5 @@
-import { WorkbookData } from "../../types/Types";
-import WorkbookCard from "./WorkbookCard";
+import { WorkbookData } from "../../../types/Types";
+import WorkbookCard from "../../workbook/WorkbookCard";
 
 
 /**
@@ -12,9 +12,9 @@ type Props = {
     data: WorkbookData[];
 }
 
-function WorkbookList(props: Props) {
+function WorkbookSearchList(props: Props) {
     return(
-        <div style={{ width: "60%", margin: "auto", display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {props.data.map((item, index) => {
                 return(
                     <WorkbookCard key={item.id} editable={props.editable} data={item} />
@@ -24,4 +24,4 @@ function WorkbookList(props: Props) {
     );
 }
 
-export default WorkbookList;
+export default WorkbookSearchList;
