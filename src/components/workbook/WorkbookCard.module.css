@@ -15,12 +15,12 @@
 }
 
 .cardHeader {
-  height: 240px;
+  height: 200px;
   width: 100%;
 }
 
 .cardHeader img {
-  height: 240px;
+  height: 200px;
   width: 100%;
   object-fit: none;
 }

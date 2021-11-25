@@ -1,3 +1,4 @@
+import { useTransition, useChain, animated, useSpringRef } from 'react-spring';
 import { WorkbookData } from "../../../types/Types";
 import WorkbookCard from "../../workbook/WorkbookCard";
 
@@ -13,15 +14,34 @@ type Props = {
 }
 
 function WorkbookSearchList(props: Props) {
-    return(
+    const transApi = useSpringRef()
+    const transition = useTransition(props.data, {
+      ref: transApi,
+      trail: 400 / props.data.length,
+      from: { opacity: 0, scale: 0 },
+      enter: { opacity: 1, scale: 1 },
+      leave: { opacity: 0, scale: 0 },
+    })
+
+    useChain([transApi]);
+
+    return (
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-            {props.data.map((item, index) => {
-                return(
+            {transition((style, item) => (
+                <animated.div style={style}>
                     <WorkbookCard key={item.id} editable={props.editable} data={item} />
-                )
-            })}
+                </animated.div>
+            ))}
         </div>
     );
 }
+
+        /*<div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+            {props.data.map((item, index) => {
+                return (
+                    <WorkbookCard key={item.id} editable={props.editable} data={item} />
+                )
+            })}
+        </div>*/
 
 export default WorkbookSearchList;

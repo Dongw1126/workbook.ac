@@ -11,8 +11,8 @@ function WorkbookSearch() {
     }
 
     return (
-        <div style={{ width: "60%", margin: "auto" }}>
-            <div style={{ textAlign: "center" }}>
+        <div style={{ margin: "auto" }}>
+            <div style={{ width: "60%", margin: "auto", textAlign: "center" }}>
                 <WorkSearchBar setQuery={handleQuery} />
             </div>
                 <WorkbookSearchResult key={query} query={query}/>
