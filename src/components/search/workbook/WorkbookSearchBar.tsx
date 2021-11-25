@@ -30,7 +30,7 @@ function WorkbookSearchBar(props: Props) {
                     setInputText(ev.value);
                 },
                 startAdornment: (
-                    <InputAdornment position="start">
+                    <InputAdornment position="start" sx={{ marginLeft: 1.2 }}>
                         <SearchIcon />
                     </InputAdornment>
                 ),
