@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Split from 'react-split'
 import Workbook from '../../components/workbook/Workbook';
-import ProblemSearch from '../../components/search/ProblemSearch';
+import ProblemSearch from '../../components/search/problem/ProblemSearch';
 
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';

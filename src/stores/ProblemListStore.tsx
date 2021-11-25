@@ -1,4 +1,4 @@
-import { ProblemList } from "../components/types/Types";
+import { ProblemList } from "../types/Types";
 
 /** 문제집 트리 데이터 */
 const problemListStore = new ProblemList();

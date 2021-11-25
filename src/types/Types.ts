@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { NodeModel } from "@minoru/react-dnd-treeview";
-import * as Constants from "../../constants";
+import * as Constants from "../constants";
 
 export type ProblemData = {
   level?: number;

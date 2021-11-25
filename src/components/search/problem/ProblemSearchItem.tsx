@@ -1,16 +1,16 @@
 import React from "react";
 import { Observer } from "mobx-react";
 import styles from "./ProblemSearchItem.module.css";
-import TypedIcon from "../types/TypedIcon";
-import ProblemDisplay from "../types/TypedText";
+import TypedIcon from "../../../types/TypedIcon";
+import ProblemDisplay from "../../../types/TypedText";
 import AddIcon from '@mui/icons-material/Add';
 import LaunchIcon from '@mui/icons-material/Launch';
 import IconButton from '@mui/material/IconButton';
 
-import AlertModal from "../modal/AlertModal";
-import useDialog from '../../hooks/useDialog';
-import problemListStore from "../../stores/ProblemListStore";
-import selectedNodeStore from "../../stores/SelectedNodeStore";
+import AlertModal from "../../modal/AlertModal";
+import useDialog from '../../../hooks/useDialog';
+import problemListStore from "../../../stores/ProblemListStore";
+import selectedNodeStore from "../../../stores/SelectedNodeStore";
 
 type Props = {
     level: number;

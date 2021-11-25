@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
-import { WorkbookDB } from '../../models';
-import WorkbookList from "../../components/workbook/WorkbookList";
-import example_wb from "../../components/workbook/example_wb.json"
+import { WorkbookDB } from '../../../models';
+import WorkbookList from "../../workbook/WorkbookList";
+import example_wb from "../../workbook/example_wb.json"
 
 const fetchDBInit = async () => {
     const byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {

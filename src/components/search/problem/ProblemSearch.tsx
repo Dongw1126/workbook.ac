@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import usePage from "../../hooks/usePage";
-import MovePage from "./MovePage";
-import SearchBar from "./SearchBar";
+import usePage from "../../../hooks/usePage";
+import MovePage from "../MovePage";
+import ProblemSearchBar from "./ProblemSearchBar";
 import ProblemSearchResult from "./ProblemSearchResult";
 
 /**
@@ -19,7 +19,7 @@ function SearchComponent() {
     
     return(
         <div>
-            <SearchBar setQuery={handleQuery} />
+            <ProblemSearchBar setQuery={handleQuery} />
             {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
             <div style={{ overflow:"auto", height:"65vh" }}>
                 <ProblemSearchResult key={query} query={query} page={page} lastPage={lastPage} setLastPage={setLastPage} />

@@ -1,6 +1,6 @@
 import { NodeModel } from "@minoru/react-dnd-treeview";
 import * as Constants from "../../constants"
-import { ProblemData, Tree, Node } from "../types/Types";
+import { ProblemData, Tree, Node } from "../../types/Types";
 
 // selectedNode 하위에 새로운 폴더 객체 반환
 export function getNewFolder(_treeData: NodeModel<ProblemData>[], _selectedNode?: NodeModel) {

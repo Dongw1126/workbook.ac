@@ -4,7 +4,7 @@ import { toJS } from "mobx";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
 import { useContextMenu } from "react-contexify";
 
-import { ProblemData } from "../types/Types";
+import { ProblemData } from "../../types/Types";
 import problemListStore from "../../stores/ProblemListStore";
 import selectedNodeStore from "../../stores/SelectedNodeStore";
 import ProblemNode from "./ProblemNode";

@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import SearchWorkbook from "../pages/workbook/SearchWorkbook";
+import WorkbookSearch from "./search/workbook/WorkbookSearch";
 import EditWorkbook from "../pages/workbook/EditWorkbook";
 import MyWorkbook from "../pages/workbook/MyWorkbook";
 import Home from "../pages/Home";
@@ -14,7 +14,7 @@ function MainComponent() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/guide" component={Guide} />
-                <Route exact path="/workbook/search" component={SearchWorkbook} />
+                <Route exact path="/workbook/search" component={WorkbookSearch} />
                 <Route exact path="/workbook/edit" component={EditWorkbook} />
                 <Route exact path="/workbook/my" component={MyWorkbook} />
             </Switch>

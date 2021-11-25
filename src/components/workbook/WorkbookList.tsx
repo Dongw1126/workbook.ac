@@ -1,4 +1,4 @@
-import { WorkbookData } from "../types/Types";
+import { WorkbookData } from "../../types/Types";
 import WorkbookCard from "./WorkbookCard";
 
 

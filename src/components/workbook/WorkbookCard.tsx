@@ -6,7 +6,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
 import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 
-import { WorkbookData } from "../types/Types";
+import { WorkbookData } from "../../types/Types";
 import styles from './WorkbookCard.module.css';
 
 type Props = {

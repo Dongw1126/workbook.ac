@@ -4,7 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import * as Constants from "../../constants";
+import * as Constants from "../../../constants";
 
 interface Props {
     setQuery: (parm: string) => void;
