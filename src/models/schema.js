@@ -10,10 +10,10 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "author": {
-                    "name": "author",
+                "public": {
+                    "name": "public",
                     "isArray": false,
-                    "type": "String",
+                    "type": "Boolean",
                     "isRequired": true,
                     "attributes": []
                 },
@@ -36,6 +36,13 @@ export const schema = {
                     "isArray": false,
                     "type": "String",
                     "isRequired": false,
+                    "attributes": []
+                },
+                "author": {
+                    "name": "author",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
                     "attributes": []
                 },
                 "treeData": {
@@ -90,5 +97,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "23c40bba216075f3a780087bb3caa545"
+    "version": "ea2e6c3e80dc4aea548329a6201386f7"
 };

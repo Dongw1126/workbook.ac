@@ -3,7 +3,7 @@
   "serviceConfiguration": {
     "apiName": "workbookac",
     "serviceName": "AppSync",
-    "gqlSchemaPath": "/tmp/amplify-3b5cb66c-e95a-49bc-ad6a-76839fc9d9e7/amplify/backend/api/workbookac/schema.graphql",
+    "gqlSchemaPath": "/tmp/amplify-dc1787a2-54d4-4f40-bca6-63636d45a84a/amplify/backend/api/workbookac/schema.graphql",
     "defaultAuthType": {
       "mode": "API_KEY",
       "keyDescription": "api key description",

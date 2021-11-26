@@ -10,10 +10,11 @@ type WorkbookDBMetaData = {
 
 export declare class WorkbookDB {
   readonly id: string;
-  readonly author: string;
+  readonly public: boolean;
   readonly title: string;
   readonly favorite: number;
   readonly image?: string;
+  readonly author: string;
   readonly treeData?: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
