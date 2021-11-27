@@ -25,7 +25,11 @@ const testData = Array.from({length: 150}, (v, i) => {
     return o;
 });
 
-function Workbook() {
+type Props = {
+    editable: boolean;
+}
+
+function Workbook(props: Props) {
     const problemList = problemListStore;
     // problemList.setData(testData);
     problemList.setData(example_t);
@@ -34,10 +38,13 @@ function Workbook() {
         <Observer>
             {() => (
                 <div style={{ overflow: "auto", height:"80vh" }}>
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                    <ProblemTreeTitle readonly={false}/>
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                    <ProblemTree canSort={true} />
+                    {props.editable && 
+                    <>
+                        <hr style={{ borderTop: "3px double #bbb" }} />
+                        <ProblemTreeTitle />
+                        <hr style={{ borderTop: "3px double #bbb" }} />
+                    </>}
+                    <ProblemTree editable={props.editable} />
                 </div>)}
         </Observer>
     );

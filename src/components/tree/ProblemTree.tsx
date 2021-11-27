@@ -15,7 +15,7 @@ import * as Constants from "../../constants";
 import TreeContextMenu from "../contextMenu/TreeContextMenu";
 
 type Props = {
-  canSort: boolean;
+  editable: boolean;
 };
 
 /**
@@ -110,34 +110,35 @@ function ProblemTree(props: Props) {
                   node={node}
                   depth={depth}
                   isOpen={isOpen}
+                  
                   isSelected={node.id === selectedNode.node?.id}
                   onToggle={onToggle}
-                  onSelect={handleSelect}
-                  displayMenu={displayMenu}
-                  hideMenu={hideAll}
+                  onSelect={props.editable ? handleSelect: () => {}}
+                  displayMenu={props.editable ? displayMenu: () => {}}
+                  hideMenu={props.editable ? hideAll: () => {}}
                 />
               )}
-              onDrop={handleDrop}
+              onDrop={props.editable ? handleDrop : () => {}}
               onChangeOpen={handleChangeOpen}
               classes={{
                 root: styles.treeRoot,
                 draggingSource: styles.draggingSource,
                 placeholder: styles.placeholder
               }}
-              canDrop={props.canSort ?
+              canDrop={props.editable ?
                 (tree, { dragSource, dropTargetId, dropTarget }) => {
                   if (dragSource?.parent === dropTargetId) {
                     return true;
                   }
                 } : undefined}
               sort={false}
-              insertDroppableFirst={!props.canSort}
-              dropTargetOffset={props.canSort ? 7 : undefined}
-              placeholderRender={props.canSort ? (node, { depth }) => (
+              insertDroppableFirst={!props.editable}
+              dropTargetOffset={props.editable ? 7 : undefined}
+              placeholderRender={props.editable ? (node, { depth }) => (
                 <Placeholder node={node} depth={depth} />
               ) : undefined}
             />
-            <TreeContextMenu node={selectedNode.node}/>
+            {props.editable && <TreeContextMenu node={selectedNode.node}/>}
           </div>
         </div>)}
     </Observer>

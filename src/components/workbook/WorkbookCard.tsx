@@ -12,6 +12,7 @@ import styles from './WorkbookCard.module.css';
 type Props = {
     editable: boolean;
     data: WorkbookData;
+    animated?: boolean;
 }
 
 const handleImgError = (e: any) => {
@@ -24,14 +25,16 @@ const handleImgError = (e: any) => {
  */
 function WorkbookCard(props: Props) {
     return (
-        <div className={styles.card}>
+        <div className={`${styles.card} ${
+            props.animated ? styles.cardAnimation : ""
+          }`}>
             <div className={styles.cardHeader}>
-                <Link to="/workbook/edit">
+                <Link to="/workbook/read">
                     <img src={props.data.img} alt="Workbook Image" onError={handleImgError} />
                 </Link>
             </div>
             <div className={styles.cardBody}>
-                <Link to="/workbook/edit" style={{ color: 'inherit', textDecoration: 'inherit' }}>
+                <Link to="/workbook/read" style={{ color: 'inherit', textDecoration: 'inherit' }}>
                     <div className={styles.cardTitle}>
                         {props.data.title}
                     </div>

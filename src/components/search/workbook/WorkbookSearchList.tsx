@@ -29,19 +29,11 @@ function WorkbookSearchList(props: Props) {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {transition((style, item) => (
                 <animated.div style={style}>
-                    <WorkbookCard key={item.id} editable={props.editable} data={item} />
+                    <WorkbookCard key={item.id} editable={props.editable} data={item} animated={true} />
                 </animated.div>
             ))}
         </div>
     );
 }
-
-        /*<div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-            {props.data.map((item, index) => {
-                return (
-                    <WorkbookCard key={item.id} editable={props.editable} data={item} />
-                )
-            })}
-        </div>*/
 
 export default WorkbookSearchList;
