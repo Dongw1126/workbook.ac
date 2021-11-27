@@ -110,7 +110,7 @@ function ProblemTree(props: Props) {
                   node={node}
                   depth={depth}
                   isOpen={isOpen}
-                  
+                  editable={props.editable}
                   isSelected={node.id === selectedNode.node?.id}
                   onToggle={onToggle}
                   onSelect={props.editable ? handleSelect: () => {}}

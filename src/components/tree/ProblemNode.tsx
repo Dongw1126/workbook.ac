@@ -1,6 +1,8 @@
 import React, { useCallback } from "react";
 import ArrowRightIcon from '@mui/icons-material/ArrowRight';
 import { NodeModel } from "@minoru/react-dnd-treeview";
+import LaunchIcon from '@mui/icons-material/Launch';
+import IconButton from '@mui/material/IconButton';
 
 import { ProblemData } from "../../types/Types";
 import TypedIcon from "../../types/TypedIcon";
@@ -14,7 +16,7 @@ type Props = {
   depth: number;
   isSelected: boolean;
   isOpen: boolean;
-
+  editable: boolean;
   onToggle: (id: NodeModel["id"]) => void;
   onSelect: (node: NodeModel) => void;
   // ContextMenu 다루는 함수
@@ -29,6 +31,7 @@ type Props = {
 function ProblemNode(props: Props) {
   const { droppable, data } = props.node;
   const indent = props.depth * Constants.TREE_ITEM_SPACE;
+  const url = "https://www.acmicpc.net/problem/" + data?.problemId;
 
   const handleToggle = useCallback((e: React.MouseEvent) => {
     console.log("handleToggle call");
@@ -55,9 +58,8 @@ function ProblemNode(props: Props) {
       onContextMenu={displayMenu}
     >
       <div
-        className={`${styles.expandIconWrapper} ${
-          props.isOpen ? styles.isOpen : ""
-        }`}
+        className={`${styles.expandIconWrapper} ${props.isOpen ? styles.isOpen : ""
+          }`}
       >
         {props.node.droppable && (
           <div>
@@ -66,11 +68,17 @@ function ProblemNode(props: Props) {
         )}
       </div>
       <div>
-        <TypedIcon droppable={droppable} level={data?.level} voteCnt={data?.voteCnt}/>
+        <TypedIcon droppable={droppable} level={data?.level} voteCnt={data?.voteCnt} />
       </div>
       <div className={styles.labelGridItem}>
         <ProblemDisplay droppable={droppable} id={props.node.data?.problemId} title={props.node.text} />
       </div>
+      {(!droppable && !props.editable) &&
+        <div>
+          <IconButton onClick={() => window.open(url, "_blank")}>
+            <LaunchIcon />
+          </IconButton>
+        </div>}
     </div>
   );
 }
