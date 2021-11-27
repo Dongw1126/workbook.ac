@@ -1,5 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+
+import ScrollToTop from "./ScrollToTop";
 import WorkbookSearch from "./search/workbook/WorkbookSearch";
 import EditWorkbook from "../pages/workbook/EditWorkbook";
 import ReadWorkbook from '../pages/workbook/ReadWorkbook';
@@ -11,6 +13,7 @@ import Guide from '../pages/Guide';
 function MainComponent() {
     return (
         <BrowserRouter>
+            <ScrollToTop />
             <Nav />
             <Switch>
                 <Route exact path="/" component={Home} />
