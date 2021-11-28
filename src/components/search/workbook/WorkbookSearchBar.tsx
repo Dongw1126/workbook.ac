@@ -4,7 +4,7 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import IconButton from '@mui/material/IconButton';
 import { InputAdornment } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import * as Constants from "../../constants";
+import * as Constants from "../../../constants";
 
 interface Props {
     setQuery: (parm: string) => void;
@@ -14,10 +14,11 @@ interface Props {
  * 검색 창 컴포넌트
  * props.setQuery 는 상위 컴포넌트 에서 넘어옴
  */
-function SearchBar(props: Props) {
+function WorkbookSearchBar(props: Props) {
     const [inputText, setInputText] = useState("");
     return (
         <TextField fullWidth
+            sx={{ width: "60%" ,borderRadius: 10, boxShadow: 4, padding: 1.5, marginTop: 7, marginBottom: 4}}
             InputProps={{
                 onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
                     if (event.key === 'Enter') {                   
@@ -29,7 +30,7 @@ function SearchBar(props: Props) {
                     setInputText(ev.value);
                 },
                 startAdornment: (
-                    <InputAdornment position="start">
+                    <InputAdornment position="start" sx={{ marginLeft: 1.2 }}>
                         <SearchIcon />
                     </InputAdornment>
                 ),
@@ -42,17 +43,18 @@ function SearchBar(props: Props) {
                         </IconButton>
                     </InputAdornment>
                 ),
-                style: { fontFamily: 'Pretendard' }
+                disableUnderline: true,
+                style: { fontFamily: 'Pretendard', fontSize: "1.2rem" }
             }}
             inputProps={{
                 maxLength: Constants.MAX_SEARCH_LENGTH,
             }}
-            id="outlined-search"
+            id="standard-search"
             label=""
-            variant="outlined"
+            variant="standard"
             autoComplete="off"
             />
     );
 }
 
-export default SearchBar;
+export default WorkbookSearchBar;

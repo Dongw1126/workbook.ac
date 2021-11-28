@@ -1,4 +1,4 @@
-import { ProblemList, Tree } from "../components/types/Types";
+import { ProblemList, Tree } from "../types/Types";
 import TreeTestData from "./TestData.json"
 import * as Constants from "../constants";
 

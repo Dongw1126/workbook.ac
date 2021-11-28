@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
+import { Link } from "react-router-dom";
 import { useSpring, animated } from 'react-spring';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
+
 import ConfettiCannon from "../components/animations/confetti/ConfettiCanon";
 import styles from "./Home.module.css";
 
@@ -30,7 +32,7 @@ function Home() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 onClick={() => parallax.current.scrollTo(1)}>
                 <animated.div style={logoProps}>
-                    <img src={process.env.PUBLIC_URL + '/logo.svg'} alt="" />
+                    <img width="580px" height="580px" src={process.env.PUBLIC_URL + '/logo.svg'} alt="" />
                 </animated.div>
             </ParallaxLayer>
 
@@ -70,10 +72,10 @@ function Home() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className={styles.content}>
                     <p>
-                        문제집을 써보고 싶으시다면 ⟶ <a href="#">문제집 둘러보기</a>
+                        문제집을 써보고 싶으시다면 ⟶ <Link to="/workbook/search">문제집 둘러보기</Link>
                     </p>
                     <p>
-                        문제집을 직접 만들어보려면 ⟶ <a href="#">문제집 만들어보기</a>
+                        문제집을 직접 만들어보려면 ⟶ <Link to="/workbook/edit">문제집 만들어보기</Link>
                     </p>
                     <p>
                         이 프로젝트에 기여하고 싶으시다면 ⟶ <a href="#">기여하기</a>

@@ -1,6 +1,6 @@
 import { makeAutoObservable } from 'mobx';
 import { NodeModel } from "@minoru/react-dnd-treeview";
-import * as Constants from "../../constants";
+import * as Constants from "../constants";
 
 export type ProblemData = {
   level?: number;
@@ -8,6 +8,14 @@ export type ProblemData = {
   voteCnt?: number;
   // tierShown, etc
 };
+
+export type WorkbookData = {
+  id: number;
+  title: string;
+  author: string;
+  favorite: number;
+  img: string;
+}
 
 export class Node {
   data: NodeModel<ProblemData> | undefined;

@@ -8,7 +8,7 @@
    version="1.1"
    id="svg5"
    inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
-   sodipodi:docname="logo.svg"
+   sodipodi:docname="logo2.svg"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns="http://www.w3.org/2000/svg"
@@ -25,13 +25,13 @@
      showgrid="false"
      units="px"
      inkscape:zoom="0.51150168"
-     inkscape:cx="721.40526"
-     inkscape:cy="50.830723"
-     inkscape:window-width="1525"
-     inkscape:window-height="1030"
-     inkscape:window-x="158"
-     inkscape:window-y="28"
-     inkscape:window-maximized="0"
+     inkscape:cx="722.38277"
+     inkscape:cy="51.808236"
+     inkscape:window-width="1920"
+     inkscape:window-height="1001"
+     inkscape:window-x="-9"
+     inkscape:window-y="-9"
+     inkscape:window-maximized="1"
      inkscape:current-layer="layer1"
      showguides="false" />
   <defs
@@ -52,50 +52,70 @@
        transform="scale(0.26458333)"
        id="text1417"
        style="fill:black;fill-opacity:1;line-height:1.25;stroke:none;font-family:'Gmarket Sans TTF';font-style:normal;font-weight:normal;font-size:40px;white-space:pre;shape-inside:url(#rect1419);-inkscape-font-specification:'Gmarket Sans TTF';font-stretch:normal;font-variant:normal" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:5.29167px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="0.4047223"
-       y="38.444126"
-       id="text2569"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
-         x="0.4047223"
-         y="38.444126"
-         id="tspan2883">WORK</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:8.33967px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="-0.19701073"
-       y="80.682037"
-       id="text2569-4"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
-         x="-0.19701073"
-         y="80.682037"
-         id="tspan2883-0">BOOK</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:35.2778px;line-height:1.25;font-family:sans-serif;letter-spacing:7.9375px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.264583"
-       x="71.121887"
-       y="122.13721"
-       id="text2569-4-3"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:35.2778px;font-family:Montserrat;-inkscape-font-specification:'Montserrat Bold';stroke-width:0.264583"
-         x="71.121887"
-         y="122.13721"
-         id="tspan2883-0-3">AC</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:60.9455px;line-height:1.25;font-family:sans-serif;letter-spacing:3.49218px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.457091"
-       x="1.9241626"
-       y="114.90131"
+    <g
+       aria-label="WORK"
+       id="text2569"
+       style="font-size:35.2778px;letter-spacing:5.29167px;word-spacing:0px;stroke-width:0.264583">
+      <path
+         d="m 11.129174,27.966619 4.374447,-14.181676 h 5.750282 l 4.33917,14.181676 4.903614,-14.181676 h 5.961948 L 27.850852,38.444126 H 23.758627 L 18.361123,21.299115 12.998897,38.444126 H 8.9066725 L 0.2988889,13.784943 h 5.9619485 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2076" />
+      <path
+         d="m 63.163845,25.991062 q 0,-3.316113 -2.116668,-5.644448 -2.116668,-2.328335 -5.221114,-2.328335 -3.069169,0 -5.185837,2.328335 -2.116668,2.328335 -2.116668,5.644448 0,3.280836 2.116668,5.609171 2.116668,2.293057 5.185837,2.293057 3.104446,0 5.221114,-2.293057 2.116668,-2.328335 2.116668,-5.609171 z m 1.869724,9.066395 q -3.739447,3.633614 -9.207506,3.633614 -5.46806,0 -9.207507,-3.633614 -3.739447,-3.668891 -3.739447,-9.101673 0,-5.432781 3.739447,-9.066395 3.739447,-3.668891 9.207507,-3.668891 5.468059,0 9.207506,3.668891 3.739447,3.633614 3.739447,9.066395 0,5.432782 -3.739447,9.101673 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2078" />
+      <path
+         d="m 98.723811,21.969393 q 0,5.92667 -4.691948,7.655283 l 6.244167,8.81945 h -6.773334 l -5.468059,-7.86695 h -3.810002 v 7.86695 H 78.721298 V 13.784943 h 9.348617 q 5.750282,0 8.18445,1.940279 2.469446,1.940279 2.469446,6.244171 z m -10.477507,3.84528 q 2.822224,0 3.84528,-0.917223 1.023057,-0.917222 1.023057,-2.892779 0,-2.010835 -1.058334,-2.751669 -1.058335,-0.740834 -3.70417,-0.740834 h -4.127502 v 7.302505 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2080" />
+      <path
+         d="m 109.6599,13.784943 h 5.50333 v 10.124729 l 9.31334,-10.124729 h 6.80862 l -9.80723,10.900841 q 1.27,1.76389 4.69195,6.596948 3.42194,4.797781 5.11528,7.161394 h -6.42056 l -7.23195,-9.736673 -2.46945,2.751668 v 6.985005 h -5.50333 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2082" />
+    </g>
+    <g
+       aria-label="BOOK"
+       id="text2569-4"
+       style="font-size:35.2778px;letter-spacing:8.33967px;word-spacing:0px;stroke-width:0.264583">
+      <path
+         d="M 13.631887,80.682037 H 2.8368802 V 56.022854 h 9.5955618 q 2.504724,0 4.303892,0.599723 1.834446,0.599722 2.751669,1.622779 1.658056,1.905001 1.658056,4.303891 0,2.89278 -1.869723,4.303892 -0.635001,0.493889 -0.881945,0.635001 -0.246945,0.105833 -0.881945,0.388055 2.293057,0.49389 3.633613,2.081391 1.375834,1.552223 1.375834,3.880558 0,2.575279 -1.76389,4.550836 -2.046112,2.293057 -7.126116,2.293057 z M 8.3402172,66.006472 h 2.6105578 q 2.293057,0 3.386668,-0.493889 1.12889,-0.49389 1.12889,-2.116668 0,-1.658057 -1.023056,-2.187224 -1.023056,-0.529167 -3.457225,-0.529167 H 8.3402172 Z m 0,10.018896 h 3.7747248 q 2.363613,0 3.52778,-0.564445 1.199445,-0.599723 1.199445,-2.293057 0,-1.728613 -1.27,-2.25778 -1.234724,-0.564444 -3.986392,-0.564444 H 8.3402172 Z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2093" />
+      <path
+         d="m 54.35655,68.228973 q 0,-3.316113 -2.116668,-5.644448 -2.116668,-2.328335 -5.221115,-2.328335 -3.069169,0 -5.185837,2.328335 -2.116668,2.328335 -2.116668,5.644448 0,3.280836 2.116668,5.609171 2.116668,2.293057 5.185837,2.293057 3.104447,0 5.221115,-2.293057 2.116668,-2.328335 2.116668,-5.609171 z m 1.869723,9.066395 q -3.739447,3.633614 -9.207506,3.633614 -5.468059,0 -9.207506,-3.633614 -3.739447,-3.668891 -3.739447,-9.101672 0,-5.432782 3.739447,-9.066395 3.739447,-3.668892 9.207506,-3.668892 5.468059,0 9.207506,3.668892 3.739447,3.633613 3.739447,9.066395 0,5.432781 -3.739447,9.101672 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2095" />
+      <path
+         d="m 91.835626,68.228973 q 0,-3.316113 -2.116668,-5.644448 -2.116668,-2.328335 -5.221115,-2.328335 -3.069168,0 -5.185836,2.328335 -2.116669,2.328335 -2.116669,5.644448 0,3.280836 2.116669,5.609171 2.116668,2.293057 5.185836,2.293057 3.104447,0 5.221115,-2.293057 2.116668,-2.328335 2.116668,-5.609171 z m 1.869724,9.066395 q -3.739447,3.633614 -9.207507,3.633614 -5.468059,0 -9.207506,-3.633614 -3.739447,-3.668891 -3.739447,-9.101672 0,-5.432782 3.739447,-9.066395 3.739447,-3.668892 9.207506,-3.668892 5.46806,0 9.207507,3.668892 3.739447,3.633613 3.739447,9.066395 0,5.432781 -3.739447,9.101672 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2097" />
+      <path
+         d="m 110.44107,56.022854 h 5.50334 v 10.124729 l 9.31334,-10.124729 h 6.80862 l -9.80723,10.900841 q 1.27,1.76389 4.69195,6.596949 3.42194,4.797781 5.11528,7.161393 h -6.42056 l -7.23195,-9.736673 -2.46945,2.751669 v 6.985004 h -5.50334 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2099" />
+    </g>
+    <g
+       aria-label="AC"
+       id="text2569-4-3"
+       style="font-size:35.2778px;letter-spacing:7.9375px;word-spacing:0px;stroke-width:0.264583">
+      <path
+         d="m 91.724123,122.13721 -2.293057,-5.32695 H 79.09467 l -2.293057,5.32695 H 70.945498 L 81.599394,97.478024 h 5.326948 l 10.653896,24.659186 z m -7.443616,-17.3214 -3.104446,7.16139 h 6.173615 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2110" />
+      <path
+         d="m 119.69938,117.26887 q 4.05694,0 6.63222,-3.21028 l 3.52778,3.63361 q -4.19805,4.72723 -9.91306,4.72723 -5.67972,0 -9.38389,-3.59834 -3.66889,-3.59833 -3.66889,-9.06639 0,-5.50334 3.73944,-9.17223 3.77473,-3.668891 9.20751,-3.668891 6.06778,0 10.16001,4.621391 l -3.42195,3.88056 q -2.61056,-3.24556 -6.49112,-3.24556 -3.10444,0 -5.32694,2.04611 -2.18723,2.01084 -2.18723,5.46806 0,3.42195 2.08139,5.50334 2.08139,2.08139 5.04473,2.08139 z"
+         style="-inkscape-font-specification:'Montserrat Bold'"
+         id="path2112" />
+    </g>
+    <g
+       aria-label="."
+       transform="scale(1.0010561,0.99894502)"
        id="text2569-4-2-5"
-       transform="scale(1.0010561,0.99894502)"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:60.9455px;font-family:'Gmarket Sans TTF';-inkscape-font-specification:'Gmarket Sans TTF Bold';stroke-width:0.457091"
-         x="1.9241626"
-         y="114.90131"
-         id="tspan2883-0-0-2">.</tspan></text>
+       style="font-size:60.9455px;letter-spacing:3.49218px;word-spacing:0px;stroke-width:0.457091">
+      <path
+         d="m 10.883151,108.68487 q 2.620657,0 4.32713,1.76742 1.706474,1.70648 1.706474,4.32713 0,2.62066 -1.706474,4.32713 -1.706473,1.76742 -4.32713,1.76742 -2.6206564,0 -4.3880759,-1.76742 -1.706474,-1.70647 -1.706474,-4.32713 0,-2.62065 1.706474,-4.32713 1.7674195,-1.76742 4.3880759,-1.76742 z"
+         style="-inkscape-font-specification:'Gmarket Sans TTF Bold'"
+         id="path2119" />
+    </g>
   </g>
 </svg>

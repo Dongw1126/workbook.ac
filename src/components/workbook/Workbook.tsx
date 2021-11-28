@@ -3,7 +3,7 @@ import { Observer } from "mobx-react";
 import problemListStore from '../../stores/ProblemListStore';
 import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
-import SampleData2 from "../tree/sample2.json";
+import example_t from "../tree/example_t.json";
 
 
 /**
@@ -25,19 +25,26 @@ const testData = Array.from({length: 150}, (v, i) => {
     return o;
 });
 
-function Workbook() {
+type Props = {
+    editable: boolean;
+}
+
+function Workbook(props: Props) {
     const problemList = problemListStore;
     // problemList.setData(testData);
-    problemList.setData(SampleData2);
+    problemList.setData(example_t);
 
     return (
         <Observer>
             {() => (
                 <div style={{ overflow: "auto", height:"80vh" }}>
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                    <ProblemTreeTitle readonly={false}/>
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                    <ProblemTree canSort={true} />
+                    {props.editable && 
+                    <>
+                        <hr style={{ borderTop: "3px double #bbb" }} />
+                        <ProblemTreeTitle />
+                        <hr style={{ borderTop: "3px double #bbb" }} />
+                    </>}
+                    <ProblemTree editable={props.editable} />
                 </div>)}
         </Observer>
     );

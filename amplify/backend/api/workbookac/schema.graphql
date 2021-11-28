@@ -1,0 +1,10 @@
+type WorkbookDB @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  public: Boolean!
+  title: String!
+  favorite: Int!
+  image: String
+  author: String!
+  treeData: AWSJSON
+}
+ 

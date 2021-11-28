@@ -5,15 +5,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import useDialog from "../../hooks/useDialog";
 import TitleInputModal from "../modal/TitleInputModal";
 import TitleStore from "../../stores/TitleStore";
-
-interface Props {
-    readonly: boolean;
-}
-
 /** 
  * 문제집 트리 제목
  */
-function ProblemTreeTitle(props: Props) {
+function ProblemTreeTitle() {
     const [titleModalOpen, handleTitleModalOpen, handleTitleModalClose] = useDialog();
     const problemTreeTitle = TitleStore;
 
@@ -25,10 +20,9 @@ function ProblemTreeTitle(props: Props) {
         <div style={{ display: "flex", justifyContent: "center" }}>
             <div style={{ textAlign: "center" }}>
                 {problemTreeTitle.title}
-                {!props.readonly && 
                 <IconButton style={{ justifyContent: "flex-end"}} onClick={handleTitleModalOpen} disabled={titleModalOpen}>
                     <EditIcon />
-                </IconButton>}
+                </IconButton>
             </div>
             <TitleInputModal open={titleModalOpen} onClose={handleTitleModalClose} />
         </div>
