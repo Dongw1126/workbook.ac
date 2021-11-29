@@ -1,11 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import selectedNodeStore from "../../stores/SelectedNodeStore";
 import Workbook from '../../components/workbook/Workbook';
 import WorkbookCard from "../../components/workbook/WorkbookCard";
-import ProblemSearch from '../../components/search/problem/ProblemSearch';
 import CloseIcon from '@mui/icons-material/Close';
 import example_wb from "../../components/workbook/example_wb.json"
 
 function ReadWorkbook() {
+    useEffect(() => {
+        selectedNodeStore.setNode(undefined);
+    }, [])
+
     return (
         <div>
             <div style={{ display: "flex", justifyContent: "center" }}>
