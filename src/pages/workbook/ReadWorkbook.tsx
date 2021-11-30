@@ -1,8 +1,6 @@
 import { useState } from "react";
 import Workbook from '../../components/workbook/Workbook';
 import WorkbookCard from "../../components/workbook/WorkbookCard";
-import ProblemSearch from '../../components/search/problem/ProblemSearch';
-import CloseIcon from '@mui/icons-material/Close';
 import example_wb from "../../components/workbook/example_wb.json"
 
 function ReadWorkbook() {

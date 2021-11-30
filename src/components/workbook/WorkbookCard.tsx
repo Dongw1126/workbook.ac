@@ -30,7 +30,7 @@ function WorkbookCard(props: Props) {
           }`}>
             <div className={styles.cardHeader}>
                 <Link to="/workbook/read">
-                    <img src={props.data.img} alt="Workbook Image" onError={handleImgError} />
+                    <img src={props.data.image} alt="Workbook Image" onError={handleImgError} />
                 </Link>
             </div>
             <div className={styles.cardBody}>

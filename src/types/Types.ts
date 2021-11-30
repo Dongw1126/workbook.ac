@@ -10,11 +10,11 @@ export type ProblemData = {
 };
 
 export type WorkbookData = {
-  id: number;
+  id: string;
   title: string;
   author: string;
   favorite: number;
-  img: string;
+  image?: string;
 }
 
 export class Node {
