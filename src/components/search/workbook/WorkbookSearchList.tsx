@@ -29,7 +29,8 @@ function WorkbookSearchList(props: Props) {
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
             {transition((style, item) => (
                 <animated.div style={style}>
-                    <WorkbookCard key={item.id} editable={props.editable} data={item} animated={true} />
+                    <WorkbookCard key={item.id} editable={props.editable} 
+                    data={item} animated={!props.editable} shadow={true} />
                 </animated.div>
             ))}
         </div>

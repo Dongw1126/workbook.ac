@@ -1,6 +1,7 @@
 export const SERVER_URL = "http://localhost:5000/";
 
 export const TREE_CONTEXT_MENU_ID = "tree";
+export const WORKBOOK_CONTEXT_MENU_ID = "workbook";
 
 export const TREE_ITEM_SPACE = 36;
 

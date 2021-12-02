@@ -4,11 +4,15 @@
   height: auto;
   justify-content: center;
   margin: 50px 40px;
+  user-select: none;
+}
+
+.cardShadow {
+  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
 }
 
 .cardAnimation {
   transition: all 0.3s;
-  box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);
 }
 
 .cardAnimation:hover {
