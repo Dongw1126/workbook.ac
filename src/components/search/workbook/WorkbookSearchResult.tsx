@@ -38,8 +38,7 @@ function WorkbookSearchResult(props: Props) {
         } catch (error) {
             setStatus(Constants.SEARCH_ERROR);
         }
-
-        console.log(byFavorite)
+        
         return [byFavorite, byCreatedAt];
     };
 
@@ -64,11 +63,12 @@ function WorkbookSearchResult(props: Props) {
         if (!props.query) {
             return (
                 <div>
-                    <div style={{ fontSize: "x-large", fontWeight: 700, textAlign: "center" }}>
+                    <br/>
+                    <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         좋아요 많은
                     </div>
                     <WorkbookSearchList editable={false} data={data[0]} />
-                    <div style={{ fontSize: "x-large", fontWeight: 700, textAlign: "center" }}>
+                    <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         새로 나온
                     </div>
                     <WorkbookSearchList editable={false} data={data[0]} />
@@ -81,12 +81,22 @@ function WorkbookSearchResult(props: Props) {
                 </div>
             );
         }
+    } else if (status === Constants.SEARCH_EMPTY) {
+        return(
+            <div>
+                검색결과 없음
+            </div>
+        )
+    } else {
+        return (
+            <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                <p>
+                    <br/>
+                    😲 검색 중 오류가 발생했습니다!
+                </p>
+            </div>
+        );
     }
-    return(
-        <div>
-            error
-        </div>
-    );
 }
 
 export default WorkbookSearchResult;

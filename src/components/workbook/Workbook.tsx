@@ -5,7 +5,6 @@ import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
 
 import { TreeDataDB } from "../../models";
-import example_t from "../tree/example_t.json";
 import { NodeModel } from '@minoru/react-dnd-treeview';
 import { ProblemData } from '../../types/Types';
 
@@ -37,7 +36,6 @@ function Workbook(props: Props) {
     useEffect(() => {
         if(typeof props.treeDB.treeData !== "undefined"){
             problemList.setData(props.treeDB.treeData as unknown as NodeModel<ProblemData>[]);
-            // problemList.setData(example_t);
         } else {
             problemList.setData([]);
         }

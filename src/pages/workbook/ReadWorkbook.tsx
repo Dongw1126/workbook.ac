@@ -48,10 +48,14 @@ function ReadWorkbook() {
                 setWorkbookData(res[0] as WorkbookDB);
                 
                 const resTree = res[1] as TreeDataDB[];
-                if(resTree.length !== 0) setTreeData(resTree[0]);
-                else setTreeData(undefined);
-
-                setStatus(Constants.SEARCH_COMPLETE);
+                if(resTree.length !== 0) {
+                    setTreeData(resTree[0]);
+                    setStatus(Constants.SEARCH_COMPLETE);
+                }
+                else {
+                    setTreeData(undefined);
+                    setStatus(Constants.SEARCH_ERROR);
+                }  
             })
         selectedNodeStore.setNode(undefined);
     }, [])
@@ -74,13 +78,17 @@ function ReadWorkbook() {
                 </div>
             </div>
         );
+    } else {
+        return (
+            <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                <p>
+                    <br/><br/>
+                    해당하는 문제집이 없습니다...<br/><br/>
+                    \( •︠_•︡ )/<br/>
+                </p>
+            </div>
+        );
     }
-
-    return (
-        <div>
-            error
-        </div>
-    );
 }
 
 export default ReadWorkbook;
