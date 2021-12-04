@@ -1,22 +1,23 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import EditIcon from '@mui/icons-material/Edit';
-import InsertPhotoIcon from '@mui/icons-material/InsertPhoto';
 import { useContextMenu } from "react-contexify";
 
 import WorkbookContextMenu from "../contextMenu/WorkbookContextMenu";
-import { WorkbookData } from "../../types/Types";
+import { WorkbookDB } from "../../models";
+import { useRouter } from "../../hooks/useRouter";
 import * as Constants from "../../constants";
 import styles from './WorkbookCard.module.css';
 
 type Props = {
     editable: boolean;
-    data: WorkbookData;
+    data: WorkbookDB;
     animated?: boolean;
     shadow?: boolean;
+    cursorDefault?: boolean;
 }
 
 const handleImgError = (e: any) => {
@@ -28,6 +29,11 @@ const handleImgError = (e: any) => {
  * 문제집 카드 컴포넌트
  */
 function WorkbookCard(props: Props) {
+    const { history } = useRouter();
+    const goToReadPage = () => {
+        history.push(`/workbook/read/${props.data.id}`);
+    }
+
     const { show, hideAll } = useContextMenu({
         id: Constants.WORKBOOK_CONTEXT_MENU_ID
     });
@@ -38,23 +44,18 @@ function WorkbookCard(props: Props) {
         show(e);
     };
 
-
     return (
         <>
             <div className={`${styles.card} 
             ${props.animated ? styles.cardAnimation : ""}
             ${props.shadow ? styles.cardShadow : ""}`}>
-                <div className={styles.cardHeader}>
-                    <Link to="/workbook/read">
-                        <img src={props.data.image} alt="Workbook Image" onError={handleImgError} />
-                    </Link>
+                <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} onClick={goToReadPage}>
+                    <img src={props.data?.image} alt="Workbook Image" onError={handleImgError} />
                 </div>
                 <div className={styles.cardBody}>
-                    <Link to="/workbook/read" style={{ color: 'inherit', textDecoration: 'inherit' }}>
-                        <div className={styles.cardTitle}>
-                            {props.data.title}
-                        </div>
-                    </Link>
+                    <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} onClick={goToReadPage}>
+                        {props.data.title}
+                    </div>
                     <div className={styles.cardAuthor}>
                         {props.data.author}
                     </div>

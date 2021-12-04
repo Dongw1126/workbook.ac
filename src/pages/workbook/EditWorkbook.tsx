@@ -38,7 +38,7 @@ function EditWorkbook() {
                     cursor="col-resize"
                 >
                     <div>
-                        <Workbook editable={true}/>
+                        {/*<Workbook editable={true}/>*/}
                     </div>
                     <div style={{ margin: 10 }}>
                         <ProblemSearch />

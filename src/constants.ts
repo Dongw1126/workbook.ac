@@ -19,3 +19,8 @@ export const MODAL_Z_INDEX = 40010;
 export const ADD_FOLDER = 1;
 export const EDIT_FOLDER = 2;
 
+export const SEARCH_LOADING = 0;
+export const SEARCH_COMPLETE = 1;
+export const SEARCH_EMPTY = 2;
+export const SEARCH_ERROR = 3;
+

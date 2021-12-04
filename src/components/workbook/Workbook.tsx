@@ -1,17 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Observer } from "mobx-react";
 import problemListStore from '../../stores/ProblemListStore';
 import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
+
+import { TreeDataDB } from "../../models";
 import example_t from "../tree/example_t.json";
+import { NodeModel } from '@minoru/react-dnd-treeview';
+import { ProblemData } from '../../types/Types';
 
-
-/**
- * 문제집 컴포넌트
- */
-
-
-const testData = Array.from({length: 150}, (v, i) => {
+/*const testData = Array.from({length: 150}, (v, i) => {
     const o =   {
         "id": i + 1000,
         "parent": 0,
@@ -23,16 +21,27 @@ const testData = Array.from({length: 150}, (v, i) => {
         }
     };
     return o;
-});
+});*/
 
 type Props = {
+    treeDB: TreeDataDB;
     editable: boolean;
 }
 
+const problemList = problemListStore;
+
+/**
+ * 문제집 트리 출력 컴포넌트
+ */
 function Workbook(props: Props) {
-    const problemList = problemListStore;
-    // problemList.setData(testData);
-    problemList.setData(example_t);
+    useEffect(() => {
+        if(typeof props.treeDB.treeData !== "undefined"){
+            problemList.setData(props.treeDB.treeData as unknown as NodeModel<ProblemData>[]);
+            // problemList.setData(example_t);
+        } else {
+            problemList.setData([]);
+        }
+    }, [])
 
     return (
         <Observer>

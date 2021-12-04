@@ -8,14 +8,14 @@ export type ProblemData = {
   voteCnt?: number;
   // tierShown, etc
 };
-
+/*
 export type WorkbookData = {
   id: string;
   title: string;
   author: string;
   favorite: number;
   image?: string;
-}
+}*/
 
 export class Node {
   data: NodeModel<ProblemData> | undefined;

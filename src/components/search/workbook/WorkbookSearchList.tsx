@@ -1,5 +1,5 @@
 import { useTransition, useChain, animated, useSpringRef } from 'react-spring';
-import { WorkbookData } from "../../../types/Types";
+import { WorkbookDB } from '../../../models';
 import WorkbookCard from "../../workbook/WorkbookCard";
 
 
@@ -10,7 +10,7 @@ import WorkbookCard from "../../workbook/WorkbookCard";
 
 type Props = {
     editable: boolean;
-    data: WorkbookData[];
+    data: WorkbookDB[];
 }
 
 function WorkbookSearchList(props: Props) {

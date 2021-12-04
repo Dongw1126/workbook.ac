@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
 import { CircularProgress } from "@mui/material";
+
+import * as Constants from "../../../constants";
 import { WorkbookDB } from '../../../models';
 import WorkbookSearchList from "./WorkbookSearchList";
-import example_wb from "../../workbook/example_wb.json";
 
 type Props = {
     query: string;
@@ -12,47 +13,54 @@ type Props = {
     // setLastPage: React.Dispatch<any>;
 }
 
-const SEARCH_LOADING = 0;
-const SEARCH_COMPLETE = 1;
-const SEARCH_EMPTY = 2;
-const SEARCH_ERROR = 3;
 
-const fetchDBInit = async () => {
-    const byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
-        sort: s => s.favorite(SortDirection.DESCENDING),
-        page: 0,
-        limit: 5
-    });
-    const byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
-        sort: s => s.createdAt(SortDirection.DESCENDING),
-        page: 0,
-        limit: 5
-    });
-
-    return [byFavorite, byCreatedAt];
-};
-
+/**
+ * 문제집 둘러보기 - 검색 컴포넌트
+ */
 function WorkbookSearchResult(props: Props) {
-    const [status, setStatus] = useState(SEARCH_LOADING);
+    const [status, setStatus] = useState(Constants.SEARCH_LOADING);
     const [data, setData] = useState<WorkbookDB[][]>([]);
 
+    const fetchDBInit = async () => {
+        let byFavorite: WorkbookDB[] = []
+        let byCreatedAt: WorkbookDB[] = []
+        try {
+            byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
+                sort: s => s.favorite(SortDirection.DESCENDING),
+                page: 0,
+                limit: 5,
+            });
+            byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
+                sort: s => s.createdAt(SortDirection.DESCENDING),
+                page: 0,
+                limit: 5
+            });
+        } catch (error) {
+            setStatus(Constants.SEARCH_ERROR);
+        }
+
+        console.log(byFavorite)
+        return [byFavorite, byCreatedAt];
+    };
+
+
     useEffect(() => {
-        setStatus(SEARCH_LOADING);
+        setStatus(Constants.SEARCH_LOADING);
         fetchDBInit()
             .then(res => {
                 setData(res);
-                setStatus(SEARCH_COMPLETE);
+                setStatus(Constants.SEARCH_COMPLETE);
             })
     }, []);
 
-    if (status === SEARCH_LOADING) {
+    if (status === Constants.SEARCH_LOADING) {
         return (
             <div style={{ textAlign: "center" }}>
                 <CircularProgress sx={{ m: 20 }} />
             </div>
         );
     }
-    else if (status === SEARCH_COMPLETE) {
+    else if (status === Constants.SEARCH_COMPLETE) {
         if (!props.query) {
             return (
                 <div>

@@ -20,7 +20,9 @@ function MainComponent() {
                 <Route exact path="/guide" component={Guide} />
                 <Route exact path="/workbook/search" component={WorkbookSearch} />
                 <Route exact path="/workbook/read" component={ReadWorkbook} />
+                <Route exact path="/workbook/read/:id" component={ReadWorkbook} />
                 <Route exact path="/workbook/edit" component={EditWorkbook} />
+                <Route exact path="/workbook/edit/:id" component={EditWorkbook} />
                 <Route exact path="/workbook/my" component={MyWorkbook} />
             </Switch>
         </BrowserRouter>

@@ -4,7 +4,6 @@
   height: auto;
   justify-content: center;
   margin: 50px 40px;
-  user-select: none;
 }
 
 .cardShadow {
@@ -24,6 +23,7 @@
 .cardHeader {
   height: 240px;
   width: 100%;
+  cursor: pointer;
 }
 
 .cardHeader img {
@@ -50,6 +50,7 @@
   font-weight: 700;
   margin-top: 15px;
   word-break: break-all;
+  cursor: pointer;
 }
 
 .cardAuthor {
@@ -69,3 +70,6 @@
   font-size: small;
 }
 
+.cursorDefault {
+  cursor: default;
+}

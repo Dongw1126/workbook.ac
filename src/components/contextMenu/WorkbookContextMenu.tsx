@@ -1,19 +1,16 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import { Menu, Item } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
-
-import EditIcon from '@mui/icons-material/Edit';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import WorkbookDeleteModal from "../modal/WorkbookDeleteModal";
-import { WorkbookData } from '../../types/Types';
+import { WorkbookDB } from '../../models';
 import useDialog from "../../hooks/useDialog";
 import { useRouter } from "../../hooks/useRouter";
 import * as Constants from "../../constants";
 
 type Props = {
-    data: WorkbookData;
+    data: WorkbookDB;
 }
 
 function WorkbookContextMenu(props: Props) {
@@ -22,7 +19,7 @@ function WorkbookContextMenu(props: Props) {
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
 
     const goToEditPage = () => {
-        history.push("/workbook/edit");
+        history.push(`/workbook/edit/${props.data.id}`);
     };
 
     return (
