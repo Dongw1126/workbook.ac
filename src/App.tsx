@@ -1,6 +1,7 @@
 import './App.css';
 import MainComponent from './components/MainComponent';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { Observer } from "mobx-react";
 import { grey } from '@mui/material/colors';
 
 import Amplify from '@aws-amplify/core';
@@ -19,9 +20,11 @@ const theme = createTheme({
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className="main">
-        <MainComponent />
-      </div>
+      <Observer>{() => (
+        <div className="main">
+          <MainComponent />
+        </div>)}
+      </Observer>
     </ThemeProvider>
   );
 }

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Observer } from "mobx-react";
+// import { Observer } from "mobx-react";
 import problemListStore from '../../stores/ProblemListStore';
 import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
@@ -34,7 +34,7 @@ const problemList = problemListStore;
  */
 function Workbook(props: Props) {
     useEffect(() => {
-        if(typeof props.treeDB.treeData !== "undefined"){
+        if (typeof props.treeDB.treeData !== "undefined") {
             problemList.setData(props.treeDB.treeData as unknown as NodeModel<ProblemData>[]);
         } else {
             problemList.setData([]);
@@ -42,19 +42,29 @@ function Workbook(props: Props) {
     }, [])
 
     return (
-        <Observer>
-            {() => (
-                <div style={{ overflow: "auto", height:"80vh" }}>
-                    {props.editable && 
-                    <>
-                        <hr style={{ borderTop: "3px double #bbb" }} />
-                        <ProblemTreeTitle />
-                        <hr style={{ borderTop: "3px double #bbb" }} />
-                    </>}
-                    <ProblemTree editable={props.editable} />
-                </div>)}
-        </Observer>
+        <div style={{ overflow: "auto", height: "80vh" }}>
+            {props.editable &&
+                <>
+                    <hr style={{ borderTop: "3px double #bbb" }} />
+                    <ProblemTreeTitle />
+                    <hr style={{ borderTop: "3px double #bbb" }} />
+                </>}
+            <ProblemTree editable={props.editable} />
+        </div>
     );
 }
+
+/*<Observer>
+    {() => (
+        <div style={{ overflow: "auto", height:"80vh" }}>
+            {props.editable && 
+            <>
+                <hr style={{ borderTop: "3px double #bbb" }} />
+                <ProblemTreeTitle />
+                <hr style={{ borderTop: "3px double #bbb" }} />
+            </>}
+            <ProblemTree editable={props.editable} />
+        </div>)}
+</Observer>*/
 
 export default Workbook;
