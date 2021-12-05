@@ -3,7 +3,7 @@
   "cognitoConfig": {
     "identityPoolName": "testAuthIdentityPool",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "workbo5d8ee501",
+    "resourceNameTruncated": "workbofb926f43",
     "userPoolName": "workbookac",
     "autoVerifiedAttributes": [
       "email"
@@ -14,7 +14,7 @@
     ],
     "smsAuthenticationMessage": "Your authentication code is {####}",
     "smsVerificationMessage": "Your verification code is {####}",
-    "emailVerificationSubject": "Forgot password code: {####}",
+    "emailVerificationSubject": "[WORKBOOK.AC] Forgot password code",
     "emailVerificationMessage": "Forgot password code: {####}",
     "defaultPasswordPolicy": false,
     "passwordPolicyMinLength": 6,
@@ -29,9 +29,9 @@
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [],
     "userpoolClientReadAttributes": [],
-    "userpoolClientLambdaRole": "workbo5d8ee501_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "workbofb926f43_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "5d8ee501",
+    "sharedId": "fb926f43",
     "resourceName": "workbookac",
     "authSelections": "identityPoolAndUserPool",
     "serviceName": "Cognito",
