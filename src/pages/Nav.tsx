@@ -1,10 +1,31 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import LoginIcon from '@mui/icons-material/Login';
 import styles from "./Nav.module.css";
 
+import { AmplifySignOut } from '@aws-amplify/ui-react';
+import { Hub } from 'aws-amplify';
+
 function Nav() {
+  const [user, setUser] = useState<any>();
+  useEffect(() => {
+    console.log(user);
+  }, [user]);
+
+  useEffect(() => {
+    Hub.listen('auth', data => {
+      switch (data.payload.event) {
+        case 'signIn':
+          setUser(data.payload.data);
+          break;
+        case 'signOut':
+          setUser(null);
+          break;
+      }
+    });
+  }, []);
+
   return (
     <div className={styles.navRoot}>
       <div className={styles.logo}>
@@ -28,11 +49,15 @@ function Nav() {
             나의 문제집
           </div>
         </Link>
-        <div className={`${styles.navContent} ${styles.navLogin}`}>
-          <IconButton sx={{ "&:hover": { backgroundColor: "transparent" }}}>
-            <LoginIcon />
-          </IconButton>
-        </div>
+        {user ?
+          <AmplifySignOut /> :
+          <Link to="/login">
+            <div className={`${styles.navContent} ${styles.navLogin}`}>
+              <IconButton sx={{ "&:hover": { backgroundColor: "transparent" } }}>
+                <LoginIcon />
+              </IconButton>
+            </div>
+          </Link>}
       </div>
     </div>
   );
