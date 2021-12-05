@@ -13,7 +13,6 @@ type Props = {
     // setLastPage: React.Dispatch<any>;
 }
 
-
 /**
  * 문제집 둘러보기 - 검색 컴포넌트
  */
@@ -41,7 +40,6 @@ function WorkbookSearchResult(props: Props) {
         
         return [byFavorite, byCreatedAt];
     };
-
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
