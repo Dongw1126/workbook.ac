@@ -31,9 +31,7 @@
         "socialProviders": [],
         "usernameAttributes": [],
         "signupAttributes": [
-          "PREFERRED_USERNAME",
-          "NICKNAME",
-          "EMAIL"
+          "PREFERRED_USERNAME"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 6,

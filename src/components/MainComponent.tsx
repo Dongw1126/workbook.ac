@@ -9,7 +9,6 @@ import MyWorkbook from "../pages/workbook/MyWorkbook";
 import Home from "../pages/Home";
 import Nav from "../pages/Nav"
 import Guide from '../pages/Guide';
-import Login from '../pages/Login';
 
 function MainComponent() {
     return (
@@ -19,7 +18,6 @@ function MainComponent() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/guide" component={Guide} />
-                <Route exact path="/login" component={Login} />
                 <Route exact path="/workbook/search" component={WorkbookSearch} />
                 <Route exact path="/workbook/read" component={ReadWorkbook} />
                 <Route exact path="/workbook/read/:id" component={ReadWorkbook} />
