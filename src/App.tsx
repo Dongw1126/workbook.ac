@@ -6,6 +6,7 @@ import { grey } from '@mui/material/colors';
 
 import Amplify from '@aws-amplify/core';
 import awsconfig from "./aws-exports";
+import { Authenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure(awsconfig);
 
@@ -21,9 +22,11 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <Observer>{() => (
-        <div className="main">
-          <MainComponent />
-        </div>)}
+        <Authenticator.Provider>
+          <div className="main">
+            <MainComponent />
+          </div>
+        </Authenticator.Provider>)}
       </Observer>
     </ThemeProvider>
   );

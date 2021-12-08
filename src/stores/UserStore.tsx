@@ -1,34 +1,40 @@
 import { makeAutoObservable } from 'mobx';
-import { Auth, Hub } from 'aws-amplify';
+import { Auth } from 'aws-amplify';
 
 class UserStore {
     user: any;
+    loggedIn: boolean;
+    
     constructor() {
         makeAutoObservable(this);
         this.user = null;
-        this.updateUser();
-
-        Hub.listen('auth', data => {
-            switch (data.payload.event) {
-                case 'signIn':
-                    userStore.user = data.payload.data;
-                    console.log("sign in");
-                    break;
-                case 'signOut':
-                    userStore.user = null;
-                    console.log("sign out");
-                    break;
-            }
-        });
+        this.loggedIn = false;
     }
-    updateUser() {
+
+    setUser(_user: any) {
+        this.user = _user;
+    }
+    getUser() {
+        return this.user;
+    }
+    /*updateUser() {
         Auth.currentAuthenticatedUser()
             .then(user => { 
                 this.user = user;
-                console.log(user);
             })
             .catch(() => this.user = null);
         console.log(this.user);
+    }*/
+
+    login(_user: any) {
+        this.setUser(_user);
+        this.loggedIn = true;
+        console.log("login called");
+    }
+    logout() {
+        this.setUser(null);
+        this.loggedIn = false;
+        console.log("logout called");
     }
 }
 

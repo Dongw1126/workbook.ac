@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
+import { Observer } from "mobx-react";
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
-import LoginIcon from '@mui/icons-material/Login';
+import LoginIcon from '@mui/icons-material/ExitToApp';
+import PersonIcon from '@mui/icons-material/Person';
 
 import styles from "./Nav.module.css";
 import useDialog from "../hooks/useDialog";
 import LoginModal from "../components/auth/LoginModal";
+import UserStore from "../stores/UserStore";
 
-import { Hub } from 'aws-amplify';
-
+/**
+ * Navigation Bar 컴포넌트
+ */
 function Nav() {
   const [modalOpen, handleModalOpen, handleModalClose] = useDialog();
-  const [user, setUser] = useState<any>();
+  const userStore = UserStore;
 
-  useEffect(() => {
-    Hub.listen('auth', data => {
-      switch (data.payload.event) {
-        case 'signIn':
-          setUser(data.payload.data);
-          break;
-        case 'signOut':
-          setUser(null);
-          break;
-      }
-    });
-  }, []);
+  const handleLoginButton = () => {
+    console.log(userStore.user);
+    handleModalOpen();
+  }
 
   return (
     <>
@@ -50,12 +46,14 @@ function Nav() {
               나의 문제집
             </div>
           </Link>
-          <div className={`${styles.navContent} ${styles.navLogin}`}
-            onClick={handleModalOpen}>
-            <IconButton sx={{ "&:hover": { backgroundColor: "transparent" } }}>
-              <LoginIcon />
-            </IconButton>
-          </div>
+          <Observer>
+            {() => (<div className={`${styles.navContent} ${styles.navLogin}`}
+              onClick={handleLoginButton}>
+              <IconButton sx={{ "&:hover": { backgroundColor: "transparent" } }}>
+                {userStore.loggedIn ? <PersonIcon /> : <LoginIcon />}
+              </IconButton>
+            </div>)}
+          </Observer>
         </div>
       </div>
       <LoginModal open={modalOpen} onClose={handleModalClose} />

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-// import { Observer } from "mobx-react";
+import { Observer } from "mobx-react";
 import problemListStore from '../../stores/ProblemListStore';
 import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
@@ -42,29 +42,20 @@ function Workbook(props: Props) {
     }, [])
 
     return (
-        <div style={{ overflow: "auto", height: "80vh" }}>
-            {props.editable &&
-                <>
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                    <ProblemTreeTitle />
-                    <hr style={{ borderTop: "3px double #bbb" }} />
-                </>}
-            <ProblemTree editable={props.editable} />
-        </div>
+        <Observer>
+            {() => (
+                <div style={{ overflow: "auto", height: "80vh" }}>
+                    {props.editable &&
+                        <>
+                            <hr style={{ borderTop: "3px double #bbb" }} />
+                            <ProblemTreeTitle />
+                            <hr style={{ borderTop: "3px double #bbb" }} />
+                        </>}
+                    <ProblemTree editable={props.editable} />
+                </div>)}
+        </Observer>
     );
 }
 
-/*<Observer>
-    {() => (
-        <div style={{ overflow: "auto", height:"80vh" }}>
-            {props.editable && 
-            <>
-                <hr style={{ borderTop: "3px double #bbb" }} />
-                <ProblemTreeTitle />
-                <hr style={{ borderTop: "3px double #bbb" }} />
-            </>}
-            <ProblemTree editable={props.editable} />
-        </div>)}
-</Observer>*/
 
 export default Workbook;
