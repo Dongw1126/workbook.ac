@@ -8,26 +8,23 @@ import useDialog from '../../hooks/useDialog';
 import * as Constants from "../../constants";
 
 interface Props {
-    inputTitle: string;
-    inputLabel: string;
     open: boolean;
     onClose: () => void;
-    eventCode: number;
 }
 
 /**
  * 폴더 이름 입력 Modal 창
  */
-function TreeInputModal(props: Props) {
-    const [inputText, setInputText] = useState("");
+function WorkbookCreateModal(props: Props) {
+    const [title, setTitle] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
     const handleClose = () => {
         props.onClose();
-        setInputText("");
+        setTitle("");
     };
 
-    const handleFolderLimit = () => {
+    const handleWorkbookLimit = () => {
         console.log("handleFolderLimit call");
 
         handleClose();
@@ -42,7 +39,7 @@ function TreeInputModal(props: Props) {
     return (
         <div>
             <Dialog onClose={handleClose} open={props.open} >
-                <DialogTitle>{props.inputTitle}</DialogTitle>
+                <DialogTitle>문제집 생성</DialogTitle>
                 <DialogContent>
                     <TextField
                         InputProps={{
@@ -53,7 +50,7 @@ function TreeInputModal(props: Props) {
                             },
                             onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
                                 let ev = event.target as HTMLInputElement;
-                                setInputText(ev.value);
+                                setTitle(ev.value);
                             }
                         }}
                         inputProps={{
@@ -61,21 +58,20 @@ function TreeInputModal(props: Props) {
                         }}
                         autoFocus
                         margin="dense"
-                        id="name"
-                        label={props.inputLabel}
+                        label="문제집 제목"
                         type='text'
                         fullWidth
                         variant="standard"
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={handleEvent}>수정</Button>
+                    <Button variant="contained" onClick={handleEvent}>추가</Button>
                     <Button variant="outlined" onClick={handleClose}>취소</Button>
                 </DialogActions>
             </Dialog>
             <AlertModal
                 title="알림"
-                content="폴더는 최대 50개까지 생성 가능합니다!"
+                content="문제집은 최대 50개까지 생성 가능합니다!"
                 open={alertOpen} 
                 onClose={handleAlertClose}
             />
@@ -83,4 +79,4 @@ function TreeInputModal(props: Props) {
     );
 }
 
-export default TreeInputModal;
+export default WorkbookCreateModal;

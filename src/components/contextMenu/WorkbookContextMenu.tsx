@@ -15,7 +15,6 @@ type Props = {
 
 function WorkbookContextMenu(props: Props) {
     const { history } = useRouter();
-    const [inputModalOpen, handleInputModalOpen, handleInputModalClose] = useDialog();
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
 
     const goToEditPage = () => {
