@@ -11,6 +11,7 @@ import UserStore from "../../stores/UserStore";
 import { theme, services, krDict } from "./CustomAuth";
 
 import { I18n } from "aws-amplify";
+import userStore from '../../stores/UserStore';
 I18n.setLanguage("kr");
 I18n.putVocabularies(krDict);
 
