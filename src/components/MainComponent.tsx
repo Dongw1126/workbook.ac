@@ -1,5 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Auth } from 'aws-amplify';
+import UserStore from '../stores/UserStore';
 
 import ScrollToTop from "./ScrollToTop";
 import WorkbookSearch from "./search/workbook/WorkbookSearch";
@@ -11,6 +13,11 @@ import Nav from "../pages/Nav"
 import Guide from '../pages/Guide';
 
 function MainComponent() {
+    const userStore = UserStore;
+    useEffect(() => {
+        userStore.updateUser();
+    });
+
     return (
         <BrowserRouter>
             <ScrollToTop />

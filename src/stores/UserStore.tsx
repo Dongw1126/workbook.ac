@@ -14,27 +14,30 @@ class UserStore {
     setUser(_user: any) {
         this.user = _user;
     }
+    
     getUser() {
         return this.user;
     }
-    /*updateUser() {
-        Auth.currentAuthenticatedUser()
-            .then(user => { 
-                this.user = user;
-            })
-            .catch(() => this.user = null);
-        console.log(this.user);
-    }*/
 
     login(_user: any) {
         this.setUser(_user);
         this.loggedIn = true;
         console.log("login called");
     }
+
     logout() {
         this.setUser(null);
         this.loggedIn = false;
         console.log("logout called");
+    }
+
+    updateUser() {
+        Auth.currentAuthenticatedUser()
+            .then(user => { 
+                this.login(user);
+                console.log(user);
+            })
+            .catch(() => this.logout());
     }
 }
 

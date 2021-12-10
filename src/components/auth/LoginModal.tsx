@@ -9,9 +9,8 @@ import '@aws-amplify/ui-react/styles.css';
 
 import UserStore from "../../stores/UserStore";
 import { theme, services, krDict } from "./CustomAuth";
-
 import { I18n } from "aws-amplify";
-import userStore from '../../stores/UserStore';
+
 I18n.setLanguage("kr");
 I18n.putVocabularies(krDict);
 
@@ -30,6 +29,7 @@ interface UserInfoProps {
  */
 function UserInfo(props: UserInfoProps) {
     const userStore = UserStore;
+    // 로그인 시 user 정보를 userStore에 저장
     useEffect(() => userStore.login(props.user), []);
 
     return (
@@ -43,6 +43,7 @@ function UserInfo(props: UserInfoProps) {
                     onClick={() => {
                         console.log("sign out");
                         props.signOut();
+                        // 로그아웃 시 userStore를 로그아웃 상태로 변경
                         userStore.logout();
                     }}>
                     로그아웃
