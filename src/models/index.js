@@ -4,9 +4,10 @@ import { schema } from './schema';
 
 
 
-const { WorkbookDB, TreeDataDB } = initSchema(schema);
+const { FavoriteDB, WorkbookDB, TreeDataDB } = initSchema(schema);
 
 export {
+  FavoriteDB,
   WorkbookDB,
   TreeDataDB
 };

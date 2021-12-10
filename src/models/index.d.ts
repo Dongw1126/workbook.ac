@@ -4,12 +4,26 @@ import { ModelInit, MutableModel, PersistentModelConstructor } from "@aws-amplif
 
 
 
+type FavoriteDBMetaData = {
+  readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
 type WorkbookDBMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
 }
 
 type TreeDataDBMetaData = {
   readOnlyFields: 'createdAt' | 'updatedAt';
+}
+
+export declare class FavoriteDB {
+  readonly id: string;
+  readonly username: string;
+  readonly workbookId?: (string | null)[];
+  readonly createdAt?: string;
+  readonly updatedAt?: string;
+  constructor(init: ModelInit<FavoriteDB, FavoriteDBMetaData>);
+  static copyOf(source: FavoriteDB, mutator: (draft: MutableModel<FavoriteDB, FavoriteDBMetaData>) => MutableModel<FavoriteDB, FavoriteDBMetaData> | void): FavoriteDB;
 }
 
 export declare class WorkbookDB {

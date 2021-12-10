@@ -6,18 +6,24 @@ import AddIcon from '@mui/icons-material/Add';
 
 import UserStore from "../../stores/UserStore";
 import useDialog from '../../hooks/useDialog';
-import LoginModal from '../../components/auth/LoginModal';
 import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import example_wb_my from "../../components/workbook/example_wb_my.json"
+import * as Constants from "../../constants";
 
+import { DataStore } from '@aws-amplify/datastore';
+import { WorkbookDB, TreeDataDB } from "../../models";
 
 /**
  * 내 문제집 보기 페이지
  */
 function MyWorkbook() {
     const userStore = UserStore;
+
     const [createClicked, setCreateClicked] = useState(false);
+    const [status, setStatus] = useState(Constants.SEARCH_LOADING);
+    const [data, setData] = useState<WorkbookDB[][]>([]);
+
     const { scale } = useSpring({
         scale: createClicked ? 0.8 : 1,
         config: {
@@ -25,8 +31,22 @@ function MyWorkbook() {
         }
     });
 
-    const [loginModalOpen, handleLoginModalOpen, handleLoginModalClose] = useDialog();
     const [createModalOpen, handleCreateModalOpen, handleCreateModalClose] = useDialog();
+
+    const fetchData = async () => {
+        const models = await DataStore.query(WorkbookDB);
+        let myWorkbook: WorkbookDB[] = []
+        let myFavorite: WorkbookDB[] = []
+
+        try {
+            const author = userStore.getUser().username;
+            myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author));
+
+        } catch (error) {
+            setStatus(Constants.SEARCH_ERROR);
+        }
+    }
+
 
     return (
         <Observer>
@@ -58,13 +78,12 @@ function MyWorkbook() {
                     );
                 } else {
                     return(
-                        <>
-                            <div>
-                                로그인이 필요합니다.
-                                <button onClick={handleLoginModalOpen}>로그인하기</button>
-                            </div>
-                            <LoginModal open={loginModalOpen} onClose={handleLoginModalClose}/>
-                        </>
+                        <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                            <p>
+                                <br/><br/><br/><br/>
+                                로그인이 필요합니다.<br/><br/>
+                            </p>
+                        </div>
                     );
                 }
             }}
