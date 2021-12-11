@@ -66,7 +66,8 @@ function WorkbookSearchResult(props: Props) {
                         좋아요 많은
                     </div>
                     <WorkbookSearchList editable={false} data={data[0]} />
-                    <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
+
+                    <div style={{ marginTop: "5rem", fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         새로 나온
                     </div>
                     <WorkbookSearchList editable={false} data={data[0]} />

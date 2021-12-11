@@ -13,7 +13,7 @@ import example_wb_my from "../../components/workbook/example_wb_my.json"
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
-import { WorkbookDB, TreeDataDB } from "../../models";
+import { WorkbookDB } from "../../models";
 
 /**
  * 내 문제집 보기 페이지
@@ -21,6 +21,7 @@ import { WorkbookDB, TreeDataDB } from "../../models";
 function MyWorkbook() {
     const userStore = UserStore;
 
+    const [createFlag, setCreateFlag] = useState(0);
     const [createClicked, setCreateClicked] = useState(false);
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
     const [data, setData] = useState<WorkbookDB[][]>([]);
@@ -45,7 +46,6 @@ function MyWorkbook() {
     }
 
     useEffect(() => {
-        console.log(userStore.loggedIn);
         setStatus(Constants.SEARCH_LOADING);
         if (userStore.loggedIn) {
             fetchData()
@@ -58,7 +58,11 @@ function MyWorkbook() {
                     setStatus(Constants.SEARCH_ERROR);
                 });
         }
-    }, [userStore.loggedIn]);
+    }, [userStore.loggedIn, createFlag]);
+
+    useEffect(() => {
+        console.log(createFlag);
+    }, [createFlag])
 
 
     if (userStore.loggedIn) {
@@ -90,7 +94,7 @@ function MyWorkbook() {
                     </div>
                     {data[0].length !== 0 ?
                         (<div>
-                            <WorkbookList editable={true} data={example_wb_my} />
+                            <WorkbookList key={createFlag} editable={true} data={data[0]} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>
@@ -98,13 +102,19 @@ function MyWorkbook() {
                                 만든 문제집이 없습니다
                             </p>
                         </div>)}
-                    <WorkbookCreateModal open={createModalOpen} onClose={handleCreateModalClose} />
+                    <WorkbookCreateModal
+                        username={userStore.getUser().username}
+                        createFlag={createFlag}
+                        setCreateFlag={setCreateFlag}
+                        open={createModalOpen} 
+                        onClose={handleCreateModalClose} 
+                    />
                     <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "8rem", fontSize: "3rem", fontWeight: 700 }}>
                         좋아요 한 문제집
                     </div>
                     {data[1].length !== 0 ?
                         (<div>
-                            <WorkbookList editable={true} data={example_wb_my} />
+                            <WorkbookList editable={true} data={data[1]} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>

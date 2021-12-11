@@ -7,7 +7,13 @@ import useDialog from '../../hooks/useDialog';
 
 import * as Constants from "../../constants";
 
+import { DataStore } from '@aws-amplify/datastore';
+import { WorkbookDB, TreeDataDB } from "../../models";
+
 interface Props {
+    username: string;
+    createFlag: number;
+    setCreateFlag: any;
     open: boolean;
     onClose: () => void;
 }
@@ -19,8 +25,42 @@ function WorkbookCreateModal(props: Props) {
     const [title, setTitle] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
+    const createWorkbook = async (_title: string) => {
+        const wb = await DataStore.save(
+            new WorkbookDB({
+                "title": _title,
+                "author": props.username,
+                "favorite": 0,
+                "image": "",
+                "treeDataId": ""
+            })
+        );
+
+        const td = await DataStore.save(
+            new TreeDataDB({
+                "treeData":  "[]",
+                "workbookId": ""
+            })
+        );
+
+        return [wb, td];
+    }
+
+    const updateId = async (created: any) => {
+        const wb = created[0] as WorkbookDB;
+        const td = created[1] as TreeDataDB;
+        await DataStore.save(WorkbookDB.copyOf(wb, item => {
+            item.treeDataId = td.id;
+        }));
+
+        await DataStore.save(TreeDataDB.copyOf(td, item => {
+            item.workbookId = wb.id;
+        }));
+    }
+
     const handleClose = () => {
         props.onClose();
+        console.log("handleClose call");
         setTitle("");
     };
 
@@ -32,7 +72,10 @@ function WorkbookCreateModal(props: Props) {
     }
 
     const handleEvent = () => {
-
+        createWorkbook(title)
+            .then((res) => updateId(res))
+            .then(() => props.setCreateFlag((props.createFlag + 1) % 10))
+            .catch(() => alert("문제집 생성 중 오류가 발생했습니다."));
         handleClose();
     };
 
