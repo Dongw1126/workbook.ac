@@ -40,7 +40,6 @@ function MyWorkbook() {
 
         const author = userStore.getUser().username;
         myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author));
-        console.log(myWorkbook);
 
         return [myWorkbook, myFavorite];
     }
@@ -53,7 +52,7 @@ function MyWorkbook() {
                 .then((res) => {
                     setData(res);
                     setStatus(Constants.SEARCH_COMPLETE);
-                    console.log("complete")
+                    console.log(data);
                 })
                 .catch(() => {
                     setStatus(Constants.SEARCH_ERROR);
@@ -82,20 +81,40 @@ function MyWorkbook() {
                             onMouseUp={() => setCreateClicked(false)}
                             onMouseLeave={() => setCreateClicked(false)}
                             onClick={handleCreateModalOpen}
-                            style={{ width: "56px", height: "56px", transform: scale.to(s => `scale(${s})`) }}>
+                            style={{ transform: scale.to(s => `scale(${s})`) }}>
                             <SpeedDial
                                 ariaLabel="Add Workbook"
                                 icon={<AddIcon />}
                             />
                         </animated.div>
                     </div>
-                    <div>
-                        <WorkbookList editable={true} data={example_wb_my} />
-                    </div>
+                    {data[0].length !== 0 ?
+                        (<div>
+                            <WorkbookList editable={true} data={example_wb_my} />
+                        </div>) :
+                        (<div style={{ fontSize: "2rem", textAlign: "center" }}>
+                            <p>
+                                <br />
+                                만든 문제집이 없습니다
+                            </p>
+                        </div>)}
                     <WorkbookCreateModal open={createModalOpen} onClose={handleCreateModalClose} />
-                </div>
+                    <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "8rem", fontSize: "3rem", fontWeight: 700 }}>
+                        좋아요 한 문제집
+                    </div>
+                    {data[1].length !== 0 ?
+                        (<div>
+                            <WorkbookList editable={true} data={example_wb_my} />
+                        </div>) :
+                        (<div style={{ fontSize: "2rem", textAlign: "center" }}>
+                            <p>
+                                <br />
+                                좋아요 한 문제집이 없습니다
+                            </p>
+                        </div>)}
+                </div >
             );
-        } 
+        }
         else {
             return (
                 <div style={{ fontSize: "2rem", textAlign: "center" }}>
@@ -106,7 +125,7 @@ function MyWorkbook() {
                 </div>
             )
         }
-    } 
+    }
     else {
         return (
             <div style={{ fontSize: "2rem", textAlign: "center" }}>
