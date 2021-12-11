@@ -31,8 +31,8 @@ class UserStore {
         console.log("logout called");
     }
 
-    updateUser() {
-        Auth.currentAuthenticatedUser()
+    async updateUser() {
+        await Auth.currentAuthenticatedUser()
             .then(user => { 
                 this.login(user);
                 console.log(user);

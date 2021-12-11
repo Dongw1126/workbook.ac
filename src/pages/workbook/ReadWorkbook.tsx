@@ -27,16 +27,13 @@ function ReadWorkbook() {
     const fetchData = async () => {
         let workbookFetched: WorkbookDB | undefined = undefined;
         let treeFetched: TreeDataDB[] = [];
-        try {
-            const params = match.params as MatchParams
 
-            workbookFetched = await DataStore.query(WorkbookDB, params.id);
-            treeFetched = await DataStore.query(TreeDataDB, c =>
-                c.workbookId("eq", params.id)
-            );
-        } catch (error) {
-            setStatus(Constants.SEARCH_ERROR);
-        }
+        const params = match.params as MatchParams
+
+        workbookFetched = await DataStore.query(WorkbookDB, params.id);
+        treeFetched = await DataStore.query(TreeDataDB, c =>
+            c.workbookId("eq", params.id)
+        );
 
         return [workbookFetched, treeFetched];
     }
@@ -57,6 +54,9 @@ function ReadWorkbook() {
                     setStatus(Constants.SEARCH_ERROR);
                 }  
             })
+            .catch(() => {
+                setStatus(Constants.SEARCH_ERROR);
+            });
         selectedNodeStore.setNode(undefined);
     }, [])
 

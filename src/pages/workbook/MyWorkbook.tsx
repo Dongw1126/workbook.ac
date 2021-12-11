@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { Observer } from "mobx-react";
+import React, { useState, useEffect } from 'react';
+import { observer } from "mobx-react";
 import { useSpring, animated } from 'react-spring';
 import SpeedDial from '@mui/material/SpeedDial';
 import AddIcon from '@mui/icons-material/Add';
+import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
 import useDialog from '../../hooks/useDialog';
@@ -34,61 +35,88 @@ function MyWorkbook() {
     const [createModalOpen, handleCreateModalOpen, handleCreateModalClose] = useDialog();
 
     const fetchData = async () => {
-        const models = await DataStore.query(WorkbookDB);
         let myWorkbook: WorkbookDB[] = []
         let myFavorite: WorkbookDB[] = []
 
-        try {
-            const author = userStore.getUser().username;
-            myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author));
+        const author = userStore.getUser().username;
+        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author));
+        console.log(myWorkbook);
 
-        } catch (error) {
-            setStatus(Constants.SEARCH_ERROR);
-        }
+        return [myWorkbook, myFavorite];
     }
 
+    useEffect(() => {
+        console.log(userStore.loggedIn);
+        setStatus(Constants.SEARCH_LOADING);
+        if (userStore.loggedIn) {
+            fetchData()
+                .then((res) => {
+                    setData(res);
+                    setStatus(Constants.SEARCH_COMPLETE);
+                    console.log("complete")
+                })
+                .catch(() => {
+                    setStatus(Constants.SEARCH_ERROR);
+                });
+        }
+    }, [userStore.loggedIn]);
 
-    return (
-        <Observer>
-            {() => {
-                if (userStore.loggedIn) {
-                    return (
-                        <div>
-                            <div style={{ textAlign: "center", margin: "2rem 0", fontSize: "3rem", fontWeight: 700 }}>
-                                나의 문제집
-                            </div>
-                            <div style={{ width: "56px", height: "56px", margin: "auto" }}>
-                                <animated.div
-                                    onMouseDown={() => setCreateClicked(true)}
-                                    onMouseUp={() => setCreateClicked(false)}
-                                    onMouseLeave={() => setCreateClicked(false)}
-                                    onClick={handleCreateModalOpen}
-                                    style={{ width: "56px", height: "56px", transform: scale.to(s => `scale(${s})`) }}>
-                                    <SpeedDial
-                                        ariaLabel="Add Workbook"
-                                        icon={<AddIcon />}
-                                    />
-                                </animated.div>
-                            </div>
-                            <div>
-                                <WorkbookList editable={true} data={example_wb_my} />
-                            </div>
-                            <WorkbookCreateModal open={createModalOpen} onClose={handleCreateModalClose} />
-                        </div>
-                    );
-                } else {
-                    return(
-                        <div style={{ fontSize: "2rem", textAlign: "center"}}>
-                            <p>
-                                <br/><br/><br/><br/>
-                                로그인이 필요합니다.<br/><br/>
-                            </p>
-                        </div>
-                    );
-                }
-            }}
-        </Observer>
-    );
+
+    if (userStore.loggedIn) {
+        if (status === Constants.SEARCH_LOADING) {
+            return (
+                <div style={{ textAlign: "center" }}>
+                    <CircularProgress sx={{ m: 20 }} />
+                </div>
+            );
+        }
+        else if (status === Constants.SEARCH_COMPLETE) {
+            return (
+                <div>
+                    <div style={{ textAlign: "center", margin: "2rem 0", fontSize: "3rem", fontWeight: 700 }}>
+                        나의 문제집
+                    </div>
+                    <div style={{ width: "56px", height: "56px", margin: "auto" }}>
+                        <animated.div
+                            onMouseDown={() => setCreateClicked(true)}
+                            onMouseUp={() => setCreateClicked(false)}
+                            onMouseLeave={() => setCreateClicked(false)}
+                            onClick={handleCreateModalOpen}
+                            style={{ width: "56px", height: "56px", transform: scale.to(s => `scale(${s})`) }}>
+                            <SpeedDial
+                                ariaLabel="Add Workbook"
+                                icon={<AddIcon />}
+                            />
+                        </animated.div>
+                    </div>
+                    <div>
+                        <WorkbookList editable={true} data={example_wb_my} />
+                    </div>
+                    <WorkbookCreateModal open={createModalOpen} onClose={handleCreateModalClose} />
+                </div>
+            );
+        } 
+        else {
+            return (
+                <div style={{ fontSize: "2rem", textAlign: "center" }}>
+                    <p>
+                        <br />
+                        😲 로드 중 오류가 발생했습니다!
+                    </p>
+                </div>
+            )
+        }
+    } 
+    else {
+        return (
+            <div style={{ fontSize: "2rem", textAlign: "center" }}>
+                <p>
+                    <br /><br /><br /><br />
+                    로그인이 필요합니다.<br /><br />
+                </p>
+            </div>
+        );
+    }
 }
 
-export default MyWorkbook;
+export default observer(MyWorkbook);

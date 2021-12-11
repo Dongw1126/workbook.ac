@@ -23,20 +23,17 @@ function WorkbookSearchResult(props: Props) {
     const fetchDBInit = async () => {
         let byFavorite: WorkbookDB[] = []
         let byCreatedAt: WorkbookDB[] = []
-        try {
-            byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
-                sort: s => s.favorite(SortDirection.DESCENDING),
-                page: 0,
-                limit: 5,
-            });
-            byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
-                sort: s => s.createdAt(SortDirection.DESCENDING),
-                page: 0,
-                limit: 5
-            });
-        } catch (error) {
-            setStatus(Constants.SEARCH_ERROR);
-        }
+
+        byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
+            sort: s => s.favorite(SortDirection.DESCENDING),
+            page: 0,
+            limit: 5,
+        });
+        byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
+            sort: s => s.createdAt(SortDirection.DESCENDING),
+            page: 0,
+            limit: 5
+        });
         
         return [byFavorite, byCreatedAt];
     };
@@ -48,6 +45,9 @@ function WorkbookSearchResult(props: Props) {
                 setData(res);
                 setStatus(Constants.SEARCH_COMPLETE);
             })
+            .catch(() => {
+                setStatus(Constants.SEARCH_ERROR)
+            });
     }, []);
 
     if (status === Constants.SEARCH_LOADING) {
