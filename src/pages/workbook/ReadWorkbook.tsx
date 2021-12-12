@@ -73,9 +73,16 @@ function ReadWorkbook() {
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <WorkbookCard editable={false} data={workbookData!} cursorDefault={true}/>
                 </div>
-                <div style={{ width: "60%", margin: "auto" }}>
-                    <Workbook treeDB={treeData!} editable={false} />
-                </div>
+                {treeData?.treeData?.length !== 0 ? 
+                    <div style={{ width: "60%", margin: "auto" }}>
+                        <Workbook treeDB={treeData!} editable={false} />
+                    </div> :
+                    <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                        <p>
+                            빈 문제집 입니다
+                        </p>
+                    </div>
+                }
             </div>
         );
     } else {
