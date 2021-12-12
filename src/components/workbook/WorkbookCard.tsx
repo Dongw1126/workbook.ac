@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import IconButton from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
@@ -30,12 +30,13 @@ const handleImgError = (e: any) => {
  */
 function WorkbookCard(props: Props) {
     const { history } = useRouter();
+
     const goToReadPage = () => {
         history.push(`/workbook/read/${props.data.id}`);
     }
 
     const { show, hideAll } = useContextMenu({
-        id: Constants.WORKBOOK_CONTEXT_MENU_ID
+        id: props.data.id
     });
 
     const displayMenu = (e: any) => {

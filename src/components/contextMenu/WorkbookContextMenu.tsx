@@ -23,7 +23,7 @@ function WorkbookContextMenu(props: Props) {
 
     return (
         <div>
-            <Menu id={Constants.WORKBOOK_CONTEXT_MENU_ID} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX }}>
+            <Menu id={props.data.id} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX }}>
                 <Item onClick={goToEditPage}>
                     문제집 편집
                 </Item>
@@ -31,7 +31,7 @@ function WorkbookContextMenu(props: Props) {
                     이름 바꾸기
                 </Item>
                 <Item>
-                    사진 바꾸기
+                    표지 바꾸기
                 </Item>
                 <Item onClick={handleDeleteModalOpen}>
                     <DeleteForeverIcon style={{ marginRight: 5 }} />
@@ -40,7 +40,7 @@ function WorkbookContextMenu(props: Props) {
             </Menu>
             <WorkbookDeleteModal
                 deleteTitle="삭제하기"
-                name={props.data.title}
+                data={props.data}
                 open={deleteModalOpen}
                 onClose={handleDeleteModalClose}
             />
