@@ -25,7 +25,7 @@ function WorkbookSearchResult(props: Props) {
         let byCreatedAt: WorkbookDB[] = []
 
         byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
-            sort: s => s.favorite(SortDirection.DESCENDING),
+            sort: s => s.favorite(SortDirection.DESCENDING).createdAt(SortDirection.DESCENDING),
             page: 0,
             limit: 5,
         });
@@ -34,6 +34,7 @@ function WorkbookSearchResult(props: Props) {
             page: 0,
             limit: 5
         });
+        console.log(byCreatedAt)
         
         return [byFavorite, byCreatedAt];
     };
@@ -70,7 +71,7 @@ function WorkbookSearchResult(props: Props) {
                     <div style={{ marginTop: "5rem", fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         새로 나온
                     </div>
-                    <WorkbookSearchList editable={false} data={data[0]} />
+                    <WorkbookSearchList editable={false} data={data[1]} />
                 </div>
             );
         } else {
