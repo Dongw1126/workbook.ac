@@ -3,6 +3,7 @@ import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/
 import TextField from '@mui/material/TextField';
 
 import AlertModal from "./AlertModal";
+import DataChangeFlag from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
 
 import * as Constants from "../../constants";
@@ -12,8 +13,6 @@ import { WorkbookDB, TreeDataDB } from "../../models";
 
 interface Props {
     username: string;
-    createFlag: number;
-    setCreateFlag: any;
     open: boolean;
     onClose: () => void;
 }
@@ -22,6 +21,7 @@ interface Props {
  * 폴더 이름 입력 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
+    const dataChangeFlag = DataChangeFlag;
     const [title, setTitle] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
@@ -74,7 +74,7 @@ function WorkbookCreateModal(props: Props) {
     const handleEvent = () => {
         createWorkbook(title)
             .then((res) => updateId(res))
-            .then(() => props.setCreateFlag((props.createFlag + 1) % 10))
+            .then(() => dataChangeFlag.effect())
             .catch(() => alert("문제집 생성 중 오류가 발생했습니다."));
         handleClose();
     };

@@ -6,10 +6,10 @@ import AddIcon from '@mui/icons-material/Add';
 import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
+import DataChangeFlagStore from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
 import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
-import example_wb_my from "../../components/workbook/example_wb_my.json"
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
@@ -21,7 +21,9 @@ import { WorkbookDB } from "../../models";
 function MyWorkbook() {
     const userStore = UserStore;
 
-    const [createFlag, setCreateFlag] = useState(0);
+    // const [createFlag, setCreateFlag] = useState(0);
+    const flag = DataChangeFlagStore.flag;
+    
     const [createClicked, setCreateClicked] = useState(false);
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
     const [data, setData] = useState<WorkbookDB[][]>([]);
@@ -58,11 +60,11 @@ function MyWorkbook() {
                     setStatus(Constants.SEARCH_ERROR);
                 });
         }
-    }, [userStore.loggedIn, createFlag]);
+    }, [userStore.loggedIn, flag]);
 
     useEffect(() => {
-        console.log(createFlag);
-    }, [createFlag])
+        console.log(flag);
+    }, [flag])
 
 
     if (userStore.loggedIn) {
@@ -94,7 +96,7 @@ function MyWorkbook() {
                     </div>
                     {data[0].length !== 0 ?
                         (<div>
-                            <WorkbookList key={createFlag} editable={true} data={data[0]} />
+                            <WorkbookList key={flag} editable={true} data={data[0]} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>
@@ -104,8 +106,6 @@ function MyWorkbook() {
                         </div>)}
                     <WorkbookCreateModal
                         username={userStore.getUser().username}
-                        createFlag={createFlag}
-                        setCreateFlag={setCreateFlag}
                         open={createModalOpen} 
                         onClose={handleCreateModalClose} 
                     />
