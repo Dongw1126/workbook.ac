@@ -22,7 +22,7 @@ const deleteWorkbook = async (wb: WorkbookDB) => {
 }
 
 /**
- * 삭제 확인 Modal 창
+ * 문제집 삭제 확인 Modal 창
  */
 function WorkbookDeleteModal(props: Props) {
     const userStore = UserStore;

@@ -3,6 +3,7 @@ import { Menu, Item } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
+import WorkbookTitleModal from "../modal/WorkbookTitleModal";
 import WorkbookDeleteModal from "../modal/WorkbookDeleteModal";
 import { WorkbookDB } from '../../models';
 import useDialog from "../../hooks/useDialog";
@@ -15,6 +16,7 @@ type Props = {
 
 function WorkbookContextMenu(props: Props) {
     const { history } = useRouter();
+    const [titleModalOpen, handleTitleModalOpen, handleTitleModalClose] = useDialog();
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
 
     const goToEditPage = () => {
@@ -27,7 +29,7 @@ function WorkbookContextMenu(props: Props) {
                 <Item onClick={goToEditPage}>
                     문제집 편집
                 </Item>
-                <Item>
+                <Item onClick={handleTitleModalOpen}>
                     이름 바꾸기
                 </Item>
                 <Item>
@@ -43,6 +45,12 @@ function WorkbookContextMenu(props: Props) {
                 data={props.data}
                 open={deleteModalOpen}
                 onClose={handleDeleteModalClose}
+            />
+            <WorkbookTitleModal 
+                id={props.data.id}
+                title={props.data.title}
+                open={titleModalOpen}
+                onClose={handleTitleModalClose}
             />
         </div>
     );

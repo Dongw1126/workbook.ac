@@ -52,7 +52,7 @@ function MyWorkbook() {
                 .then((res) => {
                     setData(res);
                     setStatus(Constants.SEARCH_COMPLETE);
-                    console.log(data);
+                    console.log(res);
                 })
                 .catch(() => {
                     setStatus(Constants.SEARCH_ERROR);

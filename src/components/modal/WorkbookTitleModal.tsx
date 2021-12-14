@@ -2,87 +2,55 @@ import React, { useState } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-import AlertModal from "./AlertModal";
 import DataChangeFlag from "../../stores/DataChangeFlagStore";
-import useDialog from '../../hooks/useDialog';
-
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
-import { WorkbookDB, TreeDataDB } from "../../models";
+import { WorkbookDB } from "../../models";
 
 interface Props {
-    username: string;
+    id: string;
+    title: string;
     open: boolean;
     onClose: () => void;
 }
 
 /**
- * 문제집 생성 - 타이틀 입력 Modal 창
+ * 문제집 제목 수정 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
     const dataChangeFlag = DataChangeFlag;
-    const [title, setTitle] = useState("");
-    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
+    const [title, setTitle] = useState(props.title);
 
-    const createWorkbook = async (_title: string) => {
-        const wb = await DataStore.save(
-            new WorkbookDB({
-                "title": _title,
-                "author": props.username,
-                "favorite": 0,
-                "image": "",
-                "treeDataId": ""
-            })
-        );
-
-        const td = await DataStore.save(
-            new TreeDataDB({
-                "treeData":  "[]",
-                "workbookId": ""
-            })
-        );
-
-        return [wb, td];
+    const fetchData = async (_id: string) => {
+        const wb = await DataStore.query(WorkbookDB, _id);
+        return wb;
     }
 
-    const updateId = async (created: any) => {
-        const wb = created[0] as WorkbookDB;
-        const td = created[1] as TreeDataDB;
-        await DataStore.save(WorkbookDB.copyOf(wb, item => {
-            item.treeDataId = td.id;
-        }));
-
-        await DataStore.save(TreeDataDB.copyOf(td, item => {
-            item.workbookId = wb.id;
+    const updateTitle = async (res: WorkbookDB, _title: string) => {
+        await DataStore.save(WorkbookDB.copyOf(res, item => {
+            item.title = _title
         }));
     }
 
     const handleClose = () => {
         props.onClose();
         console.log("handleClose call");
-        setTitle("");
+        setTitle(props.title);
     };
 
-    const handleWorkbookLimit = () => {
-        console.log("handleFolderLimit call");
-
-        handleClose();
-        handleAlertOpen();
-    }
-
     const handleEvent = () => {
-        createWorkbook(title)
-            .then((res) => updateId(res))
+        fetchData(props.id)
+            .then((res) => updateTitle(res!, title))
             .then(() => dataChangeFlag.effect())
-            .catch(() => alert("문제집 생성 중 오류가 발생했습니다."));
+            .catch(() => alert("이름 변경 중 오류가 발생했습니다."));
         handleClose();
     };
 
     return (
         <div>
             <Dialog onClose={handleClose} open={props.open} >
-                <DialogTitle>문제집 생성</DialogTitle>
+                <DialogTitle>문제집 이름 바꾸기</DialogTitle>
                 <DialogContent>
                     <TextField
                         InputProps={{
@@ -102,6 +70,7 @@ function WorkbookCreateModal(props: Props) {
                         autoFocus
                         margin="dense"
                         label="문제집 제목"
+                        defaultValue={props.title}
                         type='text'
                         fullWidth
                         variant="standard"
@@ -112,12 +81,6 @@ function WorkbookCreateModal(props: Props) {
                     <Button variant="outlined" onClick={handleClose}>취소</Button>
                 </DialogActions>
             </Dialog>
-            <AlertModal
-                title="알림"
-                content="문제집은 최대 50개까지 생성 가능합니다!"
-                open={alertOpen} 
-                onClose={handleAlertClose}
-            />
         </div>
     );
 }
