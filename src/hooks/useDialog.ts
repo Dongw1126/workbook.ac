@@ -8,7 +8,7 @@ function useDialog()
     const [open, setOpen] = useState(false);
 
     const handleDialogOpen = useCallback(() => {
-        console.log("handleDialogOpen call");
+        // console.log("handleDialogOpen call");
         setOpen(true);
     }, [setOpen]);
 

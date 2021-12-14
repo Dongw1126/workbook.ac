@@ -31,8 +31,8 @@ const handleImgError = (e: any) => {
 function WorkbookCard(props: Props) {
     const { history } = useRouter();
 
-    const goToReadPage = () => {
-        history.push(`/workbook/read/${props.data.id}`);
+    const goToPage = (_path: string) => {
+        history.push("/workbook/" + _path + `/${props.data.id}`);
     }
 
     const { show, hideAll } = useContextMenu({
@@ -50,11 +50,15 @@ function WorkbookCard(props: Props) {
             <div className={`${styles.card} 
             ${props.animated ? styles.cardAnimation : ""}
             ${props.shadow ? styles.cardShadow : ""}`}>
-                <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} onClick={goToReadPage}>
+                <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
+                    onClick={() => goToPage("read")}
+                >
                     <img src={props.data?.image} alt="Workbook Image" onError={handleImgError} />
                 </div>
                 <div className={styles.cardBody}>
-                    <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} onClick={goToReadPage}>
+                    <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
+                        onClick={() => goToPage("read")}
+                    >
                         {props.data.title}
                     </div>
                     <div className={styles.cardAuthor}>

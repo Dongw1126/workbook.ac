@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { Observer } from "mobx-react";
 import problemListStore from '../../stores/ProblemListStore';
-import ProblemTreeTitle from '../tree/ProblemTreeTitle';
 import ProblemTree from '../tree/ProblemTree';
 
 import { TreeDataDB } from "../../models";
@@ -25,6 +24,7 @@ import { ProblemData } from '../../types/Types';
 type Props = {
     treeDB: TreeDataDB;
     editable: boolean;
+    title?: string;
 }
 
 const problemList = problemListStore;
@@ -48,7 +48,9 @@ function Workbook(props: Props) {
                     {props.editable &&
                         <>
                             <hr style={{ borderTop: "3px double #bbb" }} />
-                            <ProblemTreeTitle />
+                            <div style={{ fontSize: "1.7rem", fontWeight: 700, textAlign: "center"}}>
+                                {props.title}
+                            </div>
                             <hr style={{ borderTop: "3px double #bbb" }} />
                         </>}
                     <ProblemTree editable={props.editable} />

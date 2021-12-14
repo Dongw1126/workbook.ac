@@ -28,7 +28,7 @@ function ReadWorkbook() {
         let workbookFetched: WorkbookDB | undefined = undefined;
         let treeFetched: TreeDataDB[] = [];
 
-        const params = match.params as MatchParams
+        const params = match.params as MatchParams;
 
         workbookFetched = await DataStore.query(WorkbookDB, params.id);
         treeFetched = await DataStore.query(TreeDataDB, c =>
