@@ -132,7 +132,7 @@ function ProblemTree(props: Props) {
                   }
                 } : undefined}
               sort={false}
-              insertDroppableFirst={!props.editable}
+              insertDroppableFirst={false}
               dropTargetOffset={props.editable ? 7 : undefined}
               placeholderRender={props.editable ? (node, { depth }) => (
                 <Placeholder node={node} depth={depth} />
