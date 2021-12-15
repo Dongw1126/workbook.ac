@@ -1,17 +1,23 @@
 import { useEffect, useState } from "react";
 import Split from 'react-split'
-import Workbook from '../../components/workbook/Workbook';
-import ProblemSearch from '../../components/search/problem/ProblemSearch';
 import { CircularProgress } from "@mui/material";
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
 import SaveIcon from '@mui/icons-material/Save';
 import CloseIcon from '@mui/icons-material/Close';
-import * as Constants from "../../constants";
+
 import { useRouter } from "../../hooks/useRouter";
+import useDialog from "../../hooks/useDialog";
+import AlertModal from "../../components/modal/AlertModal";
+import Workbook from '../../components/workbook/Workbook';
+import ProblemSearch from '../../components/search/problem/ProblemSearch';
+import ProblemListStore from "../../stores/ProblemListStore";
+import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB } from "../../models";
+import { toJS } from "mobx";
+
 
 type MatchParams = {
     id: string;
@@ -19,7 +25,9 @@ type MatchParams = {
 
 function EditWorkbook() {
     const { match } = useRouter();
+    const problemList = ProblemListStore;
 
+    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState("");
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
@@ -34,6 +42,25 @@ function EditWorkbook() {
         );
         setTitle(workbookFetched ? workbookFetched.title : "");
         return treeFetched;
+    }
+
+    const saveTreeData = async (_data: TreeDataDB | undefined) => {
+        if(typeof _data !== "undefined") {
+            await DataStore.save(TreeDataDB.copyOf(_data, item => {
+                item.treeData = JSON.stringify(problemList.data);
+            }));
+        }
+    }
+
+    const handleSaveClick = () => {
+        setLoading(true);
+        fetchData()
+            .then((res) => saveTreeData(res[0]))
+            .then(() => {
+                setLoading(false);
+                handleAlertOpen();
+            })
+            .catch(() => alert("저장 중 오류가 발생했습니다"));
     }
 
     useEffect(() => {
@@ -63,40 +90,50 @@ function EditWorkbook() {
     }
     else if (status === Constants.SEARCH_COMPLETE) {
         return (
-            <div>
-                <div style={{ margin: "10px 0 10px 10px" }}>
-                    <LoadingButton
-                        style={{ borderRadius: 50, margin: "0 15px 0 0"}}
-                        loading={loading}
-                        loadingPosition="start"
-                        startIcon={<SaveIcon />}
-                        variant="contained">
-                        저장
-                    </LoadingButton>
-                    <Button 
-                        style={{ borderRadius: 50 }} 
-                        variant="outlined"
-                        startIcon={<CloseIcon/>}>
-                        취소
-                    </Button>
+            <>
+                <div>
+                    <div style={{ margin: "10px 0 10px 10px" }}>
+                        <LoadingButton
+                            style={{ borderRadius: 50, margin: "0 15px 0 0"}}
+                            loading={loading}
+                            disabled={loading}
+                            loadingPosition="start"
+                            startIcon={<SaveIcon />}
+                            onClick={handleSaveClick}
+                            variant="contained">
+                            저장
+                        </LoadingButton>
+                        <Button 
+                            style={{ borderRadius: 50 }} 
+                            variant="outlined"
+                            startIcon={<CloseIcon/>}>
+                            취소
+                        </Button>
+                    </div>
+                    <div style={{ height: "100%" }}>
+                        <Split
+                            className="split"
+                            sizes={[40, 60]}
+                            minSize={300}
+                            gutterSize={10}
+                            cursor="col-resize"
+                        >
+                            <div>
+                                {<Workbook treeDB={data!} editable={true} title={title}/>}
+                            </div>
+                            <div style={{ margin: 10 }}>
+                                <ProblemSearch />
+                            </div>
+                        </Split>
+                    </div>
                 </div>
-                <div style={{ height: "100%" }}>
-                    <Split
-                        className="split"
-                        sizes={[40, 60]}
-                        minSize={300}
-                        gutterSize={10}
-                        cursor="col-resize"
-                    >
-                        <div>
-                            {<Workbook treeDB={data!} editable={true} title={title}/>}
-                        </div>
-                        <div style={{ margin: 10 }}>
-                            <ProblemSearch />
-                        </div>
-                    </Split>
-                </div>
-            </div>
+                <AlertModal
+                    title=""
+                    content="저장 완료!"
+                    open={alertOpen} 
+                    onClose={handleAlertClose}
+                />
+            </>
         );
     }
     else {
