@@ -65,7 +65,7 @@ function WorkbookCreateModal(props: Props) {
                             }
                         }}
                         inputProps={{
-                            maxLength: Constants.MAX_FOLDER_NAME,
+                            maxLength: Constants.MAX_WORKBOOK_NAME,
                         }}
                         autoFocus
                         margin="dense"
