@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { observer } from "mobx-react";
 import Split from 'react-split'
 import { CircularProgress } from "@mui/material";
 import Button from '@mui/material/Button';
@@ -12,12 +13,11 @@ import AlertModal from "../../components/modal/AlertModal";
 import Workbook from '../../components/workbook/Workbook';
 import ProblemSearch from '../../components/search/problem/ProblemSearch';
 import ProblemListStore from "../../stores/ProblemListStore";
+import UserStore from "../../stores/UserStore";
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB } from "../../models";
-import { toJS } from "mobx";
-
 
 type MatchParams = {
     id: string;
@@ -26,17 +26,39 @@ type MatchParams = {
 function EditWorkbook() {
     const { match } = useRouter();
     const problemList = ProblemListStore;
+    const userStore = UserStore;
 
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
     const [loading, setLoading] = useState(false);
     const [title, setTitle] = useState("");
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
     const [data, setData] = useState<TreeDataDB>();
+    const [error, setError] = useState("");
+
+    const checkUser = (_author: string) => {
+        const currentUser = userStore.getUser();
+
+        if(!currentUser || (currentUser.username != _author)) {
+            const errMessage = "오류: 권한 없음"
+            setError(errMessage);
+            setStatus(Constants.SEARCH_ERROR);
+            throw new Error(errMessage);
+        }
+        
+        return null;
+    }
 
     const fetchData = async () => {
-        const params = match.params as MatchParams;
+        const params = match.params as MatchParams;    
 
         const workbookFetched = await DataStore.query(WorkbookDB, params.id);
+        
+        // 편집 권한 체크
+        const checkUserResult = workbookFetched ? checkUser(workbookFetched.author) : null;
+        if(checkUserResult) {
+            return checkUserResult;
+        }
+
         const treeFetched = await DataStore.query(TreeDataDB, c =>
             c.workbookId("eq", params.id)
         );
@@ -65,6 +87,7 @@ function EditWorkbook() {
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
+
         fetchData()
             .then((res) => {
                 if(res.length !== 0) {
@@ -76,10 +99,8 @@ function EditWorkbook() {
                     setStatus(Constants.SEARCH_ERROR);
                 } 
             })
-            .catch(() => {
-                setStatus(Constants.SEARCH_ERROR);
-            });
-    }, [])
+            .catch((err) => console.log(err.message));
+    }, [userStore.user]);
 
     if (status === Constants.SEARCH_LOADING) {
         return (
@@ -141,11 +162,12 @@ function EditWorkbook() {
             <div style={{ fontSize: "2rem", textAlign: "center" }}>
                 <p>
                     <br />
-                    😲 로드 중 오류가 발생했습니다!
+                    😲 로드 중 오류가 발생했습니다!<br/>
+                    {error}
                 </p>
             </div>
         );
     }
 }
 
-export default EditWorkbook;
+export default observer(EditWorkbook);
