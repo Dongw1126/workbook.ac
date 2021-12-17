@@ -24,7 +24,7 @@ type MatchParams = {
 }
 
 function EditWorkbook() {
-    const { match } = useRouter();
+    const { match, history } = useRouter();
     const problemList = ProblemListStore;
     const userStore = UserStore;
 
@@ -85,6 +85,15 @@ function EditWorkbook() {
             .catch(() => alert("저장 중 오류가 발생했습니다"));
     }
 
+    const handleCancelClick = () => {
+        console.log(history.length);
+        if (history.length > 1) {
+            history.goBack();
+        } else {
+            history.push('/');
+        }
+    }
+
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
 
@@ -127,7 +136,9 @@ function EditWorkbook() {
                         <Button 
                             style={{ borderRadius: 50 }} 
                             variant="outlined"
-                            startIcon={<CloseIcon/>}>
+                            startIcon={<CloseIcon/>}
+                            onClick={handleCancelClick}
+                        >
                             취소
                         </Button>
                     </div>
