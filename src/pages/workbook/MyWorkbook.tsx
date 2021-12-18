@@ -12,7 +12,7 @@ import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import * as Constants from "../../constants";
 
-import { DataStore } from '@aws-amplify/datastore';
+import { DataStore, SortDirection} from '@aws-amplify/datastore';
 import { WorkbookDB } from "../../models";
 
 /**
@@ -40,7 +40,9 @@ function MyWorkbook() {
         let myFavorite: WorkbookDB[] = []
 
         const author = userStore.getUser().username;
-        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author));
+        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author), {
+            sort: s => s.title(SortDirection.ASCENDING)
+        });
 
         return [myWorkbook, myFavorite];
     }
@@ -52,7 +54,7 @@ function MyWorkbook() {
                 .then((res) => {
                     setData(res);
                     setStatus(Constants.SEARCH_COMPLETE);
-                    console.log(res);
+                    console.log(res[0]);
                 })
                 .catch(() => {
                     setStatus(Constants.SEARCH_ERROR);

@@ -77,7 +77,7 @@ function WorkbookCreateModal(props: Props) {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Button variant="contained" onClick={handleEvent}>추가</Button>
+                    <Button variant="contained" onClick={handleEvent}>변경</Button>
                     <Button variant="outlined" onClick={handleClose}>취소</Button>
                 </DialogActions>
             </Dialog>
