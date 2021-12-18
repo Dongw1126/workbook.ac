@@ -19,11 +19,10 @@ export const schema = {
                 },
                 "workbookId": {
                     "name": "workbookId",
-                    "isArray": true,
+                    "isArray": false,
                     "type": "ID",
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true
+                    "isRequired": true,
+                    "attributes": []
                 },
                 "createdAt": {
                     "name": "createdAt",
@@ -223,5 +222,5 @@ export const schema = {
     },
     "enums": {},
     "nonModels": {},
-    "version": "a3f2afbe3dc1e9a522f803b534ae0c66"
+    "version": "db7fbd30990e1e3682af828444d55f81"
 };

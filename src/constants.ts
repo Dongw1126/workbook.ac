@@ -3,6 +3,9 @@ export const SERVER_URL = "http://localhost:5000/";
 export const TREE_CONTEXT_MENU_ID = "tree";
 export const WORKBOOK_CONTEXT_MENU_ID = "workbook";
 
+export const FIRST_WORKBOOK_LOAD_NUM = 5;
+export const SEARCH_WORKBOOK_LOAD_NUM = 20;
+
 export const TREE_ITEM_SPACE = 36;
 
 export const MAX_FOLDER_NUM = 50 + 1;

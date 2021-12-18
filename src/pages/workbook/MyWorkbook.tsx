@@ -41,11 +41,13 @@ function MyWorkbook() {
 
         const author = userStore.getUser().username;
         myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author), {
-            sort: s => s.title(SortDirection.ASCENDING)
+            sort: s => s.title(SortDirection.ASCENDING),
+            page: 0,
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
         });
 
         return [myWorkbook, myFavorite];
-    }
+    };  
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);

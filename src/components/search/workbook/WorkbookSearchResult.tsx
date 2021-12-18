@@ -27,12 +27,12 @@ function WorkbookSearchResult(props: Props) {
         byFavorite = await DataStore.query(WorkbookDB, Predicates.ALL, {
             sort: s => s.favorite(SortDirection.DESCENDING).createdAt(SortDirection.DESCENDING),
             page: 0,
-            limit: 5,
+            limit: Constants.FIRST_WORKBOOK_LOAD_NUM
         });
         byCreatedAt = await DataStore.query(WorkbookDB, Predicates.ALL, {
             sort: s => s.createdAt(SortDirection.DESCENDING),
             page: 0,
-            limit: 5
+            limit: Constants.FIRST_WORKBOOK_LOAD_NUM
         });
         console.log(byCreatedAt)
         

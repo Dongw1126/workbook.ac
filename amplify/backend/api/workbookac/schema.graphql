@@ -1,7 +1,7 @@
 type FavoriteDB @model @auth(rules: [{allow: public}]) {
   id: ID!
   username: String!
-  workbookId: [ID]
+  workbookId: ID!
 }
 
 type WorkbookDB @model @auth(rules: [{allow: public}]) {

@@ -19,7 +19,7 @@ type TreeDataDBMetaData = {
 export declare class FavoriteDB {
   readonly id: string;
   readonly username: string;
-  readonly workbookId?: (string | null)[];
+  readonly workbookId: string;
   readonly createdAt?: string;
   readonly updatedAt?: string;
   constructor(init: ModelInit<FavoriteDB, FavoriteDBMetaData>);
