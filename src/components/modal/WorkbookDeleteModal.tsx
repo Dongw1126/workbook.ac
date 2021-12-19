@@ -4,7 +4,7 @@ import UserStore from "../../stores/UserStore";
 import DataChangeFlag from "../../stores/DataChangeFlagStore";
 
 import { DataStore } from '@aws-amplify/datastore';
-import { WorkbookDB, TreeDataDB } from "../../models";
+import { WorkbookDB, TreeDataDB, FavoriteDB } from "../../models";
 
 
 interface Props {
@@ -17,8 +17,9 @@ interface Props {
 const deleteWorkbook = async (wb: WorkbookDB) => {
     const td = await DataStore.query(TreeDataDB, wb.treeDataId!);
 
-    DataStore.delete(wb);
-    DataStore.delete(td!);
+    await DataStore.delete(wb);
+    await DataStore.delete(td!);
+    await DataStore.delete(FavoriteDB, c => c.workbookId("eq", wb.id));
 }
 
 /**
