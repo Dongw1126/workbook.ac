@@ -8,9 +8,11 @@ import { useContextMenu } from "react-contexify";
 
 import { DataStore } from '@aws-amplify/datastore';
 
+import AlertModal from "../modal/AlertModal";
 import WorkbookContextMenu from "../contextMenu/WorkbookContextMenu";
 import { WorkbookDB, FavoriteDB } from "../../models";
 import { useRouter } from "../../hooks/useRouter";
+import useDialog from "../../hooks/useDialog";
 import UserStore from "../../stores/UserStore";
 import * as Constants from "../../constants";
 import styles from './WorkbookCard.module.css';
@@ -33,8 +35,10 @@ const handleImgError = (e: any) => {
  * 문제집 카드 컴포넌트
  */
 function WorkbookCard(props: Props) {
-    const { history } = useRouter();
     const userStore = UserStore;
+
+    const { history } = useRouter();
+    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
     const [fav, setFav] = useState(false);
     const [favNum, setFavNum] = useState(props.data.favorite);
@@ -95,32 +99,37 @@ function WorkbookCard(props: Props) {
     };
 
     const handleLikeClick = () => {
-        // 비로그인 시 alertModal 추가
-        fetchFavData()
-            .then((res) => {
-                if (res.length > 0) {
-                    // 좋아요 -> X
-                    deleteFavData(res[0].id)
-                        .then(() => updateWorkbook(-1))
-                        .then((resFavNum) => {
-                            setFav(true);
-                            setRefresh(!refresh);
-                            setFavNum(resFavNum);
-                        })
-                        .catch(() => alert("업데이트 중 오류가 발생했습니다."));
-                } 
-                else {
-                    // X -> 좋아요
-                    createFavData()
-                        .then(() => updateWorkbook(1))
-                        .then((resFavNum) => {
-                            setFav(false);
-                            setRefresh(!refresh);
-                            setFavNum(resFavNum);
-                        })
-                        .catch(() => alert("업데이트 중 오류가 발생했습니다."));
-                }
-            })
+        if(userStore.getUser()) {
+            fetchFavData()
+                .then((res) => {
+                    if (res.length > 0) {
+                        // 좋아요 -> X
+                        deleteFavData(res[0].id)
+                            .then(() => updateWorkbook(-1))
+                            .then((resFavNum) => {
+                                setFav(true);
+                                setRefresh(!refresh);
+                                setFavNum(resFavNum);
+                            })
+                            .catch(() => alert("업데이트 중 오류가 발생했습니다."));
+                    } 
+                    else {
+                        // X -> 좋아요
+                        createFavData()
+                            .then(() => updateWorkbook(1))
+                            .then((resFavNum) => {
+                                setFav(false);
+                                setRefresh(!refresh);
+                                setFavNum(resFavNum);
+                            })
+                            .catch(() => alert("업데이트 중 오류가 발생했습니다."));
+                    }
+                });
+        } 
+        else {
+            // 비로그인 경우
+            handleAlertOpen();
+        }
     };
 
     useEffect(() => {
@@ -173,6 +182,12 @@ function WorkbookCard(props: Props) {
                 </div>
             </div>
             {props.editable && <WorkbookContextMenu data={props.data} />}
+            <AlertModal
+                title=""
+                content="좋아요는 로그인 후에 가능합니다!"
+                open={alertOpen} 
+                onClose={handleAlertClose}
+            />
         </>
     );
 }
