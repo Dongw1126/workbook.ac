@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
-import DataChangeFlag from "../../stores/DataChangeFlagStore";
+import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
 import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
@@ -20,7 +20,7 @@ import { WorkbookDB } from "../../models";
  */
 function MyWorkbook() {
     const userStore = UserStore;
-    const flag = DataChangeFlag.flag;
+    const flag = myPageChangeFlag.flag;
 
     const [createClicked, setCreateClicked] = useState(false);
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);

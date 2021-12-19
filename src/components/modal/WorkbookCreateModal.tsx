@@ -3,7 +3,7 @@ import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/
 import TextField from '@mui/material/TextField';
 
 import AlertModal from "./AlertModal";
-import DataChangeFlag from "../../stores/DataChangeFlagStore";
+import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
 
 import * as Constants from "../../constants";
@@ -21,7 +21,7 @@ interface Props {
  * 문제집 생성 - 타이틀 입력 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
-    const dataChangeFlag = DataChangeFlag;
+    const dataChangeFlag = myPageChangeFlag;
     const [title, setTitle] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 

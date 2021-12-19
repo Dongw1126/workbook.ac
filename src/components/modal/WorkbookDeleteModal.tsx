@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import UserStore from "../../stores/UserStore";
-import DataChangeFlag from "../../stores/DataChangeFlagStore";
+import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB, FavoriteDB } from "../../models";
@@ -27,7 +27,7 @@ const deleteWorkbook = async (wb: WorkbookDB) => {
  */
 function WorkbookDeleteModal(props: Props) {
     const userStore = UserStore;
-    const dataChangeFlag = DataChangeFlag;
+    const dataChangeFlag = myPageChangeFlag;
 
     const handleDelete = useCallback(() => {
         if (userStore.getUser().username == props.data.author) {

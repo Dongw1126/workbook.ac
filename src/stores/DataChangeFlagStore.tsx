@@ -12,5 +12,4 @@ class DataChangeFlag {
 }
 
 /** 데이터 생성, 삭제 시 리렌더링을 위한 객체 */
-const dataChangeFlag = new DataChangeFlag();
-export default dataChangeFlag;
+export const myPageChangeFlag = new DataChangeFlag();

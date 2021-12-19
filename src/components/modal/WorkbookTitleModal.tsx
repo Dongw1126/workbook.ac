@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-import DataChangeFlag from "../../stores/DataChangeFlagStore";
+import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
@@ -19,7 +19,7 @@ interface Props {
  * 문제집 제목 수정 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
-    const dataChangeFlag = DataChangeFlag;
+    const dataChangeFlag = myPageChangeFlag;
     const [title, setTitle] = useState(props.title);
 
     const fetchData = async (_id: string) => {
