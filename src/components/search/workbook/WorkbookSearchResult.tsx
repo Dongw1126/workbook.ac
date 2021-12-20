@@ -41,6 +41,7 @@ function WorkbookSearchResult(props: Props) {
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
+        fetchDBInit();
         fetchDBInit()
             .then(res => {
                 setData(res);
