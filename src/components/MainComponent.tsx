@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
+import { DataStore } from '@aws-amplify/datastore';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import { Auth } from 'aws-amplify';
 import UserStore from '../stores/UserStore';
 
 import ScrollToTop from "./ScrollToTop";
@@ -15,8 +15,9 @@ import Guide from '../pages/Guide';
 function MainComponent() {
     const userStore = UserStore;
     useEffect(() => {
+        DataStore.start();
         userStore.updateUser();
-    });
+    }, []);
 
     return (
         <BrowserRouter>
