@@ -12,8 +12,8 @@ import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import * as Constants from "../../constants";
 
-import { DataStore, SortDirection} from '@aws-amplify/datastore';
-import { WorkbookDB } from "../../models";
+import { DataStore, SortDirection } from '@aws-amplify/datastore';
+import { WorkbookDB, FavoriteDB } from "../../models";
 
 /**
  * 내 문제집 보기 페이지
@@ -39,12 +39,17 @@ function MyWorkbook() {
         let myWorkbook: WorkbookDB[] = []
         let myFavorite: WorkbookDB[] = []
 
-        const author = userStore.getUser().username;
-        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", author), {
+        const myUsername = userStore.getUser().username;
+        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), {
             sort: s => s.title(SortDirection.ASCENDING),
             page: 0,
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
         });
+        
+        const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername));
+        myFavorite = await DataStore.query(WorkbookDB, (c) =>
+            c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c))
+        );
 
         return [myWorkbook, myFavorite];
     };  
