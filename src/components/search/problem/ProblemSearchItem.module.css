@@ -3,7 +3,8 @@
   display: grid;
   border-radius: 2px;
   grid-template-columns: auto auto 1fr auto;
-  height: 45px;
+  height: auto;
+  min-height: 45px;
   margin: 3px;
   padding-inline-end: 8px;
   /* box-shadow: 0 1px 2px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); */
