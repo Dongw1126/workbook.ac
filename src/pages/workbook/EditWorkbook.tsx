@@ -18,6 +18,7 @@ import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB } from "../../models";
+import { Prompt } from "react-router-dom";
 
 type MatchParams = {
     id: string;
@@ -165,6 +166,7 @@ function EditWorkbook() {
                     open={alertOpen} 
                     onClose={handleAlertClose}
                 />
+                <Prompt when={true} message="저장되지 않은 변경사항은 사라집니다. 페이지를 이동하시겠습니까?"/>
             </>
         );
     }
