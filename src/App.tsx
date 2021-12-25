@@ -5,10 +5,12 @@ import { Observer } from "mobx-react";
 import { grey } from '@mui/material/colors';
 
 import Amplify from '@aws-amplify/core';
+import { DataStore } from 'aws-amplify';
 import awsconfig from "./aws-exports";
 import { Authenticator } from '@aws-amplify/ui-react';
 
 Amplify.configure(awsconfig);
+DataStore.start();
 
 const theme = createTheme({
   palette: {
