@@ -18,7 +18,9 @@ type Props = {
  */
 function WorkbookSearchResult(props: Props) {
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
-    const [data, setData] = useState<WorkbookDB[][]>([]);
+    const [initData, setInitData] = useState<WorkbookDB[][]>([]);
+    const [searchData, setSearchData] = useState<WorkbookDB[]>([]);
+    
 
     const fetchDBInit = async () => {
         let byFavorite: WorkbookDB[] = []
@@ -39,17 +41,47 @@ function WorkbookSearchResult(props: Props) {
         return [byFavorite, byCreatedAt];
     };
 
+    const fetchSearchDB = async (_query: string, _page: number = 0) => {
+        const result = await DataStore.query(WorkbookDB, c => c.title("contains", _query), {
+            sort: s => s.createdAt(SortDirection.DESCENDING),
+            page: _page,
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
+        });
+
+        return result;
+    }
+
     useEffect(() => {
-        setStatus(Constants.SEARCH_LOADING);
-        fetchDBInit()
-            .then(res => {
-                setData(res);
-                setStatus(Constants.SEARCH_COMPLETE);
-            })
-            .catch(() => {
-                setStatus(Constants.SEARCH_ERROR)
-            });
+        if(!props.query) {
+            setStatus(Constants.SEARCH_LOADING);
+            fetchDBInit()
+                .then(res => {
+                    setInitData(res);
+                    setStatus(Constants.SEARCH_COMPLETE);
+                })
+                .catch(() => {
+                    setStatus(Constants.SEARCH_ERROR)
+                });
+        }
     }, []);
+
+    useEffect(() => {
+        if(props.query) {
+            setStatus(Constants.SEARCH_LOADING);
+            fetchSearchDB(props.query)
+                .then(res => {
+                    setSearchData(res);
+                    if(res.length === 0) {
+                        setStatus(Constants.SEARCH_EMPTY);
+                    } else {
+                        setStatus(Constants.SEARCH_COMPLETE);
+                    }
+                })
+                .catch(() => {
+                    setStatus(Constants.SEARCH_ERROR);
+                })
+        }
+    }, [props.query])
 
     if (status === Constants.SEARCH_LOADING) {
         return (
@@ -66,25 +98,32 @@ function WorkbookSearchResult(props: Props) {
                     <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         좋아요 많은
                     </div>
-                    <WorkbookSearchList editable={false} data={data[0]} />
+                    <WorkbookSearchList editable={false} data={initData[0]} />
 
                     <div style={{ marginTop: "5rem", fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                         새로 나온
                     </div>
-                    <WorkbookSearchList editable={false} data={data[1]} />
+                    <WorkbookSearchList editable={false} data={initData[1]} />
                 </div>
             );
         } else {
             return (
                 <div>
-                    {props.query}
+                    <br/>
+                    <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
+                        검색결과
+                    </div>
+                    <WorkbookSearchList editable={false} data={searchData} />
                 </div>
             );
         }
     } else if (status === Constants.SEARCH_EMPTY) {
         return(
-            <div>
-                검색결과 없음
+            <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                <p>
+                    <br/>
+                    😲 검색 결과가 없습니다!
+                </p>
             </div>
         )
     } else {
