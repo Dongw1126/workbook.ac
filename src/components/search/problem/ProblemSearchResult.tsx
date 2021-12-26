@@ -6,7 +6,6 @@ import ProblemSearchList from "./ProblemSearchList";
 type Props = {
     query: string;
     page: number;
-    lastPage: number;
     setLastPage: React.Dispatch<any>;
 };
 
