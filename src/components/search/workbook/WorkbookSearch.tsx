@@ -3,6 +3,7 @@ import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB } from '../../../models';
 import WorkSearchBar from "./WorkbookSearchBar";
 import WorkbookSearchResult from "./WorkbookSearchResult";
+import WorkbookSearchInit from "./WorkbookSearchInit";
 import usePage from '../../../hooks/usePage';
 
 function WorkbookSearch() {
@@ -17,7 +18,7 @@ function WorkbookSearch() {
             <div style={{ width: "60%", margin: "auto", textAlign: "center" }}>
                 <WorkSearchBar setQuery={handleQuery} />
             </div>
-                <WorkbookSearchResult key={query} query={query}/>
+                {query ? <WorkbookSearchResult key={query} query={query}/> : <WorkbookSearchInit />}
         </div>
     );
 }
