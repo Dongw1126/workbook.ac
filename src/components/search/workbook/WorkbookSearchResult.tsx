@@ -8,7 +8,7 @@ import WorkbookSearchList from "./WorkbookSearchList";
 
 type Props = {
     query: string;
-    // page: number;
+    page: number;
     // lastPage: number;
     // setLastPage: React.Dispatch<any>;
 }
@@ -32,9 +32,10 @@ function WorkbookSearchResult(props: Props) {
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
-        fetchSearchDB(props.query)
+        fetchSearchDB(props.query, props.page)
             .then(res => {
                 setSearchData(res);
+                console.log(res);
                 if(res.length === 0) {
                     setStatus(Constants.SEARCH_EMPTY);
                 } else {
@@ -44,7 +45,7 @@ function WorkbookSearchResult(props: Props) {
             .catch(() => {
                 setStatus(Constants.SEARCH_ERROR);
             })
-    }, [props.query])
+    }, [props.query, props.page]);
 
     if (status === Constants.SEARCH_LOADING) {
         return (

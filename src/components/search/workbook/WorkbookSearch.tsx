@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
-import { WorkbookDB } from '../../../models';
+import React, { useState } from 'react';
 import WorkSearchBar from "./WorkbookSearchBar";
 import WorkbookSearchResult from "./WorkbookSearchResult";
 import WorkbookSearchInit from "./WorkbookSearchInit";
+import MovePage from './MovePageInWorkbook';
 import usePage from '../../../hooks/usePage';
 
 function WorkbookSearch() {
     const [query, setQuery] = useState('');
     const [page, lastPage, setPage, setLastPage] = usePage();
     const handleQuery = (str: string) => {
+        setPage(0);
         setQuery(str);
     }
 
@@ -18,7 +18,9 @@ function WorkbookSearch() {
             <div style={{ width: "60%", margin: "auto", textAlign: "center" }}>
                 <WorkSearchBar setQuery={handleQuery} />
             </div>
-                {query ? <WorkbookSearchResult key={query} query={query}/> : <WorkbookSearchInit />}
+                {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
+                <br/>
+                {query ? <WorkbookSearchResult key={query} query={query} page={page}/> : <WorkbookSearchInit />}
         </div>
     );
 }
