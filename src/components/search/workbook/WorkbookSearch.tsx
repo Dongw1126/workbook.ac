@@ -21,8 +21,11 @@ function WorkbookSearch() {
             </div>
             <div>
                 <br/>
+                {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}
+                <br/>
                 {query ? <WorkbookSearchResult key={query} query={query} page={page}/> : <WorkbookSearchInit />}
-                {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
+                <br/><br/>
+                {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}
                 <br/><br/>
             </div>
         </div>

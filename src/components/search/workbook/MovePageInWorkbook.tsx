@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import FirstPageIcon from '@mui/icons-material/FirstPage';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import PrevPageIcon from '@mui/icons-material/KeyboardArrowLeft';
@@ -14,22 +14,28 @@ interface Props {
 }
 
 function MovePageInWorkbook(props: Props) {
+    const handleMovePage = (_movePage: number) => {
+        window.scrollTo(0, 0);
+        props.setPage(_movePage);
+    }
+
     return (
         <div style={{ textAlign: "center" }}>
             <IconButton disabled={props.page === 0}
                 onClick={() => {
-                    props.setPage(0);
+                    handleMovePage(0);
                 }}>
                 <FirstPageIcon />
             </IconButton>
             <IconButton disabled={props.page === 0}
                 onClick={() => {
-                    props.setPage(props.page - 1);
+                    handleMovePage(props.page - 1);
                 }}>
                 <PrevPageIcon />
             </IconButton>
 
-            <TextField variant="standard" type="text" margin="none" size="small" defaultValue={props.page + 1}
+            <TextField key={props.page}
+                variant="standard" type="text" margin="none" size="small" defaultValue={props.page + 1}
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', style: { textAlign: 'center' } }}
                 style={{ width: "10%", height: "10%", marginTop: "8px" }}
                 InputProps={{
@@ -41,7 +47,7 @@ function MovePageInWorkbook(props: Props) {
                             if(!isNaN(inputPage)) {
                                 inputPage = Math.max(inputPage, 1);
                                 // inputPage = Math.min(inputPage, props.lastPage);
-                                props.setPage(inputPage - 1);
+                                handleMovePage(inputPage - 1);
                             }
                         }
                     }
@@ -50,13 +56,13 @@ function MovePageInWorkbook(props: Props) {
             <IconButton 
                 onClick={() => {
                     // disabled={props.lastPage <= props.page}
-                    props.setPage(props.page + 1);
+                    handleMovePage(props.page + 1);
                 }}>
                 <NextPageIcon />
             </IconButton>
             <IconButton
                 onClick={() => {
-                    props.setPage(props.lastPage);
+                    handleMovePage(props.lastPage);
                 }}>
                 <LastPageIcon />
             </IconButton>
