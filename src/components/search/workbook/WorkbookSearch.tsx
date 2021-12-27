@@ -8,6 +8,7 @@ import usePage from '../../../hooks/usePage';
 function WorkbookSearch() {
     const [query, setQuery] = useState('');
     const [page, lastPage, setPage, setLastPage] = usePage();
+
     const handleQuery = (str: string) => {
         setPage(0);
         setQuery(str);
@@ -18,9 +19,12 @@ function WorkbookSearch() {
             <div style={{ width: "60%", margin: "auto", textAlign: "center" }}>
                 <WorkSearchBar setQuery={handleQuery} />
             </div>
-                {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
+            <div>
                 <br/>
                 {query ? <WorkbookSearchResult key={query} query={query} page={page}/> : <WorkbookSearchInit />}
+                {query && <MovePage key={page} page={page} lastPage={lastPage} setPage={setPage}/>}
+                <br/><br/>
+            </div>
         </div>
     );
 }
