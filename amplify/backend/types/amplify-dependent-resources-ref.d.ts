@@ -16,5 +16,11 @@ export type AmplifyDependentResourcesAttributes = {
             "AppClientIDWeb": "string",
             "AppClientID": "string"
         }
+    },
+    "storage": {
+        "s3workbookacstoragemain": {
+            "BucketName": "string",
+            "Region": "string"
+        }
     }
 }

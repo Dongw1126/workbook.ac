@@ -52,5 +52,12 @@
         ]
       }
     }
+  },
+  "storage": {
+    "s3workbookacstoragemain": {
+      "service": "S3",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }

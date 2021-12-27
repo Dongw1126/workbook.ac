@@ -7,6 +7,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import { useContextMenu } from "react-contexify";
 
 import { DataStore } from '@aws-amplify/datastore';
+import { Storage } from "aws-amplify";
 
 import AlertModal from "../modal/AlertModal";
 import WorkbookContextMenu from "../contextMenu/WorkbookContextMenu";
@@ -131,6 +132,16 @@ function WorkbookCard(props: Props) {
             handleAlertOpen();
         }
     };
+
+    const getCoverImage = async () => {
+        const url = await Storage.get("covers/default0.jpg");
+        return url;
+    }
+
+    /*useEffect(() => {
+        getCoverImage()
+            .then((res) => console.log(res));
+    }, []);*/
 
     useEffect(() => {
         if(userStore.getUser()) {
