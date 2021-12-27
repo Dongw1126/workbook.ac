@@ -39,9 +39,9 @@ function MovePageInWorkbook(props: Props) {
                             let inputPage = Number(ev.value);
                             
                             if(!isNaN(inputPage)) {
-                                inputPage = Math.max(inputPage, 0);
+                                inputPage = Math.max(inputPage, 1);
                                 // inputPage = Math.min(inputPage, props.lastPage);
-                                props.setPage(inputPage);
+                                props.setPage(inputPage - 1);
                             }
                         }
                     }
