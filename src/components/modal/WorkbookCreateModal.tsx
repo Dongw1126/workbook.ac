@@ -31,7 +31,7 @@ function WorkbookCreateModal(props: Props) {
                 "title": _title,
                 "author": props.username,
                 "favorite": 0,
-                "image": "",
+                "image": Constants.DEFAULT_COVER_IMAGE_KEY,
                 "treeDataId": ""
             })
         );
@@ -64,12 +64,12 @@ function WorkbookCreateModal(props: Props) {
         setTitle("");
     };
 
-    const handleWorkbookLimit = () => {
+    /*const handleWorkbookLimit = () => {
         console.log("handleFolderLimit call");
 
         handleClose();
         handleAlertOpen();
-    }
+    }*/
 
     const handleEvent = () => {
         createWorkbook(title)

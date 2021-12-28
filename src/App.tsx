@@ -9,6 +9,7 @@ import { DataStore } from 'aws-amplify';
 import awsconfig from "./aws-exports";
 import { Authenticator } from '@aws-amplify/ui-react';
 
+DataStore.clear();
 Amplify.configure(awsconfig);
 DataStore.start();
 

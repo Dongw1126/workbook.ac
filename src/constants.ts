@@ -1,4 +1,4 @@
-export const SERVER_URL = "http://localhost:5000/";
+export const DEFAULT_COVER_IMAGE_KEY = "covers/default0.jpg";
 
 export const TREE_CONTEXT_MENU_ID = "tree";
 export const WORKBOOK_CONTEXT_MENU_ID = "workbook";

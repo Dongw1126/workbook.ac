@@ -41,6 +41,7 @@ function WorkbookCard(props: Props) {
     const { history } = useRouter();
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
+    const [imgUrl, setImgUrl] = useState("");
     const [fav, setFav] = useState(false);
     const [favNum, setFavNum] = useState(props.data.favorite);
     const [refresh, setRefresh] = useState(false);
@@ -133,17 +134,28 @@ function WorkbookCard(props: Props) {
         }
     };
 
-    const getCoverImage = async () => {
-        const url = await Storage.get("covers/default0.jpg");
+    const getCoverImage = async (_key: string | undefined) => {
+        let currKey: string;
+        if (typeof _key === "undefined") {
+            currKey = Constants.DEFAULT_COVER_IMAGE_KEY;
+        } else {
+            currKey = _key;
+        }
+
+        const url = await Storage.get(currKey);
+        // console.log(url);
         return url;
     }
 
-    /*useEffect(() => {
-        getCoverImage()
-            .then((res) => console.log(res));
-    }, []);*/
+    useEffect(() => {
+        getCoverImage(props.data.image)
+            .then((res) => {
+                setImgUrl(res);
+            });
+    }, []);
 
     useEffect(() => {
+        // 좋아요 정보 불러오기
         if(userStore.getUser()) {
             fetchFavData()
                 .then((res) => {
@@ -164,7 +176,7 @@ function WorkbookCard(props: Props) {
                 <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
                     onClick={() => goToPage("read")}
                 >
-                    <img src={props.data?.image} alt="Workbook Image" onError={handleImgError} />
+                    <img src={imgUrl} alt="Workbook Image" />
                 </div>
                 <div className={styles.cardBody}>
                     <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
