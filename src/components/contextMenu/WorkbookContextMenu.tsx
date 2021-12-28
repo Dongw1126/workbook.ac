@@ -5,6 +5,7 @@ import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 import WorkbookTitleModal from "../modal/WorkbookTitleModal";
 import WorkbookDeleteModal from "../modal/WorkbookDeleteModal";
+import WorkbookImageModal from "../modal/WorkbookImageModal";
 import { WorkbookDB } from '../../models';
 import useDialog from "../../hooks/useDialog";
 import { useRouter } from "../../hooks/useRouter";
@@ -18,6 +19,7 @@ function WorkbookContextMenu(props: Props) {
     const { history } = useRouter();
     const [titleModalOpen, handleTitleModalOpen, handleTitleModalClose] = useDialog();
     const [deleteModalOpen, handleDeleteModalOpen, handleDeleteModalClose] = useDialog();
+    const [imageModalOpen, handleImageModalOpen, handleImageModalClose] = useDialog();
 
     const goToEditPage = () => {
         history.push(`/workbook/edit/${props.data.id}`);
@@ -32,7 +34,7 @@ function WorkbookContextMenu(props: Props) {
                 <Item onClick={handleTitleModalOpen}>
                     이름 바꾸기
                 </Item>
-                <Item>
+                <Item onClick={handleImageModalOpen}>
                     표지 바꾸기
                 </Item>
                 <Item onClick={handleDeleteModalOpen}>
@@ -51,6 +53,10 @@ function WorkbookContextMenu(props: Props) {
                 title={props.data.title}
                 open={titleModalOpen}
                 onClose={handleTitleModalClose}
+            />
+            <WorkbookImageModal 
+                open={imageModalOpen}
+                onClose={handleImageModalClose}
             />
         </div>
     );
