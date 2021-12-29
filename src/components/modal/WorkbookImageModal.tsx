@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { v1 } from 'uuid';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import { Input } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
@@ -10,6 +11,7 @@ import * as Constants from "../../constants";
 import { Storage } from "aws-amplify";
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB } from "../../models";
+
 
 interface Props {
     data: WorkbookDB;
@@ -58,6 +60,7 @@ function WorkbookImageModal(props: Props) {
         if(!error) {
             if(currFile) {
                 console.log("clicked with file");
+                console.log(v1());
             } else {
                 console.log("clicked with null");
             }
