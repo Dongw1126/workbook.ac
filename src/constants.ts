@@ -1,4 +1,5 @@
 export const DEFAULT_COVER_IMAGE_KEY = "covers/default0.jpg";
+export const COVER_IMAGE_SIZE_LIMIT = 307200;
 
 export const TREE_CONTEXT_MENU_ID = "tree";
 export const WORKBOOK_CONTEXT_MENU_ID = "workbook";

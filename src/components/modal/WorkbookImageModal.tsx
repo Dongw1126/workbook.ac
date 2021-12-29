@@ -39,7 +39,7 @@ function WorkbookImageModal(props: Props) {
             setCurrFile(null);
             setError(true);
             setErrMsg("이미지가 아닙니다. (jpg, jpeg, png, gif)");
-        } else if (_file.size > 300000) {
+        } else if (_file.size > Constants.COVER_IMAGE_SIZE_LIMIT) {
             setCurrFile(null);
             setError(true);
             setErrMsg("파일이 너무 큽니다. (300KB 초과)");   
