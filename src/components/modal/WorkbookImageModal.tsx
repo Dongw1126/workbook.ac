@@ -58,12 +58,26 @@ function WorkbookImageModal(props: Props) {
     
     const fileUploadS3 = async () => {
         if(!error) {
+            let s3Key: string;
+
             if(currFile) {
-                console.log("clicked with file");
-                console.log(v1());
+                // console.log("clicked with file");
+                const newKey = Constants.COVER_IMAGE_PATH + v1();
+                const result = await Storage.put(newKey, currFile);
+                s3Key = result.key;
             } else {
-                console.log("clicked with null");
+                // console.log("clicked with null");
+                s3Key = Constants.DEFAULT_COVER_IMAGE_KEY;
             }
+
+            // 이미 이미지가 있는 경우 삭제
+            if ((typeof props.data.image != "undefined") && (props.data.image != Constants.DEFAULT_COVER_IMAGE_KEY)) {
+                await Storage.remove(props.data.image);
+            }
+
+            await DataStore.save(WorkbookDB.copyOf(props.data, item => {
+                item.image = s3Key;
+            }));
         }
         /*try {
             await Storage.put(file.name, file, {
@@ -81,7 +95,9 @@ function WorkbookImageModal(props: Props) {
     };
 
     const handleEvent = () => {
-        fileUploadS3();
+        fileUploadS3()
+            .then(() => dataChangeFlag.effect())
+            .catch(() => alert("표지 변경 중 오류가 발생했습니다."));
     };
 
     return (
