@@ -12,6 +12,7 @@ import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB } from "../../models";
 
 interface Props {
+    data: WorkbookDB;
     open: boolean;
     onClose: () => void;
 }
@@ -22,23 +23,45 @@ interface Props {
 function WorkbookImageModal(props: Props) {
     const dataChangeFlag = myPageChangeFlag;
 
+    const [currFile, setCurrFile] = useState<any>(null);
     const [error, setError] = useState(false);
-    const [errMsg, setErrMsg] = useState("");
+    const [errMsg, setErrMsg] = useState("파일이 없으면 기본 이미지로 대체됩니다.");
 
     const fileValidation = (_file: any) => {
         console.log(_file);
-        if (!_file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+        if (typeof _file === "undefined") {
+            setCurrFile(null);
+            setError(false);
+            setErrMsg("파일이 없으면 기본 이미지로 대체됩니다.");
+        } else if (!_file.name.match(/\.(jpg|jpeg|png|gif)$/)) {
+            setCurrFile(null);
             setError(true);
             setErrMsg("이미지가 아닙니다. (jpg, jpeg, png, gif)");
+        } else if (_file.size > 300000) {
+            setCurrFile(null);
+            setError(true);
+            setErrMsg("파일이 너무 큽니다. (300KB 초과)");   
         } else {
+            // 정상 파일 업로드
+            setCurrFile(_file);
             setError(false);
             setErrMsg("");
         }
     }
-    
-    const fileUploadS3 = async (e: any) => {
+
+    const handleFileOnChange = (e: any) => {
         const file = e.target.files[0];
         fileValidation(file);
+    }
+    
+    const fileUploadS3 = async () => {
+        if(!error) {
+            if(currFile) {
+                console.log("clicked with file");
+            } else {
+                console.log("clicked with null");
+            }
+        }
         /*try {
             await Storage.put(file.name, file, {
                 contentType: "image/png", // contentType is optional
@@ -55,7 +78,7 @@ function WorkbookImageModal(props: Props) {
     };
 
     const handleEvent = () => {
-        
+        fileUploadS3();
     };
 
     return (
@@ -67,7 +90,7 @@ function WorkbookImageModal(props: Props) {
                         <Input 
                             type="file" 
                             inputProps={{ accept: '.gif, .jpg, .jpeg, .png'}} 
-                            onChange={fileUploadS3}
+                            onChange={handleFileOnChange}
                         />
                         <FormHelperText>{errMsg}</FormHelperText>
                     </FormControl>

@@ -55,6 +55,7 @@ function WorkbookContextMenu(props: Props) {
                 onClose={handleTitleModalClose}
             />
             <WorkbookImageModal 
+                data={props.data}
                 open={imageModalOpen}
                 onClose={handleImageModalClose}
             />
