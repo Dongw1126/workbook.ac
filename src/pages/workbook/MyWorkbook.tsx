@@ -47,9 +47,13 @@ function MyWorkbook() {
         });
         
         const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername));
-        myFavorite = await DataStore.query(WorkbookDB, (c) =>
-            c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c))
-        );
+        if(favId.length > 0 ) {
+            myFavorite = await DataStore.query(WorkbookDB, (c) =>
+                c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c))
+            );
+        }
+        console.log(favId);
+        console.log(myFavorite)
 
         return [myWorkbook, myFavorite];
     };  
@@ -61,7 +65,6 @@ function MyWorkbook() {
                 .then((res) => {
                     setData(res);
                     setStatus(Constants.SEARCH_COMPLETE);
-                    console.log(res[0]);
                 })
                 .catch(() => {
                     setStatus(Constants.SEARCH_ERROR);
@@ -99,7 +102,7 @@ function MyWorkbook() {
                     </div>
                     {data[0].length !== 0 ?
                         (<div>
-                            <WorkbookList key={flag} editable={true} data={data[0]} />
+                            <WorkbookList key={flag} editable={true} animated={false} data={data[0]} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>
@@ -117,7 +120,7 @@ function MyWorkbook() {
                     </div>
                     {data[1].length !== 0 ?
                         (<div>
-                            <WorkbookList editable={true} data={data[1]} />
+                            <WorkbookList editable={false} animated={false} data={data[1]} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>

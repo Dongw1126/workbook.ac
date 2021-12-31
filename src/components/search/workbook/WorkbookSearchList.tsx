@@ -10,6 +10,7 @@ import WorkbookCard from "../../workbook/WorkbookCard";
 
 type Props = {
     editable: boolean;
+    animated: boolean;
     data: WorkbookDB[];
 }
 
@@ -30,7 +31,7 @@ function WorkbookSearchList(props: Props) {
             {transition((style, item) => (
                 <animated.div style={style}>
                     <WorkbookCard key={item.id} editable={props.editable} 
-                    data={item} animated={!props.editable} shadow={true} />
+                    data={item} animated={props.animated} shadow={true} />
                 </animated.div>
             ))}
         </div>

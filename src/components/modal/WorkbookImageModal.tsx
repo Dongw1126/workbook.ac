@@ -1,6 +1,13 @@
 import React, { useState } from 'react';
 import { v1 } from 'uuid';
-import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
+import { 
+    DialogContent, 
+    DialogContentText, 
+    DialogTitle, 
+    Dialog, 
+    DialogActions, 
+    Button
+} from '@mui/material';
 import { Input } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
@@ -79,14 +86,6 @@ function WorkbookImageModal(props: Props) {
                 item.image = s3Key;
             }));
         }
-        /*try {
-            await Storage.put(file.name, file, {
-                contentType: "image/png", // contentType is optional
-            });
-        } catch (error) {
-            alert("파일 업로드 오류");
-            console.log("Error uploading file: ", error);
-        }*/
     }
 
 
@@ -105,6 +104,9 @@ function WorkbookImageModal(props: Props) {
             <Dialog onClose={handleClose} open={props.open} >
                 <DialogTitle>문제집 표지 바꾸기</DialogTitle>
                 <DialogContent>
+                    <DialogContentText sx={{ color: "black", fontSize: "small" }}>
+                        권장 크기: 240 x 240 px
+                    </DialogContentText>
                     <FormControl error={error}>
                         <Input 
                             type="file" 

@@ -61,7 +61,7 @@ function WorkbookSearchResult(props: Props) {
                 <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                     검색결과
                 </div>
-                <WorkbookSearchList editable={false} data={searchData} />
+                <WorkbookSearchList animated={true} editable={false} data={searchData} />
             </div>
         );      
     } else if (status === Constants.SEARCH_EMPTY) {

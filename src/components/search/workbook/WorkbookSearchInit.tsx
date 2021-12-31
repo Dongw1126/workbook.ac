@@ -59,12 +59,12 @@ function WorkbookSearchResult() {
                 <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                     좋아요 많은
                 </div>
-                <WorkbookSearchList editable={false} data={initData[0]} />
+                <WorkbookSearchList animated={true} editable={false} data={initData[0]} />
 
                 <div style={{ marginTop: "5rem", fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                     새로 나온
                 </div>
-                <WorkbookSearchList editable={false} data={initData[1]} />
+                <WorkbookSearchList animated={true} editable={false} data={initData[1]} />
             </div>
         );
     } 
