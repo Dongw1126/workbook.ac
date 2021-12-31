@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Menu, Item } from "react-contexify";
 import "react-contexify/dist/ReactContexify.css";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ImageIcon from '@mui/icons-material/Image';
+import ArticleIcon from '@mui/icons-material/Article';
+import SegmentIcon from '@mui/icons-material/Segment';
 
 import WorkbookTitleModal from "../modal/WorkbookTitleModal";
 import WorkbookDeleteModal from "../modal/WorkbookDeleteModal";
@@ -29,12 +32,15 @@ function WorkbookContextMenu(props: Props) {
         <div>
             <Menu id={props.data.id} style={{ zIndex: Constants.CONTEXT_MENU_Z_INDEX }}>
                 <Item onClick={goToEditPage}>
+                   <ArticleIcon style={{ marginRight: 5 }} />
                     문제집 편집
                 </Item>
                 <Item onClick={handleTitleModalOpen}>
+                  <SegmentIcon style={{ marginRight: 5 }} />
                     이름 바꾸기
                 </Item>
                 <Item onClick={handleImageModalOpen}>
+                    <ImageIcon style={{ marginRight: 5 }} />
                     표지 바꾸기
                 </Item>
                 <Item onClick={handleDeleteModalOpen}>
