@@ -138,8 +138,11 @@ function WorkbookCard(props: Props) {
         }
 
         const url = await Storage.get(currKey);
-        // console.log(url);
-        return url;
+        //console.log(url);
+
+        // 캐시 활성화를 위해 public URL 사용
+        const urlWithoutSigniture = url.substring(0, url.indexOf('?'));
+        return urlWithoutSigniture;
     }
 
     useEffect(() => {
@@ -172,7 +175,7 @@ function WorkbookCard(props: Props) {
                 <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
                     onClick={() => goToPage("read")}
                 >
-                    <img src={imgUrl} alt="Workbook Image" />
+                    <img src={imgUrl} alt="Workbook Image" loading="lazy"/>
                 </div>
                 <div className={styles.cardBody}>
                     <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} 

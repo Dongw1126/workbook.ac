@@ -52,8 +52,6 @@ function MyWorkbook() {
                 c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c))
             );
         }
-        console.log(favId);
-        console.log(myFavorite)
 
         return [myWorkbook, myFavorite];
     };  
