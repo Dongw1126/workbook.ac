@@ -30,7 +30,7 @@ function WorkbookDeleteModal(props: Props) {
     const dataChangeFlag = myPageChangeFlag;
 
     const handleDelete = useCallback(() => {
-        if (userStore.getUser().username == props.data.author) {
+        if (userStore.checkUsername(props.data.author)) {
             deleteWorkbook(props.data)
                 .then(() => dataChangeFlag.effect())
                 .catch(() => alert("문제집 삭제 중 오류가 발생했습니다."));

@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
-import AlertModal from "./AlertModal";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
+import UserStore from '../../stores/UserStore';
 
 import * as Constants from "../../constants";
 
@@ -21,6 +21,7 @@ interface Props {
  * 문제집 생성 - 타이틀 입력 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
+    const userStore = UserStore;
     const dataChangeFlag = myPageChangeFlag;
     const [title, setTitle] = useState("");
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
@@ -65,10 +66,13 @@ function WorkbookCreateModal(props: Props) {
     };
     
     const handleEvent = () => {
-        createWorkbook(title)
-            .then((res) => updateId(res))
-            .then(() => dataChangeFlag.effect())
-            .catch(() => alert("문제집 생성 중 오류가 발생했습니다."));
+        if (userStore.checkUsername(props.username)) {
+            createWorkbook(title)
+                .then((res) => updateId(res))
+                .then(() => dataChangeFlag.effect())
+                .catch(() => alert("문제집 생성 중 오류가 발생했습니다."));
+        }
+        
         handleClose();
     };
 

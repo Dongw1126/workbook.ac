@@ -27,11 +27,6 @@ type Props = {
     cursorDefault?: boolean;
 }
 
-const handleImgError = (e: any) => {
-    e.target.onerror = null;
-    e.target.src = process.env.PUBLIC_URL + "/images/wb-basic.jpg";
-}
-
 /**
  * 문제집 카드 컴포넌트
  */
@@ -171,8 +166,9 @@ function WorkbookCard(props: Props) {
     return (
         <>
             <div className={`${styles.card} 
-            ${props.animated ? styles.cardAnimation : ""}
-            ${props.shadow ? styles.cardShadow : ""}`}>
+                ${props.animated ? styles.cardAnimation : ""}
+                ${props.shadow ? styles.cardShadow : ""}`}
+            >
                 <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
                     onClick={() => goToPage("read")}
                 >

@@ -2,15 +2,16 @@ import React, { useState } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
+import UserStore from '../../stores/UserStore';
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import * as Constants from "../../constants";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB } from "../../models";
 
+
 interface Props {
-    id: string;
-    title: string;
+    data: WorkbookDB;
     open: boolean;
     onClose: () => void;
 }
@@ -19,8 +20,9 @@ interface Props {
  * 문제집 제목 수정 Modal 창
  */
 function WorkbookCreateModal(props: Props) {
+    const userStore = UserStore;
     const dataChangeFlag = myPageChangeFlag;
-    const [title, setTitle] = useState(props.title);
+    const [title, setTitle] = useState(props.data.title);
 
     const fetchData = async (_id: string) => {
         const wb = await DataStore.query(WorkbookDB, _id);
@@ -36,14 +38,17 @@ function WorkbookCreateModal(props: Props) {
     const handleClose = () => {
         props.onClose();
         console.log("handleClose call");
-        setTitle(props.title);
+        setTitle(props.data.title);
     };
 
     const handleEvent = () => {
-        fetchData(props.id)
-            .then((res) => updateTitle(res!, title))
-            .then(() => dataChangeFlag.effect())
-            .catch(() => alert("이름 변경 중 오류가 발생했습니다."));
+        if (userStore.checkUsername(props.data.author)) {
+            fetchData(props.data.id)
+                .then((res) => updateTitle(res!, title))
+                .then(() => dataChangeFlag.effect())
+                .catch(() => alert("이름 변경 중 오류가 발생했습니다."));
+        }
+
         handleClose();
     };
 
@@ -70,7 +75,7 @@ function WorkbookCreateModal(props: Props) {
                         autoFocus
                         margin="dense"
                         label="문제집 제목"
-                        defaultValue={props.title}
+                        defaultValue={props.data.title}
                         type='text'
                         fullWidth
                         variant="standard"

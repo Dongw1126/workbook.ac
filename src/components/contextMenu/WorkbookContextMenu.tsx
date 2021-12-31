@@ -49,8 +49,7 @@ function WorkbookContextMenu(props: Props) {
                 onClose={handleDeleteModalClose}
             />
             <WorkbookTitleModal 
-                id={props.data.id}
-                title={props.data.title}
+                data={props.data}
                 open={titleModalOpen}
                 onClose={handleTitleModalClose}
             />

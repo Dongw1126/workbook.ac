@@ -12,6 +12,7 @@ import { Input } from '@mui/material';
 import FormHelperText from '@mui/material/FormHelperText';
 import FormControl from '@mui/material/FormControl';
 
+import UserStore from '../../stores/UserStore';
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import * as Constants from "../../constants";
 
@@ -31,6 +32,7 @@ interface Props {
  */
 function WorkbookImageModal(props: Props) {
     const dataChangeFlag = myPageChangeFlag;
+    const userStore = UserStore;
 
     const [currFile, setCurrFile] = useState<any>(null);
     const [error, setError] = useState(false);
@@ -94,9 +96,11 @@ function WorkbookImageModal(props: Props) {
     };
 
     const handleEvent = () => {
-        fileUploadS3()
-            .then(() => dataChangeFlag.effect())
-            .catch(() => alert("표지 변경 중 오류가 발생했습니다."));
+        if (userStore.checkUsername(props.data.author)) {
+            fileUploadS3()
+                .then(() => dataChangeFlag.effect())
+                .catch(() => alert("표지 변경 중 오류가 발생했습니다."));
+        }
     };
 
     return (

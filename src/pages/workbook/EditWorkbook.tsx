@@ -76,7 +76,6 @@ function EditWorkbook() {
     }
 
     const handleCancelClick = () => {
-        console.log(history.length);
         if (history.length > 1) {
             history.goBack();
         } else {
