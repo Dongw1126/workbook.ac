@@ -43,10 +43,11 @@ function EditWorkbook() {
             const errMessage = "오류: 권한 없음"
             setError(errMessage);
             setStatus(Constants.SEARCH_ERROR);
-            throw new Error(errMessage);
+            
+            return false;
         }
         
-        return null;
+        return true;
     }
 
     const fetchData = async () => {
@@ -55,9 +56,9 @@ function EditWorkbook() {
         const workbookFetched = await DataStore.query(WorkbookDB, params.id);
         
         // 편집 권한 체크
-        const checkUserResult = workbookFetched ? checkUser(workbookFetched.author) : null;
-        if(checkUserResult) {
-            return checkUserResult;
+        const checkUserResult = workbookFetched ? checkUser(workbookFetched.author) : false;
+        if(!checkUserResult) {
+            throw new Error("편집 권한 없음");
         }
 
         const treeFetched = await DataStore.query(TreeDataDB, c =>
