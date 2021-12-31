@@ -41,7 +41,7 @@ function MyWorkbook() {
 
         const myUsername = userStore.getUser().username;
         myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), {
-            sort: s => s.title(SortDirection.ASCENDING),
+            sort: s => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING),
             page: 0,
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
         });
