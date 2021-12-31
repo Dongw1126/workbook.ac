@@ -11,7 +11,7 @@ export const SEARCH_WORKBOOK_LOAD_NUM = 20;
 export const TREE_ITEM_SPACE = 36;
 
 export const MAX_FOLDER_NUM = 50 + 1;
-export const MAX_WORKBOOK_NUM = 100;
+// export const MAX_WORKBOOK_NUM = 100;
 
 export const MAX_WORKBOOK_NAME = 25;
 export const MAX_FOLDER_NAME = 20;

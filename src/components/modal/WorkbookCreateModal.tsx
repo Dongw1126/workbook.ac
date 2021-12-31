@@ -63,14 +63,7 @@ function WorkbookCreateModal(props: Props) {
         console.log("handleClose call");
         setTitle("");
     };
-
-    /*const handleWorkbookLimit = () => {
-        console.log("handleFolderLimit call");
-
-        handleClose();
-        handleAlertOpen();
-    }*/
-
+    
     const handleEvent = () => {
         createWorkbook(title)
             .then((res) => updateId(res))
@@ -112,12 +105,6 @@ function WorkbookCreateModal(props: Props) {
                     <Button variant="outlined" onClick={handleClose}>취소</Button>
                 </DialogActions>
             </Dialog>
-            <AlertModal
-                title="알림"
-                content="문제집은 최대 50개까지 생성 가능합니다!"
-                open={alertOpen} 
-                onClose={handleAlertClose}
-            />
         </div>
     );
 }

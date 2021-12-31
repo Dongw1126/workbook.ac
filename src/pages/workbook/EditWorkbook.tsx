@@ -36,29 +36,17 @@ function EditWorkbook() {
     const [data, setData] = useState<TreeDataDB>();
     const [error, setError] = useState("");
 
-    const checkUser = (_author: string) => {
-        const currentUser = userStore.getUser();
-
-        if(!currentUser || (currentUser.username != _author)) {
-            const errMessage = "오류: 권한 없음"
-            setError(errMessage);
-            setStatus(Constants.SEARCH_ERROR);
-            
-            return false;
-        }
-        
-        return true;
-    }
-
     const fetchData = async () => {
-        const params = match.params as MatchParams;    
-
+        const params = match.params as MatchParams;
         const workbookFetched = await DataStore.query(WorkbookDB, params.id);
         
         // 편집 권한 체크
-        const checkUserResult = workbookFetched ? checkUser(workbookFetched.author) : false;
+        const checkUserResult = workbookFetched ? userStore.checkUsername(workbookFetched.author) : false;
         if(!checkUserResult) {
-            throw new Error("편집 권한 없음");
+            const errMessage = "오류: 권한 없음"
+            setError(errMessage);
+            setStatus(Constants.SEARCH_ERROR);
+            throw new Error(errMessage);
         }
 
         const treeFetched = await DataStore.query(TreeDataDB, c =>
