@@ -72,7 +72,9 @@ function WorkbookImageModal(props: Props) {
             if(currFile) {
                 // console.log("clicked with file");
                 const newKey = Constants.COVER_IMAGE_PATH + v1();
-                const result = await Storage.put(newKey, currFile);
+                const result = await Storage.put(newKey, currFile, {
+                    contentType: currFile.type
+                });
                 s3Key = result.key;
             } else {
                 // console.log("clicked with null");
