@@ -1,10 +1,21 @@
+type FavoriteDB @model @auth(rules: [{allow: public}]) {
+  id: ID!
+  username: String!
+  workbookId: ID!
+}
+
 type WorkbookDB @model @auth(rules: [{allow: public}]) {
   id: ID!
-  public: Boolean!
   title: String!
+  author: String!
   favorite: Int!
   image: String
-  author: String!
+  treeDataId: ID
+}
+
+type TreeDataDB @model @auth(rules: [{allow: public}]) {
+  id: ID!
   treeData: AWSJSON
+  workbookId: ID
 }
  

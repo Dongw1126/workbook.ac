@@ -6,7 +6,6 @@ import ProblemSearchList from "./ProblemSearchList";
 type Props = {
     query: string;
     page: number;
-    lastPage: number;
     setLastPage: React.Dispatch<any>;
 };
 
@@ -38,7 +37,7 @@ function ProblemSearchResult(props: Props) {
         if(!error && data) {
             props.setLastPage(Math.ceil(data.count / 100));
         }
-    }, [data])
+    }, [data, error])
 
     //빈 쿼리
     if (!props.query) {

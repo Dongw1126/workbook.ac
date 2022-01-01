@@ -1,5 +1,5 @@
 import { useTransition, useChain, animated, useSpringRef } from 'react-spring';
-import { WorkbookData } from "../../../types/Types";
+import { WorkbookDB } from '../../../models';
 import WorkbookCard from "../../workbook/WorkbookCard";
 
 
@@ -10,7 +10,8 @@ import WorkbookCard from "../../workbook/WorkbookCard";
 
 type Props = {
     editable: boolean;
-    data: WorkbookData[];
+    animated: boolean;
+    data: WorkbookDB[];
 }
 
 function WorkbookSearchList(props: Props) {
@@ -27,13 +28,25 @@ function WorkbookSearchList(props: Props) {
 
     return (
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
-            {transition((style, item) => (
-                <animated.div style={style}>
-                    <WorkbookCard key={item.id} editable={props.editable} data={item} animated={true} />
-                </animated.div>
-            ))}
+            {props.data.map(
+                (item, index) => {
+                    return(
+                        <WorkbookCard key={item.id} editable={props.editable} 
+                        data={item} animated={props.animated} shadow={true} />
+                    )
+                }
+            )}
         </div>
     );
 }
+
+/*
+            {transition((style, item) => (
+                <animated.div style={style}>
+                    <WorkbookCard key={item.id} editable={props.editable} 
+                    data={item} animated={props.animated} shadow={true} />
+                </animated.div>
+            ))}
+*/
 
 export default WorkbookSearchList;

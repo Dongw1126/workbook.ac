@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import UserStore from '../stores/UserStore';
 
 import ScrollToTop from "./ScrollToTop";
 import WorkbookSearch from "./search/workbook/WorkbookSearch";
@@ -11,6 +12,11 @@ import Nav from "../pages/Nav"
 import Guide from '../pages/Guide';
 
 function MainComponent() {
+    const userStore = UserStore;
+    useEffect(() => {
+        userStore.updateUser();
+    }, []);
+
     return (
         <BrowserRouter>
             <ScrollToTop />
@@ -20,7 +26,9 @@ function MainComponent() {
                 <Route exact path="/guide" component={Guide} />
                 <Route exact path="/workbook/search" component={WorkbookSearch} />
                 <Route exact path="/workbook/read" component={ReadWorkbook} />
+                <Route exact path="/workbook/read/:id" component={ReadWorkbook} />
                 <Route exact path="/workbook/edit" component={EditWorkbook} />
+                <Route exact path="/workbook/edit/:id" component={EditWorkbook} />
                 <Route exact path="/workbook/my" component={MyWorkbook} />
             </Switch>
         </BrowserRouter>

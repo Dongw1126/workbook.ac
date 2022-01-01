@@ -13,7 +13,7 @@ interface Props {
     lastPage: number
 }
 
-function MovePage(props: Props) {
+function MovePageInProblem(props: Props) {
     return (
         <div style={{ textAlign: "center" }}>
             <IconButton disabled={props.page === 1}
@@ -31,7 +31,7 @@ function MovePage(props: Props) {
 
             <TextField variant="standard" type="text" margin="none" size="small" defaultValue={props.page}
                 inputProps={{ inputMode: 'numeric', pattern: '[0-9]*', style: { textAlign: 'center' } }}
-                style={{ width: "10%", height: "10%", marginTop: "1%" }}
+                style={{ width: "10%", height: "10%", marginTop: "8px" }}
                 InputProps={{
                     onKeyDown: (event: React.KeyboardEvent<HTMLInputElement>) => {
                         if (event.key === 'Enter') {
@@ -63,4 +63,4 @@ function MovePage(props: Props) {
     );
 }
 
-export default MovePage;
+export default MovePageInProblem;

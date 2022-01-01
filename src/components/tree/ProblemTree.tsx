@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Observer } from "mobx-react";
 import { toJS } from "mobx";
 import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
@@ -29,19 +29,13 @@ function ProblemTree(props: Props) {
   const problemList = problemListStore;
   const selectedNode = selectedNodeStore;
 
-  const [newOpenIds, setNewOpenIds] = useState<NodeModel["id"][]>(
-    () => JSON.parse(window.localStorage.getItem("openIds") || "[]")
-  );
-
-  const ref = useRef<TreeMethods>(null);
-
   // ContextMenu 관련 함수
   const { show, hideAll } = useContextMenu({
     id: Constants.TREE_CONTEXT_MENU_ID
   });
 
   const displayMenu = (e: any) => {
-    console.log("displayMenu call");
+    // console.log("displayMenu call");
     e.stopPropagation();
     show(e);
   };
@@ -51,47 +45,24 @@ function ProblemTree(props: Props) {
     resetSelect();
   };
 
-  
-  // newOpenIds로 부터 열려있던 폴더 상태 불러옴
-  const handleOpen = useCallback(() => {
-    console.log("handleOpen call");
-
-    if (ref.current?.open) {
-      ref.current.open(newOpenIds);
-    }
-  }, [newOpenIds])
-
-  useEffect(() => {
-    handleOpen();
-  }, []);
-
   // 노드 선택 시 호출
   const handleSelect = (node: NodeModel) => {
-    console.log("handleSelect call");
+    // console.log("handleSelect call");
 
     selectedNode.setNode(node);
   }
 
   const resetSelect = () => {
-    console.log("resetSelect call");
+    // console.log("resetSelect call");
 
     selectedNode.setNode(undefined);
   }
 
   const handleDrop = (newTree: NodeModel<ProblemData>[]) => {
-    console.log("handleDrop call");
+    // console.log("handleDrop call");
 
     problemList.setData(newTree);
   }
-
-  // 폴더를 열때 호출
-  const handleChangeOpen = useCallback((_newOpenIds: NodeModel["id"][]) => {
-    console.log("handleChangeOpen call");
-
-    // 어떤 폴더들을 열었는지 상태 저장
-    setNewOpenIds(_newOpenIds);
-    window.localStorage.setItem("openIds", JSON.stringify(_newOpenIds));
-  }, [setNewOpenIds]);
 
   return (
     <Observer>
@@ -99,7 +70,6 @@ function ProblemTree(props: Props) {
         <div onContextMenu={rootDisplayMenu}>
           <div className={styles.treeapp}>
             <Tree
-              ref={ref}
               tree={toJS(problemList.data)}
               rootId={0}
               render={(
@@ -119,7 +89,6 @@ function ProblemTree(props: Props) {
                 />
               )}
               onDrop={props.editable ? handleDrop : () => {}}
-              onChangeOpen={handleChangeOpen}
               classes={{
                 root: styles.treeRoot,
                 draggingSource: styles.draggingSource,
@@ -132,7 +101,7 @@ function ProblemTree(props: Props) {
                   }
                 } : undefined}
               sort={false}
-              insertDroppableFirst={!props.editable}
+              insertDroppableFirst={false}
               dropTargetOffset={props.editable ? 7 : undefined}
               placeholderRender={props.editable ? (node, { depth }) => (
                 <Placeholder node={node} depth={depth} />

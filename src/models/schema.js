@@ -1,5 +1,71 @@
 export const schema = {
     "models": {
+        "FavoriteDB": {
+            "name": "FavoriteDB",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "username": {
+                    "name": "username",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "workbookId": {
+                    "name": "workbookId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "FavoriteDBS",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
+        },
         "WorkbookDB": {
             "name": "WorkbookDB",
             "fields": {
@@ -10,15 +76,15 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "public": {
-                    "name": "public",
+                "title": {
+                    "name": "title",
                     "isArray": false,
-                    "type": "Boolean",
+                    "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
+                "author": {
+                    "name": "author",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
@@ -38,17 +104,10 @@ export const schema = {
                     "isRequired": false,
                     "attributes": []
                 },
-                "author": {
-                    "name": "author",
+                "treeDataId": {
+                    "name": "treeDataId",
                     "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "treeData": {
-                    "name": "treeData",
-                    "isArray": false,
-                    "type": "AWSJSON",
+                    "type": "ID",
                     "isRequired": false,
                     "attributes": []
                 },
@@ -93,9 +152,75 @@ export const schema = {
                     }
                 }
             ]
+        },
+        "TreeDataDB": {
+            "name": "TreeDataDB",
+            "fields": {
+                "id": {
+                    "name": "id",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "treeData": {
+                    "name": "treeData",
+                    "isArray": false,
+                    "type": "AWSJSON",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "workbookId": {
+                    "name": "workbookId",
+                    "isArray": false,
+                    "type": "ID",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "createdAt": {
+                    "name": "createdAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                },
+                "updatedAt": {
+                    "name": "updatedAt",
+                    "isArray": false,
+                    "type": "AWSDateTime",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isReadOnly": true
+                }
+            },
+            "syncable": true,
+            "pluralName": "TreeDataDBS",
+            "attributes": [
+                {
+                    "type": "model",
+                    "properties": {}
+                },
+                {
+                    "type": "auth",
+                    "properties": {
+                        "rules": [
+                            {
+                                "allow": "public",
+                                "operations": [
+                                    "create",
+                                    "update",
+                                    "delete",
+                                    "read"
+                                ]
+                            }
+                        ]
+                    }
+                }
+            ]
         }
     },
     "enums": {},
     "nonModels": {},
-    "version": "ea2e6c3e80dc4aea548329a6201386f7"
+    "version": "db7fbd30990e1e3682af828444d55f81"
 };

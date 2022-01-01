@@ -31,3 +31,8 @@
 .navContent:hover {
     background-color: #dbdbdb;
 }
+
+.navLogin {
+    width: 90px;
+    float: right;
+}

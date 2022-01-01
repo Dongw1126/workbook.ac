@@ -1,0 +1,14 @@
+{
+  "resourceName": "s3workbookacstoragemain",
+  "bucketName": "workbookac-storage-main",
+  "policyUUID": "c4bed78f",
+  "storageAccess": "authAndGuest",
+  "guestAccess": [
+    "READ"
+  ],
+  "authAccess": [
+    "READ",
+    "DELETE",
+    "CREATE_AND_UPDATE"
+  ]
+}

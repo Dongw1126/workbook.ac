@@ -13,7 +13,7 @@ interface Props {
 /**
  * 삭제 확인 Modal 창
  */
-function DeleteModal(props: Props) {
+function TreeDeleteModal(props: Props) {
     const problemList = problemListStore;
     const selectedNode = selectedNodeStore;
     const [name, setName] = useState("");
@@ -47,4 +47,4 @@ function DeleteModal(props: Props) {
     );
 }
 
-export default DeleteModal;
+export default TreeDeleteModal;

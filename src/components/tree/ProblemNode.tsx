@@ -34,7 +34,7 @@ function ProblemNode(props: Props) {
   const url = "https://www.acmicpc.net/problem/" + data?.problemId;
 
   const handleToggle = useCallback((e: React.MouseEvent) => {
-    console.log("handleToggle call");
+    // console.log("handleToggle call");
 
     e.stopPropagation();
     props.onToggle(props.node.id);

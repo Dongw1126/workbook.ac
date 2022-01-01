@@ -8,14 +8,14 @@ export type ProblemData = {
   voteCnt?: number;
   // tierShown, etc
 };
-
+/*
 export type WorkbookData = {
-  id: number;
+  id: string;
   title: string;
   author: string;
   favorite: number;
-  img: string;
-}
+  image?: string;
+}*/
 
 export class Node {
   data: NodeModel<ProblemData> | undefined;
@@ -80,7 +80,7 @@ export class ProblemList {
   }
 
   setData(_treeData: NodeModel<ProblemData>[]) {
-    console.log("setData");
+    // console.log("setData");
     this.data = _treeData;
 
     this.updateIdArray();
@@ -89,7 +89,7 @@ export class ProblemList {
 
   /** selectedNode 하위에 새로운 폴더 추가 */
   addFolder(folderName: string, _selectedNode?: NodeModel) {
-    console.log("addFolder call");
+    // console.log("addFolder call");
 
     let newId = -1;
     for (let i = 1; i < Constants.MAX_FOLDER_NUM; i++) {
@@ -128,7 +128,7 @@ export class ProblemList {
 
   /** selectedNode 하위에 새로운 문제 추가 */
   addProblem(_problemId: number, _level: number, _text: string, _voteCnt?: number, _selectedNode?: NodeModel) {
-    console.log("addProblem call");
+    // console.log("addProblem call");
 
     let isDup = false;
     this.data.forEach((element) => {
@@ -167,12 +167,12 @@ export class ProblemList {
     this.data.push(newProblem);
     this.problemNum++;
 
-    console.log(this.problemNum);
+    // console.log(this.problemNum);
     return true;
   }
 
   editFolderName(folderName: string, _selectedNode?: NodeModel) {
-    console.log("editFolderName call");
+    // console.log("editFolderName call");
     if (typeof _selectedNode !== 'undefined') {
       this.data.forEach((element) => {
         if (element.id === _selectedNode.id) {
@@ -198,7 +198,7 @@ export class ProblemList {
 
   /** 해당 노드와 하위 노드를 삭제 */
   deleteNode(_del?: NodeModel) {
-    console.log("deleteNode call");
+    // console.log("deleteNode call");
 
     this.tree = new Tree(this.data);
     this.data = [];
