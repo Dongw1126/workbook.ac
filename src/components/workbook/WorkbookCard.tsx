@@ -35,11 +35,15 @@ function WorkbookCard(props: Props) {
 
     const { history } = useRouter();
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
-
+    
+    const [disabled, setDisabled] = useState(true);
     const [imgUrl, setImgUrl] = useState("");
     const [fav, setFav] = useState(false);
     const [favNum, setFavNum] = useState(props.data.favorite);
     const [refresh, setRefresh] = useState(false);
+
+    const _hideImage = () => setDisabled(true);
+    const _displayImage = () => setDisabled(false);
 
     const goToPage = (_path: string) => {
         history.push("/workbook/" + _path + `/${props.data.id}`);
@@ -175,7 +179,13 @@ function WorkbookCard(props: Props) {
                 <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
                     onClick={() => goToPage("read")}
                 >
-                    <img src={imgUrl} alt="Workbook Image" loading="lazy"/>
+                    <img
+                        src={imgUrl} 
+                        alt="Workbook Image"
+                        onError={_hideImage}
+                        onLoad={_displayImage}
+                        style={{ visibility: disabled ? "hidden" : "visible" }}
+                    />
                 </div>
                 <div className={styles.cardBody}>
                     <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
