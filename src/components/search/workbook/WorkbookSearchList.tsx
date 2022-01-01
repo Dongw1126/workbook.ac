@@ -31,8 +31,10 @@ function WorkbookSearchList(props: Props) {
             {props.data.map(
                 (item, index) => {
                     return(
-                        <WorkbookCard key={item.id} editable={props.editable} 
-                        data={item} animated={props.animated} shadow={true} />
+                        <div style={{ display: "block" }}>
+                            <WorkbookCard key={item.id} editable={props.editable} 
+                            data={item} animated={props.animated} shadow={true} />
+                        </div>
                     )
                 }
             )}
