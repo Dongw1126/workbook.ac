@@ -9,11 +9,12 @@
 }
 
 .content {
-    font-size: 2.2rem;
+    font-size: 1.8rem;
     line-height: 2;
 }
 
 .subTitle {
+    user-select: none;
     white-space: nowrap;
     padding: 0 0 0 40px;
     font-weight: bolder;
@@ -33,7 +34,7 @@
 }
 
 .usage {
-    margin-right: 30%;
+    margin-left: 30%;
 }
   
 

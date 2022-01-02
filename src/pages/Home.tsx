@@ -50,7 +50,7 @@ function Home() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className={styles.content}>
                     <p>
-                        WORKBOOK.AC는 <a href="#">solved.ac</a>를 기반으로 만들어진 문제집 제작, 공유 플랫폼입니다.
+                        WORKBOOK.AC는 <a href="https://solved.ac">solved.ac</a>를 기반으로 만들어진 문제집 제작, 공유 플랫폼입니다.
                     </p>
                     원하는 문제를 골라 문제집을 만들어보고 <br />
                     사람들과 함께 공유해보세요. <br />
@@ -75,7 +75,7 @@ function Home() {
                         문제집을 써보고 싶으시다면 ⟶ <Link to="/workbook/search">문제집 둘러보기</Link>
                     </p>
                     <p>
-                        문제집을 직접 만들어보려면 ⟶ <Link to="/workbook/edit">문제집 만들어보기</Link>
+                        문제집을 직접 만들어보려면 ⟶ <Link to="/workbook/my">문제집 만들어보기</Link>
                     </p>
                     <p>
                         이 프로젝트에 기여하고 싶으시다면 ⟶ <a href="#">기여하기</a>

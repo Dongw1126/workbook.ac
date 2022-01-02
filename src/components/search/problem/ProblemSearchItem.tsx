@@ -11,6 +11,7 @@ import AlertModal from "../../modal/AlertModal";
 import useDialog from '../../../hooks/useDialog';
 import problemListStore from "../../../stores/ProblemListStore";
 import selectedNodeStore from "../../../stores/SelectedNodeStore";
+import * as Constants from "../../../constants";
 
 type Props = {
     level: number;
@@ -29,7 +30,7 @@ function ProblemSearchItem(props: Props) {
     const [limitAlertOpen, handleLimitAlertOpen, handleLimitAlertClose] = useDialog();
 
     const handleAddClick = (e: React.MouseEvent) => {
-        if(problemList.problemNum >= 150) {
+        if(problemList.problemNum >= Constants.MAX_PROBLEM_NUM) {
             handleLimitAlertOpen();
         } else {
             const flag = problemList.addProblem(props.id, props.level, props.title, props.voteCnt, selectedNode.node);
