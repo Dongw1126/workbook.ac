@@ -2,7 +2,9 @@ import React, { useCallback, useEffect } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
+import * as Constants from "../../constants";
 
+import { Storage } from "aws-amplify";
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB, FavoriteDB } from "../../models";
 
@@ -14,20 +16,25 @@ interface Props {
     onClose: () => void;
 }
 
-const deleteWorkbook = async (wb: WorkbookDB) => {
-    const td = await DataStore.query(TreeDataDB, wb.treeDataId!);
-
-    await DataStore.delete(wb);
-    await DataStore.delete(td!);
-    await DataStore.delete(FavoriteDB, c => c.workbookId("eq", wb.id));
-}
-
 /**
  * 문제집 삭제 확인 Modal 창
  */
 function WorkbookDeleteModal(props: Props) {
     const userStore = UserStore;
     const dataChangeFlag = myPageChangeFlag;
+
+    const deleteWorkbook = async (wb: WorkbookDB) => {
+        const td = await DataStore.query(TreeDataDB, wb.treeDataId!);
+    
+        // s3 삭제
+        if ((typeof props.data.image != "undefined") && (props.data.image != Constants.DEFAULT_COVER_IMAGE_KEY)) {
+            await Storage.remove(props.data.image);
+        }
+        
+        await DataStore.delete(wb);
+        await DataStore.delete(td!);
+        await DataStore.delete(FavoriteDB, c => c.workbookId("eq", wb.id));
+    }
 
     const handleDelete = useCallback(() => {
         if (userStore.checkUsername(props.data.author)) {
