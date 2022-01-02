@@ -46,10 +46,16 @@ function MyWorkbook() {
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
         });
         
-        const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername));
+        const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername), {
+            page: 0,
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
+        });
+
         if(favId.length > 0 ) {
             myFavorite = await DataStore.query(WorkbookDB, (c) =>
-                c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c))
+                c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c)), {
+                    sort: s => s.title(SortDirection.ASCENDING)
+                }
             );
         }
 
