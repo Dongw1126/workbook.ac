@@ -38,6 +38,11 @@
   background-color:#fff;
 }
 
+.cardBody a {
+  text-decoration: none;
+  color: black;
+}
+
 .cardContent {
   width: 100%;
   display: flex;
@@ -46,6 +51,7 @@
 }
 
 .cardTitle {
+  display: inline-block;
   font-size: 1.7rem;
   font-weight: 700;
   margin-top: 15px;

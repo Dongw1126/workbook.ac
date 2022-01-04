@@ -36,17 +36,22 @@ function WorkbookCard(props: Props) {
     const { history } = useRouter();
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
     
-    const [disabled, setDisabled] = useState(true);
+    const [disabledImg, setDisabledImg] = useState(true);
+    const [disabledFav, setDisabledFav] = useState(false);
     const [imgUrl, setImgUrl] = useState("");
     const [fav, setFav] = useState(false);
     const [favNum, setFavNum] = useState(props.data.favorite);
     const [refresh, setRefresh] = useState(false);
 
-    const _hideImage = () => setDisabled(true);
-    const _displayImage = () => setDisabled(false);
+    const _hideImage = () => setDisabledImg(true);
+    const _displayImage = () => setDisabledImg(false);
 
-    const goToPage = (_path: string) => {
+    /*const goToPage = (_path: string) => {
         history.push("/workbook/" + _path + `/${props.data.id}`);
+    }*/
+
+    const getUrl = (_path: string) => {
+        return "/workbook/" + _path + `/${props.data.id}`;
     }
 
     const { show, hideAll } = useContextMenu({
@@ -99,8 +104,10 @@ function WorkbookCard(props: Props) {
         await DataStore.delete(FavoriteDB, _id);
     };
 
-    const handleLikeClick = () => {
+    const handleFavClick = (e: any) => {
         if(userStore.getUser()) {
+            setDisabledFav(true);
+            e.preventDefault();
             fetchFavData()
                 .then((res) => {
                     if (res.length > 0) {
@@ -126,6 +133,9 @@ function WorkbookCard(props: Props) {
                             .catch(() => alert("업데이트 중 오류가 발생했습니다."));
                     }
                 });
+                setTimeout(() => {
+                    setDisabledFav(false);
+                }, 500);
         } 
         else {
             // 비로그인 경우
@@ -176,23 +186,23 @@ function WorkbookCard(props: Props) {
                 ${props.animated ? styles.cardAnimation : ""}
                 ${props.shadow ? styles.cardShadow : ""}`}
             >
-                <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
-                    onClick={() => goToPage("read")}
-                >
-                    <img
-                        src={imgUrl} 
-                        alt="Workbook Image"
-                        onError={_hideImage}
-                        onLoad={_displayImage}
-                        style={{ visibility: disabled ? "hidden" : "visible" }}
-                    />
-                </div>
-                <div className={styles.cardBody}>
-                    <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} 
-                        onClick={() => goToPage("read")}
-                    >
-                        {props.data.title}
+                <Link to={getUrl("read")} style={{ textDecoration: "none" }}>
+                    <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`}>
+                        <img
+                            src={imgUrl} 
+                            alt="Workbook Image"
+                            onError={_hideImage}
+                            onLoad={_displayImage}
+                            style={{ visibility: disabledImg ? "hidden" : "visible" }}
+                        />
                     </div>
+                </Link>
+                <div className={styles.cardBody}>
+                    <Link to={getUrl("read")}>
+                        <div className={`${styles.cardTitle} ${props.cursorDefault ? styles.cursorDefault : ""}`} >
+                            {props.data.title}
+                        </div>
+                    </Link>
                     <div className={styles.cardAuthor}>
                         {props.data.author}
                     </div>
@@ -203,7 +213,7 @@ function WorkbookCard(props: Props) {
                                     <EditIcon />
                                 </IconButton>
                             }
-                            <IconButton onClick={handleLikeClick}>
+                            <IconButton onClick={disabledFav ? undefined : handleFavClick}>
                                 {fav ? <FavoriteIcon /> : <FavoriteBorderIcon />}
                             </IconButton>
                             <span className={styles.favNumber}>
