@@ -35,7 +35,7 @@ function WorkbookSearchResult(props: Props) {
         fetchSearchDB(props.query, props.page)
             .then(res => {
                 setSearchData(res);
-                console.log(res);
+                // console.log(res);
                 if(res.length === 0) {
                     setStatus(Constants.SEARCH_EMPTY);
                 } else {

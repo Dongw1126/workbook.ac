@@ -37,7 +37,7 @@ function WorkbookCreateModal(props: Props) {
 
     const handleClose = () => {
         props.onClose();
-        console.log("handleClose call");
+        // console.log("handleClose call");
         setTitle(props.data.title);
     };
 

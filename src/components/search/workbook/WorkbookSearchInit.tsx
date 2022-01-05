@@ -27,7 +27,7 @@ function WorkbookSearchResult() {
             page: 0,
             limit: Constants.FIRST_WORKBOOK_LOAD_NUM
         });
-        console.log(byCreatedAt)
+        // console.log(byCreatedAt)
         
         return [byFavorite, byCreatedAt];
     };

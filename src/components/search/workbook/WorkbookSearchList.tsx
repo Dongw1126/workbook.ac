@@ -15,6 +15,7 @@ type Props = {
 }
 
 function WorkbookSearchList(props: Props) {
+    /*
     const transApi = useSpringRef()
     const transition = useTransition(props.data, {
       ref: transApi,
@@ -25,6 +26,7 @@ function WorkbookSearchList(props: Props) {
     })
 
     useChain([transApi]);
+    */
 
     return (
         <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
