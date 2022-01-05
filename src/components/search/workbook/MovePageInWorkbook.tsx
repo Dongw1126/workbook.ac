@@ -21,12 +21,12 @@ function MovePageInWorkbook(props: Props) {
 
     return (
         <div style={{ textAlign: "center" }}>
-            <IconButton disabled={props.page === 0}
+            {/*<IconButton disabled={props.page === 0}
                 onClick={() => {
                     handleMovePage(0);
                 }}>
-                <FirstPageIcon />
-            </IconButton>
+            <FirstPageIcon />
+            </IconButton>*/}
             <IconButton disabled={props.page === 0}
                 onClick={() => {
                     handleMovePage(props.page - 1);
@@ -60,12 +60,12 @@ function MovePageInWorkbook(props: Props) {
                 }}>
                 <NextPageIcon />
             </IconButton>
-            <IconButton
+            {/*<IconButton
                 onClick={() => {
                     handleMovePage(props.lastPage);
                 }}>
                 <LastPageIcon />
-            </IconButton>
+            </IconButton>*/}
         </div>
     );
 }
