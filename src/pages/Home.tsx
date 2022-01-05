@@ -72,13 +72,13 @@ function Home() {
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
                 <div className={styles.content}>
                     <p>
+                        이 사이트에 처음 오셨다면&nbsp;&nbsp; ⟶ <Link to="/guide">가이드 살펴보기</Link>
+                    </p>
+                    <p>
                         문제집을 써보고 싶으시다면 ⟶ <Link to="/workbook/search">문제집 둘러보기</Link>
                     </p>
                     <p>
                         문제집을 직접 만들어보려면 ⟶ <Link to="/workbook/my">문제집 만들어보기</Link>
-                    </p>
-                    <p>
-                        이 프로젝트에 기여하고 싶으시다면 ⟶ <a href="#">기여하기</a>
                     </p>
                 </div>
             </ParallaxLayer>
