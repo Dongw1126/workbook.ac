@@ -123,10 +123,10 @@ function MyWorkbook() {
                         좋아요 한 문제집
                     </div>
                     {data[1].length !== 0 ?
-                        (<div>
+                        (<div style={{ marginBottom: "5rem" }}>
                             <WorkbookList editable={false} animated={false} data={data[1]} />
                         </div>) :
-                        (<div style={{ fontSize: "2rem", textAlign: "center" }}>
+                        (<div style={{ fontSize: "2rem", textAlign: "center", marginBottom: "15rem" }}>
                             <p>
                                 <br />
                                 좋아요 한 문제집이 없습니다
