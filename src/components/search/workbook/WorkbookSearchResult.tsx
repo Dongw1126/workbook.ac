@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { SortDirection } from '@aws-amplify/datastore';
 import { CircularProgress } from "@mui/material";
 
 import * as Constants from "../../../constants";
@@ -11,6 +10,7 @@ type Props = {
     page: number;
     setLastPage: React.Dispatch<any>;
     fetcher: any;
+    sorter?: any;
 }
 
 /**
@@ -22,7 +22,7 @@ function WorkbookSearchResult(props: Props) {
 
     const fetchSearchDB = async (_query: string, _page: number = 0) => {
         const result = await props.fetcher(_query, {
-            sort: (s: any) => s.createdAt(SortDirection.DESCENDING),
+            sort: props.sorter,
             page: _page,
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM      
         });

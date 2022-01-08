@@ -5,7 +5,7 @@ import WorkbookSearchInit from "../../components/search/workbook/WorkbookSearchI
 import MovePage from '../../components/search/workbook/MovePageInWorkbook';
 import usePage from '../../hooks/usePage';
 
-import { DataStore } from '@aws-amplify/datastore';
+import { DataStore, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB } from '../../models';
 
 const fetcher = async (_query: string, paginationProducer?: any) => {
@@ -13,7 +13,9 @@ const fetcher = async (_query: string, paginationProducer?: any) => {
     return ret;
 }
 
-function WorkbookSearch() {
+const sorter = (s: any) => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING);
+
+function SearchWorkbook() {
     const [query, setQuery] = useState('');
     const [page, lastPage, setPage, setLastPage] = usePage();
 
@@ -36,6 +38,7 @@ function WorkbookSearch() {
                         key={query} query={query} 
                         page={page} setLastPage={setLastPage}
                         fetcher={fetcher}
+                        sorter={sorter}
                     /> : 
                     <WorkbookSearchInit />}
                 <br/><br/>
@@ -46,4 +49,4 @@ function WorkbookSearch() {
     );
 }
 
-export default WorkbookSearch;
+export default SearchWorkbook;
