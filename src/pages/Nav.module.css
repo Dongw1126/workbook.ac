@@ -32,7 +32,10 @@
     background-color: #dbdbdb;
 }
 
+.loginContent {
+    float: right;
+}
+
 .navLogin {
     width: 90px;
-    float: right;
 }

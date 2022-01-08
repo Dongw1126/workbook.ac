@@ -37,21 +37,41 @@ function Nav() {
             </div>
           </Link>
           <Link to="/workbook/search">
-            <div className={styles.navContent}>
+            <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
               둘러보기
             </div>
           </Link>
-          <Link to="/workbook/my">
-            <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
-              나의 문제집
-            </div>
-          </Link>
           <Observer>
-            {() => (<div className={`${styles.navContent} ${styles.navLogin}`}
-              onClick={handleLoginButton}>
-              <IconButton sx={{ "&:hover": { backgroundColor: "transparent" } }}>
-                {userStore.loggedIn ? <PersonIcon /> : <LoginIcon />}
-              </IconButton>
+            {() => (<>
+              {userStore.loggedIn && 
+              <>
+
+              </>}
+            </>)}
+          </Observer>
+
+          <Observer>
+            {() => (
+              <div className={styles.loginContent}>
+                {userStore.loggedIn && 
+                <>
+                  <Link to="/workbook/my">
+                    <div className={styles.navContent}>
+                      나의 문제집
+                    </div>
+                  </Link>
+                  <Link to="/workbook/my">
+                    <div className={styles.navContent}>
+                      좋아요 목록
+                    </div>
+                  </Link>
+                </>}
+                <div className={`${styles.navContent} ${styles.navLogin}`}
+                  onClick={handleLoginButton}>
+                  <IconButton sx={{ "&:hover": { backgroundColor: "transparent" } }}>
+                    {userStore.loggedIn ? <PersonIcon /> : <LoginIcon />}
+                  </IconButton>
+                </div>
             </div>)}
           </Observer>
         </div>
