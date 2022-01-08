@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from "mobx-react";
-import { useSpring, animated } from 'react-spring';
-import SpeedDial from '@mui/material/SpeedDial';
-import AddIcon from '@mui/icons-material/Add';
 import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
-import useDialog from '../../hooks/useDialog';
-import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import * as Constants from "../../constants";
 
@@ -22,29 +17,13 @@ function FavWorkbook() {
     const userStore = UserStore;
     const flag = myPageChangeFlag.flag;
 
-    const [createClicked, setCreateClicked] = useState(false);
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
-    const [data, setData] = useState<WorkbookDB[][]>([]);
-
-    const { scale } = useSpring({
-        scale: createClicked ? 0.8 : 1,
-        config: {
-            tension: 700
-        }
-    });
-
-    const [createModalOpen, handleCreateModalOpen, handleCreateModalClose] = useDialog();
+    const [data, setData] = useState<WorkbookDB[]>([]);
 
     const fetchData = async () => {
-        let myWorkbook: WorkbookDB[] = []
         let myFavorite: WorkbookDB[] = []
 
         const myUsername = userStore.getUser().username;
-        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), {
-            sort: s => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING),
-            page: 0,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
-        });
         
         const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername), {
             page: 0,
@@ -59,7 +38,7 @@ function FavWorkbook() {
             );
         }
 
-        return [myWorkbook, myFavorite];
+        return myFavorite;
     };  
 
     useEffect(() => {
@@ -91,9 +70,9 @@ function FavWorkbook() {
                     <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
                         좋아요 한 문제집
                     </div>
-                    {data[1].length !== 0 ?
+                    {data.length !== 0 ?
                         (<div style={{ marginBottom: "5rem" }}>
-                            <WorkbookList editable={false} animated={false} data={data[1]} />
+                            <WorkbookList editable={false} animated={false} data={data} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center", marginBottom: "15rem" }}>
                             <p>

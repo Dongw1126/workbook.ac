@@ -24,7 +24,7 @@ function MyWorkbook() {
 
     const [createClicked, setCreateClicked] = useState(false);
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
-    const [data, setData] = useState<WorkbookDB[][]>([]);
+    const [data, setData] = useState<WorkbookDB[]>([]);
 
     const { scale } = useSpring({
         scale: createClicked ? 0.8 : 1,
@@ -42,24 +42,11 @@ function MyWorkbook() {
         const myUsername = userStore.getUser().username;
         myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), {
             sort: s => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING),
-            page: 0,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
-        });
-        
-        const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername), {
-            page: 0,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
+            /*page: 0,
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM*/
         });
 
-        if(favId.length > 0 ) {
-            myFavorite = await DataStore.query(WorkbookDB, (c) =>
-                c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c)), {
-                    sort: s => s.title(SortDirection.ASCENDING)
-                }
-            );
-        }
-
-        return [myWorkbook, myFavorite];
+        return myWorkbook;
     };  
 
     useEffect(() => {
@@ -104,9 +91,9 @@ function MyWorkbook() {
                             />
                         </animated.div>
                     </div>
-                    {data[0].length !== 0 ?
+                    {data.length !== 0 ?
                         (<div>
-                            <WorkbookList key={flag} editable={true} animated={false} data={data[0]} />
+                            <WorkbookList key={flag} editable={true} animated={false} data={data} />
                         </div>) :
                         (<div style={{ fontSize: "2rem", textAlign: "center" }}>
                             <p>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
+import { SortDirection } from '@aws-amplify/datastore';
 import { CircularProgress } from "@mui/material";
 
 import * as Constants from "../../../constants";
@@ -14,7 +14,7 @@ type Props = {
 }
 
 /**
- * 문제집 둘러보기 - 검색 컴포넌트
+ * 문제집 검색 컴포넌트
  */
 function WorkbookSearchResult(props: Props) {
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
