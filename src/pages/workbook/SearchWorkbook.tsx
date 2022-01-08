@@ -33,13 +33,20 @@ function SearchWorkbook() {
                 <br/>
                 {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}
                 <br/>
-                {query ? 
-                    <WorkbookSearchResult 
-                        key={query} query={query} 
-                        page={page} setLastPage={setLastPage}
-                        fetcher={fetcher}
-                        sorter={sorter}
-                    /> : 
+                {query ?
+                    <div>
+                        <br/>
+                        <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
+                            검색결과
+                        </div>
+                        <WorkbookSearchResult 
+                            key={query} query={query} 
+                            page={page} setLastPage={setLastPage}
+                            fetcher={fetcher}
+                            sorter={sorter}
+                            emptyMessage="😲 검색 결과가 없습니다!"
+                        />
+                    </div> : 
                     <WorkbookSearchInit />}
                 <br/><br/>
                 {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}

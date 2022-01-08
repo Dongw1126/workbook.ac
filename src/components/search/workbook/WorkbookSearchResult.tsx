@@ -11,6 +11,7 @@ type Props = {
     setLastPage: React.Dispatch<any>;
     fetcher: any;
     sorter?: any;
+    emptyMessage?: string;
 }
 
 /**
@@ -68,20 +69,14 @@ function WorkbookSearchResult(props: Props) {
     }
     else if (status === Constants.SEARCH_COMPLETE) {      
         return (
-            <div>
-                <br/>
-                <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
-                    검색결과
-                </div>
-                <WorkbookSearchList animated={true} editable={false} data={searchData} />
-            </div>
+            <WorkbookSearchList animated={true} editable={false} data={searchData} />
         );      
     } else if (status === Constants.SEARCH_EMPTY) {
         return(
             <div style={{ fontSize: "2rem", textAlign: "center"}}>
                 <p>
                     <br/>
-                    😲 검색 결과가 없습니다!
+                    {props.emptyMessage}
                 </p>
             </div>
         )
@@ -90,7 +85,7 @@ function WorkbookSearchResult(props: Props) {
             <div style={{ fontSize: "2rem", textAlign: "center"}}>
                 <p>
                     <br/>
-                    😲 검색 중 오류가 발생했습니다!
+                    😲 로드 중 오류가 발생했습니다!
                 </p>
             </div>
         );
