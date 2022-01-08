@@ -16,9 +16,9 @@ import { DataStore, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB, FavoriteDB } from "../../models";
 
 /**
- * 내 문제집 보기 페이지
+ * 좋아요 문제집 보기 페이지
  */
-function MyWorkbook() {
+function FavWorkbook() {
     const userStore = UserStore;
     const flag = myPageChangeFlag.flag;
 
@@ -89,36 +89,18 @@ function MyWorkbook() {
             return (
                 <div>
                     <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
-                        나의 문제집
+                        좋아요 한 문제집
                     </div>
-                    <div style={{ width: "56px", height: "56px", margin: "auto" }}>
-                        <animated.div
-                            onMouseDown={() => setCreateClicked(true)}
-                            onMouseUp={() => setCreateClicked(false)}
-                            onMouseLeave={() => setCreateClicked(false)}
-                            onClick={handleCreateModalOpen}
-                            style={{ transform: scale.to(s => `scale(${s})`) }}>
-                            <SpeedDial
-                                ariaLabel="Add Workbook"
-                                icon={<AddIcon />}
-                            />
-                        </animated.div>
-                    </div>
-                    {data[0].length !== 0 ?
-                        (<div>
-                            <WorkbookList key={flag} editable={true} animated={false} data={data[0]} />
+                    {data[1].length !== 0 ?
+                        (<div style={{ marginBottom: "5rem" }}>
+                            <WorkbookList editable={false} animated={false} data={data[1]} />
                         </div>) :
-                        (<div style={{ fontSize: "2rem", textAlign: "center" }}>
+                        (<div style={{ fontSize: "2rem", textAlign: "center", marginBottom: "15rem" }}>
                             <p>
                                 <br />
-                                만든 문제집이 없습니다
+                                좋아요 한 문제집이 없습니다
                             </p>
                         </div>)}
-                    <WorkbookCreateModal
-                        username={userStore.getUser().username}
-                        open={createModalOpen} 
-                        onClose={handleCreateModalClose} 
-                    />
                 </div >
             );
         }
@@ -145,4 +127,4 @@ function MyWorkbook() {
     }
 }
 
-export default observer(MyWorkbook);
+export default observer(FavWorkbook);

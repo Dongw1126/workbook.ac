@@ -60,7 +60,7 @@ function Nav() {
                       나의 문제집
                     </div>
                   </Link>
-                  <Link to="/workbook/my">
+                  <Link to="/workbook/fav">
                     <div className={styles.navContent}>
                       좋아요 목록
                     </div>
