@@ -6,7 +6,7 @@ export const TREE_CONTEXT_MENU_ID = "tree";
 export const WORKBOOK_CONTEXT_MENU_ID = "workbook";
 
 export const FIRST_WORKBOOK_LOAD_NUM = 5;
-export const SEARCH_WORKBOOK_LOAD_NUM = 20;
+export const SEARCH_WORKBOOK_LOAD_NUM = 3;
 
 export const TREE_ITEM_SPACE = 36;
 

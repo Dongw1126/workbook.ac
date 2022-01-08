@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import UserStore from '../stores/UserStore';
 
 import ScrollToTop from "./ScrollToTop";
-import WorkbookSearch from "./search/workbook/WorkbookSearch";
+import WorkbookSearch from "../pages/workbook/WorkbookSearch";
 import EditWorkbook from "../pages/workbook/EditWorkbook";
 import ReadWorkbook from '../pages/workbook/ReadWorkbook';
 import MyWorkbook from "../pages/workbook/MyWorkbook";

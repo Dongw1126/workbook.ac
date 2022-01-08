@@ -10,6 +10,7 @@ type Props = {
     query: string;
     page: number;
     setLastPage: React.Dispatch<any>;
+    fetcher: any;
 }
 
 /**
@@ -20,17 +21,17 @@ function WorkbookSearchResult(props: Props) {
     const [searchData, setSearchData] = useState<WorkbookDB[]>([]);
 
     const fetchSearchDB = async (_query: string, _page: number = 0) => {
-        const result = await DataStore.query(WorkbookDB, c => c.title("contains", _query), {
-            sort: s => s.createdAt(SortDirection.DESCENDING),
+        const result = await props.fetcher(_query, {
+            sort: (s: any) => s.createdAt(SortDirection.DESCENDING),
             page: _page,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM      
         });
-
+        
         return result;
     }
     
     const fetchQueryNumber = async (_query: string) => {
-        const result = await DataStore.query(WorkbookDB, c => c.title("contains", _query));
+        const result = await props.fetcher(_query);
         return result.length;
     }
 
