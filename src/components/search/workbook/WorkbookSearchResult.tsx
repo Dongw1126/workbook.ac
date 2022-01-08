@@ -9,8 +9,7 @@ import WorkbookSearchList from "./WorkbookSearchList";
 type Props = {
     query: string;
     page: number;
-    // lastPage: number;
-    // setLastPage: React.Dispatch<any>;
+    setLastPage: React.Dispatch<any>;
 }
 
 /**
@@ -29,6 +28,11 @@ function WorkbookSearchResult(props: Props) {
 
         return result;
     }
+    
+    const fetchQueryNumber = async (_query: string) => {
+        const result = await DataStore.query(WorkbookDB, c => c.title("contains", _query));
+        return result.length;
+    }
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
@@ -46,6 +50,13 @@ function WorkbookSearchResult(props: Props) {
                 setStatus(Constants.SEARCH_ERROR);
             })
     }, [props.query, props.page]);
+
+    useEffect(() => {
+        fetchQueryNumber(props.query)
+            .then((res) => {
+                props.setLastPage(Math.ceil(res / Constants.SEARCH_WORKBOOK_LOAD_NUM) - 1);
+            });
+    }, [props.query]);
 
     if (status === Constants.SEARCH_LOADING) {
         return (

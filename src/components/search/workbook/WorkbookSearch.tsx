@@ -23,7 +23,7 @@ function WorkbookSearch() {
                 <br/>
                 {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}
                 <br/>
-                {query ? <WorkbookSearchResult key={query} query={query} page={page}/> : <WorkbookSearchInit />}
+                {query ? <WorkbookSearchResult key={query} query={query} page={page} setLastPage={setLastPage}/> : <WorkbookSearchInit />}
                 <br/><br/>
                 {query && <MovePage page={page} lastPage={lastPage} setPage={setPage}/>}
                 <br/><br/>
