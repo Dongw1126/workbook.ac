@@ -17,7 +17,7 @@ const sorter = (s: any) => s.title(SortDirection.ASCENDING).createdAt(SortDirect
 
 function SearchWorkbook() {
     const [query, setQuery] = useState('');
-    const [page, lastPage, setPage, setLastPage] = usePage();
+    const [page, lastPage, setPage, setLastPage] = usePage(0);
 
     const handleQuery = (str: string) => {
         setPage(0);
@@ -39,7 +39,8 @@ function SearchWorkbook() {
                         <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
                             검색결과
                         </div>
-                        <WorkbookSearchResult 
+                        <WorkbookSearchResult
+                            editable={false}
                             key={query} query={query} 
                             page={page} setLastPage={setLastPage}
                             fetcher={fetcher}
