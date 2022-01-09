@@ -9,11 +9,13 @@ import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
 import useDialog from '../../hooks/useDialog';
 import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
-import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
+import WorkbookSearchResult from "../../components/search/workbook/WorkbookSearchResult";
+import MovePage from '../../components/search/workbook/MovePageInWorkbook';
+import usePage from '../../hooks/usePage';
 import * as Constants from "../../constants";
 
 import { DataStore, SortDirection } from '@aws-amplify/datastore';
-import { WorkbookDB, FavoriteDB } from "../../models";
+import { WorkbookDB } from "../../models";
 
 /**
  * 내 문제집 보기 페이지
@@ -23,8 +25,7 @@ function MyWorkbook() {
     const flag = myPageChangeFlag.flag;
 
     const [createClicked, setCreateClicked] = useState(false);
-    const [status, setStatus] = useState(Constants.SEARCH_LOADING);
-    const [data, setData] = useState<WorkbookDB[]>([]);
+    const [page, lastPage, setPage, setLastPage] = usePage(0);
 
     const { scale } = useSpring({
         scale: createClicked ? 0.8 : 1,
@@ -35,90 +36,58 @@ function MyWorkbook() {
 
     const [createModalOpen, handleCreateModalOpen, handleCreateModalClose] = useDialog();
 
-    const fetchData = async () => {
-        let myWorkbook: WorkbookDB[] = []
-        let myFavorite: WorkbookDB[] = []
-
+    const fetcher = async (_query: string, paginationProducer?: any) => {
         const myUsername = userStore.getUser().username;
-        myWorkbook = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), {
-            sort: s => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING),
-            /*page: 0,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM*/
-        });
+        const result = await DataStore.query(WorkbookDB, c => c.author("eq", myUsername), paginationProducer);
+        return result;
+    }
 
-        return myWorkbook;
-    };  
+    const sorter = (s: any) => s.createdAt(SortDirection.DESCENDING);
 
     useEffect(() => {
-        setStatus(Constants.SEARCH_LOADING);
-        if (userStore.loggedIn) {
-            fetchData()
-                .then((res) => {
-                    setData(res);
-                    setStatus(Constants.SEARCH_COMPLETE);
-                })
-                .catch(() => {
-                    setStatus(Constants.SEARCH_ERROR);
-                });
-        }
+        // console.log(page);
     }, [userStore.loggedIn, flag]);
 
 
     if (userStore.loggedIn) {
-        if (status === Constants.SEARCH_LOADING) {
-            return (
-                <div style={{ textAlign: "center" }}>
-                    <CircularProgress sx={{ m: 20 }} />
+        return (
+            <div>
+                <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
+                    나의 문제집
                 </div>
-            );
-        }
-        else if (status === Constants.SEARCH_COMPLETE) {
-            return (
+                <div style={{ width: "56px", height: "56px", margin: "auto", marginBottom: "2rem" }}>
+                    <animated.div
+                        onMouseDown={() => setCreateClicked(true)}
+                        onMouseUp={() => setCreateClicked(false)}
+                        onMouseLeave={() => setCreateClicked(false)}
+                        onClick={handleCreateModalOpen}
+                        style={{ transform: scale.to(s => `scale(${s})`) }}>
+                        <SpeedDial
+                            ariaLabel="Add Workbook"
+                            icon={<AddIcon />}
+                        />
+                    </animated.div>
+                </div>
                 <div>
-                    <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
-                        나의 문제집
-                    </div>
-                    <div style={{ width: "56px", height: "56px", margin: "auto" }}>
-                        <animated.div
-                            onMouseDown={() => setCreateClicked(true)}
-                            onMouseUp={() => setCreateClicked(false)}
-                            onMouseLeave={() => setCreateClicked(false)}
-                            onClick={handleCreateModalOpen}
-                            style={{ transform: scale.to(s => `scale(${s})`) }}>
-                            <SpeedDial
-                                ariaLabel="Add Workbook"
-                                icon={<AddIcon />}
-                            />
-                        </animated.div>
-                    </div>
-                    {data.length !== 0 ?
-                        (<div>
-                            <WorkbookList key={flag} editable={true} animated={false} data={data} />
-                        </div>) :
-                        (<div style={{ fontSize: "2rem", textAlign: "center" }}>
-                            <p>
-                                <br />
-                                만든 문제집이 없습니다
-                            </p>
-                        </div>)}
-                    <WorkbookCreateModal
-                        username={userStore.getUser().username}
-                        open={createModalOpen} 
-                        onClose={handleCreateModalClose} 
+                    <WorkbookSearchResult
+                        key={flag}
+                        editable={true} query=''
+                        page={page} setLastPage={setLastPage}
+                        fetcher={fetcher}
+                        sorter={sorter}
+                        emptyMessage='문제집이 없습니다  \( •︠_•︡ )/'
                     />
-                </div >
-            );
-        }
-        else {
-            return (
-                <div style={{ fontSize: "2rem", textAlign: "center" }}>
-                    <p>
-                        <br />
-                        😲 로드 중 오류가 발생했습니다!
-                    </p>
+                    <div style={{ marginTop: "3rem", marginBottom: "5rem" }}>
+                        <MovePage page={page} lastPage={lastPage} setPage={setPage}/>
+                    </div>
                 </div>
-            )
-        }
+                <WorkbookCreateModal
+                    username={userStore.getUser().username}
+                    open={createModalOpen} 
+                    onClose={handleCreateModalClose} 
+                />
+            </div >
+        );
     }
     else {
         return (

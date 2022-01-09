@@ -6,10 +6,11 @@ import { WorkbookDB } from '../../../models';
 import WorkbookSearchList from "./WorkbookSearchList";
 
 type Props = {
+    editable: boolean;
     query: string;
     page: number;
     setLastPage: React.Dispatch<any>;
-    fetcher: any;
+    fetcher: (_query: string, paginationProducer?: any) => Promise<WorkbookDB[]>;
     sorter?: any;
     emptyMessage?: string;
 }
@@ -28,6 +29,7 @@ function WorkbookSearchResult(props: Props) {
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM      
         });
         
+        console.log(result);
         return result;
     }
     
@@ -69,7 +71,7 @@ function WorkbookSearchResult(props: Props) {
     }
     else if (status === Constants.SEARCH_COMPLETE) {      
         return (
-            <WorkbookSearchList animated={true} editable={false} data={searchData} />
+            <WorkbookSearchList animated={true} editable={props.editable} data={searchData} />
         );      
     } else if (status === Constants.SEARCH_EMPTY) {
         return(
