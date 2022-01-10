@@ -40,7 +40,7 @@ function MyWorkbook() {
         return result;
     }
 
-    const sorter = (s: any) => s.createdAt(SortDirection.DESCENDING);
+    const sorter = (s: any) => s.title(SortDirection.ASCENDING).createdAt(SortDirection.DESCENDING);
 
     useEffect(() => {
         // console.log(page);
