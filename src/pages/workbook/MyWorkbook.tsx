@@ -73,7 +73,7 @@ function MyWorkbook() {
                         page={page} setLastPage={setLastPage}
                         fetcher={fetcher}
                         sorter={sorter}
-                        emptyMessage='문제집이 없습니다  \( •︠_•︡ )/'
+                        emptyMessage='문제집이 없습니다.&nbsp;&nbsp;&nbsp;\( •︠_•︡ )/'
                     />
                     <div style={{ marginTop: "3rem", marginBottom: "5rem" }}>
                         <MovePage page={page} lastPage={lastPage} setPage={setPage}/>

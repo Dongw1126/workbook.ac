@@ -29,7 +29,7 @@ function WorkbookSearchResult(props: Props) {
             limit: Constants.SEARCH_WORKBOOK_LOAD_NUM      
         });
         
-        console.log(result);
+        // console.log(result);
         return result;
     }
     
