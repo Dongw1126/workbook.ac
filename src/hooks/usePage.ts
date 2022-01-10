@@ -3,10 +3,10 @@ import { useCallback, useState } from 'react';
 /**
  * 검색 페이지 번호 Custom hook
  */
-function usePage()
+function usePage(initPage: number = 1)
 :[number, number, (p: number) => void, (p: number) => void] {
-    const [page, setPage] = useState(1);
-    const [lastPage, setLastPage] = useState(1);
+    const [page, setPage] = useState(initPage);
+    const [lastPage, setLastPage] = useState(initPage);
 
     const _setPage = useCallback((p: number) => {
         setPage(p);

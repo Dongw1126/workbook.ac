@@ -35,7 +35,7 @@ class UserStore {
         await Auth.currentAuthenticatedUser()
             .then(user => { 
                 this.login(user);
-                console.log(user);
+                // console.log(user);
             })
             .catch(() => this.logout());
     }

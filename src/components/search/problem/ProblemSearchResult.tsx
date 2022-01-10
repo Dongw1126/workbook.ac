@@ -11,7 +11,7 @@ type Props = {
 
 
 const fetcher = async (url: string) => {
-    console.log("fetcher call");
+    // console.log("fetcher call");
 
     const res = await fetch(url)
 

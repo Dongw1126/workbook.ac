@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { DataStore, Predicates, SortDirection } from '@aws-amplify/datastore';
 import { CircularProgress } from "@mui/material";
 
 import * as Constants from "../../../constants";
@@ -7,27 +6,36 @@ import { WorkbookDB } from '../../../models';
 import WorkbookSearchList from "./WorkbookSearchList";
 
 type Props = {
+    editable: boolean;
     query: string;
     page: number;
-    // lastPage: number;
-    // setLastPage: React.Dispatch<any>;
+    setLastPage: React.Dispatch<any>;
+    fetcher: (_query: string, paginationProducer?: any) => Promise<WorkbookDB[]>;
+    sorter?: any;
+    emptyMessage?: string;
 }
 
 /**
- * 문제집 둘러보기 - 검색 컴포넌트
+ * 문제집 검색 컴포넌트
  */
 function WorkbookSearchResult(props: Props) {
     const [status, setStatus] = useState(Constants.SEARCH_LOADING);
     const [searchData, setSearchData] = useState<WorkbookDB[]>([]);
 
     const fetchSearchDB = async (_query: string, _page: number = 0) => {
-        const result = await DataStore.query(WorkbookDB, c => c.title("contains", _query), {
-            sort: s => s.createdAt(SortDirection.DESCENDING),
+        const result = await props.fetcher(_query, {
+            sort: props.sorter,
             page: _page,
-            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM
+            limit: Constants.SEARCH_WORKBOOK_LOAD_NUM      
         });
-
+        
+        // console.log(result);
         return result;
+    }
+    
+    const fetchQueryNumber = async (_query: string) => {
+        const result = await props.fetcher(_query);
+        return result.length;
     }
 
     useEffect(() => {
@@ -35,7 +43,7 @@ function WorkbookSearchResult(props: Props) {
         fetchSearchDB(props.query, props.page)
             .then(res => {
                 setSearchData(res);
-                console.log(res);
+                // console.log(res);
                 if(res.length === 0) {
                     setStatus(Constants.SEARCH_EMPTY);
                 } else {
@@ -47,6 +55,13 @@ function WorkbookSearchResult(props: Props) {
             })
     }, [props.query, props.page]);
 
+    useEffect(() => {
+        fetchQueryNumber(props.query)
+            .then((res) => {
+                props.setLastPage(Math.ceil(res / Constants.SEARCH_WORKBOOK_LOAD_NUM) - 1);
+            });
+    }, [props.query]);
+
     if (status === Constants.SEARCH_LOADING) {
         return (
             <div style={{ textAlign: "center" }}>
@@ -56,20 +71,14 @@ function WorkbookSearchResult(props: Props) {
     }
     else if (status === Constants.SEARCH_COMPLETE) {      
         return (
-            <div>
-                <br/>
-                <div style={{ fontSize: "2rem", fontWeight: 700, textAlign: "center" }}>
-                    검색결과
-                </div>
-                <WorkbookSearchList animated={true} editable={false} data={searchData} />
-            </div>
+            <WorkbookSearchList animated={true} editable={props.editable} data={searchData} />
         );      
     } else if (status === Constants.SEARCH_EMPTY) {
         return(
             <div style={{ fontSize: "2rem", textAlign: "center"}}>
                 <p>
                     <br/>
-                    😲 검색 결과가 없습니다!
+                    {props.emptyMessage}
                 </p>
             </div>
         )
@@ -78,7 +87,7 @@ function WorkbookSearchResult(props: Props) {
             <div style={{ fontSize: "2rem", textAlign: "center"}}>
                 <p>
                     <br/>
-                    😲 검색 중 오류가 발생했습니다!
+                    😲 로드 중 오류가 발생했습니다!
                 </p>
             </div>
         );
