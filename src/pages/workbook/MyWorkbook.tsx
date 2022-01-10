@@ -3,7 +3,6 @@ import { observer } from "mobx-react";
 import { useSpring, animated } from 'react-spring';
 import SpeedDial from '@mui/material/SpeedDial';
 import AddIcon from '@mui/icons-material/Add';
-import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
@@ -12,7 +11,6 @@ import WorkbookCreateModal from "../../components/modal/WorkbookCreateModal";
 import WorkbookSearchResult from "../../components/search/workbook/WorkbookSearchResult";
 import MovePage from '../../components/search/workbook/MovePageInWorkbook';
 import usePage from '../../hooks/usePage';
-import * as Constants from "../../constants";
 
 import { DataStore, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB } from "../../models";

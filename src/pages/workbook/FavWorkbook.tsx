@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { observer } from "mobx-react";
-import { CircularProgress } from "@mui/material";
 
 import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";
-import WorkbookList from "../../components/search/workbook/WorkbookSearchList";
 import * as Constants from "../../constants";
+import WorkbookSearchResult from "../../components/search/workbook/WorkbookSearchResult";
+import MovePage from '../../components/search/workbook/MovePageInWorkbook';
+import usePage from '../../hooks/usePage';
 
 import { DataStore, SortDirection } from '@aws-amplify/datastore';
 import { WorkbookDB, FavoriteDB } from "../../models";
@@ -17,8 +18,23 @@ function FavWorkbook() {
     const userStore = UserStore;
     const flag = myPageChangeFlag.flag;
 
-    const [status, setStatus] = useState(Constants.SEARCH_LOADING);
-    const [data, setData] = useState<WorkbookDB[]>([]);
+    const [page, lastPage, setPage, setLastPage] = usePage(0);
+
+    const fetcher = async (_query: string, paginationProducer?: any) => {
+        let result: WorkbookDB[] = [];
+        const myUsername = userStore.getUser().username;
+        const favId = await DataStore.query(FavoriteDB, c => c.username("eq", myUsername), paginationProducer);
+
+        if(favId.length > 0 ) {
+            result = await DataStore.query(WorkbookDB, (c) =>
+                c.or((c) => favId.reduce((c, f) => c.id("eq", f.workbookId), c)), {
+                    sort: s => s.title(SortDirection.ASCENDING)
+                }
+            );
+        }
+
+        return result;
+    }
 
     const fetchData = async () => {
         let myFavorite: WorkbookDB[] = []
@@ -42,57 +58,30 @@ function FavWorkbook() {
     };  
 
     useEffect(() => {
-        setStatus(Constants.SEARCH_LOADING);
-        if (userStore.loggedIn) {
-            fetchData()
-                .then((res) => {
-                    setData(res);
-                    setStatus(Constants.SEARCH_COMPLETE);
-                })
-                .catch(() => {
-                    setStatus(Constants.SEARCH_ERROR);
-                });
-        }
+        // console.log();
     }, [userStore.loggedIn, flag]);
 
 
     if (userStore.loggedIn) {
-        if (status === Constants.SEARCH_LOADING) {
-            return (
-                <div style={{ textAlign: "center" }}>
-                    <CircularProgress sx={{ m: 20 }} />
+        return (
+            <div>
+                <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
+                    좋아요 한 문제집
                 </div>
-            );
-        }
-        else if (status === Constants.SEARCH_COMPLETE) {
-            return (
                 <div>
-                    <div style={{ textAlign: "center", margin: "2rem 0", marginTop: "3rem", fontSize: "3rem", fontWeight: 700 }}>
-                        좋아요 한 문제집
+                    <WorkbookSearchResult
+                        key={flag}
+                        editable={true} query=''
+                        page={page} setLastPage={setLastPage}
+                        fetcher={fetcher}
+                        emptyMessage='좋아요 한 문제집이 없습니다.'
+                    />
+                    <div style={{ marginTop: "3rem", marginBottom: "5rem" }}>
+                        <MovePage page={page} lastPage={lastPage} setPage={setPage}/>
                     </div>
-                    {data.length !== 0 ?
-                        (<div style={{ marginBottom: "5rem" }}>
-                            <WorkbookList editable={false} animated={false} data={data} />
-                        </div>) :
-                        (<div style={{ fontSize: "2rem", textAlign: "center", marginBottom: "15rem" }}>
-                            <p>
-                                <br />
-                                좋아요 한 문제집이 없습니다
-                            </p>
-                        </div>)}
-                </div >
-            );
-        }
-        else {
-            return (
-                <div style={{ fontSize: "2rem", textAlign: "center" }}>
-                    <p>
-                        <br />
-                        😲 로드 중 오류가 발생했습니다!
-                    </p>
                 </div>
-            )
-        }
+            </div >
+        );
     }
     else {
         return (
