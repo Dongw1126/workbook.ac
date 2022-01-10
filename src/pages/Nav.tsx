@@ -37,18 +37,15 @@ function Nav() {
             </div>
           </Link>
           <Link to="/workbook/search">
-            <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
+            <div className={styles.navContent}>
               둘러보기
             </div>
           </Link>
-          <Observer>
-            {() => (<>
-              {userStore.loggedIn && 
-              <>
-
-              </>}
-            </>)}
-          </Observer>
+          <Link to="/issue">
+            <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
+              건의하기
+            </div>
+          </Link>
 
           <Observer>
             {() => (
