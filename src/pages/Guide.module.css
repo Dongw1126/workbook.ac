@@ -1,0 +1,44 @@
+.title {
+    font-weight: 700;
+    font-size: 4rem;
+}
+
+.contentsTable {
+    user-select: none;
+    cursor: pointer;
+}
+
+.content {
+    font-size: 1.8rem;
+    line-height: 2;
+}
+
+.subTitle {
+    user-select: none;
+    white-space: nowrap;
+    padding: 0 0 0 40px;
+    font-weight: bolder;
+    font-size: 2.8rem;
+}
+
+
+.circle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 37px;
+    width: 37px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: black;
+}
+
+.usage {
+    margin-left: 30%;
+}
+  
+
+.sticky {
+    margin-left: 2%;
+    width: auto;
+}

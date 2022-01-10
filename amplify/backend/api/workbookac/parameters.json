@@ -1,0 +1,12 @@
+{
+  "AppSyncApiName": "workbookac",
+  "DynamoDBBillingMode": "PAY_PER_REQUEST",
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authworkbookac",
+      "Outputs.UserPoolId"
+    ]
+  },
+  "AuthModeLastUpdated": "2021-12-10T14:16:39.384Z"
+}

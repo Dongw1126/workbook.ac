@@ -1,0 +1,27 @@
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.treeapp {
+  height: 70vh;
+  padding: 0px 10px;
+}
+
+/*.treeRoot > :first-child {
+  margin-top: 10%;
+}
+
+.treeRoot > :last-child {
+  padding-bottom: 10%;
+}*/
+  
+.treeRoot {
+  height: auto;
+  padding: 20px 0px 100px 0px;
+  margin-top: 0;
+}
+  
+.draggingSource {
+  opacity: 0.3;
+}
