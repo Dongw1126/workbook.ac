@@ -42,7 +42,7 @@ function Nav() {
             </div>
           </Link>
           <Link to="/issue">
-            <div className={styles.navContent} style={{ borderRight: "solid 1px #b9b9b9" }}>
+            <div className={`${styles.navContent} ${styles.navContentLast}`}>
               건의하기
             </div>
           </Link>

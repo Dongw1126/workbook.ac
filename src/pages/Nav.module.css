@@ -28,6 +28,10 @@
     font-size: large;
 }
 
+.navContentLast {
+    border-right: solid 1px #b9b9b9;
+}
+
 .navContent:hover {
     background-color: #dbdbdb;
 }
@@ -38,4 +42,33 @@
 
 .navLogin {
     width: 90px;
+}
+
+@media screen and (max-width: 1200px) {
+    .navContent {
+        width: 100px;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .logo {
+        padding: 0 5% 0 2%;
+    }
+
+    .logo img {
+        width: 70px;
+        height: 70px;
+    }
+
+    .navContent {
+        width: 100px;
+        height: 50px;
+        line-height: 50px;
+        border: none;
+        font-weight: 400;
+    }
+
+    .navContentLast {
+        border: none;
+    }
 }
