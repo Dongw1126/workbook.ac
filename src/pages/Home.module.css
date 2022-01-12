@@ -1,5 +1,10 @@
+.logo {
+    width: 38vmax;
+    height: auto;
+}
+
 .content {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     line-height: 2;
 }
 
@@ -9,7 +14,7 @@
 
 .blackBar {
     width: 50%;
-    height: 40px;
+    height: 5vh;
     background-color: black;
 }
 
@@ -33,5 +38,11 @@
     40%, 100% {
         transform: rotate(3deg);
         transform-origin: bottom left;
+    }
+}
+
+@media screen and (max-width: 768px) { 
+    .content {
+        font-size: 1.4rem;
     }
 }
