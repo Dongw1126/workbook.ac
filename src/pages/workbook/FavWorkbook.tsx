@@ -71,7 +71,9 @@ function FavWorkbook() {
                 <div>
                     <WorkbookSearchResult
                         key={flag}
-                        editable={true} query=''
+                        editable={false} 
+                        animated={true}
+                        query=''
                         page={page} setLastPage={setLastPage}
                         fetcher={fetcher}
                         emptyMessage='좋아요 한 문제집이 없습니다.'

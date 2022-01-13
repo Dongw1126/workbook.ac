@@ -88,7 +88,7 @@ function EditWorkbook() {
         if (isMobile) {
             alert("⚠ 문제집 편집은 PC 환경에서 하시는 것을 권장드립니다.")
         }
-    }, [])
+    }, []);
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);

@@ -7,6 +7,7 @@ import WorkbookSearchList from "./WorkbookSearchList";
 
 type Props = {
     editable: boolean;
+    animated: boolean;
     query: string;
     page: number;
     setLastPage: React.Dispatch<any>;
@@ -71,7 +72,7 @@ function WorkbookSearchResult(props: Props) {
     }
     else if (status === Constants.SEARCH_COMPLETE) {      
         return (
-            <WorkbookSearchList animated={true} editable={props.editable} data={searchData} />
+            <WorkbookSearchList animated={props.animated} editable={props.editable} data={searchData} />
         );      
     } else if (status === Constants.SEARCH_EMPTY) {
         return(

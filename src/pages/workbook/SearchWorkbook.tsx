@@ -41,6 +41,7 @@ function SearchWorkbook() {
                         </div>
                         <WorkbookSearchResult
                             editable={false}
+                            animated={true}
                             key={query} query={query} 
                             page={page} setLastPage={setLastPage}
                             fetcher={fetcher}
