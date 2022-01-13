@@ -18,7 +18,7 @@ function Nav() {
   const userStore = UserStore;
 
   const handleLoginButton = () => {
-    console.log(userStore.user);
+    // console.log(userStore.user);
     handleModalOpen();
   }
 

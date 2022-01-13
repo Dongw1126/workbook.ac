@@ -45,8 +45,18 @@
 }
 
 @media screen and (max-width: 1200px) {
+    .logo {
+        height: 58px;
+    }
+    .logo img {
+        width: 60px;
+        height: 58px;
+    }
+
     .navContent {
         width: 100px;
+        height: 58px;
+        line-height: 58px;
     }
 }
 
