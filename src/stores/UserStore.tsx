@@ -22,13 +22,13 @@ class UserStore {
     login(_user: any) {
         this.setUser(_user);
         this.loggedIn = true;
-        console.log("login called");
+        // console.log("login called");
     }
 
     logout() {
         this.setUser(null);
         this.loggedIn = false;
-        console.log("logout called");
+        // console.log("logout called");
     }
 
     async updateUser() {

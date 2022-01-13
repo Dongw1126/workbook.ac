@@ -1,10 +1,15 @@
 .issueContainer {
-    margin: 8rem;
+    margin: 8vmax;
 }
 
 .title {
     font-weight: bold;
     font-size: 2.5rem;
+}
+
+.subTitle {
+    font-weight: bold;
+    font-size: 1.7rem;
 }
 
 .content {

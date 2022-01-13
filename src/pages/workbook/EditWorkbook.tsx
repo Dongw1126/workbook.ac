@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { observer } from "mobx-react";
 import Split from 'react-split'
+import { isMobile } from "react-device-detect";
 import { CircularProgress } from "@mui/material";
 import Button from '@mui/material/Button';
 import LoadingButton from '@mui/lab/LoadingButton';
@@ -82,6 +83,12 @@ function EditWorkbook() {
             history.push('/');
         }
     }
+
+    useEffect(() => {
+        if (isMobile) {
+            alert("⚠ 문제집 편집은 PC 환경에서 하시는 것을 권장드립니다.")
+        }
+    }, [])
 
     useEffect(() => {
         setStatus(Constants.SEARCH_LOADING);
