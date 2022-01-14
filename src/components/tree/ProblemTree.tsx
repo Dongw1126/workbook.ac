@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
 import { Observer } from "mobx-react";
 import { toJS } from "mobx";
-import { Tree, NodeModel, TreeMethods } from "@minoru/react-dnd-treeview";
+import { Tree, NodeModel } from "@minoru/react-dnd-treeview";
 import { useContextMenu } from "react-contexify";
 
 import { ProblemData } from "../../types/Types";
