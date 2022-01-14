@@ -113,7 +113,7 @@ function Guide() {
             <ParallaxLayer sticky={creatingSticky} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
                 <div className={styles.sticky}>
                     <div className={styles.circle}></div>
-                    <div className={styles.subTitle}>제작</div>
+                    <div className={styles.subTitle}>생성</div>
                 </div>
             </ParallaxLayer>
 
