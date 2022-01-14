@@ -1,18 +1,18 @@
-import React, { useEffect, useRef } from 'react';
-import { useSpring, animated } from 'react-spring';
+import { useRef } from 'react';
 import { Parallax, ParallaxLayer, IParallax } from '@react-spring/parallax';
 import styles from "./Guide.module.css";
 
-const scrollSpeed = 1;
+const scrollSpeed = 0;
+const totalPage = 14;
 
-const sideGuide = [2, 2.8];
-const creating = [4, 4.8];
-const editing = [6, 6.8, 7.6, 8.4];
-const totalPage = 9.4;
+const pages = Array.from({length: totalPage}, (v, i) => i);
+const getStarted = pages.slice(2, 5);
+const creating = pages.slice(5, 7);
+const editing = pages.slice(7, 14);
 
-const siteGuideSticky = {
-    start: sideGuide[0],
-    end: sideGuide[sideGuide.length - 1]
+const getStartedSticky = {
+    start: getStarted[0],
+    end: getStarted[getStarted.length - 1]
 };
 
 const creatingSticky = {
@@ -26,7 +26,11 @@ const editingSticky = {
 };
 
 function Guide() {
-    const alignCenter = { display: 'flex', alignItems: 'center' }
+    const alignCenter = { 
+        display: 'flex', 
+        alignItems: 'center',
+    };
+
     const parallax = useRef<IParallax>(null!);
     
     return (
@@ -37,48 +41,51 @@ function Guide() {
                 </p>
             </ParallaxLayer>
 
-            <ParallaxLayer offset={1.2} speed={0.4} style={{ textAlign: 'center', justifyContent: 'center'}}>
+            <ParallaxLayer offset={1} speed={0.4} style={{ textAlign: 'center', justifyContent: 'center'}}>
                 <p 
                     className={`${styles.contentsTable} ${styles.subTitle}`} 
-                    onClick={() => parallax.current.scrollTo(siteGuideSticky.start)}>
+                    onClick={() => parallax.current.scrollTo(getStartedSticky.start)}
+                >
                     &gt;&nbsp;&nbsp;사이트 이용
                 </p>
                 <p 
                     className={`${styles.contentsTable} ${styles.subTitle}`} 
-                    onClick={() => parallax.current.scrollTo(creatingSticky.start)}>
-                    &gt;&nbsp;&nbsp;문제집 제작
+                    onClick={() => parallax.current.scrollTo(creatingSticky.start)}
+                >
+                    &gt;&nbsp;&nbsp;문제집 생성
                 </p>
                 <p 
                     className={`${styles.contentsTable} ${styles.subTitle}`}
-                    onClick={() => parallax.current.scrollTo(editingSticky.start)}>
+                    onClick={() => parallax.current.scrollTo(editingSticky.start)}
+                >
                     &gt;&nbsp;&nbsp;문제집 편집
                 </p>
             </ParallaxLayer>
 
 
 
-            <ParallaxLayer sticky={siteGuideSticky} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
+            <ParallaxLayer sticky={getStartedSticky} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
                 <div className={styles.sticky}>
                     <div className={styles.circle}></div>
                     <div className={styles.subTitle}>사용법</div>
                 </div>
             </ParallaxLayer>
 
-        <ParallaxLayer offset={sideGuide[0]} speed={scrollSpeed} style={{ ...alignCenter }}>
+        <ParallaxLayer offset={getStarted[0]} speed={scrollSpeed} style={{ ...alignCenter }}>
                 <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         둘러보기 탭
                     </h3>
                     <p>
                         둘러보기 탭에서는 문제집을 둘러보고 검색할 수 있습니다.<br/>
-                        검색어가 없는 경우 좋아요 순, 최근 생성 된 순이 표시됩니다.<br/>
+                        검색어가 없는 경우 좋아요 많은, 최근 생성 된 문제집이 각각 나열됩니다.<br/>
                         검색 결과의 경우 사전순으로 표시됩니다.<br/>
-                        문제집을 표지나 제목을 클릭하여 열람 가능합니다.<br/>
+                        문제집의 표지나 제목을 클릭하여 열람 가능합니다.<br/>
                     </p>
                 </div>
             </ParallaxLayer>
 
-            <ParallaxLayer offset={sideGuide[1]} speed={scrollSpeed} style={{ ...alignCenter }}>
+            <ParallaxLayer offset={getStarted[1]} speed={scrollSpeed} style={{ ...alignCenter }}>
                 <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         나의 문제집 탭
@@ -88,7 +95,11 @@ function Guide() {
                         문제집 편집, 이름 바꾸기, 표지 바꾸기, 문제집 삭제 기능을 수행할 수 있습니다.<br/>
                         나의 문제집 목록은 사전순으로 정렬됩니다.<br/><br/>
                     </p>
-                    
+                </div>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={getStarted[2]} speed={scrollSpeed} style={{ ...alignCenter }}>
+                <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         좋아요 목록
                     </h3>
@@ -109,7 +120,7 @@ function Guide() {
             <ParallaxLayer offset={creating[0]} speed={scrollSpeed} style={{ ...alignCenter }}>
                 <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
-                        문제집 생성
+                        생성하기
                     </h3>
                     <p>
                         문제집 생성은 나의 문제집 탭에서 가능합니다.<br/>
@@ -124,13 +135,11 @@ function Guide() {
                         생성 후
                     </h3>
                     <p>
-                        처음 문제집이 생성되면 기본 표지 사진과 함께 빈 문제집 상태입니다.<br/>
+                        처음 문제집이 생성되면 빈 문제집 상태이며 표지 사진은 기본 이미지입니다.<br/>
                         문제집 편집을 통하여 문제를 추가하고 표지 사진이나 제목을 수정할 수 있습니다.<br/>
                     </p>
                 </div>
             </ParallaxLayer>
-
-
 
             <ParallaxLayer sticky={editingSticky} style={{ ...alignCenter, justifyContent: 'flex-start' }}>
                 <div className={styles.sticky}>
@@ -146,7 +155,7 @@ function Guide() {
                     </h3>
                     <p>
                         나의 문제집에서 좋아요 버튼 좌측의 편집 버튼으로 문제집 수정 메뉴를 열 수 있습니다.<br/>
-                        메뉴에서 문제집 편집을 클락하여 편집 페이지로 이동할 수 있습니다.<br/>
+                        메뉴에서 문제집 편집을 클릭하여 편집 페이지로 이동할 수 있습니다.<br/>
                     </p>
                 </div>
             </ParallaxLayer>
@@ -175,7 +184,11 @@ function Guide() {
                         문제집 트리에서 폴더나 문제에 대해 좌클릭, 우클릭을 하면 노드가 선택됩니다.<br/>
                         이때, 문제집 트리의 빈 곳에서 우클릭을 하면 선택된 커서를 해제할 수 있습니다.
                     </p>
-                    <br/>
+                </div>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={editing[3]} speed={scrollSpeed} style={{ ...alignCenter }}>
+                <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         문제 추가하기
                     </h3>
@@ -183,10 +196,14 @@ function Guide() {
                         문제 검색 후 + 버튼을 눌러 문제를 추가할 수 있습니다.<br/>
                         이 때, 문제가 추가되는 위치는<br/>
                         선택된 노드가 폴더라면 폴더안에 문제가 추가되고, <br/>
-                        선택된 노드가 문제라면 그 문제의 형제 노드로 추가됩니다.<br/>
+                        선택된 노드가 문제라면 그 문제의 형제 노드의 마지막에 추가됩니다.<br/>
                         문제는 최대 150개까지 추가할 수 있습니다.<br/>
                     </p>
-                    <br/>
+                </div>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={editing[4]} speed={scrollSpeed} style={{ ...alignCenter }}>
+                <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         문제 삭제하기
                     </h3>
@@ -194,9 +211,9 @@ function Guide() {
                         문제집 트리에서 문제에 대해 우클릭을 하면 문제를 삭제할 수 있습니다.<br/>
                     </p>
                 </div>
-            </ParallaxLayer>
+            </ParallaxLayer>            
 
-            <ParallaxLayer offset={editing[3]} speed={scrollSpeed} style={{ ...alignCenter }}>
+            <ParallaxLayer offset={editing[5]} speed={scrollSpeed} style={{ ...alignCenter }}>
                 <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         폴더 추가하기
@@ -207,7 +224,11 @@ function Guide() {
                         폴더는 최대 50개까지 생성할 수 있으며<br/>
                         폴더 이름은 20자까지 가능합니다.
                     </p>
-                    <br/>
+                </div>
+            </ParallaxLayer>
+
+            <ParallaxLayer offset={editing[6]} speed={scrollSpeed} style={{ ...alignCenter }}>
+                <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
                         폴더 삭제하기
                     </h3>

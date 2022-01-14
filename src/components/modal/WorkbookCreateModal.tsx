@@ -24,7 +24,6 @@ function WorkbookCreateModal(props: Props) {
     const userStore = UserStore;
     const dataChangeFlag = myPageChangeFlag;
     const [title, setTitle] = useState("");
-    const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
 
     const createWorkbook = async (_title: string) => {
         const wb = await DataStore.save(

@@ -11,6 +11,7 @@ import FavWorkbook from "../pages/workbook/FavWorkbook";
 import Home from "../pages/Home";
 import Nav from "../pages/Nav"
 import Guide from '../pages/Guide';
+import Issue from '../pages/Issue';
 
 function MainComponent() {
     const userStore = UserStore;
@@ -25,6 +26,7 @@ function MainComponent() {
             <Switch>
                 <Route exact path="/" component={Home} />
                 <Route exact path="/guide" component={Guide} />
+                <Route exact path="/issue" component={Issue} />
                 <Route exact path="/workbook/search" component={SearchWorkbook} />
                 <Route exact path="/workbook/read" component={ReadWorkbook} />
                 <Route exact path="/workbook/read/:id" component={ReadWorkbook} />

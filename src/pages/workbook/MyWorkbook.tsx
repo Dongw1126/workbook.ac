@@ -69,7 +69,9 @@ function MyWorkbook() {
                 <div>
                     <WorkbookSearchResult
                         key={flag}
-                        editable={true} query=''
+                        editable={true}
+                        animated={false}
+                        query=''
                         page={page} setLastPage={setLastPage}
                         fetcher={fetcher}
                         sorter={sorter}

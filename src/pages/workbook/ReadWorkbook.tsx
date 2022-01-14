@@ -6,6 +6,7 @@ import selectedNodeStore from "../../stores/SelectedNodeStore";
 import Workbook from '../../components/workbook/Workbook';
 import WorkbookCard from "../../components/workbook/WorkbookCard";
 import * as Constants from "../../constants";
+import styles from "./ReadWorkbook.module.css";
 
 import { DataStore } from '@aws-amplify/datastore';
 import { WorkbookDB, TreeDataDB } from "../../models";
@@ -62,7 +63,7 @@ function ReadWorkbook() {
 
     if(status === Constants.SEARCH_LOADING) {
         return (
-            <div style={{ textAlign: "center" }}>
+            <div className={styles.progress}>
                 <CircularProgress sx={{ m: 20 }} />
             </div>
         );
@@ -70,14 +71,14 @@ function ReadWorkbook() {
     else if (status === Constants.SEARCH_COMPLETE) {
         return (
             <div>
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div className={styles.cardContainer}>
                     <WorkbookCard editable={false} data={workbookData!} cursorDefault={true}/>
                 </div>
                 {treeData?.treeData?.length !== 0 ? 
-                    <div style={{ width: "60%", margin: "auto" }}>
+                    <div className={styles.workbookConatiner}>
                         <Workbook treeDB={treeData!} editable={false} />
                     </div> :
-                    <div style={{ fontSize: "2rem", textAlign: "center"}}>
+                    <div className={styles.emtpyText}>
                         <p>
                             빈 문제집 입니다
                         </p>
@@ -87,7 +88,7 @@ function ReadWorkbook() {
         );
     } else {
         return (
-            <div style={{ fontSize: "2rem", textAlign: "center"}}>
+            <div className={styles.emtpyText}>
                 <p>
                     <br/><br/>
                     해당하는 문제집이 없습니다...<br/><br/>

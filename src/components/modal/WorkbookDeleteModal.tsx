@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { useCallback } from 'react';
 import { DialogContent, DialogTitle, Dialog, DialogActions, Button } from '@mui/material';
 import UserStore from "../../stores/UserStore";
 import { myPageChangeFlag } from "../../stores/DataChangeFlagStore";

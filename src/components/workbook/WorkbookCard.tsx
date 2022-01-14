@@ -12,7 +12,6 @@ import { Storage } from "aws-amplify";
 import AlertModal from "../modal/AlertModal";
 import WorkbookContextMenu from "../contextMenu/WorkbookContextMenu";
 import { WorkbookDB, FavoriteDB } from "../../models";
-import { useRouter } from "../../hooks/useRouter";
 import useDialog from "../../hooks/useDialog";
 import UserStore from "../../stores/UserStore";
 import * as Constants from "../../constants";
@@ -32,8 +31,6 @@ type Props = {
  */
 function WorkbookCard(props: Props) {
     const userStore = UserStore;
-
-    const { history } = useRouter();
     const [alertOpen, handleAlertOpen, handleAlertClose] = useDialog();
     
     const [disabledImg, setDisabledImg] = useState(true);
@@ -54,7 +51,7 @@ function WorkbookCard(props: Props) {
         return "/workbook/" + _path + `/${props.data.id}`;
     }
 
-    const { show, hideAll } = useContextMenu({
+    const { show } = useContextMenu({
         id: props.data.id
     });
 
@@ -190,7 +187,7 @@ function WorkbookCard(props: Props) {
                     <div className={`${styles.cardHeader} ${props.cursorDefault ? styles.cursorDefault : ""}`}>
                         <img
                             src={imgUrl} 
-                            alt="Workbook Image"
+                            alt="WorkbookCard"
                             onError={_hideImage}
                             onLoad={_displayImage}
                             style={{ visibility: disabledImg ? "hidden" : "visible" }}
