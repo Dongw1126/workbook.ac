@@ -52,7 +52,7 @@ function Guide() {
                     className={`${styles.contentsTable} ${styles.subTitle}`} 
                     onClick={() => parallax.current.scrollTo(creatingSticky.start)}
                 >
-                    &gt;&nbsp;&nbsp;문제집 제작
+                    &gt;&nbsp;&nbsp;문제집 생성
                 </p>
                 <p 
                     className={`${styles.contentsTable} ${styles.subTitle}`}
@@ -78,9 +78,9 @@ function Guide() {
                     </h3>
                     <p>
                         둘러보기 탭에서는 문제집을 둘러보고 검색할 수 있습니다.<br/>
-                        검색어가 없는 경우 좋아요 순, 최근 생성 된 순이 표시됩니다.<br/>
+                        검색어가 없는 경우 좋아요 많은, 최근 생성 된 문제집이 각각 나열됩니다.<br/>
                         검색 결과의 경우 사전순으로 표시됩니다.<br/>
-                        문제집을 표지나 제목을 클릭하여 열람 가능합니다.<br/>
+                        문제집의 표지나 제목을 클릭하여 열람 가능합니다.<br/>
                     </p>
                 </div>
             </ParallaxLayer>
@@ -120,7 +120,7 @@ function Guide() {
             <ParallaxLayer offset={creating[0]} speed={scrollSpeed} style={{ ...alignCenter }}>
                 <div className={`${styles.usage} ${styles.content}`}>
                     <h3>
-                        문제집 생성
+                        생성하기
                     </h3>
                     <p>
                         문제집 생성은 나의 문제집 탭에서 가능합니다.<br/>
@@ -135,7 +135,7 @@ function Guide() {
                         생성 후
                     </h3>
                     <p>
-                        처음 문제집이 생성되면 기본 표지 사진과 함께 빈 문제집 상태입니다.<br/>
+                        처음 문제집이 생성되면 빈 문제집 상태이며 표지 사진은 기본 이미지입니다.<br/>
                         문제집 편집을 통하여 문제를 추가하고 표지 사진이나 제목을 수정할 수 있습니다.<br/>
                     </p>
                 </div>
@@ -155,7 +155,7 @@ function Guide() {
                     </h3>
                     <p>
                         나의 문제집에서 좋아요 버튼 좌측의 편집 버튼으로 문제집 수정 메뉴를 열 수 있습니다.<br/>
-                        메뉴에서 문제집 편집을 클락하여 편집 페이지로 이동할 수 있습니다.<br/>
+                        메뉴에서 문제집 편집을 클릭하여 편집 페이지로 이동할 수 있습니다.<br/>
                     </p>
                 </div>
             </ParallaxLayer>
@@ -196,7 +196,7 @@ function Guide() {
                         문제 검색 후 + 버튼을 눌러 문제를 추가할 수 있습니다.<br/>
                         이 때, 문제가 추가되는 위치는<br/>
                         선택된 노드가 폴더라면 폴더안에 문제가 추가되고, <br/>
-                        선택된 노드가 문제라면 그 문제의 형제 노드로 추가됩니다.<br/>
+                        선택된 노드가 문제라면 그 문제의 형제 노드의 마지막에 추가됩니다.<br/>
                         문제는 최대 150개까지 추가할 수 있습니다.<br/>
                     </p>
                 </div>
