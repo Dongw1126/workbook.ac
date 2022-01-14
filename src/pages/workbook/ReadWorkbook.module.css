@@ -1,0 +1,25 @@
+.cardContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.workbookConatiner {
+    width: 60%;
+    margin: auto;
+}
+
+.progress {
+    text-align: center;
+}
+
+.emtpyText {
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+@media screen and (max-width: 768px) {
+    .workbookConatiner {
+        width: 100%;
+    }
+}

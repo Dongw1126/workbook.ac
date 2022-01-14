@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { observer } from "mobx-react";
 
 import UserStore from "../../stores/UserStore";
@@ -71,7 +71,9 @@ function FavWorkbook() {
                 <div>
                     <WorkbookSearchResult
                         key={flag}
-                        editable={true} query=''
+                        editable={false} 
+                        animated={true}
+                        query=''
                         page={page} setLastPage={setLastPage}
                         fetcher={fetcher}
                         emptyMessage='좋아요 한 문제집이 없습니다.'
