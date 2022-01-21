@@ -28,7 +28,7 @@
 .cardHeader img {
   height: 240px;
   width: 240px;
-  object-fit: none;
+  object-fit: contain;
 }
 
 .cardBody {
